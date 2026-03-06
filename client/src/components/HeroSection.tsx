@@ -46,17 +46,8 @@ export default function HeroSection() {
 
         {/* Content */}
         <div className="relative container z-10 text-white max-w-3xl">
-          <div className="animate-fade-in-up space-y-6">
-            {/* Logo with Title */}
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <img
-                src="/logo-khamci.png"
-                alt="KHAMCI VOYAGES"
-                className="h-16 md:h-20 w-auto drop-shadow-lg"
-              />
-            </div>
-
-            {/* Main Headline - Version 2: Fiabilité Mondiale */}
+           <div className="animate-fade-in-up space-y-6">
+            {/* Main Headline - Version 2: Fiabiité Mondiale */}
             <div>
               <h1 className="heading-display mb-2 leading-tight">
                 Vos Voyages Organisés en 24h<br />
