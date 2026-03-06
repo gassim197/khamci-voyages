@@ -9,6 +9,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import PopularDestinations from "@/components/PopularDestinations";
 
 /**
  * Home Page - KHAMCI VOYAGES
@@ -43,6 +44,7 @@ export default function Home() {
         <TeamBuilding />
         <DiscoverGuinea />
         <DestinationGalleries />
+        <PopularDestinations />
         <Blog />
         <HowItWorks />
         <ContactForm />
