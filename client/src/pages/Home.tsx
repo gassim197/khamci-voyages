@@ -4,6 +4,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Services from "@/components/Services";
 import TeamBuilding from "@/components/TeamBuilding";
 import DiscoverGuinea from "@/components/DiscoverGuinea";
+import DestinationGalleries from "@/components/DestinationGalleries";
 import HowItWorks from "@/components/HowItWorks";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -25,9 +26,10 @@ import Footer from "@/components/Footer";
  * 4. Services - 6 services présentés
  * 5. Team Building - Section dédiée
  * 6. Discover Guinea - Destinations
- * 7. How It Works - Processus en 3 étapes
- * 8. Contact Form - Formulaire de demande
- * 9. Footer - Informations et liens
+ * 7. Destination Galleries - Galeries interactives avec lightbox
+ * 8. How It Works - Processus en 3 étapes
+ * 9. Contact Form - Formulaire de demande
+ * 10. Footer - Informations et liens
  */
 export default function Home() {
   return (
@@ -39,6 +41,7 @@ export default function Home() {
         <Services />
         <TeamBuilding />
         <DiscoverGuinea />
+        <DestinationGalleries />
         <HowItWorks />
         <ContactForm />
       </main>
