@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
+import { useLocation } from "wouter";
 import { toast } from "sonner";
 
 /**
@@ -41,6 +42,7 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [, setLocation] = useLocation();
 
   const destinations = [
     { value: "", label: "Choisir une destination" },
@@ -114,9 +116,17 @@ export default function ContactForm() {
 
       console.log("Devis form submitted:", formData);
 
+      // Store form data in sessionStorage for thank you page
+      sessionStorage.setItem("quoteData", JSON.stringify(formData));
+
       toast.success(
-        "✅ Votre demande de devis a été envoyée ! Nous vous recontacterons sous 24h."
+        "✅ Votre demande de devis a été envoyée ! Redirection en cours..."
       );
+
+      // Redirect to thank you page after a short delay
+      setTimeout(() => {
+        setLocation("/thank-you");
+      }, 1500);
 
       // Reset form
       setFormData({
