@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import { countries } from "@/data/countries";
 
 /**
  * Contact Form / Devis Form - KHAMCI VOYAGES
@@ -44,14 +45,13 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [, setLocation] = useLocation();
 
+  // Destinations = tous les pays du monde
   const destinations = [
-    { value: "", label: "Choisir une destination" },
-    { value: "fouta-djallon", label: "Fouta Djallon" },
-    { value: "conakry", label: "Conakry" },
-    { value: "kindia", label: "Kindia" },
-    { value: "iles-loos", label: "Îles de Loos" },
-    { value: "combine", label: "Combiné (plusieurs destinations)" },
-    { value: "autre", label: "Autre" },
+    { value: "", label: "Choisir un pays" },
+    ...countries.map((country) => ({
+      value: country.code,
+      label: country.name,
+    })),
   ];
 
   const airlines = [
@@ -350,9 +350,10 @@ export default function ContactForm() {
                     errors.destination ? "border-red-500" : "border-gray-300"
                   }`}
                 >
-                  {destinations.map((dest) => (
-                    <option key={dest.value} value={dest.value}>
-                      {dest.label}
+                  <option value="">Choisir un pays</option>
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name}
                     </option>
                   ))}
                 </select>

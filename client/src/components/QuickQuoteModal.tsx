@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { countries } from "@/data/countries";
 
 interface QuickQuoteModalProps {
   isOpen: boolean;
@@ -108,12 +109,12 @@ export default function QuickQuoteModal({
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             >
-              <option value="">Choisir une destination</option>
-              <option value="fouta-djallon">Fouta Djallon</option>
-              <option value="conakry">Conakry</option>
-              <option value="kindia">Kindia</option>
-              <option value="iles-loos">Îles de Loos</option>
-              <option value="combine">Combiné</option>
+              <option value="">Choisir un pays</option>
+              {countries.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
             </select>
           </div>
 
