@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MapPin, Clock, DollarSign, Utensils, Camera, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceQuoteForm from '@/components/ServiceQuoteForm';
+import DestinationImageGallery from '@/components/DestinationImageGallery';
 
 /**
  * Paris Destination Page - KHAMCI VOYAGES
@@ -66,6 +67,34 @@ export default function ParisPage() {
     { icon: '⏰', title: 'Meilleure période', description: 'Avril-Mai et Septembre-Octobre pour éviter les foules.' },
     { icon: '🎟️', title: 'Musées', description: 'Achetez le Paris Museum Pass pour accès illimité à 70 musées.' },
     { icon: '🚴', title: 'Vélib', description: 'Louez des vélos pour explorer la ville comme les Parisiens.' },
+  ];
+
+  const parisImages = [
+    {
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-eiffel-tower-nADmPQsckLn2jEZdgxhyw9.webp',
+      alt: 'Tour Eiffel au coucher de soleil',
+      title: 'Tour Eiffel - Le symbole de Paris'
+    },
+    {
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-louvre-nADmPQsckLn2jEZdgxhyw9.webp',
+      alt: 'Musée du Louvre',
+      title: 'Musée du Louvre - Patrimoine mondial'
+    },
+    {
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-seine-river-nADmPQsckLn2jEZdgxhyw9.webp',
+      alt: 'Croisière sur la Seine',
+      title: 'La Seine - Cœur romantique de Paris'
+    },
+    {
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-notre-dame-nADmPQsckLn2jEZdgxhyw9.webp',
+      alt: 'Cathédrale Notre-Dame',
+      title: 'Notre-Dame - Chef-d\'œuvre gothique'
+    },
+    {
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-montmartre-nADmPQsckLn2jEZdgxhyw9.webp',
+      alt: 'Montmartre au coucher de soleil',
+      title: 'Montmartre - Quartier bohème et artistique'
+    }
   ];
 
   const offers = [
@@ -148,6 +177,12 @@ export default function ParisPage() {
             <h3 className="font-bold text-gray-900 mb-2">Meilleure période</h3>
             <p className="text-gray-700">Avril-Octobre</p>
           </div>
+        </section>
+
+        {/* Image Gallery */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">Galerie Photos - Paris</h2>
+          <DestinationImageGallery images={parisImages} destinationName="Paris" />
         </section>
 
         {/* Top Attractions */}
