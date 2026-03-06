@@ -6,6 +6,7 @@ import TeamBuilding from "@/components/TeamBuilding";
 import DiscoverGuinea from "@/components/DiscoverGuinea";
 import DestinationGalleries from "@/components/DestinationGalleries";
 import HowItWorks from "@/components/HowItWorks";
+import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
@@ -42,6 +43,7 @@ export default function Home() {
         <TeamBuilding />
         <DiscoverGuinea />
         <DestinationGalleries />
+        <Blog />
         <HowItWorks />
         <ContactForm />
       </main>
