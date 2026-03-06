@@ -1,4 +1,19 @@
+import { useState } from "react";
+import QuickQuoteModal from "./QuickQuoteModal";
+
+/**
+ * Hero Section - KHAMCI VOYAGES
+ * 
+ * Optimisé pour la conversion :
+ * - CTA principal renforcé et visible
+ * - Mini-formulaire rapide
+ * - Éléments de réassurance visibles
+ * - Copywriting orienté action immédiate
+ */
+
 export default function HeroSection() {
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -7,53 +22,92 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airplane-sunset-64duN9FBfa4CZjHNXpHzzz.webp')",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative container z-10 text-white max-w-2xl">
-        <div className="animate-fade-in-up">
-          <h1 className="heading-display mb-4 leading-tight">
-            Explorez le Monde<br />
-            <span className="gradient-text">Avec Confiance</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-100 leading-relaxed">
-            KHAMCI VOYAGES vous accompagne dans chaque étape de votre voyage.
-            Rapidité, fiabilité et expertise locale pour une expérience inoubliable.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="btn-cta"
-            >
-              Demander un Devis
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="btn-cta-secondary bg-white text-orange-500 border-white"
-            >
-              Découvrir nos Services
-            </button>
-          </div>
+    <>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airplane-sunset-64duN9FBfa4CZjHNXpHzzz.webp')",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white rounded-full animate-pulse"></div>
+        {/* Content */}
+        <div className="relative container z-10 text-white max-w-3xl">
+          <div className="animate-fade-in-up space-y-6">
+            {/* Main Headline - Optimized for Conversion */}
+            <div>
+              <h1 className="heading-display mb-2 leading-tight">
+                Réservez Votre Voyage en Guinée<br />
+                <span className="gradient-text">en 5 Minutes</span>
+              </h1>
+              <p className="text-lg md:text-xl text-orange-300 font-semibold">
+                Devis Gratuit • Réponse sous 24h • Sans Engagement
+              </p>
+            </div>
+
+            {/* Subheading */}
+            <p className="text-lg md:text-xl text-gray-100 leading-relaxed max-w-2xl">
+              Vols, hôtels, visas et voyages sur mesure.
+              Laissez nos experts créer votre aventure africaine parfaite.
+            </p>
+
+            {/* Primary CTA - PROMINENT */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="btn-cta bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-2xl hover:shadow-2xl transition-all transform hover:scale-105 animate-pulse"
+              >
+                🎯 OBTENIR MON DEVIS GRATUIT
+              </button>
+              <button
+                onClick={() => scrollToSection("services")}
+                className="btn-cta-secondary bg-white/20 backdrop-blur-sm text-white border-2 border-white hover:bg-white/30 font-bold text-lg px-8 py-4 rounded-lg transition-all"
+              >
+                Voir les Destinations
+              </button>
+            </div>
+
+            {/* Reassurance Section */}
+            <div className="mt-8 pt-8 border-t border-white/30 space-y-4">
+              <p className="text-sm font-semibold text-white/90">
+                ✓ Pourquoi 500+ voyageurs nous font confiance ?
+              </p>
+              <div className="grid grid-cols-3 gap-4 text-sm">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
+                  <p className="font-bold text-lg">24h</p>
+                  <p className="text-xs text-white/80">Réponse garantie</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
+                  <p className="font-bold text-lg">100%</p>
+                  <p className="text-xs text-white/80">Gratuit & sans engagement</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
+                  <p className="font-bold text-lg">15+</p>
+                  <p className="text-xs text-white/80">Ans d'expertise locale</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
+              <div className="w-1 h-2 bg-white rounded-full animate-pulse"></div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Quick Quote Modal */}
+      <QuickQuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        source="hero"
+      />
+    </>
   );
 }
