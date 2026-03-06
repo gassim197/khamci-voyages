@@ -38,21 +38,23 @@ export default function HeroSection() {
         {/* Content */}
         <div className="relative container z-10 text-white max-w-3xl">
           <div className="animate-fade-in-up space-y-6">
-            {/* Main Headline - Optimized for Conversion */}
+            {/* Main Headline - Version 2: Fiabilité Mondiale */}
             <div>
               <h1 className="heading-display mb-2 leading-tight">
-                Réservez Votre Voyage en Guinée<br />
-                <span className="gradient-text">en 5 Minutes</span>
+                Vos Voyages Organisés en 24h<br />
+                <span className="gradient-text">Partout dans le Monde</span>
               </h1>
               <p className="text-lg md:text-xl text-orange-300 font-semibold">
-                Devis Gratuit • Réponse sous 24h • Sans Engagement
+                ⚡ Devis en 24h • Partout dans le monde • Zéro stress
               </p>
             </div>
 
-            {/* Subheading */}
+            {/* Subheading - Version 2 */}
             <p className="text-lg md:text-xl text-gray-100 leading-relaxed max-w-2xl">
-              Vols, hôtels, visas et voyages sur mesure.
-              Laissez nos experts créer votre aventure africaine parfaite.
+              Que vous rêviez de Paris, Bangkok, New York ou Dakar,
+              KHAMCI VOYAGES transforme vos envies en réalité.
+              Vols, hôtels, visas, circuits : nous gérons tout.
+              Réponse garantie sous 24h. Zéro stress.
             </p>
 
             {/* Primary CTA - PROMINENT */}
@@ -61,7 +63,7 @@ export default function HeroSection() {
                 onClick={() => setIsQuoteModalOpen(true)}
                 className="btn-cta bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-2xl hover:shadow-2xl transition-all transform hover:scale-105 animate-pulse"
               >
-                🎯 OBTENIR MON DEVIS GRATUIT
+                🎯 QUELLE EST VOTRE DESTINATION ?
               </button>
               <button
                 onClick={() => scrollToSection("services")}
