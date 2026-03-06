@@ -10,6 +10,9 @@ import ThankYou from "./pages/ThankYou";
 import FlightsPage from "./pages/FlightsPage";
 import HotelsPage from "./pages/HotelsPage";
 import CarsPage from "./pages/CarsPage";
+import ParisPage from "./pages/ParisPage";
+import DubaiPage from "./pages/DubaiPage";
+import NewYorkPage from "./pages/NewYorkPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -25,6 +28,9 @@ function Router() {
         <Route path="/vols" component={FlightsPage} />
         <Route path="/hotels" component={HotelsPage} />
         <Route path="/voitures" component={CarsPage} />
+        <Route path="/destination/paris" component={ParisPage} />
+        <Route path="/destination/dubai" component={DubaiPage} />
+        <Route path="/destination/new-york" component={NewYorkPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
