@@ -13,6 +13,9 @@ import CarsPage from "./pages/CarsPage";
 import ParisPage from "./pages/ParisPage";
 import DubaiPage from "./pages/DubaiPage";
 import NewYorkPage from "./pages/NewYorkPage";
+import CasablancaPage from "./pages/CasablancaPage";
+import BangkokPage from "./pages/BangkokPage";
+import BarcelonaPage from "./pages/BarcelonaPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -31,6 +34,9 @@ function Router() {
         <Route path="/destination/paris" component={ParisPage} />
         <Route path="/destination/dubai" component={DubaiPage} />
         <Route path="/destination/new-york" component={NewYorkPage} />
+        <Route path="/destination/casablanca" component={CasablancaPage} />
+        <Route path="/destination/bangkok" component={BangkokPage} />
+        <Route path="/destination/barcelona" component={BarcelonaPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
