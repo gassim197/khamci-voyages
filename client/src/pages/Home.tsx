@@ -1,25 +1,48 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import Services from "@/components/Services";
+import TeamBuilding from "@/components/TeamBuilding";
+import DiscoverGuinea from "@/components/DiscoverGuinea";
+import HowItWorks from "@/components/HowItWorks";
+import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Home Page - KHAMCI VOYAGES
+ * 
+ * Design Philosophy: "Aventure Africaine Moderne"
+ * - Énergie vibrante avec couleurs dégradées du logo
+ * - Asymétrie intentionnelle et layouts organiques
+ * - Animations fluides et sophistiquées
+ * - Typographie mixte pour hiérarchie claire
+ * - Motifs africains subtils
+ * 
+ * Sections:
+ * 1. Header - Navigation sticky
+ * 2. Hero - Image plein écran avec CTA
+ * 3. Why Choose Us - 4 arguments clés
+ * 4. Services - 6 services présentés
+ * 5. Team Building - Section dédiée
+ * 6. Discover Guinea - Destinations
+ * 7. How It Works - Processus en 3 étapes
+ * 8. Contact Form - Formulaire de demande
+ * 9. Footer - Informations et liens
  */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header />
+      <main className="flex-grow">
+        <HeroSection />
+        <WhyChooseUs />
+        <Services />
+        <TeamBuilding />
+        <DiscoverGuinea />
+        <HowItWorks />
+        <ContactForm />
       </main>
+      <Footer />
     </div>
   );
 }

@@ -43,74 +43,75 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  /* KHAMCI VOYAGES Brand Colors */
+  --primary: #FF4500;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #FF6B35;
+  --sidebar-primary-foreground: #FFFFFF;
+  --chart-1: #FFD700;
+  --chart-2: #FF8C00;
+  --chart-3: #FF4500;
+  --chart-4: #6B46C1;
+  --chart-5: #4C1D95;
   --radius: 0.65rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
+  --foreground: oklch(0.15 0.02 65);
+  --card: oklch(0.98 0.001 286.375);
+  --card-foreground: oklch(0.15 0.02 65);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --popover-foreground: oklch(0.15 0.02 65);
+  --secondary: oklch(0.95 0.01 286.375);
+  --secondary-foreground: oklch(0.3 0.02 65);
+  --muted: oklch(0.92 0.002 286.375);
+  --muted-foreground: oklch(0.55 0.016 285.938);
+  --accent: #FFD700;
+  --accent-foreground: oklch(0.15 0.02 65);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
+  --input: oklch(0.95 0.004 286.32);
+  --ring: #FF4500;
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-foreground: oklch(0.15 0.02 65);
+  --sidebar-accent: oklch(0.95 0.01 286.375);
+  --sidebar-accent-foreground: oklch(0.15 0.02 65);
   --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --sidebar-ring: #FF4500;
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
+  --primary: #FF6B35;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #FF8C00;
+  --sidebar-primary-foreground: #FFFFFF;
   --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
+  --foreground: oklch(0.95 0.005 65);
   --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
+  --card-foreground: oklch(0.95 0.005 65);
   --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
+  --popover-foreground: oklch(0.95 0.005 65);
   --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
+  --secondary-foreground: oklch(0.85 0.005 65);
   --muted: oklch(0.274 0.006 286.033);
   --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
+  --accent: #FFD700;
+  --accent-foreground: oklch(0.15 0.02 65);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --ring: #FF6B35;
+  --chart-1: #FFD700;
+  --chart-2: #FF8C00;
+  --chart-3: #FF4500;
+  --chart-4: #6B46C1;
+  --chart-5: #4C1D95;
   --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
+  --sidebar-foreground: oklch(0.95 0.005 65);
   --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --sidebar-ring: #FF6B35;
 }
 
 @layer base {
@@ -134,24 +135,11 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -162,16 +150,111 @@
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
+  }
+
+  /* KHAMCI VOYAGES Custom Styles */
+  
+  /* Gradient dégradé du logo */
+  .gradient-khamci {
+    @apply bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600;
+  }
+
+  /* Gradient pour texte */
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  /* Sections avec fond dégradé */
+  .section-gradient-warm {
+    @apply bg-gradient-to-br from-orange-50 to-red-50;
+  }
+
+  .section-gradient-cool {
+    @apply bg-gradient-to-br from-purple-50 to-blue-50;
+  }
+
+  /* Cartes de service */
+  .service-card {
+    @apply rounded-lg bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:scale-105;
+  }
+
+  /* Boutons CTA */
+  .btn-cta {
+    @apply bg-gradient-to-r from-orange-500 to-red-500 px-8 py-3 font-semibold text-white rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  .btn-cta-secondary {
+    @apply border-2 border-orange-500 px-8 py-3 font-semibold text-orange-500 rounded-lg transition-all duration-300 hover:bg-orange-50;
+  }
+
+  /* Séparateurs géométriques */
+  .divider-gradient {
+    @apply h-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 69, 0, 0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  }
+
+  /* Typography */
+  .heading-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-bold;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  .text-body {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  .text-muted {
+    @apply text-gray-600 text-sm md:text-base;
   }
 }
