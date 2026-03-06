@@ -7,6 +7,9 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ThankYou from "./pages/ThankYou";
+import FlightsPage from "./pages/FlightsPage";
+import HotelsPage from "./pages/HotelsPage";
+import CarsPage from "./pages/CarsPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 
@@ -18,6 +21,9 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/thank-you" component={ThankYou} />
+        <Route path="/vols" component={FlightsPage} />
+        <Route path="/hotels" component={HotelsPage} />
+        <Route path="/voitures" component={CarsPage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
