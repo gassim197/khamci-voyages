@@ -16,17 +16,17 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <nav className="container flex items-center justify-between py-4">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2 hover:scale-105 transition-transform">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/khamci-logo.png"
-            alt="KHAMCI VOYAGES"
-            className="h-12 w-auto"
+            src="/logo-khamci.png"
+            alt="KHAMCI VOYAGES - Agence de Voyages Guinée"
+            className="h-12 md:h-16 w-auto"
           />
           <div className="hidden sm:block">
-            <h1 className="text-xl font-bold gradient-text">KHAMCI VOYAGES</h1>
+            <h1 className="text-lg md:text-xl font-bold gradient-text">KHAMCI VOYAGES</h1>
             <p className="text-xs text-gray-600">Agence de Voyages</p>
           </div>
-        </div>
+        </a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">

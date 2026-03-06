@@ -35,9 +35,27 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         </div>
 
+        {/* Logo Watermark - Subtle Background */}
+        <div className="absolute bottom-10 right-10 opacity-10 z-0">
+          <img
+            src="/logo-khamci.png"
+            alt=""
+            className="w-40 md:w-56 h-auto"
+          />
+        </div>
+
         {/* Content */}
         <div className="relative container z-10 text-white max-w-3xl">
           <div className="animate-fade-in-up space-y-6">
+            {/* Logo with Title */}
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <img
+                src="/logo-khamci.png"
+                alt="KHAMCI VOYAGES"
+                className="h-16 md:h-20 w-auto drop-shadow-lg"
+              />
+            </div>
+
             {/* Main Headline - Version 2: Fiabilité Mondiale */}
             <div>
               <h1 className="heading-display mb-2 leading-tight">
