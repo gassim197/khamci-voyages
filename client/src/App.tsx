@@ -12,6 +12,7 @@ import HotelsPage from "./pages/HotelsPage";
 import CarsPage from "./pages/CarsPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -34,6 +35,7 @@ function Router() {
         onClose={() => setIsQuoteModalOpen(false)}
         source="sticky"
       />
+      <WhatsAppButton />
     </>
   );
 }
