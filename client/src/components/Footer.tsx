@@ -48,15 +48,16 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href="tel:+224" className="hover:text-orange-400 transition-colors">
-                  +224 XXX XXX XXX
+                <a href="tel:+224611145892" className="hover:text-orange-400 transition-colors">
+                  +224 611 145 892
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@khamcivoyages.com" className="hover:text-orange-400 transition-colors">
-                  contact@khamcivoyages.com
+                <a href="mailto:khamcivoyages@gmail.com" className="hover:text-orange-400 transition-colors">
+                  khamcivoyages@gmail.com
                 </a>
               </li>
+              <li className="text-gray-400">Almamya, commune de Kaloum</li>
               <li className="text-gray-400">Conakry, Guinée</li>
             </ul>
           </div>

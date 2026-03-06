@@ -96,7 +96,11 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Téléphone</h3>
-                  <p className="text-gray-600">+224 XXX XXX XXX</p>
+                  <p className="text-gray-600">
+                    <a href="tel:+224611145892" className="hover:text-orange-500 transition-colors">
+                      +224 611 145 892
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -108,7 +112,11 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Email</h3>
-                  <p className="text-gray-600">contact@khamcivoyages.com</p>
+                  <p className="text-gray-600">
+                    <a href="mailto:khamcivoyages@gmail.com" className="hover:text-orange-500 transition-colors">
+                      khamcivoyages@gmail.com
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -120,7 +128,8 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Adresse</h3>
-                  <p className="text-gray-600">Conakry, Guinée</p>
+                  <p className="text-gray-600">Almamya, commune de Kaloum</p>
+                  <p className="text-gray-600 text-sm">Conakry, Guinée</p>
                 </div>
               </div>
             </div>
