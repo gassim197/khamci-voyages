@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -10,6 +11,9 @@ import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import PopularDestinations from "@/components/PopularDestinations";
+import Testimonials from "@/components/Testimonials";
+import TestimonialForm from "@/components/TestimonialForm";
+import { Testimonial } from "@/data/testimonials";
 
 /**
  * Home Page - KHAMCI VOYAGES
@@ -29,11 +33,21 @@ import PopularDestinations from "@/components/PopularDestinations";
  * 5. Team Building - Section dédiée
  * 6. Discover Guinea - Destinations
  * 7. Destination Galleries - Galeries interactives avec lightbox
- * 8. How It Works - Processus en 3 étapes
- * 9. Contact Form - Formulaire de demande
- * 10. Footer - Informations et liens
+ * 8. Popular Destinations - 6 destinations populaires
+ * 9. Testimonials - Avis clients
+ * 10. Blog - Articles de voyage
+ * 11. How It Works - Processus en 3 étapes
+ * 12. Contact Form - Formulaire de demande
+ * 13. Footer - Informations et liens
  */
 export default function Home() {
+  const [showTestimonialForm, setShowTestimonialForm] = useState(false);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  const handleAddTestimonial = (testimonial: Testimonial) => {
+    setTestimonials(prev => [...prev, testimonial]);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
@@ -45,11 +59,18 @@ export default function Home() {
         <DiscoverGuinea />
         <DestinationGalleries />
         <PopularDestinations />
+        <Testimonials onAddTestimonial={() => setShowTestimonialForm(true)} />
         <Blog />
         <HowItWorks />
         <ContactForm />
       </main>
       <Footer />
+      {showTestimonialForm && (
+        <TestimonialForm
+          onClose={() => setShowTestimonialForm(false)}
+          onSubmit={handleAddTestimonial}
+        />
+      )}
     </div>
   );
 }
