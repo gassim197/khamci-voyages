@@ -51,3 +51,10 @@
 - [x] Ajouter répartition par type de service (camembert)
 - [x] Ajouter répartition par statut (barres)
 - [x] Intégrer la section stats dans AdminDashboardNew.tsx
+
+## Amélioration visuelle Dashboard Admin
+
+- [ ] Refondre le design du dashboard avec les couleurs KHAMCI VOYAGES (bleu marine + orange)
+- [ ] Améliorer les cartes de statistiques avec icônes et couleurs
+- [ ] Améliorer les tableaux de devis et témoignages
+- [ ] Améliorer la page de connexion admin
