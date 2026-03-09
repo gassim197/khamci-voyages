@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2, Hotel } from 'lucide-react';
 import { majorCities, starRatings } from '@/data/serviceTypes';
+import { trpc } from '@/lib/trpc';
+import { toast } from 'sonner';
 
 /**
  * Hotel Quote Form - KHAMCI VOYAGES
@@ -57,24 +59,48 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
     return Object.keys(newErrors).length === 0;
   };
 
+  const submitQuote = trpc.quotes.submit.useMutation({
+    onSuccess: () => {
+      toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
+      if (onSubmit) {
+        onSubmit(formData);
+      } else {
+        window.location.href = '/thank-you';
+      }
+    },
+    onError: (err) => {
+      toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+      console.error(err);
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    submitQuote.mutate({
+      clientName: `${formData.firstName} ${formData.lastName}`.trim(),
+      clientEmail: formData.email,
+      clientPhone: formData.phone || undefined,
+      destination: formData.destination || undefined,
+      departureDate: formData.checkInDate || undefined,
+      returnDate: formData.checkOutDate || undefined,
+      passengers: parseInt(formData.guests) || 1,
+      serviceType: 'hotel',
+      message: formData.message || undefined,
+      source: 'website',
+    });
+  };
+
+  const _handleSubmitOld = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      sessionStorage.setItem('quoteData', JSON.stringify({
-        ...formData,
-        serviceType: 'hotel',
-      }));
-
-      if (onSubmit) {
-        onSubmit(formData);
-      } else {
-        window.location.href = '/thank-you';
-      }
+      sessionStorage.setItem('quoteData', JSON.stringify({ ...formData, serviceType: 'hotel' }));
+      if (onSubmit) { onSubmit(formData); } else { window.location.href = '/thank-you'; }
     } finally {
       setIsLoading(false);
     }

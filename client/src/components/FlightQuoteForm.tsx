@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2, Plane } from 'lucide-react';
 import { majorAirlines, majorCities, cabinClasses } from '@/data/serviceTypes';
+import { trpc } from '@/lib/trpc';
+import { toast } from 'sonner';
 
 /**
  * Flight Quote Form - KHAMCI VOYAGES
@@ -67,29 +69,37 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Store data and redirect
-      sessionStorage.setItem('quoteData', JSON.stringify({
-        ...formData,
-        serviceType: 'flights',
-      }));
-
+  const submitQuote = trpc.quotes.submit.useMutation({
+    onSuccess: () => {
+      toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
       if (onSubmit) {
         onSubmit(formData);
       } else {
         window.location.href = '/thank-you';
       }
-    } finally {
-      setIsLoading(false);
-    }
+    },
+    onError: (err) => {
+      toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+      console.error(err);
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    submitQuote.mutate({
+      clientName: `${formData.firstName} ${formData.lastName}`.trim(),
+      clientEmail: formData.email,
+      clientPhone: formData.phone || undefined,
+      destination: formData.arrivalCity ? `${formData.departureCity} → ${formData.arrivalCity}` : undefined,
+      departureDate: formData.departureDate || undefined,
+      returnDate: formData.returnDate || undefined,
+      passengers: parseInt(formData.passengers) || 1,
+      serviceType: 'vol',
+      message: formData.message || undefined,
+      source: 'website',
+    });
   };
 
   return (

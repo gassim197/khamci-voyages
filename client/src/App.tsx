@@ -5,10 +5,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { AdminProvider } from "./contexts/AdminContext";
 import Home from "./pages/Home";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
 import ThankYou from "./pages/ThankYou";
 import FlightsPage from "./pages/FlightsPage";
 import HotelsPage from "./pages/HotelsPage";
@@ -22,6 +19,7 @@ import BarcelonaPage from "./pages/BarcelonaPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 import WhatsAppButton from "./components/WhatsAppButton";
+import AdminDashboardNew from "./pages/AdminDashboardNew";
 
 function Router() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -40,8 +38,7 @@ function Router() {
         <Route path="/destination/casablanca" component={CasablancaPage} />
         <Route path="/destination/bangkok" component={BangkokPage} />
         <Route path="/destination/barcelona" component={BarcelonaPage} />
-        <Route path="/admin/login" component={AdminLogin} />
-        <Route path="/admin/dashboard" component={AdminDashboard} />
+        <Route path="/admin" component={AdminDashboardNew} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
@@ -57,25 +54,18 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
-      <AdminProvider>
-        <ThemeProvider
-          defaultTheme="light"
-          // switchable
-        >
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </ThemeProvider>
-      </AdminProvider>
+      <ThemeProvider
+        defaultTheme="light"
+        // switchable
+      >
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

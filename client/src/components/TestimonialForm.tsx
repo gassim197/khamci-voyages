@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Testimonial } from "@/data/testimonials";
 import { Star, X } from "lucide-react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 /**
  * TestimonialForm - Formulaire pour laisser un témoignage
@@ -34,10 +35,34 @@ export default function TestimonialForm({ onClose, onSubmit }: TestimonialFormPr
     }));
   };
 
+  const submitTestimonial = trpc.testimonials.submit.useMutation({
+    onSuccess: () => {
+      toast.success("Merci pour votre témoignage ! Il sera affiché après modération.");
+      // Also call legacy callback for backward compatibility
+      const newTestimonial: Testimonial = {
+        id: Date.now().toString(),
+        name: formData.name,
+        title: formData.title || "Client",
+        location: formData.location || "Guinée",
+        rating: formData.rating,
+        comment: formData.comment,
+        image: "👤",
+        date: new Date().toISOString().split("T")[0],
+        verified: false
+      };
+      onSubmit(newTestimonial);
+      onClose();
+    },
+    onError: (err) => {
+      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+      console.error(err);
+      setIsSubmitting(false);
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
     if (!formData.name.trim() || !formData.comment.trim()) {
       toast.error("Veuillez remplir tous les champs");
       return;
@@ -49,32 +74,13 @@ export default function TestimonialForm({ onClose, onSubmit }: TestimonialFormPr
     }
 
     setIsSubmitting(true);
-
-    // Créer le nouveau témoignage
-    const newTestimonial: Testimonial = {
-      id: Date.now().toString(),
-      name: formData.name,
-      title: formData.title || "Client",
-      location: formData.location || "Guinée",
+    submitTestimonial.mutate({
+      clientName: formData.name,
+      clientTitle: formData.title || undefined,
+      clientLocation: formData.location || undefined,
+      content: formData.comment,
       rating: formData.rating,
-      comment: formData.comment,
-      image: "👤",
-      date: new Date().toISOString().split("T")[0],
-      verified: false
-    };
-
-    // Sauvegarder dans localStorage
-    const stored = localStorage.getItem("khamci-testimonials");
-    const testimonials = stored ? JSON.parse(stored) : [];
-    testimonials.push(newTestimonial);
-    localStorage.setItem("khamci-testimonials", JSON.stringify(testimonials));
-
-    // Appeler le callback
-    onSubmit(newTestimonial);
-
-    toast.success("Merci pour votre témoignage ! Il sera affiché après modération.");
-    setIsSubmitting(false);
-    onClose();
+    });
   };
 
   return (

@@ -98,8 +98,7 @@ export default function PopularDestinations() {
         {/* Destinations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {destinations.map((destination) => (
-            <Link key={destination.id} href={destination.path}>
-              <a className="block h-full">
+            <Link key={destination.id} href={destination.path} className="block h-full">
                 <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group">
                   {/* Image Container */}
                   <div className="relative h-64 overflow-hidden">
@@ -138,7 +137,6 @@ export default function PopularDestinations() {
                     </div>
                   </div>
                 </Card>
-              </a>
             </Link>
           ))}
         </div>
