@@ -27,7 +27,7 @@ import {
   LogOut, RefreshCw, Search, Trash2, CheckCircle, XCircle,
   Clock, MessageSquare, FileText, ChevronDown, ChevronUp,
   MapPin, Phone, Mail, Plane, Star, Users, TrendingUp,
-  StickyNote, AlertCircle,
+  StickyNote, AlertCircle, Settings, Lock, Eye, EyeOff, ShieldCheck,
 } from "lucide-react";
 import AdminStatsSection from "@/components/AdminStatsSection";
 
@@ -526,8 +526,196 @@ function TestimonialCard({ testimonial: t, onRefresh }: { testimonial: any; onRe
   );
 }
 
+// ─── SECTION PARAMÈTRES ──────────────────────────────────────────────────────
+function SettingsSection({ adminToken }: { adminToken: string }) {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const changePasswordMutation = adminTrpc.auth.changeAdminPassword.useMutation({
+    onSuccess: () => {
+      toast.success("Mot de passe modifié avec succès ! Veuillez vous reconnecter.");
+      // Vider les champs
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      // Déconnecter après changement de mot de passe
+      setTimeout(() => {
+        localStorage.removeItem("khamci-admin-token");
+        localStorage.removeItem("khamci-admin-expiry");
+        window.location.reload();
+      }, 2000);
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const passwordStrength = (pwd: string) => {
+    if (pwd.length === 0) return null;
+    if (pwd.length < 6) return { level: "faible", color: "#EF4444", width: "25%" };
+    if (pwd.length < 8) return { level: "moyen", color: "#F59E0B", width: "50%" };
+    if (pwd.length < 12 || !/[A-Z]/.test(pwd) || !/[0-9]/.test(pwd)) return { level: "bon", color: "#3B82F6", width: "75%" };
+    return { level: "fort", color: "#10B981", width: "100%" };
+  };
+
+  const strength = passwordStrength(newPassword);
+  const passwordsMatch = confirmPassword.length > 0 && newPassword === confirmPassword;
+  const passwordsMismatch = confirmPassword.length > 0 && newPassword !== confirmPassword;
+
+  return (
+    <div className="max-w-lg mx-auto">
+      {/* Carte principale */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        {/* En-tête */}
+        <div className="p-6 border-b border-gray-100" style={{ background: "linear-gradient(135deg, #0D1B3E, #1E3A6E)" }}>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,107,53,0.2)" }}>
+              <Lock className="w-5 h-5" style={{ color: "#FF8C5A" }} />
+            </div>
+            <div>
+              <h2 className="text-white font-bold text-lg">Changer le mot de passe</h2>
+              <p className="text-blue-300 text-sm">Sécurisez votre accès administrateur</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Formulaire */}
+        <div className="p-6 space-y-5">
+          {/* Mot de passe actuel */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Mot de passe actuel
+            </label>
+            <div className="relative">
+              <Input
+                type={showCurrent ? "text" : "password"}
+                placeholder="Entrez votre mot de passe actuel"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                className="h-11 pr-10 border-gray-200 focus:border-orange-400"
+              />
+              <button
+                type="button"
+                onClick={() => setShowCurrent(!showCurrent)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showCurrent ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Nouveau mot de passe */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Nouveau mot de passe
+            </label>
+            <div className="relative">
+              <Input
+                type={showNew ? "text" : "password"}
+                placeholder="Minimum 6 caractères"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="h-11 pr-10 border-gray-200 focus:border-orange-400"
+              />
+              <button
+                type="button"
+                onClick={() => setShowNew(!showNew)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+            {/* Barre de force */}
+            {strength && (
+              <div className="mt-2">
+                <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-300"
+                    style={{ width: strength.width, background: strength.color }}
+                  />
+                </div>
+                <p className="text-xs mt-1" style={{ color: strength.color }}>
+                  Force : <strong>{strength.level}</strong>
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Confirmation */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+              Confirmer le nouveau mot de passe
+            </label>
+            <div className="relative">
+              <Input
+                type={showConfirm ? "text" : "password"}
+                placeholder="Répétez le nouveau mot de passe"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className={`h-11 pr-10 border-gray-200 focus:border-orange-400 ${
+                  passwordsMismatch ? "border-red-300 bg-red-50" : ""
+                } ${passwordsMatch ? "border-emerald-300 bg-emerald-50" : ""}`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+            {passwordsMismatch && (
+              <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                <XCircle className="w-3.5 h-3.5" /> Les mots de passe ne correspondent pas
+              </p>
+            )}
+            {passwordsMatch && (
+              <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                <CheckCircle className="w-3.5 h-3.5" /> Les mots de passe correspondent
+              </p>
+            )}
+          </div>
+
+          {/* Bouton */}
+          <Button
+            className="w-full h-11 text-white font-semibold rounded-xl mt-2"
+            style={{ background: "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
+            onClick={() => changePasswordMutation.mutate({ currentPassword, newPassword, confirmPassword })}
+            disabled={
+              changePasswordMutation.isPending ||
+              !currentPassword || !newPassword || !confirmPassword ||
+              newPassword !== confirmPassword || newPassword.length < 6
+            }
+          >
+            {changePasswordMutation.isPending ? (
+              <span className="flex items-center gap-2"><RefreshCw className="w-4 h-4 animate-spin" /> Modification en cours...</span>
+            ) : (
+              <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" /> Modifier le mot de passe</span>
+            )}
+          </Button>
+        </div>
+      </div>
+
+      {/* Conseil sécurité */}
+      <div className="mt-4 p-4 rounded-xl border border-blue-100 bg-blue-50">
+        <p className="text-sm font-semibold text-blue-800 mb-1 flex items-center gap-1.5">
+          <ShieldCheck className="w-4 h-4" /> Conseils de sécurité
+        </p>
+        <ul className="text-xs text-blue-700 space-y-1 list-disc list-inside">
+          <li>Utilisez au moins 8 caractères</li>
+          <li>Mélangez majuscules, minuscules et chiffres</li>
+          <li>Évitez les mots du dictionnaire</li>
+          <li>Ne partagez jamais votre mot de passe</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 // ─── DASHBOARD PRINCIPAL ──────────────────────────────────────────────────────
-function Dashboard({ onLogout }: { onLogout: () => void }) {
+function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken: string }) {
   const [quoteFilter, setQuoteFilter] = useState<string>("all");
   const [testimonialFilter, setTestimonialFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -562,6 +750,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
   const pendingQuotes = quotes.filter(q => q.status === "pending").length;
   const pendingTestimonials = testimonials.filter(t => t.status === "pending").length;
+  const totalPending = pendingQuotes + pendingTestimonials;
 
   return (
     <div className="min-h-screen" style={{ background: "#F1F5F9" }}>
@@ -669,6 +858,13 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                 </span>
               )}
             </TabsTrigger>
+            <TabsTrigger
+              value="settings"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium data-[state=active]:text-white transition-all"
+            >
+              <Settings className="w-4 h-4" />
+              <span className="hidden sm:inline">Paramètres</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* ─── ONGLET DEVIS ─── */}
@@ -724,6 +920,11 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          {/* ─── ONGLET PARAMÈTRES ─── */}
+          <TabsContent value="settings">
+            <SettingsSection adminToken={adminToken} />
           </TabsContent>
 
           {/* ─── ONGLET TÉMOIGNAGES ─── */}
@@ -787,6 +988,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
 // ─── WRAPPER AVEC PROVIDER TRPC DÉDIÉ ADMIN ──────────────────────────────────
 function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
+  // Vérifier que le token est toujours valide au montage
   const adminQueryClient = useMemo(() => new QueryClient({
     defaultOptions: { queries: { retry: false } },
   }), []);
@@ -809,7 +1011,7 @@ function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: stri
   return (
     <adminTrpc.Provider client={adminTrpcClient} queryClient={adminQueryClient}>
       <QueryClientProvider client={adminQueryClient}>
-        <Dashboard onLogout={onLogout} />
+        <Dashboard onLogout={onLogout} adminToken={adminToken} />
       </QueryClientProvider>
     </adminTrpc.Provider>
   );

@@ -1,7 +1,8 @@
-import { eq, desc, gte, and } from "drizzle-orm";
+import { eq, desc, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, quotes, testimonials, InsertQuote, InsertTestimonial } from "../drizzle/schema";
+import { InsertUser, users, quotes, testimonials, adminSettings, InsertQuote, InsertTestimonial } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import bcrypt from "bcryptjs";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -179,4 +180,36 @@ export async function deleteTestimonial(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.delete(testimonials).where(eq(testimonials.id, id));
+}
+
+// =====================
+// ADMIN SETTINGS (MOT DE PASSE)
+// =====================
+
+const ADMIN_PASSWORD_KEY = "admin_password";
+
+export async function getAdminPasswordHash(): Promise<string | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(adminSettings).where(eq(adminSettings.key, ADMIN_PASSWORD_KEY)).limit(1);
+  return result[0]?.value ?? null;
+}
+
+export async function verifyAdminPassword(password: string): Promise<boolean> {
+  const hash = await getAdminPasswordHash();
+  // Si aucun hash en DB, utiliser le mot de passe par défaut de l'env
+  if (!hash) {
+    const defaultPassword = process.env.ADMIN_PASSWORD || "khamci2024";
+    return password === defaultPassword;
+  }
+  return bcrypt.compare(password, hash);
+}
+
+export async function setAdminPassword(newPassword: string): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const hash = await bcrypt.hash(newPassword, 12);
+  await db.insert(adminSettings)
+    .values({ key: ADMIN_PASSWORD_KEY, value: hash })
+    .onDuplicateKeyUpdate({ set: { value: hash } });
 }

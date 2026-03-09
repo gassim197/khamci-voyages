@@ -7,14 +7,18 @@ import { TRPCError } from "@trpc/server";
 import {
   createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
+  verifyAdminPassword, setAdminPassword,
 } from "./db";
 import { sendNewQuoteNotification, sendQuoteConfirmationToClient, sendNewTestimonialNotification } from "./email";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "khamci2024";
-
-const adminProcedure = publicProcedure.use(({ ctx, next }) => {
-  const token = (ctx.req as any).headers["x-admin-token"];
-  if (token !== ADMIN_PASSWORD) {
+// adminProcedure vérifie le token dans les headers (token = mot de passe en clair pour la session)
+const adminProcedure = publicProcedure.use(async ({ ctx, next }) => {
+  const token = (ctx.req as any).headers["x-admin-token"] as string | undefined;
+  if (!token) {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Accès non autorisé" });
+  }
+  const isValid = await verifyAdminPassword(token);
+  if (!isValid) {
     throw new TRPCError({ code: "UNAUTHORIZED", message: "Accès non autorisé" });
   }
   return next({ ctx });
@@ -31,11 +35,32 @@ export const appRouter = router({
     }),
     adminLogin: publicProcedure
       .input(z.object({ password: z.string() }))
-      .mutation(({ input }) => {
-        if (input.password !== ADMIN_PASSWORD) {
+      .mutation(async ({ input }) => {
+        const isValid = await verifyAdminPassword(input.password);
+        if (!isValid) {
           throw new TRPCError({ code: "UNAUTHORIZED", message: "Mot de passe incorrect" });
         }
-        return { success: true, token: ADMIN_PASSWORD };
+        // Le token de session = le mot de passe en clair (vérifié côté serveur à chaque requête)
+        return { success: true, token: input.password };
+      }),
+
+    changeAdminPassword: adminProcedure
+      .input(z.object({
+        currentPassword: z.string().min(1),
+        newPassword: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
+        confirmPassword: z.string().min(1),
+      }))
+      .mutation(async ({ input }) => {
+        if (input.newPassword !== input.confirmPassword) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Les mots de passe ne correspondent pas" });
+        }
+        // Vérifier l'ancien mot de passe
+        const isValid = await verifyAdminPassword(input.currentPassword);
+        if (!isValid) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Mot de passe actuel incorrect" });
+        }
+        await setAdminPassword(input.newPassword);
+        return { success: true };
       }),
   }),
 

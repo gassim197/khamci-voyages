@@ -58,3 +58,9 @@
 - [ ] Améliorer les cartes de statistiques avec icônes et couleurs
 - [ ] Améliorer les tableaux de devis et témoignages
 - [ ] Améliorer la page de connexion admin
+
+## Paramètres Admin - Changement de mot de passe
+
+- [ ] Ajouter la table admin_settings en base de données pour stocker le mot de passe hashé
+- [ ] Ajouter route tRPC auth.changeAdminPassword (vérif ancien MDP + hash bcrypt)
+- [ ] Ajouter onglet "Paramètres" dans le dashboard avec formulaire de changement de mot de passe
