@@ -32,7 +32,8 @@ export default function HeroSection() {
               "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airport-travel-nADmPQsckLn2jEZdgxhyw9.webp')",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
         </div>
 
         {/* Logo Watermark - Subtle Background */}
