@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { adminTrpc } from "@/lib/adminTrpc";
+import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
@@ -57,7 +57,7 @@ function CustomPieLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent, n
 export default function AdminStatsSection() {
   const [viewMode, setViewMode] = useState<ViewMode>("day");
 
-  const statsQuery = adminTrpc.quotes.stats.useQuery(undefined, {
+  const statsQuery = trpc.quotes.stats.useQuery(undefined, {
     refetchInterval: 60000,
   });
 

@@ -84,3 +84,16 @@
 - [x] Modifier main.tsx pour injecter dynamiquement le token admin depuis localStorage
 - [x] Remplacer tous les usages de adminTrpc par trpc dans AdminDashboardNew.tsx
 - [x] Valider que tous les onglets du dashboard fonctionnent (Devis, Témoignages, Profil, Paramètres)
+
+## Refonte Complète Dashboard Admin (Design Professionnel)
+
+- [x] Créer une sidebar de navigation fixe à gauche (logo, profil admin, liens de navigation)
+- [x] Créer un header fixe en haut avec titre de page, barre de recherche et actions rapides
+- [x] Reconstruire les KPI cards (Total devis, En attente, Complétés, Témoignages)
+- [x] Créer la vue Tableau de bord (vue d'ensemble avec statistiques et activité récente)
+- [x] Créer la vue Devis (liste complète avec filtres et actions)
+- [x] Créer la vue Témoignages (liste avec modération)
+- [x] Créer la vue Profil (édition du profil admin)
+- [x] Créer la vue Paramètres (changement de mot de passe)
+- [x] Appliquer le design KHAMCI VOYAGES (bleu marine #0D1B3E + orange #FF6B35)
+- [x] Rendre le dashboard responsive (mobile-friendly)
