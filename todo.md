@@ -37,3 +37,8 @@
 - [x] Page de remerciement
 - [x] Bouton WhatsApp flottant
 - [x] CTA sticky pour les devis
+
+## Bugs à corriger
+
+- [x] Les devis soumis n'apparaissent pas dans le dashboard admin (corrigé : provider tRPC dédié avec token admin)
+- [x] Les emails de notification (nécessite GMAIL_USER + GMAIL_APP_PASSWORD dans les secrets Manus)

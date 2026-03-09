@@ -1,7 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/client";
+import superjson from "superjson";
+import { adminTrpc } from "@/lib/adminTrpc";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,9 +24,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  LogOut, RefreshCw, Search, Eye, Trash2, CheckCircle, XCircle,
-  Clock, TrendingUp, MessageSquare, FileText, ChevronDown, ChevronUp,
-  Star, MapPin, Phone, Mail, Calendar, Users, Filter
+  LogOut, RefreshCw, Search, Trash2, CheckCircle, XCircle,
+  Clock, MessageSquare, FileText, ChevronDown, ChevronUp,
+  MapPin, Phone, Mail,
 } from "lucide-react";
 
 // =====================
@@ -62,7 +65,7 @@ const SERVICE_LABELS: Record<string, string> = {
 };
 
 // =====================
-// COMPOSANT LOGIN
+// COMPOSANT LOGIN (utilise le trpc global sans token)
 // =====================
 function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
   const [password, setPassword] = useState("");
@@ -131,9 +134,7 @@ function StatsCards({ quotes, testimonials }: { quotes: any[]; testimonials: any
     completed: quotes.filter(q => q.status === "completed").length,
   };
   const testimonialStats = {
-    total: testimonials.length,
     pending: testimonials.filter(t => t.status === "pending").length,
-    approved: testimonials.filter(t => t.status === "approved").length,
   };
 
   return (
@@ -167,39 +168,29 @@ function StatsCards({ quotes, testimonials }: { quotes: any[]; testimonials: any
 }
 
 // =====================
-// COMPOSANT CARTE DEVIS
+// COMPOSANT CARTE DEVIS (utilise adminTrpc)
 // =====================
-function QuoteCard({
-  quote,
-  adminToken,
-  onRefresh,
-}: {
-  quote: any;
-  adminToken: string;
-  onRefresh: () => void;
-}) {
+function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) {
   const [expanded, setExpanded] = useState(false);
   const [showNotesDialog, setShowNotesDialog] = useState(false);
   const [notes, setNotes] = useState(quote.adminNotes || "");
 
-  const updateMutation = trpc.quotes.updateStatus.useMutation({
+  const updateMutation = adminTrpc.quotes.updateStatus.useMutation({
     onSuccess: () => { toast.success("Statut mis à jour !"); onRefresh(); },
-    onError: () => toast.error("Erreur lors de la mise à jour"),
+    onError: (e) => toast.error("Erreur : " + e.message),
   });
 
-  const deleteMutation = trpc.quotes.delete.useMutation({
+  const deleteMutation = adminTrpc.quotes.delete.useMutation({
     onSuccess: () => { toast.success("Devis supprimé"); onRefresh(); },
-    onError: () => toast.error("Erreur lors de la suppression"),
+    onError: (e) => toast.error("Erreur : " + e.message),
   });
-
-  const headers = { "x-admin-token": adminToken };
 
   const handleStatusChange = (status: QuoteStatus) => {
-    updateMutation.mutate({ id: quote.id, status, adminNotes: notes }, { context: { headers } } as any);
+    updateMutation.mutate({ id: quote.id, status, adminNotes: notes });
   };
 
   const handleSaveNotes = () => {
-    updateMutation.mutate({ id: quote.id, status: quote.status, adminNotes: notes }, { context: { headers } } as any);
+    updateMutation.mutate({ id: quote.id, status: quote.status, adminNotes: notes });
     setShowNotesDialog(false);
   };
 
@@ -281,9 +272,9 @@ function QuoteCard({
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 text-xs text-red-600 hover:text-red-700 hover:bg-red-50"
+                className="h-8 text-xs text-red-600 hover:bg-red-50"
                 onClick={() => {
-                  if (confirm("Supprimer ce devis ?")) deleteMutation.mutate({ id: quote.id }, { context: { headers } } as any);
+                  if (confirm("Supprimer ce devis ?")) deleteMutation.mutate({ id: quote.id });
                 }}
               >
                 <Trash2 className="w-3 h-3 mr-1" /> Supprimer
@@ -297,7 +288,7 @@ function QuoteCard({
       <Dialog open={showNotesDialog} onOpenChange={setShowNotesDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Notes admin - {quote.clientName}</DialogTitle>
+            <DialogTitle>Notes admin — {quote.clientName}</DialogTitle>
           </DialogHeader>
           <Textarea
             placeholder="Ajouter des notes internes sur ce devis..."
@@ -316,30 +307,20 @@ function QuoteCard({
 }
 
 // =====================
-// COMPOSANT CARTE TÉMOIGNAGE
+// COMPOSANT CARTE TÉMOIGNAGE (utilise adminTrpc)
 // =====================
-function TestimonialCard({
-  testimonial,
-  adminToken,
-  onRefresh,
-}: {
-  testimonial: any;
-  adminToken: string;
-  onRefresh: () => void;
-}) {
+function TestimonialCard({ testimonial, onRefresh }: { testimonial: any; onRefresh: () => void }) {
   const [expanded, setExpanded] = useState(false);
 
-  const updateMutation = trpc.testimonials.updateStatus.useMutation({
+  const updateMutation = adminTrpc.testimonials.updateStatus.useMutation({
     onSuccess: () => { toast.success("Statut mis à jour !"); onRefresh(); },
-    onError: () => toast.error("Erreur lors de la mise à jour"),
+    onError: (e) => toast.error("Erreur : " + e.message),
   });
 
-  const deleteMutation = trpc.testimonials.delete.useMutation({
+  const deleteMutation = adminTrpc.testimonials.delete.useMutation({
     onSuccess: () => { toast.success("Témoignage supprimé"); onRefresh(); },
-    onError: () => toast.error("Erreur lors de la suppression"),
+    onError: (e) => toast.error("Erreur : " + e.message),
   });
-
-  const headers = { "x-admin-token": adminToken };
 
   return (
     <Card className="mb-3 hover:shadow-md transition-shadow">
@@ -374,7 +355,7 @@ function TestimonialCard({
                 <Button
                   size="sm"
                   className="h-8 text-xs bg-green-600 hover:bg-green-700"
-                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "approved" }, { context: { headers } } as any)}
+                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "approved" })}
                 >
                   <CheckCircle className="w-3 h-3 mr-1" /> Approuver
                 </Button>
@@ -384,7 +365,7 @@ function TestimonialCard({
                   variant="outline"
                   size="sm"
                   className="h-8 text-xs text-orange-600 hover:bg-orange-50"
-                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "rejected" }, { context: { headers } } as any)}
+                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "rejected" })}
                 >
                   <XCircle className="w-3 h-3 mr-1" /> Rejeter
                 </Button>
@@ -394,7 +375,7 @@ function TestimonialCard({
                   variant="outline"
                   size="sm"
                   className="h-8 text-xs"
-                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "pending" }, { context: { headers } } as any)}
+                  onClick={() => updateMutation.mutate({ id: testimonial.id, status: "pending" })}
                 >
                   <Clock className="w-3 h-3 mr-1" /> Remettre en attente
                 </Button>
@@ -404,7 +385,7 @@ function TestimonialCard({
                 size="sm"
                 className="h-8 text-xs text-red-600 hover:bg-red-50"
                 onClick={() => {
-                  if (confirm("Supprimer ce témoignage ?")) deleteMutation.mutate({ id: testimonial.id }, { context: { headers } } as any);
+                  if (confirm("Supprimer ce témoignage ?")) deleteMutation.mutate({ id: testimonial.id });
                 }}
               >
                 <Trash2 className="w-3 h-3 mr-1" /> Supprimer
@@ -418,46 +399,40 @@ function TestimonialCard({
 }
 
 // =====================
-// DASHBOARD PRINCIPAL
+// DASHBOARD PRINCIPAL (utilise adminTrpc avec token injecté)
 // =====================
-function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
+function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [quoteFilter, setQuoteFilter] = useState<string>("all");
   const [testimonialFilter, setTestimonialFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const headers = { "x-admin-token": adminToken };
-
-  const quotesQuery = trpc.quotes.list.useQuery(undefined, {
-    // @ts-ignore
-    headers,
+  const quotesQuery = adminTrpc.quotes.list.useQuery(undefined, {
     refetchInterval: 30000,
   });
 
-  const testimonialsQuery = trpc.testimonials.listAll.useQuery(undefined, {
-    // @ts-ignore
-    headers,
+  const testimonialsQuery = adminTrpc.testimonials.listAll.useQuery(undefined, {
     refetchInterval: 30000,
   });
 
   const quotes = quotesQuery.data || [];
   const testimonials = testimonialsQuery.data || [];
 
-  const filteredQuotes = quotes.filter(q => {
+  const filteredQuotes = useMemo(() => quotes.filter(q => {
     const matchesFilter = quoteFilter === "all" || q.status === quoteFilter;
     const matchesSearch = !searchQuery ||
       q.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       q.clientEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (q.destination || "").toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
-  });
+  }), [quotes, quoteFilter, searchQuery]);
 
-  const filteredTestimonials = testimonials.filter(t => {
+  const filteredTestimonials = useMemo(() => testimonials.filter(t => {
     const matchesFilter = testimonialFilter === "all" || t.status === testimonialFilter;
     const matchesSearch = !searchQuery ||
       t.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       t.content.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
-  });
+  }), [testimonials, testimonialFilter, searchQuery]);
 
   const handleRefresh = () => {
     quotesQuery.refetch();
@@ -553,6 +528,10 @@ function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () 
 
             {quotesQuery.isLoading ? (
               <div className="text-center py-12 text-muted-foreground">Chargement...</div>
+            ) : quotesQuery.error ? (
+              <div className="text-center py-12 text-red-500">
+                Erreur : {quotesQuery.error.message}
+              </div>
             ) : filteredQuotes.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 <FileText className="w-12 h-12 mx-auto mb-3 opacity-30" />
@@ -563,7 +542,6 @@ function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () 
                 <QuoteCard
                   key={quote.id}
                   quote={quote}
-                  adminToken={adminToken}
                   onRefresh={handleRefresh}
                 />
               ))
@@ -595,6 +573,10 @@ function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () 
 
             {testimonialsQuery.isLoading ? (
               <div className="text-center py-12 text-muted-foreground">Chargement...</div>
+            ) : testimonialsQuery.error ? (
+              <div className="text-center py-12 text-red-500">
+                Erreur : {testimonialsQuery.error.message}
+              </div>
             ) : filteredTestimonials.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-30" />
@@ -605,7 +587,6 @@ function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () 
                 <TestimonialCard
                   key={t.id}
                   testimonial={t}
-                  adminToken={adminToken}
                   onRefresh={handleRefresh}
                 />
               ))
@@ -614,6 +595,39 @@ function Dashboard({ adminToken, onLogout }: { adminToken: string; onLogout: () 
         </Tabs>
       </div>
     </div>
+  );
+}
+
+// =====================
+// WRAPPER AVEC PROVIDER TRPC DÉDIÉ ADMIN
+// =====================
+function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
+  // Créer un client tRPC dédié avec le token dans les headers
+  const adminQueryClient = useMemo(() => new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  }), []);
+
+  const adminTrpcClient = useMemo(() => adminTrpc.createClient({
+    links: [
+      httpBatchLink({
+        url: "/api/trpc",
+        transformer: superjson,
+        headers() {
+          return { "x-admin-token": adminToken };
+        },
+        fetch(input, init) {
+          return globalThis.fetch(input, { ...(init ?? {}), credentials: "include" });
+        },
+      }),
+    ],
+  }), [adminToken]);
+
+  return (
+    <adminTrpc.Provider client={adminTrpcClient} queryClient={adminQueryClient}>
+      <QueryClientProvider client={adminQueryClient}>
+        <Dashboard onLogout={onLogout} />
+      </QueryClientProvider>
+    </adminTrpc.Provider>
   );
 }
 
@@ -641,5 +655,5 @@ export default function AdminDashboardNew() {
     return <AdminLogin onLogin={setAdminToken} />;
   }
 
-  return <Dashboard adminToken={adminToken} onLogout={handleLogout} />;
+  return <AdminDashboardWithProvider adminToken={adminToken} onLogout={handleLogout} />;
 }
