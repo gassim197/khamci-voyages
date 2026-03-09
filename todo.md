@@ -54,22 +54,22 @@
 
 ## Amélioration visuelle Dashboard Admin
 
-- [ ] Refondre le design du dashboard avec les couleurs KHAMCI VOYAGES (bleu marine + orange)
-- [ ] Améliorer les cartes de statistiques avec icônes et couleurs
-- [ ] Améliorer les tableaux de devis et témoignages
-- [ ] Améliorer la page de connexion admin
+- [x] Refondre le design du dashboard avec les couleurs KHAMCI VOYAGES (bleu marine + orange)
+- [x] Améliorer les cartes de statistiques avec icônes et couleurs
+- [x] Améliorer les tableaux de devis et témoignages
+- [x] Améliorer la page de connexion admin
 
 ## Paramètres Admin - Changement de mot de passe
 
-- [ ] Ajouter la table admin_settings en base de données pour stocker le mot de passe hashé
-- [ ] Ajouter route tRPC auth.changeAdminPassword (vérif ancien MDP + hash bcrypt)
-- [ ] Ajouter onglet "Paramètres" dans le dashboard avec formulaire de changement de mot de passe
+- [x] Ajouter la table admin_settings en base de données pour stocker le mot de passe hashé
+- [x] Ajouter route tRPC auth.changeAdminPassword (vérif ancien MDP + hash bcrypt)
+- [x] Ajouter onglet "Paramètres" dans le dashboard avec formulaire de changement de mot de passe
 
 ## Profil Administrateur
 
-- [ ] Ajouter les champs profil dans la table admin_settings (nom, email, téléphone, bio, avatar)
-- [ ] Ajouter routes tRPC auth.getAdminProfile et auth.updateAdminProfile
-- [ ] Créer la section Profil dans le dashboard (onglet dédié)
-- [ ] Formulaire de modification : nom, email, téléphone, poste, bio
-- [ ] Upload de photo de profil (avatar)
-- [ ] Afficher le nom/avatar dans le header du dashboard
+- [x] Ajouter les champs profil dans la table admin_settings (nom, email, téléphone, bio, avatar)
+- [x] Ajouter routes tRPC auth.getAdminProfile et auth.updateAdminProfile
+- [x] Créer la section Profil dans le dashboard (onglet dédié)
+- [x] Formulaire de modification : nom, email, téléphone, poste, bio
+- [x] Upload de photo de profil (avatar)
+- [x] Afficher le nom et l'avatar de l'admin dans le header du dashboard

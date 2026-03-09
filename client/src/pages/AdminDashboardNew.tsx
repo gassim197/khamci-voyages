@@ -915,6 +915,12 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   const [testimonialFilter, setTestimonialFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Profil admin pour le header
+  const profileQuery = adminTrpc.auth.getAdminProfile.useQuery();
+  const adminName = profileQuery.data?.name || "Administrateur";
+  const adminPosition = profileQuery.data?.position || "Admin";
+  const adminAvatar = profileQuery.data?.avatarUrl || null;
+
   const quotesQuery = adminTrpc.quotes.list.useQuery(undefined, { refetchInterval: 30000 });
   const testimonialsQuery = adminTrpc.testimonials.listAll.useQuery(undefined, { refetchInterval: 30000 });
 
@@ -962,6 +968,30 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
               <div>
                 <h1 className="text-white font-bold text-base leading-tight">KHAMCI VOYAGES</h1>
                 <p className="text-blue-300 text-xs">Tableau de bord administrateur</p>
+              </div>
+            </div>
+
+            {/* Profil admin au centre */}
+            <div className="hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-xl"
+                 style={{ background: "rgba(255,255,255,0.07)" }}>
+              {adminAvatar ? (
+                <img
+                  src={adminAvatar}
+                  alt={adminName}
+                  className="w-8 h-8 rounded-full object-cover border-2"
+                  style={{ borderColor: "#FF6B35" }}
+                />
+              ) : (
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                  style={{ background: "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
+                >
+                  {adminName.charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="text-left">
+                <p className="text-white text-xs font-semibold leading-tight">{adminName}</p>
+                <p className="text-blue-300 text-[10px] leading-tight">{adminPosition}</p>
               </div>
             </div>
 
