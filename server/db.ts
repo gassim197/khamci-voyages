@@ -1,6 +1,6 @@
 import { eq, desc, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, quotes, testimonials, adminSettings, InsertQuote, InsertTestimonial } from "../drizzle/schema";
+import { InsertUser, users, quotes, testimonials, adminSettings, InsertQuote, InsertTestimonial, AdminProfile } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import bcrypt from "bcryptjs";
 
@@ -212,4 +212,42 @@ export async function setAdminPassword(newPassword: string): Promise<void> {
   await db.insert(adminSettings)
     .values({ key: ADMIN_PASSWORD_KEY, value: hash })
     .onDuplicateKeyUpdate({ set: { value: hash } });
+}
+
+// =====================
+// ADMIN PROFILE
+// =====================
+
+const ADMIN_PROFILE_KEY = "admin_profile";
+
+const DEFAULT_PROFILE: AdminProfile = {
+  name: "Administrateur",
+  email: "khamcivoyages@gmail.com",
+  phone: "+224 611 14 58 92",
+  position: "Administrateur",
+  bio: "",
+  avatarUrl: "",
+};
+
+export async function getAdminProfile(): Promise<AdminProfile> {
+  const db = await getDb();
+  if (!db) return DEFAULT_PROFILE;
+  const result = await db.select().from(adminSettings).where(eq(adminSettings.key, ADMIN_PROFILE_KEY)).limit(1);
+  if (!result[0]) return DEFAULT_PROFILE;
+  try {
+    return JSON.parse(result[0].value) as AdminProfile;
+  } catch {
+    return DEFAULT_PROFILE;
+  }
+}
+
+export async function updateAdminProfile(profile: Partial<AdminProfile>): Promise<AdminProfile> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const current = await getAdminProfile();
+  const updated = { ...current, ...profile };
+  await db.insert(adminSettings)
+    .values({ key: ADMIN_PROFILE_KEY, value: JSON.stringify(updated) })
+    .onDuplicateKeyUpdate({ set: { value: JSON.stringify(updated) } });
+  return updated;
 }

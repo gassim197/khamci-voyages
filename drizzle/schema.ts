@@ -82,3 +82,13 @@ export const adminSettings = mysqlTable("admin_settings", {
 
 export type AdminSetting = typeof adminSettings.$inferSelect;
 export type InsertAdminSetting = typeof adminSettings.$inferInsert;
+
+// Type pour le profil admin
+export type AdminProfile = {
+  name: string;
+  email: string;
+  phone: string;
+  position: string;
+  bio: string;
+  avatarUrl: string;
+};

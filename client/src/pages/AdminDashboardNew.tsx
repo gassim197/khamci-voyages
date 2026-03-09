@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
@@ -28,6 +28,7 @@ import {
   Clock, MessageSquare, FileText, ChevronDown, ChevronUp,
   MapPin, Phone, Mail, Plane, Star, Users, TrendingUp,
   StickyNote, AlertCircle, Settings, Lock, Eye, EyeOff, ShieldCheck,
+  User, Camera, Save, Building2,
 } from "lucide-react";
 import AdminStatsSection from "@/components/AdminStatsSection";
 
@@ -526,7 +527,201 @@ function TestimonialCard({ testimonial: t, onRefresh }: { testimonial: any; onRe
   );
 }
 
-// ─── SECTION PARAMÈTRES ──────────────────────────────────────────────────────
+// ───// ─── SECTION PROFIL ─────────────────────────────────────────────────
+function ProfileSection() {
+  const profileQuery = adminTrpc.auth.getAdminProfile.useQuery();
+  const updateProfileMutation = adminTrpc.auth.updateAdminProfile.useMutation({
+    onSuccess: () => {
+      toast.success("Profil mis à jour avec succès ! ✅");
+      profileQuery.refetch();
+      setIsDirty(false);
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [position, setPosition] = useState("");
+  const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState("");
+  const [isDirty, setIsDirty] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (profileQuery.data) {
+      const p = profileQuery.data;
+      setName(p.name || "");
+      setEmail(p.email || "");
+      setPhone(p.phone || "");
+      setPosition(p.position || "");
+      setBio(p.bio || "");
+      setAvatarUrl(p.avatarUrl || "");
+      setAvatarPreview(p.avatarUrl || "");
+      setIsDirty(false);
+    }
+  }, [profileQuery.data]);
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("L'image ne doit pas dépasser 2 Mo");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      setAvatarPreview(dataUrl);
+      setAvatarUrl(dataUrl);
+      setIsDirty(true);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const initials = name
+    ? name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)
+    : "AD";
+
+  if (profileQuery.isLoading) {
+    return (
+      <div className="text-center py-16 text-gray-400">
+        <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin opacity-40" />
+        <p>Chargement du profil...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      {/* En-tête profil avec bannière */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-5">
+        <div className="h-24" style={{ background: "linear-gradient(135deg, #0D1B3E 0%, #1a3a6e 100%)" }} />
+        <div className="px-6 pb-6">
+          <div className="flex items-end gap-4 -mt-10 mb-4">
+            <div className="relative">
+              <div
+                className="w-20 h-20 rounded-2xl border-4 border-white shadow-lg flex items-center justify-center overflow-hidden"
+                style={{ background: avatarPreview ? "transparent" : "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
+              >
+                {avatarPreview ? (
+                  <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-white text-xl font-bold">{initials}</span>
+                )}
+              </div>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center shadow-md border-2 border-white transition-transform hover:scale-110"
+                style={{ background: "#FF6B35" }}
+                title="Changer la photo"
+              >
+                <Camera className="w-3.5 h-3.5 text-white" />
+              </button>
+              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+            </div>
+            <div className="pb-1">
+              <h2 className="text-lg font-bold text-gray-900">{name || "Administrateur"}</h2>
+              <p className="text-sm text-gray-500">{position || "Administrateur"}</p>
+              {email && <p className="text-xs text-gray-400 mt-0.5">{email}</p>}
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 flex items-center gap-1">
+            <Camera className="w-3 h-3" /> Cliquez sur l'icône pour changer votre photo (max 2 Mo)
+          </p>
+        </div>
+      </div>
+
+      {/* Formulaire */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+          <User className="w-4 h-4" style={{ color: "#FF6B35" }} />
+          Informations personnelles
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom complet</label>
+            <Input
+              value={name}
+              onChange={(e) => { setName(e.target.value); setIsDirty(true); }}
+              placeholder="Votre nom complet"
+              className="h-11 border-gray-200 focus:border-orange-400"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Poste / Titre</label>
+            <div className="relative">
+              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                value={position}
+                onChange={(e) => { setPosition(e.target.value); setIsDirty(true); }}
+                placeholder="Ex: Directeur, Agent de voyage..."
+                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Adresse email</label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); setIsDirty(true); }}
+                placeholder="votre@email.com"
+                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone</label>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                value={phone}
+                onChange={(e) => { setPhone(e.target.value); setIsDirty(true); }}
+                placeholder="+224 6XX XX XX XX"
+                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+            Biographie <span className="text-gray-400 font-normal">(optionnel, max 300 caractères)</span>
+          </label>
+          <Textarea
+            value={bio}
+            onChange={(e) => { setBio(e.target.value); setIsDirty(true); }}
+            placeholder="Quelques mots sur vous..."
+            maxLength={300}
+            rows={3}
+            className="border-gray-200 focus:border-orange-400 resize-none"
+          />
+          <p className="text-xs text-gray-400 mt-1 text-right">{bio.length}/300</p>
+        </div>
+
+        <Button
+          className="w-full h-11 text-white font-semibold rounded-xl mt-5 transition-all"
+          style={{ background: isDirty ? "linear-gradient(135deg, #FF6B35, #FF8C5A)" : "#9CA3AF" }}
+          onClick={() => updateProfileMutation.mutate({ name, email, phone, position, bio, avatarUrl })}
+          disabled={updateProfileMutation.isPending || !isDirty}
+        >
+          {updateProfileMutation.isPending ? (
+            <span className="flex items-center gap-2"><RefreshCw className="w-4 h-4 animate-spin" /> Sauvegarde...</span>
+          ) : (
+            <span className="flex items-center gap-2"><Save className="w-4 h-4" /> Sauvegarder le profil</span>
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// ─── SECTION PARAMÈTRES ─────────────────────────────────────────────────
 function SettingsSection({ adminToken }: { adminToken: string }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -859,6 +1054,13 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
               )}
             </TabsTrigger>
             <TabsTrigger
+              value="profile"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium data-[state=active]:text-white transition-all"
+            >
+              <User className="w-4 h-4" />
+              <span className="hidden sm:inline">Profil</span>
+            </TabsTrigger>
+            <TabsTrigger
               value="settings"
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium data-[state=active]:text-white transition-all"
             >
@@ -979,6 +1181,11 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          {/* ─── ONGLET PROFIL ─── */}
+          <TabsContent value="profile">
+            <ProfileSection />
           </TabsContent>
         </Tabs>
       </main>

@@ -64,3 +64,12 @@
 - [ ] Ajouter la table admin_settings en base de données pour stocker le mot de passe hashé
 - [ ] Ajouter route tRPC auth.changeAdminPassword (vérif ancien MDP + hash bcrypt)
 - [ ] Ajouter onglet "Paramètres" dans le dashboard avec formulaire de changement de mot de passe
+
+## Profil Administrateur
+
+- [ ] Ajouter les champs profil dans la table admin_settings (nom, email, téléphone, bio, avatar)
+- [ ] Ajouter routes tRPC auth.getAdminProfile et auth.updateAdminProfile
+- [ ] Créer la section Profil dans le dashboard (onglet dédié)
+- [ ] Formulaire de modification : nom, email, téléphone, poste, bio
+- [ ] Upload de photo de profil (avatar)
+- [ ] Afficher le nom/avatar dans le header du dashboard

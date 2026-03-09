@@ -7,7 +7,7 @@ import { TRPCError } from "@trpc/server";
 import {
   createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
-  verifyAdminPassword, setAdminPassword,
+  verifyAdminPassword, setAdminPassword, getAdminProfile, updateAdminProfile,
 } from "./db";
 import { sendNewQuoteNotification, sendQuoteConfirmationToClient, sendNewTestimonialNotification } from "./email";
 
@@ -42,6 +42,22 @@ export const appRouter = router({
         }
         // Le token de session = le mot de passe en clair (vérifié côté serveur à chaque requête)
         return { success: true, token: input.password };
+      }),
+
+    getAdminProfile: adminProcedure.query(async () => getAdminProfile()),
+
+    updateAdminProfile: adminProcedure
+      .input(z.object({
+        name: z.string().min(1).optional(),
+        email: z.string().email().optional(),
+        phone: z.string().optional(),
+        position: z.string().optional(),
+        bio: z.string().max(300).optional(),
+        avatarUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const updated = await updateAdminProfile(input);
+        return { success: true, profile: updated };
       }),
 
     changeAdminPassword: adminProcedure
