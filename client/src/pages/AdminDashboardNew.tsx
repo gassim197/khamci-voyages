@@ -28,6 +28,7 @@ import {
   Clock, MessageSquare, FileText, ChevronDown, ChevronUp,
   MapPin, Phone, Mail,
 } from "lucide-react";
+import AdminStatsSection from "@/components/AdminStatsSection";
 
 // =====================
 // TYPES
@@ -463,10 +464,13 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
-        {/* Statistiques */}
+        {/* Statistiques rapides */}
         {!quotesQuery.isLoading && !testimonialsQuery.isLoading && (
           <StatsCards quotes={quotes} testimonials={testimonials} />
         )}
+
+        {/* Section statistiques visuelles */}
+        <AdminStatsSection />
 
         {/* Barre de recherche */}
         <div className="relative mb-4">

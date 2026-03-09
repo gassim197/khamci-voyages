@@ -5,7 +5,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
 import {
-  createQuote, getAllQuotes, updateQuoteStatus, deleteQuote,
+  createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
 } from "./db";
 import { sendNewQuoteNotification, sendQuoteConfirmationToClient, sendNewTestimonialNotification } from "./email";
@@ -93,6 +93,95 @@ export const appRouter = router({
         await deleteQuote(input.id);
         return { success: true };
       }),
+
+    stats: adminProcedure.query(async () => {
+      const { recentQuotes, allQuotes } = await getQuoteStats();
+
+      // Agrégation par jour (7 derniers jours)
+      const last7Days: Record<string, { date: string; total: number; pending: number; completed: number }> = {};
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const key = d.toISOString().slice(0, 10);
+        const label = d.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
+        last7Days[key] = { date: label, total: 0, pending: 0, completed: 0 };
+      }
+
+      // Agrégation par semaine (8 dernières semaines)
+      const last8Weeks: Record<string, { week: string; total: number; pending: number; completed: number }> = {};
+      for (let i = 7; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i * 7);
+        // Trouver le lundi de cette semaine
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        d.setDate(diff);
+        const key = d.toISOString().slice(0, 10);
+        const label = `Sem. ${d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}`;
+        if (!last8Weeks[key]) {
+          last8Weeks[key] = { week: label, total: 0, pending: 0, completed: 0 };
+        }
+      }
+
+      // Remplir les données
+      for (const q of recentQuotes) {
+        const dateKey = new Date(q.createdAt).toISOString().slice(0, 10);
+        if (last7Days[dateKey]) {
+          last7Days[dateKey].total++;
+          if (q.status === "pending") last7Days[dateKey].pending++;
+          if (q.status === "completed") last7Days[dateKey].completed++;
+        }
+        // Trouver la semaine
+        const qDate = new Date(q.createdAt);
+        const day = qDate.getDay();
+        const diff = qDate.getDate() - day + (day === 0 ? -6 : 1);
+        qDate.setDate(diff);
+        const weekKey = qDate.toISOString().slice(0, 10);
+        if (last8Weeks[weekKey]) {
+          last8Weeks[weekKey].total++;
+          if (q.status === "pending") last8Weeks[weekKey].pending++;
+          if (q.status === "completed") last8Weeks[weekKey].completed++;
+        }
+      }
+
+      // Répartition par type de service
+      const serviceCount: Record<string, number> = {};
+      for (const q of allQuotes) {
+        const svc = q.serviceType || "autre";
+        serviceCount[svc] = (serviceCount[svc] || 0) + 1;
+      }
+      const serviceData = Object.entries(serviceCount).map(([name, value]) => ({
+        name: { vol: "Vols", hotel: "Hôtels", visa: "Visa", circuit: "Circuits", custom: "Personnalisé", team_building: "Team Building", autre: "Autre" }[name] || name,
+        value,
+      }));
+
+      // Répartition par statut
+      const statusCount = {
+        pending: allQuotes.filter(q => q.status === "pending").length,
+        in_progress: allQuotes.filter(q => q.status === "in_progress").length,
+        completed: allQuotes.filter(q => q.status === "completed").length,
+        rejected: allQuotes.filter(q => q.status === "rejected").length,
+      };
+
+      return {
+        byDay: Object.values(last7Days),
+        byWeek: Object.values(last8Weeks),
+        byService: serviceData,
+        byStatus: [
+          { name: "En attente", value: statusCount.pending, color: "#F59E0B" },
+          { name: "En cours", value: statusCount.in_progress, color: "#3B82F6" },
+          { name: "Complétés", value: statusCount.completed, color: "#10B981" },
+          { name: "Rejetés", value: statusCount.rejected, color: "#EF4444" },
+        ],
+        totals: {
+          all: allQuotes.length,
+          pending: statusCount.pending,
+          inProgress: statusCount.in_progress,
+          completed: statusCount.completed,
+          rejected: statusCount.rejected,
+        },
+      };
+    }),
   }),
 
   testimonials: router({

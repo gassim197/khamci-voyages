@@ -42,3 +42,12 @@
 
 - [x] Les devis soumis n'apparaissent pas dans le dashboard admin (corrigé : provider tRPC dédié avec token admin)
 - [x] Les emails de notification (nécessite GMAIL_USER + GMAIL_APP_PASSWORD dans les secrets Manus)
+
+## Statistiques Dashboard
+
+- [x] Ajouter route tRPC quotes.stats pour les données statistiques
+- [x] Créer graphique devis par jour (7 derniers jours)
+- [x] Créer graphique devis par semaine (8 dernières semaines)
+- [x] Ajouter répartition par type de service (camembert)
+- [x] Ajouter répartition par statut (barres)
+- [x] Intégrer la section stats dans AdminDashboardNew.tsx

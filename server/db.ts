@@ -1,4 +1,4 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, gte, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, quotes, testimonials, InsertQuote, InsertTestimonial } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -124,6 +124,27 @@ export async function deleteQuote(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.delete(quotes).where(eq(quotes.id, id));
+}
+
+// Récupérer toutes les statistiques pour le dashboard
+export async function getQuoteStats() {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Récupérer tous les devis des 90 derniers jours
+  const ninetyDaysAgo = new Date();
+  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+
+  const allQuotes = await db
+    .select()
+    .from(quotes)
+    .where(gte(quotes.createdAt, ninetyDaysAgo))
+    .orderBy(desc(quotes.createdAt));
+
+  // Tous les devis pour les stats globales
+  const totalQuotes = await db.select().from(quotes);
+
+  return { recentQuotes: allQuotes, allQuotes: totalQuotes };
 }
 
 // =====================
