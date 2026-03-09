@@ -97,3 +97,9 @@
 - [x] Créer la vue Paramètres (changement de mot de passe)
 - [x] Appliquer le design KHAMCI VOYAGES (bleu marine #0D1B3E + orange #FF6B35)
 - [x] Rendre le dashboard responsive (mobile-friendly)
+
+## Affichage Informations Clients dans le Dashboard
+
+- [x] Afficher nom complet, téléphone et email visibles directement sur les cartes de devis (sans cliquer)
+- [x] Vérifier que les formulaires collectent bien toutes les infos (nom, prénom, téléphone, email)
+- [x] Améliorer la vue liste des devis avec un tableau structuré des informations clients

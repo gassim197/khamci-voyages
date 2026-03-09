@@ -383,34 +383,24 @@ function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) 
       }} />
 
       <div className="p-5">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap mb-2">
-              {/* Avatar initiales */}
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                   style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY_LIGHT})` }}>
-                {quote.clientName?.charAt(0)?.toUpperCase() || "?"}
-              </div>
-              <div>
-                <span className="font-bold text-gray-900 text-sm">{quote.clientName}</span>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusStyle}`}>
-                    {statusLabel}
-                  </span>
-                  <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-blue-50 text-blue-700 border border-blue-100">
-                    {serviceLabel}
-                  </span>
-                </div>
-              </div>
+        {/* En-tête : avatar + nom + badges statut/service + boutons */}
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white text-base font-bold flex-shrink-0"
+                 style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY_LIGHT})` }}>
+              {quote.clientName?.charAt(0)?.toUpperCase() || "?"}
             </div>
-
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-500 mt-2">
-              <span className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-gray-400" />{quote.clientEmail}</span>
-              <span className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-gray-400" />{quote.clientPhone}</span>
-              {quote.destination && (
-                <span className="flex items-center gap-1.5 col-span-2"><MapPin className="w-3.5 h-3.5 text-gray-400" />{quote.destination}</span>
-              )}
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-gray-400" />{new Date(quote.createdAt).toLocaleDateString("fr-FR")}</span>
+            <div>
+              <p className="font-bold text-gray-900 text-base leading-tight">{quote.clientName}</p>
+              <div className="flex items-center gap-2 mt-1 flex-wrap">
+                <span className={`text-xs px-2.5 py-0.5 rounded-full font-semibold ${statusStyle}`}>
+                  {statusLabel}
+                </span>
+                <span className="text-xs px-2.5 py-0.5 rounded-full font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  {serviceLabel}
+                </span>
+                <span className="text-xs text-gray-400">{new Date(quote.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</span>
+              </div>
             </div>
           </div>
 
@@ -430,6 +420,52 @@ function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) 
             >
               {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
+          </div>
+        </div>
+
+        {/* ─── INFOS CLIENT TOUJOURS VISIBLES ─── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
+          {/* Email */}
+          <a
+            href={`mailto:${quote.clientEmail}`}
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl border border-blue-100 bg-blue-50 hover:bg-blue-100 transition-colors group"
+          >
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#DBEAFE" }}>
+              <Mail className="w-3.5 h-3.5 text-blue-600" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-semibold text-blue-500 uppercase tracking-wide">Email</p>
+              <p className="text-xs font-semibold text-blue-800 truncate group-hover:underline">{quote.clientEmail}</p>
+            </div>
+          </a>
+
+          {/* Téléphone */}
+          <a
+            href={`tel:${quote.clientPhone}`}
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50 hover:bg-emerald-100 transition-colors group"
+          >
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#D1FAE5" }}>
+              <Phone className="w-3.5 h-3.5 text-emerald-600" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-semibold text-emerald-500 uppercase tracking-wide">Téléphone</p>
+              <p className="text-xs font-semibold text-emerald-800 truncate group-hover:underline">
+                {quote.clientPhone || <span className="italic text-emerald-400">Non renseigné</span>}
+              </p>
+            </div>
+          </a>
+
+          {/* Destination */}
+          <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl border border-orange-100 bg-orange-50">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#FFEDD5" }}>
+              <MapPin className="w-3.5 h-3.5 text-orange-600" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-semibold text-orange-500 uppercase tracking-wide">Destination</p>
+              <p className="text-xs font-semibold text-orange-800 truncate">
+                {quote.destination || <span className="italic text-orange-400">Non spécifiée</span>}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -1026,20 +1062,39 @@ function DashboardOverview({
                 <p className="text-sm">Aucun devis pour l'instant</p>
               </div>
             ) : recentQuotes.map((q) => (
-              <div key={q.id} className="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition-colors">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                     style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY_LIGHT})` }}>
-                  {q.clientName?.charAt(0)?.toUpperCase() || "?"}
+              <div key={q.id} className="px-5 py-4 hover:bg-gray-50 transition-colors">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                         style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY_LIGHT})` }}>
+                      {q.clientName?.charAt(0)?.toUpperCase() || "?"}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-gray-900 truncate">{q.clientName}</p>
+                      <p className="text-xs text-gray-400 truncate">{q.destination || SERVICE_LABELS[q.serviceType] || q.serviceType}</p>
+                    </div>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${QUOTE_STATUS_STYLES[q.status as QuoteStatus]}`}>
+                      {QUOTE_STATUS_LABELS[q.status as QuoteStatus]}
+                    </span>
+                    <p className="text-xs text-gray-400 mt-0.5">{new Date(q.createdAt).toLocaleDateString("fr-FR")}</p>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate">{q.clientName}</p>
-                  <p className="text-xs text-gray-400 truncate">{q.destination || SERVICE_LABELS[q.serviceType] || q.serviceType}</p>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${QUOTE_STATUS_STYLES[q.status as QuoteStatus]}`}>
-                    {QUOTE_STATUS_LABELS[q.status as QuoteStatus]}
-                  </span>
-                  <p className="text-xs text-gray-400 mt-0.5">{new Date(q.createdAt).toLocaleDateString("fr-FR")}</p>
+                {/* Infos de contact */}
+                <div className="flex flex-wrap gap-3 mt-2 ml-13 pl-[52px]">
+                  <a href={`mailto:${q.clientEmail}`}
+                     className="flex items-center gap-1 text-xs text-blue-600 hover:underline truncate max-w-[200px]">
+                    <Mail className="w-3 h-3 flex-shrink-0" />
+                    {q.clientEmail}
+                  </a>
+                  {q.clientPhone && (
+                    <a href={`tel:${q.clientPhone}`}
+                       className="flex items-center gap-1 text-xs text-emerald-600 hover:underline">
+                      <Phone className="w-3 h-3 flex-shrink-0" />
+                      {q.clientPhone}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
