@@ -73,3 +73,14 @@
 - [x] Formulaire de modification : nom, email, téléphone, poste, bio
 - [x] Upload de photo de profil (avatar)
 - [x] Afficher le nom et l'avatar de l'admin dans le header du dashboard
+## Refonte Page Profil Admin
+
+- [ ] Reconstruire la section Profil avec un design moderne et une meilleure UX
+
+## Correction Bug tRPC (Session actuelle)
+
+- [x] Corriger l'erreur "client[procedureType] is not a function" dans le dashboard admin
+- [x] Refactoriser l'architecture tRPC : supprimer le double provider adminTrpc/trpc
+- [x] Modifier main.tsx pour injecter dynamiquement le token admin depuis localStorage
+- [x] Remplacer tous les usages de adminTrpc par trpc dans AdminDashboardNew.tsx
+- [x] Valider que tous les onglets du dashboard fonctionnent (Devis, Témoignages, Profil, Paramètres)

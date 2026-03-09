@@ -1,8 +1,4 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink } from "@trpc/client";
-import superjson from "superjson";
-import { adminTrpc } from "@/lib/adminTrpc";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -222,12 +218,12 @@ function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) 
   const [showNotesDialog, setShowNotesDialog] = useState(false);
   const [notes, setNotes] = useState(quote.adminNotes || "");
 
-  const updateMutation = adminTrpc.quotes.updateStatus.useMutation({
+  const updateMutation = trpc.quotes.updateStatus.useMutation({
     onSuccess: () => { toast.success("Statut mis à jour !"); onRefresh(); },
     onError: (e) => toast.error("Erreur : " + e.message),
   });
 
-  const deleteMutation = adminTrpc.quotes.delete.useMutation({
+  const deleteMutation = trpc.quotes.delete.useMutation({
     onSuccess: () => { toast.success("Devis supprimé"); onRefresh(); },
     onError: (e) => toast.error("Erreur : " + e.message),
   });
@@ -398,12 +394,12 @@ function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) 
 function TestimonialCard({ testimonial: t, onRefresh }: { testimonial: any; onRefresh: () => void }) {
   const [expanded, setExpanded] = useState(false);
 
-  const updateMutation = adminTrpc.testimonials.updateStatus.useMutation({
+  const updateMutation = trpc.testimonials.updateStatus.useMutation({
     onSuccess: () => { toast.success("Statut mis à jour !"); onRefresh(); },
     onError: (e) => toast.error("Erreur : " + e.message),
   });
 
-  const deleteMutation = adminTrpc.testimonials.delete.useMutation({
+  const deleteMutation = trpc.testimonials.delete.useMutation({
     onSuccess: () => { toast.success("Témoignage supprimé"); onRefresh(); },
     onError: (e) => toast.error("Erreur : " + e.message),
   });
@@ -529,8 +525,8 @@ function TestimonialCard({ testimonial: t, onRefresh }: { testimonial: any; onRe
 
 // ───// ─── SECTION PROFIL ─────────────────────────────────────────────────
 function ProfileSection() {
-  const profileQuery = adminTrpc.auth.getAdminProfile.useQuery();
-  const updateProfileMutation = adminTrpc.auth.updateAdminProfile.useMutation({
+  const profileQuery = trpc.auth.getAdminProfile.useQuery();
+  const updateProfileMutation = trpc.auth.updateAdminProfile.useMutation({
     onSuccess: () => {
       toast.success("Profil mis à jour avec succès ! ✅");
       profileQuery.refetch();
@@ -586,136 +582,225 @@ function ProfileSection() {
 
   if (profileQuery.isLoading) {
     return (
-      <div className="text-center py-16 text-gray-400">
-        <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin opacity-40" />
-        <p>Chargement du profil...</p>
+      <div className="flex items-center justify-center py-24">
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse"
+               style={{ background: "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}>
+            <User className="w-8 h-8 text-white" />
+          </div>
+          <p className="text-gray-500 font-medium">Chargement du profil...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      {/* En-tête profil avec bannière */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-5">
-        <div className="h-24" style={{ background: "linear-gradient(135deg, #0D1B3E 0%, #1a3a6e 100%)" }} />
-        <div className="px-6 pb-6">
-          <div className="flex items-end gap-4 -mt-10 mb-4">
-            <div className="relative">
-              <div
-                className="w-20 h-20 rounded-2xl border-4 border-white shadow-lg flex items-center justify-center overflow-hidden"
-                style={{ background: avatarPreview ? "transparent" : "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
-              >
-                {avatarPreview ? (
-                  <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-white text-xl font-bold">{initials}</span>
-                )}
+    <div className="max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* ── COLONNE GAUCHE : Carte de profil ── */}
+        <div className="lg:col-span-1">
+          {/* Carte avatar */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            {/* Bannière */}
+            <div className="h-28 relative" style={{ background: "linear-gradient(135deg, #0D1B3E 0%, #1E3A7A 50%, #0D1B3E 100%)" }}>
+              {/* Motif décoratif */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-3 left-4 w-8 h-8 rounded-full border-2 border-white" />
+                <div className="absolute top-6 right-6 w-5 h-5 rounded-full border-2 border-white" />
+                <div className="absolute bottom-2 left-1/2 w-12 h-12 rounded-full border-2 border-white -translate-x-1/2" />
               </div>
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center shadow-md border-2 border-white transition-transform hover:scale-110"
-                style={{ background: "#FF6B35" }}
-                title="Changer la photo"
-              >
-                <Camera className="w-3.5 h-3.5 text-white" />
-              </button>
-              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+              <div className="absolute top-3 right-3">
+                <span className="px-2 py-0.5 rounded-full text-xs font-semibold text-white"
+                      style={{ background: "rgba(255,107,53,0.8)" }}>Admin</span>
+              </div>
             </div>
-            <div className="pb-1">
-              <h2 className="text-lg font-bold text-gray-900">{name || "Administrateur"}</h2>
-              <p className="text-sm text-gray-500">{position || "Administrateur"}</p>
-              {email && <p className="text-xs text-gray-400 mt-0.5">{email}</p>}
-            </div>
-          </div>
-          <p className="text-xs text-gray-400 flex items-center gap-1">
-            <Camera className="w-3 h-3" /> Cliquez sur l'icône pour changer votre photo (max 2 Mo)
-          </p>
-        </div>
-      </div>
 
-      {/* Formulaire */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
-          <User className="w-4 h-4" style={{ color: "#FF6B35" }} />
-          Informations personnelles
-        </h3>
+            {/* Avatar centré */}
+            <div className="flex flex-col items-center px-6 pb-6 -mt-12">
+              <div className="relative mb-3">
+                <div
+                  className="w-24 h-24 rounded-full border-4 border-white shadow-xl flex items-center justify-center overflow-hidden cursor-pointer group"
+                  style={{ background: avatarPreview ? "transparent" : "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {avatarPreview ? (
+                    <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-white text-2xl font-bold">{initials}</span>
+                  )}
+                  {/* Overlay au survol */}
+                  <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Camera className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white transition-all hover:scale-110 active:scale-95"
+                  style={{ background: "linear-gradient(135deg, #FF6B35, #FF8C5A)" }}
+                  title="Changer la photo"
+                >
+                  <Camera className="w-4 h-4 text-white" />
+                </button>
+                <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+              </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom complet</label>
-            <Input
-              value={name}
-              onChange={(e) => { setName(e.target.value); setIsDirty(true); }}
-              placeholder="Votre nom complet"
-              className="h-11 border-gray-200 focus:border-orange-400"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Poste / Titre</label>
-            <div className="relative">
-              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <Input
-                value={position}
-                onChange={(e) => { setPosition(e.target.value); setIsDirty(true); }}
-                placeholder="Ex: Directeur, Agent de voyage..."
-                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
-              />
+              <h2 className="text-xl font-bold text-gray-900 text-center">{name || "Administrateur"}</h2>
+              <p className="text-sm font-medium mt-0.5 text-center" style={{ color: "#FF6B35" }}>{position || "Poste non défini"}</p>
+              {email && (
+                <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                  <Mail className="w-3 h-3" />{email}
+                </p>
+              )}
+              {phone && (
+                <p className="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
+                  <Phone className="w-3 h-3" />{phone}
+                </p>
+              )}
+
+              {bio && (
+                <p className="text-xs text-gray-500 mt-3 text-center leading-relaxed border-t border-gray-100 pt-3 w-full">{bio}</p>
+              )}
+
+              <p className="text-xs text-gray-400 mt-4 flex items-center gap-1">
+                <Camera className="w-3 h-3" /> Cliquez sur la photo pour la modifier
+              </p>
             </div>
           </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Adresse email</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); setIsDirty(true); }}
-                placeholder="votre@email.com"
-                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone</label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <Input
-                value={phone}
-                onChange={(e) => { setPhone(e.target.value); setIsDirty(true); }}
-                placeholder="+224 6XX XX XX XX"
-                className="h-11 pl-9 border-gray-200 focus:border-orange-400"
-              />
-            </div>
-          </div>
-        </div>
 
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-            Biographie <span className="text-gray-400 font-normal">(optionnel, max 300 caractères)</span>
-          </label>
-          <Textarea
-            value={bio}
-            onChange={(e) => { setBio(e.target.value); setIsDirty(true); }}
-            placeholder="Quelques mots sur vous..."
-            maxLength={300}
-            rows={3}
-            className="border-gray-200 focus:border-orange-400 resize-none"
-          />
-          <p className="text-xs text-gray-400 mt-1 text-right">{bio.length}/300</p>
-        </div>
-
-        <Button
-          className="w-full h-11 text-white font-semibold rounded-xl mt-5 transition-all"
-          style={{ background: isDirty ? "linear-gradient(135deg, #FF6B35, #FF8C5A)" : "#9CA3AF" }}
-          onClick={() => updateProfileMutation.mutate({ name, email, phone, position, bio, avatarUrl })}
-          disabled={updateProfileMutation.isPending || !isDirty}
-        >
-          {updateProfileMutation.isPending ? (
-            <span className="flex items-center gap-2"><RefreshCw className="w-4 h-4 animate-spin" /> Sauvegarde...</span>
-          ) : (
-            <span className="flex items-center gap-2"><Save className="w-4 h-4" /> Sauvegarder le profil</span>
+          {/* Indicateur de modifications */}
+          {isDirty && (
+            <div className="mt-3 px-4 py-3 rounded-xl flex items-center gap-2 text-sm font-medium"
+                 style={{ background: "rgba(255,107,53,0.1)", color: "#FF6B35", border: "1px solid rgba(255,107,53,0.2)" }}>
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              Modifications non sauvegardées
+            </div>
           )}
-        </Button>
+        </div>
+
+        {/* ── COLONNE DROITE : Formulaire ── */}
+        <div className="lg:col-span-2 space-y-5">
+
+          {/* Informations de base */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                   style={{ background: "rgba(255,107,53,0.1)" }}>
+                <User className="w-4 h-4" style={{ color: "#FF6B35" }} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Informations personnelles</h3>
+                <p className="text-xs text-gray-400">Ces informations apparaissent dans le header du dashboard</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Nom */}
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Nom complet *</label>
+                <Input
+                  value={name}
+                  onChange={(e) => { setName(e.target.value); setIsDirty(true); }}
+                  placeholder="Ex: Mamadou Diallo"
+                  className="h-12 text-base border-gray-200 rounded-xl focus:border-orange-400 focus:ring-orange-400/20"
+                />
+              </div>
+
+              {/* Poste */}
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Poste / Titre *</label>
+                <div className="relative">
+                  <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    value={position}
+                    onChange={(e) => { setPosition(e.target.value); setIsDirty(true); }}
+                    placeholder="Ex: Directeur Général, Agent de voyage..."
+                    className="h-12 pl-10 text-base border-gray-200 rounded-xl focus:border-orange-400"
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Email</label>
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); setIsDirty(true); }}
+                    placeholder="votre@email.com"
+                    className="h-12 pl-10 border-gray-200 rounded-xl focus:border-orange-400"
+                  />
+                </div>
+              </div>
+
+              {/* Téléphone */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Téléphone</label>
+                <div className="relative">
+                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    value={phone}
+                    onChange={(e) => { setPhone(e.target.value); setIsDirty(true); }}
+                    placeholder="+224 6XX XX XX XX"
+                    className="h-12 pl-10 border-gray-200 rounded-xl focus:border-orange-400"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Biographie */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                   style={{ background: "rgba(13,27,62,0.08)" }}>
+                <MessageSquare className="w-4 h-4" style={{ color: "#0D1B3E" }} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Biographie</h3>
+                <p className="text-xs text-gray-400">Optionnel — quelques mots sur vous</p>
+              </div>
+            </div>
+            <Textarea
+              value={bio}
+              onChange={(e) => { setBio(e.target.value); setIsDirty(true); }}
+              placeholder="Partagez votre expérience, vos spécialités ou votre message pour les clients..."
+              maxLength={300}
+              rows={4}
+              className="border-gray-200 rounded-xl focus:border-orange-400 resize-none text-sm"
+            />
+            <div className="flex justify-between items-center mt-2">
+              <p className="text-xs text-gray-400">Apparaît sur votre carte de profil</p>
+              <p className="text-xs font-medium" style={{ color: bio.length > 250 ? "#FF6B35" : "#9CA3AF" }}>{bio.length}/300</p>
+            </div>
+          </div>
+
+          {/* Bouton sauvegarder */}
+          <button
+            className="w-full h-14 rounded-2xl text-white font-bold text-base transition-all duration-200 flex items-center justify-center gap-3 shadow-lg"
+            style={{
+              background: isDirty
+                ? "linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%)"
+                : "#E5E7EB",
+              color: isDirty ? "white" : "#9CA3AF",
+              cursor: isDirty ? "pointer" : "not-allowed",
+              transform: isDirty ? "none" : "none",
+              boxShadow: isDirty ? "0 8px 24px rgba(255,107,53,0.35)" : "none",
+            }}
+            onClick={() => isDirty && updateProfileMutation.mutate({ name, email, phone, position, bio, avatarUrl })}
+            disabled={updateProfileMutation.isPending || !isDirty}
+          >
+            {updateProfileMutation.isPending ? (
+              <><RefreshCw className="w-5 h-5 animate-spin" /> Sauvegarde en cours...</>
+            ) : isDirty ? (
+              <><Save className="w-5 h-5" /> Enregistrer les modifications</>
+            ) : (
+              <><Save className="w-5 h-5" /> Profil à jour</>  
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -730,7 +815,7 @@ function SettingsSection({ adminToken }: { adminToken: string }) {
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const changePasswordMutation = adminTrpc.auth.changeAdminPassword.useMutation({
+  const changePasswordMutation = trpc.auth.changeAdminPassword.useMutation({
     onSuccess: () => {
       toast.success("Mot de passe modifié avec succès ! Veuillez vous reconnecter.");
       // Vider les champs
@@ -916,13 +1001,13 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   const [searchQuery, setSearchQuery] = useState("");
 
   // Profil admin pour le header
-  const profileQuery = adminTrpc.auth.getAdminProfile.useQuery();
+  const profileQuery = trpc.auth.getAdminProfile.useQuery();
   const adminName = profileQuery.data?.name || "Administrateur";
   const adminPosition = profileQuery.data?.position || "Admin";
   const adminAvatar = profileQuery.data?.avatarUrl || null;
 
-  const quotesQuery = adminTrpc.quotes.list.useQuery(undefined, { refetchInterval: 30000 });
-  const testimonialsQuery = adminTrpc.testimonials.listAll.useQuery(undefined, { refetchInterval: 30000 });
+  const quotesQuery = trpc.quotes.list.useQuery(undefined, { refetchInterval: 30000 });
+  const testimonialsQuery = trpc.testimonials.listAll.useQuery(undefined, { refetchInterval: 30000 });
 
   const quotes = quotesQuery.data || [];
   const testimonials = testimonialsQuery.data || [];
@@ -1223,35 +1308,9 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   );
 }
 
-// ─── WRAPPER AVEC PROVIDER TRPC DÉDIÉ ADMIN ──────────────────────────────────
+// ─── WRAPPER SIMPLIFIÉ (utilise le client tRPC global avec injection dynamique du token) ──────────────────────────────────
 function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
-  // Vérifier que le token est toujours valide au montage
-  const adminQueryClient = useMemo(() => new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  }), []);
-
-  const adminTrpcClient = useMemo(() => adminTrpc.createClient({
-    links: [
-      httpBatchLink({
-        url: "/api/trpc",
-        transformer: superjson,
-        headers() {
-          return { "x-admin-token": adminToken };
-        },
-        fetch(input, init) {
-          return globalThis.fetch(input, { ...(init ?? {}), credentials: "include" });
-        },
-      }),
-    ],
-  }), [adminToken]);
-
-  return (
-    <adminTrpc.Provider client={adminTrpcClient} queryClient={adminQueryClient}>
-      <QueryClientProvider client={adminQueryClient}>
-        <Dashboard onLogout={onLogout} adminToken={adminToken} />
-      </QueryClientProvider>
-    </adminTrpc.Provider>
-  );
+  return <Dashboard onLogout={onLogout} adminToken={adminToken} />;
 }
 
 // ─── PAGE PRINCIPALE ──────────────────────────────────────────────────────────

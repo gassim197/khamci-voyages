@@ -42,6 +42,12 @@ const trpcClient = trpc.createClient({
     httpBatchLink({
       url: "/api/trpc",
       transformer: superjson,
+      headers() {
+        const token = typeof window !== "undefined"
+          ? localStorage.getItem("khamci-admin-token")
+          : null;
+        return token ? { "x-admin-token": token } : {};
+      },
       fetch(input, init) {
         return globalThis.fetch(input, {
           ...(init ?? {}),
