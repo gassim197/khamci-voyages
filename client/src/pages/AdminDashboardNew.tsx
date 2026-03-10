@@ -23,7 +23,7 @@ import {
   MapPin, Phone, Mail, Plane, Star, TrendingUp,
   StickyNote, AlertCircle, Settings, Lock, Eye, EyeOff, ShieldCheck,
   User, Camera, Save, LayoutDashboard, Menu, X, Bell,
-  ArrowUpRight, ArrowDownRight, Calendar, MoreVertical,
+  ArrowUpRight, ArrowDownRight, Calendar, MoreVertical, Download,
 } from "lucide-react";
 import AdminStatsSection from "@/components/AdminStatsSection";
 
@@ -1212,6 +1212,67 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
     testimonialsQuery.refetch();
   };
 
+  // ─── EXPORT CSV ─────────────────────────────────────────────────────────────
+  const exportQuotesToCSV = () => {
+    const dataToExport = filteredQuotes.length > 0 ? filteredQuotes : quotes;
+    if (dataToExport.length === 0) {
+      toast.error("Aucun devis à exporter");
+      return;
+    }
+
+    const SERVICE_LABELS_FR: Record<string, string> = {
+      flights: "Vols", vol: "Vols", hotel: "Hôtel", car: "Voiture",
+      visa: "Visa", tour: "Circuit", custom: "Personnalisé",
+      team_building: "Team Building",
+    };
+    const STATUS_LABELS_FR: Record<string, string> = {
+      pending: "En attente", in_progress: "En cours",
+      completed: "Complété", rejected: "Rejeté",
+    };
+
+    const headers = [
+      "Nom client", "Email", "Téléphone", "Destination",
+      "Service", "Statut", "Passagers", "Date départ", "Date retour",
+      "Budget", "Message", "Source", "Date demande",
+    ];
+
+    const rows = dataToExport.map(q => [
+      q.clientName || "",
+      q.clientEmail || "",
+      q.clientPhone || "",
+      q.destination || "",
+      SERVICE_LABELS_FR[q.serviceType || ""] || q.serviceType || "",
+      STATUS_LABELS_FR[q.status] || q.status || "",
+      q.passengers?.toString() || "",
+      q.departureDate ? new Date(q.departureDate).toLocaleDateString("fr-FR") : "",
+      q.returnDate ? new Date(q.returnDate).toLocaleDateString("fr-FR") : "",
+      (q as any).budget || "",
+      (q.message || "").replace(/"/g, "'").replace(/\n/g, " "),
+      q.source || "",
+      new Date(q.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }),
+    ]);
+
+    const csvContent = [
+      headers.join(";"),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(";")),
+    ].join("\n");
+
+    // BOM UTF-8 pour Excel
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const filterLabel = quoteFilter === "all" ? "tous" : quoteFilter;
+    link.href = url;
+    link.download = `khamci-voyages-devis-${filterLabel}-${dateStr}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    toast.success(`${dataToExport.length} devis exporté${dataToExport.length > 1 ? "s" : ""} en CSV`);
+  };
+
   const pendingQuotes = quotes.filter(q => q.status === "pending").length;
   const pendingTestimonials = testimonials.filter(t => t.status === "pending").length;
 
@@ -1324,25 +1385,41 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
           {/* ─── VUE DEVIS ─── */}
           {activeView === "quotes" && (
             <div>
-              {/* Filtres */}
-              <div className="flex gap-2 mb-5 flex-wrap">
-                {[
-                  { value: "all", label: "Tous", count: quotes.length },
-                  { value: "pending", label: "En attente", count: quotes.filter(q => q.status === "pending").length },
-                  { value: "in_progress", label: "En cours", count: quotes.filter(q => q.status === "in_progress").length },
-                  { value: "completed", label: "Complétés", count: quotes.filter(q => q.status === "completed").length },
-                  { value: "rejected", label: "Rejetés", count: quotes.filter(q => q.status === "rejected").length },
-                ].map(f => (
-                  <button key={f.value} onClick={() => setQuoteFilter(f.value)}
-                    className="px-4 py-2 rounded-xl text-sm font-medium transition-all border"
-                    style={quoteFilter === f.value
-                      ? { background: NAVY, color: "white", borderColor: NAVY }
-                      : { background: "white", color: "#6B7280", borderColor: "#E5E7EB" }
-                    }>
-                    {f.label}
-                    <span className="ml-1.5 text-xs opacity-70">({f.count})</span>
-                  </button>
-                ))}
+              {/* Filtres + bouton export */}
+              <div className="flex gap-2 mb-5 flex-wrap items-center justify-between">
+                <div className="flex gap-2 flex-wrap">
+                  {[
+                    { value: "all", label: "Tous", count: quotes.length },
+                    { value: "pending", label: "En attente", count: quotes.filter(q => q.status === "pending").length },
+                    { value: "in_progress", label: "En cours", count: quotes.filter(q => q.status === "in_progress").length },
+                    { value: "completed", label: "Complétés", count: quotes.filter(q => q.status === "completed").length },
+                    { value: "rejected", label: "Rejetés", count: quotes.filter(q => q.status === "rejected").length },
+                  ].map(f => (
+                    <button key={f.value} onClick={() => setQuoteFilter(f.value)}
+                      className="px-4 py-2 rounded-xl text-sm font-medium transition-all border"
+                      style={quoteFilter === f.value
+                        ? { background: NAVY, color: "white", borderColor: NAVY }
+                        : { background: "white", color: "#6B7280", borderColor: "#E5E7EB" }
+                      }>
+                      {f.label}
+                      <span className="ml-1.5 text-xs opacity-70">({f.count})</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Bouton Export CSV */}
+                <button
+                  onClick={exportQuotesToCSV}
+                  disabled={quotes.length === 0}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all border shadow-sm hover:shadow-md disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ background: "#10B981", color: "white", borderColor: "#059669" }}
+                  title={`Exporter ${filteredQuotes.length > 0 ? filteredQuotes.length : quotes.length} devis en CSV`}
+                >
+                  <Download className="w-4 h-4" />
+                  <span className="hidden sm:inline">Exporter CSV</span>
+                  <span className="sm:hidden">CSV</span>
+                  <span className="text-xs opacity-80 ml-0.5">({filteredQuotes.length > 0 ? filteredQuotes.length : quotes.length})</span>
+                </button>
               </div>
 
               {quotesQuery.isLoading ? (

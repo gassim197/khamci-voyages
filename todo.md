@@ -103,3 +103,9 @@
 - [x] Afficher nom complet, téléphone et email visibles directement sur les cartes de devis (sans cliquer)
 - [x] Vérifier que les formulaires collectent bien toutes les infos (nom, prénom, téléphone, email)
 - [x] Améliorer la vue liste des devis avec un tableau structuré des informations clients
+
+## Export CSV des contacts clients
+
+- [x] Ajouter fonction exportQuotesToCSV dans le dashboard admin
+- [x] Ajouter bouton "Exporter CSV" dans la vue Devis (avec filtre par statut actif)
+- [x] Inclure dans le CSV : nom, email, téléphone, destination, service, statut, date
