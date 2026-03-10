@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Hotel, MapPin, Star, Users, Wifi, Utensils } from 'lucide-react';
+import HeaderNav from '@/components/HeaderNav';
 import { Button } from '@/components/ui/button';
 import HotelQuoteForm from '@/components/HotelQuoteForm';
 
@@ -29,6 +30,7 @@ export default function HotelsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <HeaderNav />
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-500 to-cyan-500">
         <div className="absolute inset-0 opacity-20">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Car, MapPin, Fuel, Shield, Users, Zap } from 'lucide-react';
+import HeaderNav from '@/components/HeaderNav';
 import { Button } from '@/components/ui/button';
 import CarQuoteForm from '@/components/CarQuoteForm';
 
@@ -31,6 +32,7 @@ export default function CarsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <HeaderNav />
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500">
         <div className="absolute inset-0 opacity-20">

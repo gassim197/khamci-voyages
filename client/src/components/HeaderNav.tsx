@@ -1,0 +1,116 @@
+import { useState } from "react";
+import { Menu, X, Phone } from "lucide-react";
+
+/**
+ * HeaderNav — Header de navigation pour les pages internes (services, destinations)
+ * Utilise des liens href vers la page d'accueil au lieu de scrollToSection
+ */
+export default function HeaderNav() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      <nav className="container flex items-center justify-between py-4">
+        {/* Logo */}
+        <a href="/" className="flex items-center gap-2 hover:scale-105 transition-transform">
+          <img
+            src="/logo-khamci.png"
+            alt="KHAMCI VOYAGES - Agence de Voyages Guinée"
+            className="h-12 md:h-16 w-auto"
+          />
+          <div className="hidden sm:block">
+            <h1 className="text-lg md:text-xl font-bold gradient-text">KHAMCI VOYAGES</h1>
+            <p className="text-xs text-gray-600">Agence de Voyages</p>
+          </div>
+        </a>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-6">
+          <a
+            href="/#services"
+            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+          >
+            Services
+          </a>
+          <a
+            href="/#team-building"
+            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+          >
+            Team Building
+          </a>
+          <a
+            href="/#guinea"
+            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+          >
+            Découvrir
+          </a>
+          <a
+            href="tel:+224611145892"
+            className="hidden lg:flex items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors font-medium"
+          >
+            <Phone size={16} />
+            +224 611 145 892
+          </a>
+          <a
+            href="/#contact"
+            className="btn-cta"
+          >
+            Demander un Devis
+          </a>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden p-2"
+          aria-label="Menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="container py-4 flex flex-col gap-4">
+            <a
+              href="/#services"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-left text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
+            >
+              Services
+            </a>
+            <a
+              href="/#team-building"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-left text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
+            >
+              Team Building
+            </a>
+            <a
+              href="/#guinea"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-left text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
+            >
+              Découvrir la Guinée
+            </a>
+            <a
+              href="tel:+224611145892"
+              className="flex items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
+            >
+              <Phone size={16} />
+              +224 611 145 892
+            </a>
+            <a
+              href="/#contact"
+              onClick={() => setIsMenuOpen(false)}
+              className="btn-cta w-full text-center"
+            >
+              Demander un Devis
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

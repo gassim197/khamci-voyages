@@ -109,3 +109,10 @@
 - [x] Ajouter fonction exportQuotesToCSV dans le dashboard admin
 - [x] Ajouter bouton "Exporter CSV" dans la vue Devis (avec filtre par statut actif)
 - [x] Inclure dans le CSV : nom, email, téléphone, destination, service, statut, date
+
+## Corrections Critiques (Analyse du 10/03/2026)
+
+- [x] Activer envoi email automatique à chaque nouveau devis soumis (configurer nodemailer)
+- [x] Ajouter header de navigation sur la page /vols
+- [x] Ajouter header de navigation sur la page /hotels
+- [x] Ajouter header de navigation sur la page /voitures
