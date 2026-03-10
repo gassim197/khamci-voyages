@@ -8,6 +8,8 @@ import {
   createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
   verifyAdminPassword, setAdminPassword, getAdminProfile, updateAdminProfile,
+  subscribeToNewsletter, getAllNewsletterSubscribers, deleteNewsletterSubscriber,
+  createBlogPost, updateBlogPost, deleteBlogPost, getAllBlogPosts, getPublishedBlogPosts, getBlogPostBySlug,
 } from "./db";
 import { sendNewQuoteNotification, sendQuoteConfirmationToClient, sendNewTestimonialNotification } from "./email";
 
@@ -265,6 +267,101 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         await deleteTestimonial(input.id);
+        return { success: true };
+      }),
+  }),
+
+  // =====================
+  // NEWSLETTER
+  // =====================
+  newsletter: router({
+    subscribe: publicProcedure
+      .input(z.object({
+        email: z.string().email("Email invalide"),
+        name: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        await subscribeToNewsletter(input.email, input.name);
+        return { success: true };
+      }),
+
+    listAll: adminProcedure.query(async () => getAllNewsletterSubscribers()),
+
+    delete: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await deleteNewsletterSubscriber(input.id);
+        return { success: true };
+      }),
+  }),
+
+  // =====================
+  // BLOG
+  // =====================
+  blog: router({
+    // Routes publiques
+    listPublished: publicProcedure.query(async () => getPublishedBlogPosts()),
+
+    getBySlug: publicProcedure
+      .input(z.object({ slug: z.string() }))
+      .query(async ({ input }) => {
+        const post = await getBlogPostBySlug(input.slug);
+        if (!post || post.status !== "published") {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Article introuvable" });
+        }
+        return post;
+      }),
+
+    // Routes admin
+    listAll: adminProcedure.query(async () => getAllBlogPosts()),
+
+    create: adminProcedure
+      .input(z.object({
+        title: z.string().min(5, "Le titre doit contenir au moins 5 caractères"),
+        excerpt: z.string().optional(),
+        content: z.string().min(50, "Le contenu doit contenir au moins 50 caractères"),
+        coverImage: z.string().optional(),
+        category: z.enum(["destinations", "conseils", "offres", "actualites"]).default("destinations"),
+        status: z.enum(["draft", "published"]).default("draft"),
+        authorName: z.string().optional(),
+        readTime: z.number().min(1).max(60).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        await createBlogPost({
+          title: input.title,
+          excerpt: input.excerpt ?? null,
+          content: input.content,
+          coverImage: input.coverImage ?? null,
+          category: input.category,
+          status: input.status,
+          authorName: input.authorName ?? "KHAMCI VOYAGES",
+          readTime: input.readTime ?? 5,
+        });
+        return { success: true };
+      }),
+
+    update: adminProcedure
+      .input(z.object({
+        id: z.number(),
+        title: z.string().min(5).optional(),
+        excerpt: z.string().optional(),
+        content: z.string().min(50).optional(),
+        coverImage: z.string().optional(),
+        category: z.enum(["destinations", "conseils", "offres", "actualites"]).optional(),
+        status: z.enum(["draft", "published"]).optional(),
+        authorName: z.string().optional(),
+        readTime: z.number().min(1).max(60).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        await updateBlogPost(id, data);
+        return { success: true };
+      }),
+
+    delete: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await deleteBlogPost(input.id);
         return { success: true };
       }),
   }),

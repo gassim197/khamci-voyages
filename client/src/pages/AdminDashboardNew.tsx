@@ -24,6 +24,7 @@ import {
   StickyNote, AlertCircle, Settings, Lock, Eye, EyeOff, ShieldCheck,
   User, Camera, Save, LayoutDashboard, Menu, X, Bell,
   ArrowUpRight, ArrowDownRight, Calendar, MoreVertical, Download,
+  BookOpen, Users, PenLine, Globe, Tag, Plus, Edit3,
 } from "lucide-react";
 import AdminStatsSection from "@/components/AdminStatsSection";
 
@@ -36,7 +37,7 @@ const ORANGE_LIGHT = "#FF8C5A";
 // ─── TYPES ──────────────────────────────────────────────────────────────────
 type QuoteStatus = "pending" | "in_progress" | "completed" | "rejected";
 type TestimonialStatus = "pending" | "approved" | "rejected";
-type ActiveView = "dashboard" | "quotes" | "testimonials" | "profile" | "settings";
+type ActiveView = "dashboard" | "quotes" | "testimonials" | "blog" | "newsletter" | "profile" | "settings";
 
 const QUOTE_STATUS_LABELS: Record<QuoteStatus, string> = {
   pending: "En attente",
@@ -215,12 +216,14 @@ function Sidebar({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const navItems: { id: ActiveView; icon: any; label: string; badge?: number }[] = [
-    { id: "dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
-    { id: "quotes", icon: FileText, label: "Devis", badge: pendingQuotes },
-    { id: "testimonials", icon: MessageSquare, label: "Témoignages", badge: pendingTestimonials },
-    { id: "profile", icon: User, label: "Profil" },
-    { id: "settings", icon: Settings, label: "Paramètres" },
+  const navItems: { id: ActiveView; icon: any; label: string; badge?: number; section?: string }[] = [
+    { id: "dashboard", icon: LayoutDashboard, label: "Tableau de bord", section: "principal" },
+    { id: "quotes", icon: FileText, label: "Devis", badge: pendingQuotes, section: "principal" },
+    { id: "testimonials", icon: MessageSquare, label: "Témoignages", badge: pendingTestimonials, section: "principal" },
+    { id: "blog", icon: BookOpen, label: "Blog", section: "contenu" },
+    { id: "newsletter", icon: Users, label: "Newsletter", section: "contenu" },
+    { id: "profile", icon: User, label: "Profil", section: "compte" },
+    { id: "settings", icon: Settings, label: "Paramètres", section: "compte" },
   ];
 
   return (
@@ -289,36 +292,50 @@ function Sidebar({
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
-          <p className="text-xs font-semibold uppercase tracking-wider px-3 mb-3"
-             style={{ color: "rgba(255,255,255,0.3)" }}>
-            Menu principal
-          </p>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeView === item.id;
+        <nav className="flex-1 px-3 py-2 overflow-y-auto">
+          {["principal", "contenu", "compte"].map(section => {
+            const sectionItems = navItems.filter(i => i.section === section);
+            const sectionLabels: Record<string, string> = {
+              principal: "Principal",
+              contenu: "Contenu",
+              compte: "Compte",
+            };
             return (
-              <button
-                key={item.id}
-                onClick={() => { onNavigate(item.id); onClose(); }}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group"
-                style={isActive
-                  ? { background: `linear-gradient(135deg, ${ORANGE}22, ${ORANGE}11)`, color: ORANGE_LIGHT, borderLeft: `3px solid ${ORANGE}` }
-                  : { color: "rgba(255,255,255,0.6)", borderLeft: "3px solid transparent" }
-                }
-              >
-                <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "" : "group-hover:text-white"}`}
-                     style={isActive ? { color: ORANGE } : {}} />
-                <span className={`flex-1 text-left transition-colors ${!isActive ? "group-hover:text-white" : ""}`}>
-                  {item.label}
-                </span>
-                {item.badge !== undefined && item.badge > 0 && (
-                  <span className="text-white text-xs rounded-full px-2 py-0.5 font-bold min-w-[22px] text-center"
-                        style={{ background: ORANGE }}>
-                    {item.badge}
-                  </span>
-                )}
-              </button>
+              <div key={section} className="mb-4">
+                <p className="text-xs font-semibold uppercase tracking-wider px-3 mb-2"
+                   style={{ color: "rgba(255,255,255,0.3)" }}>
+                  {sectionLabels[section]}
+                </p>
+                <div className="space-y-0.5">
+                  {sectionItems.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = activeView === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => { onNavigate(item.id); onClose(); }}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group"
+                        style={isActive
+                          ? { background: `linear-gradient(135deg, ${ORANGE}22, ${ORANGE}11)`, color: ORANGE_LIGHT, borderLeft: `3px solid ${ORANGE}` }
+                          : { color: "rgba(255,255,255,0.6)", borderLeft: "3px solid transparent" }
+                        }
+                      >
+                        <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "" : "group-hover:text-white"}`}
+                             style={isActive ? { color: ORANGE } : {}} />
+                        <span className={`flex-1 text-left transition-colors ${!isActive ? "group-hover:text-white" : ""}`}>
+                          {item.label}
+                        </span>
+                        {item.badge !== undefined && item.badge > 0 && (
+                          <span className="text-white text-xs rounded-full px-2 py-0.5 font-bold min-w-[22px] text-center"
+                                style={{ background: ORANGE }}>
+                            {item.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
         </nav>
@@ -1280,6 +1297,8 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
     dashboard: "Tableau de bord",
     quotes: "Gestion des devis",
     testimonials: "Gestion des témoignages",
+    blog: "Gestion du blog",
+    newsletter: "Abonnés newsletter",
     profile: "Mon profil",
     settings: "Paramètres",
   };
@@ -1498,6 +1517,12 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
             </div>
           )}
 
+          {/* ─── VUE BLOG ─── */}
+          {activeView === "blog" && <BlogView />}
+
+          {/* ─── VUE NEWSLETTER ─── */}
+          {activeView === "newsletter" && <NewsletterView />}
+
           {/* ─── VUE PROFIL ─── */}
           {activeView === "profile" && <ProfileSection />}
 
@@ -1509,7 +1534,406 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   );
 }
 
-// ─── WRAPPER ──────────────────────────────────────────────────────────────────
+// ─── VUE BLOG ───────────────────────────────────────────────────────────────────────────────
+function BlogView() {
+  const [showForm, setShowForm] = useState(false);
+  const [editingPost, setEditingPost] = useState<any>(null);
+  const [form, setForm] = useState({
+    title: "",
+    excerpt: "",
+    content: "",
+    coverImage: "",
+    category: "destinations" as "destinations" | "conseils" | "offres" | "actualites",
+    status: "draft" as "draft" | "published",
+    authorName: "KHAMCI VOYAGES",
+    readTime: 5,
+  });
+
+  const postsQuery = trpc.blog.listAll.useQuery();
+  const posts = postsQuery.data || [];
+
+  const createMutation = trpc.blog.create.useMutation({
+    onSuccess: () => {
+      toast.success("Article créé avec succès !");
+      postsQuery.refetch();
+      setShowForm(false);
+      resetForm();
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const updateMutation = trpc.blog.update.useMutation({
+    onSuccess: () => {
+      toast.success("Article mis à jour !");
+      postsQuery.refetch();
+      setShowForm(false);
+      setEditingPost(null);
+      resetForm();
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const deleteMutation = trpc.blog.delete.useMutation({
+    onSuccess: () => { toast.success("Article supprimé"); postsQuery.refetch(); },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const resetForm = () => setForm({
+    title: "", excerpt: "", content: "", coverImage: "",
+    category: "destinations", status: "draft",
+    authorName: "KHAMCI VOYAGES", readTime: 5,
+  });
+
+  const handleEdit = (post: any) => {
+    setEditingPost(post);
+    setForm({
+      title: post.title,
+      excerpt: post.excerpt || "",
+      content: post.content,
+      coverImage: post.coverImage || "",
+      category: post.category,
+      status: post.status,
+      authorName: post.authorName || "KHAMCI VOYAGES",
+      readTime: post.readTime || 5,
+    });
+    setShowForm(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingPost) {
+      updateMutation.mutate({ id: editingPost.id, ...form });
+    } else {
+      createMutation.mutate(form);
+    }
+  };
+
+  const CATEGORY_LABELS: Record<string, string> = {
+    destinations: "🌍 Destinations",
+    conseils: "💡 Conseils",
+    offres: "🎉 Offres",
+    actualites: "📰 Actualités",
+  };
+
+  const CATEGORY_COLORS: Record<string, string> = {
+    destinations: "bg-blue-50 text-blue-700 border border-blue-200",
+    conseils: "bg-amber-50 text-amber-700 border border-amber-200",
+    offres: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+    actualites: "bg-purple-50 text-purple-700 border border-purple-200",
+  };
+
+  return (
+    <div>
+      {/* Header de la vue */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <p className="text-sm text-gray-500">{posts.length} article{posts.length > 1 ? "s" : ""} au total</p>
+        </div>
+        <button
+          onClick={() => { setShowForm(true); setEditingPost(null); resetForm(); }}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
+          style={{ background: NAVY }}
+        >
+          <Plus className="w-4 h-4" />
+          Nouvel article
+        </button>
+      </div>
+
+      {/* Formulaire de création/édition */}
+      {showForm && (
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-6">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="font-bold text-gray-900 text-lg">
+              {editingPost ? "✏️ Modifier l'article" : "➕ Nouvel article"}
+            </h3>
+            <button onClick={() => { setShowForm(false); setEditingPost(null); resetForm(); }}
+                    className="p-2 rounded-xl text-gray-400 hover:bg-gray-100">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Titre *</label>
+                <Input value={form.title} onChange={e => setForm(f => ({...f, title: e.target.value}))}
+                       placeholder="Titre de l'article" required className="h-11" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
+                <Select value={form.category} onValueChange={v => setForm(f => ({...f, category: v as any}))}>
+                  <SelectTrigger className="h-11">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="destinations">Destinations</SelectItem>
+                    <SelectItem value="conseils">Conseils</SelectItem>
+                    <SelectItem value="offres">Offres</SelectItem>
+                    <SelectItem value="actualites">Actualités</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                <Select value={form.status} onValueChange={v => setForm(f => ({...f, status: v as any}))}>
+                  <SelectTrigger className="h-11">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Brouillon</SelectItem>
+                    <SelectItem value="published">Publié</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Auteur</label>
+                <Input value={form.authorName} onChange={e => setForm(f => ({...f, authorName: e.target.value}))}
+                       placeholder="Nom de l'auteur" className="h-11" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Temps de lecture (min)</label>
+                <Input type="number" min={1} max={60} value={form.readTime}
+                       onChange={e => setForm(f => ({...f, readTime: parseInt(e.target.value) || 5}))}
+                       className="h-11" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture (URL)</label>
+                <Input value={form.coverImage} onChange={e => setForm(f => ({...f, coverImage: e.target.value}))}
+                       placeholder="https://example.com/image.jpg" className="h-11" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Résumé</label>
+                <Textarea value={form.excerpt} onChange={e => setForm(f => ({...f, excerpt: e.target.value}))}
+                          placeholder="Courte description de l'article (2-3 phrases)" rows={2} />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Contenu *</label>
+                <Textarea value={form.content} onChange={e => setForm(f => ({...f, content: e.target.value}))}
+                          placeholder="Contenu complet de l'article..." rows={8} required />
+              </div>
+            </div>
+            <div className="flex gap-3 justify-end pt-2">
+              <button type="button" onClick={() => { setShowForm(false); setEditingPost(null); resetForm(); }}
+                      className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                Annuler
+              </button>
+              <button type="submit"
+                      disabled={createMutation.isPending || updateMutation.isPending}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-colors disabled:opacity-70"
+                      style={{ background: ORANGE }}>
+                {(createMutation.isPending || updateMutation.isPending) ? (
+                  <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                ) : (
+                  <Save className="w-4 h-4" />
+                )}
+                {editingPost ? "Mettre à jour" : "Publier l'article"}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Liste des articles */}
+      {postsQuery.isLoading ? (
+        <div className="text-center py-16 text-gray-400">
+          <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin opacity-40" />
+          <p>Chargement des articles...</p>
+        </div>
+      ) : posts.length === 0 ? (
+        <div className="text-center py-16 bg-white rounded-2xl border border-gray-100">
+          <BookOpen className="w-12 h-12 mx-auto mb-3 text-gray-200" />
+          <p className="font-medium text-gray-500">Aucun article pour l'instant</p>
+          <p className="text-sm text-gray-400 mt-1">Créez votre premier article de blog</p>
+          <button onClick={() => setShowForm(true)}
+                  className="mt-4 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
+                  style={{ background: ORANGE }}>
+            ➕ Créer un article
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {posts.map((post: any) => (
+            <div key={post.id} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-start gap-4">
+                {post.coverImage && (
+                  <img src={post.coverImage} alt={post.title}
+                       className="w-20 h-20 rounded-xl object-cover flex-shrink-0" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${CATEGORY_COLORS[post.category] || "bg-gray-100 text-gray-600"}`}>
+                      {CATEGORY_LABELS[post.category] || post.category}
+                    </span>
+                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${
+                      post.status === "published"
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                        : "bg-gray-100 text-gray-500 border border-gray-200"
+                    }`}>
+                      {post.status === "published" ? "✅ Publié" : "📝 Brouillon"}
+                    </span>
+                    <span className="text-xs text-gray-400">⏱ {post.readTime} min de lecture</span>
+                  </div>
+                  <h4 className="font-bold text-gray-900 text-base mb-1 truncate">{post.title}</h4>
+                  {post.excerpt && (
+                    <p className="text-sm text-gray-500 line-clamp-2 mb-2">{post.excerpt}</p>
+                  )}
+                  <div className="flex items-center gap-4 text-xs text-gray-400">
+                    <span>✍️ {post.authorName}</span>
+                    <span>📅 {new Date(post.createdAt).toLocaleDateString("fr-FR")}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button onClick={() => handleEdit(post)}
+                          className="p-2 rounded-xl text-blue-500 hover:bg-blue-50 transition-colors" title="Modifier">
+                    <Edit3 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (confirm(`Supprimer l'article "${post.title}" ?`)) {
+                        deleteMutation.mutate({ id: post.id });
+                      }
+                    }}
+                    className="p-2 rounded-xl text-red-400 hover:bg-red-50 transition-colors" title="Supprimer">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── VUE NEWSLETTER ───────────────────────────────────────────────────────────────────────────────
+function NewsletterView() {
+  const subscribersQuery = trpc.newsletter.listAll.useQuery();
+  const subscribers = subscribersQuery.data || [];
+
+  const deleteMutation = trpc.newsletter.delete.useMutation({
+    onSuccess: () => { toast.success("Abonné supprimé"); subscribersQuery.refetch(); },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const exportSubscribersCSV = () => {
+    if (subscribers.length === 0) { toast.error("Aucun abonné à exporter"); return; }
+    const BOM = "\uFEFF";
+    const headers = ["ID", "Email", "Prénom", "Date d'inscription"];
+    const rows = subscribers.map((s: any) => [
+      s.id,
+      s.email,
+      s.name || "",
+      new Date(s.createdAt).toLocaleDateString("fr-FR"),
+    ]);
+    const csvContent = BOM + [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `khamci-newsletter-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success(`${subscribers.length} abonné${subscribers.length > 1 ? "s" : ""} exporté${subscribers.length > 1 ? "s" : ""} en CSV`);
+  };
+
+  return (
+    <div>
+      {/* Stats + actions */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${NAVY}15` }}>
+              <Users className="w-5 h-5" style={{ color: NAVY }} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{subscribers.length}</p>
+              <p className="text-xs text-gray-500">Abonnés total</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${ORANGE}15` }}>
+              <Mail className="w-5 h-5" style={{ color: ORANGE }} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-gray-900">
+                {subscribers.filter((s: any) => {
+                  const d = new Date(s.createdAt);
+                  const now = new Date();
+                  return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+                }).length}
+              </p>
+              <p className="text-xs text-gray-500">Nouveaux ce mois</p>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={exportSubscribersCSV}
+          disabled={subscribers.length === 0}
+          className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-emerald-50">
+            <Download className="w-5 h-5 text-emerald-600" />
+          </div>
+          <div className="text-left">
+            <p className="font-semibold text-gray-900 text-sm">Exporter CSV</p>
+            <p className="text-xs text-gray-500">{subscribers.length} contacts</p>
+          </div>
+        </button>
+      </div>
+
+      {/* Liste des abonnés */}
+      {subscribersQuery.isLoading ? (
+        <div className="text-center py-16 text-gray-400">
+          <RefreshCw className="w-8 h-8 mx-auto mb-3 animate-spin opacity-40" />
+          <p>Chargement...</p>
+        </div>
+      ) : subscribers.length === 0 ? (
+        <div className="text-center py-16 bg-white rounded-2xl border border-gray-100">
+          <Users className="w-12 h-12 mx-auto mb-3 text-gray-200" />
+          <p className="font-medium text-gray-500">Aucun abonné pour l'instant</p>
+          <p className="text-sm text-gray-400 mt-1">Les inscriptions via le footer apparaîtront ici</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+            <h3 className="font-semibold text-gray-900">Liste des abonnés</h3>
+            <span className="text-sm text-gray-500">{subscribers.length} contact{subscribers.length > 1 ? "s" : ""}</span>
+          </div>
+          <div className="divide-y divide-gray-50">
+            {subscribers.map((sub: any) => (
+              <div key={sub.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                     style={{ background: `linear-gradient(135deg, ${NAVY}, ${NAVY_LIGHT})` }}>
+                  {(sub.name || sub.email).charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-gray-900 text-sm truncate">{sub.name || "—"}</p>
+                  <p className="text-xs text-gray-500 truncate">{sub.email}</p>
+                </div>
+                <div className="text-xs text-gray-400 hidden sm:block flex-shrink-0">
+                  {new Date(sub.createdAt).toLocaleDateString("fr-FR")}
+                </div>
+                <button
+                  onClick={() => {
+                    if (confirm(`Supprimer ${sub.email} de la newsletter ?`)) {
+                      deleteMutation.mutate({ id: sub.id });
+                    }
+                  }}
+                  className="p-2 rounded-xl text-red-400 hover:bg-red-50 transition-colors flex-shrink-0" title="Supprimer">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── WRAPPER ───────────────────────────────────────────────────────────────────────────────
 function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
   return <Dashboard onLogout={onLogout} adminToken={adminToken} />;
 }

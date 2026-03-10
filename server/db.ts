@@ -1,6 +1,6 @@
 import { eq, desc, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, quotes, testimonials, adminSettings, InsertQuote, InsertTestimonial, AdminProfile } from "../drizzle/schema";
+import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import bcrypt from "bcryptjs";
 
@@ -250,4 +250,102 @@ export async function updateAdminProfile(profile: Partial<AdminProfile>): Promis
     .values({ key: ADMIN_PROFILE_KEY, value: JSON.stringify(updated) })
     .onDuplicateKeyUpdate({ set: { value: JSON.stringify(updated) } });
   return updated;
+}
+
+// =====================
+// NEWSLETTER
+// =====================
+
+export async function subscribeToNewsletter(email: string, name?: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  // Upsert : si l'email existe déjà, on réactive l'abonnement
+  await db.insert(newsletterSubscribers)
+    .values({ email, name: name ?? null, isActive: true })
+    .onDuplicateKeyUpdate({ set: { isActive: true, name: name ?? null } });
+}
+
+export async function getAllNewsletterSubscribers() {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.select().from(newsletterSubscribers).orderBy(desc(newsletterSubscribers.createdAt));
+}
+
+export async function deleteNewsletterSubscriber(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(newsletterSubscribers).where(eq(newsletterSubscribers.id, id));
+}
+
+// =====================
+// BLOG POSTS
+// =====================
+
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .substring(0, 100);
+}
+
+export async function createBlogPost(data: Omit<InsertBlogPost, "slug">) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const baseSlug = generateSlug(data.title);
+  // S'assurer que le slug est unique
+  const existing = await db.select().from(blogPosts).where(eq(blogPosts.slug, baseSlug)).limit(1);
+  const slug = existing.length > 0 ? `${baseSlug}-${Date.now()}` : baseSlug;
+  const insertData: InsertBlogPost = {
+    ...data,
+    slug,
+    publishedAt: data.status === "published" ? new Date() : null,
+  };
+  const result = await db.insert(blogPosts).values(insertData);
+  return result;
+}
+
+export async function updateBlogPost(id: number, data: Partial<InsertBlogPost>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const updateData: Record<string, unknown> = { ...data };
+  // Si on publie, mettre la date de publication
+  if (data.status === "published") {
+    const existing = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    if (existing[0] && !existing[0].publishedAt) {
+      updateData.publishedAt = new Date();
+    }
+  }
+  return db.update(blogPosts).set(updateData).where(eq(blogPosts.id, id));
+}
+
+export async function deleteBlogPost(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(blogPosts).where(eq(blogPosts.id, id));
+}
+
+export async function getAllBlogPosts() {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+}
+
+export async function getPublishedBlogPosts() {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.select().from(blogPosts)
+    .where(eq(blogPosts.status, "published"))
+    .orderBy(desc(blogPosts.publishedAt));
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
+  return result[0] ?? null;
 }

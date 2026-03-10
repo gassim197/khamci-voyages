@@ -15,6 +15,13 @@
       "when": 1773067942876,
       "tag": "0001_silent_newton_destine",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1773144666418,
+      "tag": "0002_known_blink",
+      "breakpoints": true
     }
   ]
 }

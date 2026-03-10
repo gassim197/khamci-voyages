@@ -125,3 +125,24 @@
 - [x] Refondre le formulaire principal ContactForm en 2 étapes (Étape 1 : service + destination + dates, Étape 2 : coordonnées)
 - [x] Ajouter une barre de progression visuelle entre les 2 étapes du formulaire
 - [x] Conserver la validation des champs à chaque étape
+
+## Newsletter, Blog Dynamique & SEO (10/03/2026)
+
+### Newsletter
+- [x] Ajouter table `newsletter_subscribers` dans drizzle/schema.ts
+- [x] Ajouter route tRPC newsletter.subscribe (email + nom optionnel)
+- [x] Ajouter formulaire newsletter dans le Footer avec validation email
+- [x] Afficher les abonnés dans le dashboard admin (vue dédiée)
+
+### Blog Dynamique
+- [x] Ajouter table `blog_posts` dans drizzle/schema.ts (titre, contenu, image, catégorie, statut, slug)
+- [x] Ajouter routes tRPC blog.create, blog.update, blog.delete, blog.list, blog.getBySlug
+- [x] Créer la vue Blog dans le dashboard admin (liste + éditeur d'articles)
+- [x] Connecter la section Blog de la page d'accueil aux articles dynamiques
+- [x] Créer une page /blog et /blog/:slug pour afficher les articles
+
+### SEO de Base
+- [x] Personnaliser le <title> de chaque page (accueil, vols, hotels, voitures, destinations)
+- [x] Ajouter balises Open Graph (og:title, og:description, og:image, og:url) dans index.html
+- [x] Ajouter meta description unique pour chaque page
+- [x] Ajouter balises Twitter Card pour partage sur Twitter/X
