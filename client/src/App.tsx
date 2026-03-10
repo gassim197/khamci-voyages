@@ -18,7 +18,6 @@ import BangkokPage from "./pages/BangkokPage";
 import BarcelonaPage from "./pages/BarcelonaPage";
 import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
-import WhatsAppButton from "./components/WhatsAppButton";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
 import ChatWidget from "./components/ChatWidget";
 
@@ -50,7 +49,6 @@ function Router() {
         onClose={() => setIsQuoteModalOpen(false)}
         source="sticky"
       />
-      <WhatsAppButton />
       <ChatWidget />
     </>
   );
