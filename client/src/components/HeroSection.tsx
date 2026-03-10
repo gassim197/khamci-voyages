@@ -24,14 +24,21 @@ export default function HeroSection() {
   return (
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-bg-world-travel-dAdxY5xHpjMoxUVLkFppar.webp')",
-          }}
-        >
+        {/* Background Video with Overlay */}
+        <div className="absolute inset-0 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-bg-world-travel-dAdxY5xHpjMoxUVLkFppar.webp"
+          >
+            <source
+              src="https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/rkJnXtrlevfTbeSv.mp4?Expires=1804697242&Signature=RtkEPV2vNSgwbfYFmwFmZ5zTXxVWYE69ErsaqyVP0ABSZ6i4q~~7V59oFOd3twCMwTcVZQfpMpTwM-yYeUrxSXYObbUIeeG~cIPLHAmlTgpDBr0TouHS6JhuNwlQ-JDDynkSbToh2Tb8xmY14MDbmojbHMVN~FG~qlvlg0P9GNqesARZvaa02NX~-vjkh-rz~dG5pFCarY7pAEt~mBie5DnfXc4EZ8~ijpsuLsRIoYlr18LjSYJlnyGfUnyi1Td2uQBEA-CNayiq14EylheC45jhrzZD4Vpzk0zFa6PqLkX1UZ1XIDRZX4AqUNOj5g1HCMkO0z9Cvhtqe3XIao13mA__&Key-Pair-Id=K2HSFNDJXOU9YS"
+              type="video/mp4"
+            />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
         </div>
