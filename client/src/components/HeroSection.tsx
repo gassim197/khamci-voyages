@@ -29,7 +29,7 @@ export default function HeroSection() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airport-travel-nADmPQsckLn2jEZdgxhyw9.webp')",
+              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-bg-world-travel-dAdxY5xHpjMoxUVLkFppar.webp')",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
@@ -51,20 +51,18 @@ export default function HeroSection() {
             {/* Main Headline - Version 2: Fiabiité Mondiale */}
             <div>
               <h1 className="heading-display mb-2 leading-tight">
-                Vos Voyages Organisés en 24h<br />
-                <span className="gradient-text">Partout dans le Monde</span>
+                Organisez votre voyage partout dans le monde<br />
+                <span className="gradient-text">avec KHAMCI VOYAGES</span>
               </h1>
               <p className="text-lg md:text-xl text-orange-300 font-semibold">
-                ⚡ Devis en 24h • Partout dans le monde • Zéro stress
+                ⚡ Devis personnalisé en moins de 24h • Gratuit & sans engagement
               </p>
             </div>
 
             {/* Subheading - Version 2 */}
             <p className="text-lg md:text-xl text-gray-100 leading-relaxed max-w-2xl">
-              Que vous rêviez de Paris, Bangkok, New York ou Dakar,
-              KHAMCI VOYAGES transforme vos envies en réalité.
-              Vols, hôtels, visas, circuits : nous gérons tout.
-              Réponse garantie sous 24h. Zéro stress.
+              Billets d'avion, hôtels, voyages sur mesure et services pour entreprises.
+              Décrivez votre projet et recevez votre devis personnalisé en moins de 24h.
             </p>
 
             {/* Primary CTA - PROMINENT */}

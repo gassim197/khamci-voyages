@@ -443,7 +443,7 @@ export default function ContactForm() {
                     <p className="font-semibold text-[#0D1B3E] mb-2">📋 Récapitulatif de votre voyage :</p>
                     <div className="grid grid-cols-2 gap-2 text-gray-700">
                       <span>Service : <strong>{SERVICE_TYPES.find(s => s.value === formData.serviceType)?.label ?? "—"}</strong></span>
-                      <span>Destination : <strong>{(countries.find(c => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase())?.name ?? formData.destination) || "—"}</strong></span>
+                      <span>Destination : <strong>{formData.destination ? (countries.find(c => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase())?.name || formData.destination) : "—"}</strong></span>
                       <span>Départ : <strong>{formData.departureDate || "—"}</strong></span>
                       <span>Retour : <strong>{formData.returnDate || "—"}</strong></span>
                     </div>
