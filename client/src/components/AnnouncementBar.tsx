@@ -39,9 +39,14 @@ export default function AnnouncementBar() {
 
         {/* Message */}
         <p className="text-center leading-snug">
-          <span className="text-[#FF6B35] font-bold">🎉 KHAMCI VOYAGES est officiellement en ligne !</span>
-          <span className="hidden sm:inline text-white/90">
-            {" "}— Réservez vos vols, hôtels et voyages sur mesure dès maintenant.
+          <span className="inline-flex items-center gap-1.5">
+            <span className="bg-[#FF6B35] text-white text-xs font-black px-2 py-0.5 rounded-full uppercase tracking-wide flex-shrink-0">Offre de lancement</span>
+            <span className="text-white font-bold">✈️ Réservez via notre site et économisez</span>
+            <span className="text-[#FF6B35] font-black text-base">-5%</span>
+            <span className="hidden sm:inline text-white font-bold">sur votre billet d'avion !</span>
+          </span>
+          <span className="hidden md:inline text-white/80">
+            {" "}Faites votre demande de devis, achetez en ligne et profitez de la réduction automatiquement.
           </span>
           <a
             href="#contact"
@@ -51,7 +56,7 @@ export default function AnnouncementBar() {
             }}
             className="ml-2 underline underline-offset-2 text-orange-300 hover:text-white transition-colors font-semibold whitespace-nowrap"
           >
-            Demander un devis →
+            J'en profite →
           </a>
         </p>
 
