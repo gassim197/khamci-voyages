@@ -34,7 +34,7 @@ export default function CarsPage() {
     <div className="min-h-screen bg-white">
       <HeaderNav />
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500">
+      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#0D1B3E] to-[#FF6B35]">
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full bg-purple-600"></div>
         </div>
@@ -136,7 +136,7 @@ export default function CarsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-12 text-white text-center">
+        <section className="bg-gradient-to-r from-[#0D1B3E] to-[#FF6B35] rounded-lg p-12 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Prêt à Louer Votre Voiture ?</h2>
           <p className="text-lg mb-6">
             Obtenez un devis personnalisé en 24h, sans engagement

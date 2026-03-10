@@ -58,7 +58,7 @@ export default function FlightsPage() {
     <div className="min-h-screen bg-white">
       <HeaderNav />
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-orange-500 to-red-500">
+      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#FF6B35] to-[#0D1B3E]">
         <div className="absolute inset-0 opacity-20">
           <img
             src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airplane-sunset-64duN9FBfa4CZjHNXpHzzz.webp"
@@ -164,7 +164,7 @@ export default function FlightsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-12 text-white text-center">
+        <section className="bg-gradient-to-r from-[#FF6B35] to-[#0D1B3E] rounded-lg p-12 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Prêt à Décrocher Votre Vol ?</h2>
           <p className="text-lg mb-6">
             Obtenez un devis personnalisé en 24h, sans engagement

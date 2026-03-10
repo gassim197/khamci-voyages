@@ -116,3 +116,12 @@
 - [x] Ajouter header de navigation sur la page /vols
 - [x] Ajouter header de navigation sur la page /hotels
 - [x] Ajouter header de navigation sur la page /voitures
+
+## Priorité Haute - UX & Design (10/03/2026)
+
+- [x] Harmoniser les couleurs de la page /hotels (remplacer bleu-cyan par bleu marine + orange)
+- [x] Harmoniser les couleurs de la page /voitures (remplacer violet-rose par bleu marine + orange)
+- [x] Harmoniser les couleurs de la page /vols (vérifier cohérence avec la charte)
+- [x] Refondre le formulaire principal ContactForm en 2 étapes (Étape 1 : service + destination + dates, Étape 2 : coordonnées)
+- [x] Ajouter une barre de progression visuelle entre les 2 étapes du formulaire
+- [x] Conserver la validation des champs à chaque étape

@@ -32,7 +32,7 @@ export default function HotelsPage() {
     <div className="min-h-screen bg-white">
       <HeaderNav />
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-500 to-cyan-500">
+      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#0D1B3E] to-[#1a3a6e]">
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full bg-blue-600"></div>
         </div>
@@ -137,7 +137,7 @@ export default function HotelsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg p-12 text-white text-center">
+        <section className="bg-gradient-to-r from-[#0D1B3E] to-[#1a3a6e] rounded-lg p-12 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Prêt à Réserver Votre Hôtel ?</h2>
           <p className="text-lg mb-6">
             Obtenez les meilleurs tarifs en 24h, sans engagement
