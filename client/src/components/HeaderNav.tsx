@@ -46,10 +46,10 @@ export default function HeaderNav() {
           </a>
           <a
             href="tel:+224611145892"
-            className="hidden lg:flex items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors font-medium"
+            className="flex items-center gap-1.5 text-[#0D1B3E] hover:text-[#FF6B35] transition-colors font-semibold text-sm border border-[#0D1B3E] hover:border-[#FF6B35] rounded-full px-3 py-1.5"
           >
-            <Phone size={16} />
-            +224 611 145 892
+            <Phone size={14} className="shrink-0" />
+            <span>+224 611 145 892</span>
           </a>
           <a
             href="/#contact"
@@ -96,10 +96,10 @@ export default function HeaderNav() {
             </a>
             <a
               href="tel:+224611145892"
-              className="flex items-center gap-2 text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
+              className="flex items-center justify-center gap-2 bg-[#0D1B3E] text-white rounded-lg py-3 font-semibold hover:bg-[#1a3a6e] transition-colors"
             >
               <Phone size={16} />
-              +224 611 145 892
+              <span>Appeler : +224 611 145 892</span>
             </a>
             <a
               href="/#contact"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,6 +48,13 @@ export default function Header() {
           >
             Découvrir
           </button>
+          <a
+            href="tel:+224611145892"
+            className="flex items-center gap-1.5 text-[#0D1B3E] hover:text-[#FF6B35] transition-colors font-semibold text-sm border border-[#0D1B3E] hover:border-[#FF6B35] rounded-full px-3 py-1.5"
+          >
+            <Phone size={14} className="shrink-0" />
+            <span>+224 611 145 892</span>
+          </a>
           <button
             onClick={() => scrollToSection("contact")}
             className="btn-cta"
@@ -87,6 +94,13 @@ export default function Header() {
             >
               Découvrir la Guinée
             </button>
+            <a
+              href="tel:+224611145892"
+              className="flex items-center justify-center gap-2 bg-[#0D1B3E] text-white rounded-lg py-3 font-semibold hover:bg-[#1a3a6e] transition-colors"
+            >
+              <Phone size={16} />
+              <span>Appeler : +224 611 145 892</span>
+            </a>
             <button
               onClick={() => scrollToSection("contact")}
               className="btn-cta w-full"

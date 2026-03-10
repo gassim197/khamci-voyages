@@ -155,3 +155,8 @@
 - [x] Ajouter bouton "Retour à l'accueil"
 - [x] Connecter la redirection depuis ContactForm après soumission réussie
 - [x] Connecter la redirection depuis QuickQuoteModal après soumission réussie
+
+## Numéro de Téléphone dans le Header
+
+- [x] Ajouter le numéro +224 611 145 892 cliquable (tel:) dans Header.tsx (visible desktop + mobile)
+- [x] Ajouter le numéro +224 611 145 892 cliquable dans HeaderNav.tsx (pages de services)
