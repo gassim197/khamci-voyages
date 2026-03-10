@@ -72,6 +72,15 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
   const submitQuote = trpc.quotes.submit.useMutation({
     onSuccess: () => {
       toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
+      sessionStorage.setItem('quoteData', JSON.stringify({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        destination: formData.arrivalCity ? `${formData.departureCity} → ${formData.arrivalCity}` : formData.departureCity,
+        departureDate: formData.departureDate,
+        returnDate: formData.returnDate,
+        passengers: formData.passengers,
+        serviceType: 'vol',
+      }));
       if (onSubmit) {
         onSubmit(formData);
       } else {

@@ -146,3 +146,12 @@
 - [x] Ajouter balises Open Graph (og:title, og:description, og:image, og:url) dans index.html
 - [x] Ajouter meta description unique pour chaque page
 - [x] Ajouter balises Twitter Card pour partage sur Twitter/X
+
+## Page de Confirmation Post-Devis
+
+- [x] Créer la page ThankYou (/merci) avec message de remerciement professionnel
+- [x] Afficher le délai de réponse (24h garantie)
+- [x] Ajouter bouton WhatsApp pour contact immédiat
+- [x] Ajouter bouton "Retour à l'accueil"
+- [x] Connecter la redirection depuis ContactForm après soumission réussie
+- [x] Connecter la redirection depuis QuickQuoteModal après soumission réussie
