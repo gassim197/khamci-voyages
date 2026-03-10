@@ -20,6 +20,7 @@ import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 import WhatsAppButton from "./components/WhatsAppButton";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
+import ChatWidget from "./components/ChatWidget";
 
 function Router() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -50,6 +51,7 @@ function Router() {
         source="sticky"
       />
       <WhatsAppButton />
+      <ChatWidget />
     </>
   );
 }

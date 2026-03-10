@@ -160,3 +160,10 @@
 
 - [x] Ajouter le numéro +224 611 145 892 cliquable (tel:) dans Header.tsx (visible desktop + mobile)
 - [x] Ajouter le numéro +224 611 145 892 cliquable dans HeaderNav.tsx (pages de services)
+
+## Chatbot IA Widget
+
+- [x] Créer route tRPC chatbot.ask avec IA (contexte KHAMCI VOYAGES)
+- [x] Créer composant ChatWidget.tsx (widget flottant avec bulle de chat)
+- [x] Ajouter suggestions rapides (destinations, tarifs, visa, contact)
+- [x] Intégrer ChatWidget dans App.tsx sur toutes les pages
