@@ -4,6 +4,7 @@ import { Loader2, Plane } from 'lucide-react';
 import { majorAirlines, majorCities, cabinClasses } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
+import CityCombobox from '@/components/CityCombobox';
 
 /**
  * Flight Quote Form - KHAMCI VOYAGES
@@ -190,36 +191,30 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Ville de Départ *</label>
-            <select
-              name="departureCity"
+            <CityCombobox
               value={formData.departureCity}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.departureCity ? 'border-red-500' : 'border-gray-300'
-              }`}
-            >
-              <option value="">Choisir une ville</option>
-              {majorCities.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
-            </select>
+              onChange={(val) => {
+                setFormData(prev => ({ ...prev, departureCity: val }));
+                if (errors.departureCity) setErrors(prev => ({ ...prev, departureCity: '' }));
+              }}
+              placeholder="Ex: Conakry, Paris, Dakar..."
+              cities={majorCities}
+              error={errors.departureCity}
+            />
             {errors.departureCity && <p className="text-red-500 text-xs mt-1">{errors.departureCity}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Ville d'Arrivée *</label>
-            <select
-              name="arrivalCity"
+            <CityCombobox
               value={formData.arrivalCity}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.arrivalCity ? 'border-red-500' : 'border-gray-300'
-              }`}
-            >
-              <option value="">Choisir une ville</option>
-              {majorCities.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
-            </select>
+              onChange={(val) => {
+                setFormData(prev => ({ ...prev, arrivalCity: val }));
+                if (errors.arrivalCity) setErrors(prev => ({ ...prev, arrivalCity: '' }));
+              }}
+              placeholder="Ex: Paris, Dubaï, New York..."
+              cities={majorCities}
+              error={errors.arrivalCity}
+            />
             {errors.arrivalCity && <p className="text-red-500 text-xs mt-1">{errors.arrivalCity}</p>}
           </div>
         </div>

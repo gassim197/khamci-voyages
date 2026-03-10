@@ -4,6 +4,7 @@ import { Loader2, Car } from 'lucide-react';
 import { majorCities, carTypes } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
+import CityCombobox from '@/components/CityCombobox';
 
 /**
  * Car Rental Quote Form - KHAMCI VOYAGES
@@ -181,36 +182,30 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Lieu de Prise en Charge *</label>
-            <select
-              name="pickupLocation"
+            <CityCombobox
               value={formData.pickupLocation}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.pickupLocation ? 'border-red-500' : 'border-gray-300'
-              }`}
-            >
-              <option value="">Choisir un lieu</option>
-              {majorCities.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
-            </select>
+              onChange={(val) => {
+                setFormData(prev => ({ ...prev, pickupLocation: val }));
+                if (errors.pickupLocation) setErrors(prev => ({ ...prev, pickupLocation: '' }));
+              }}
+              placeholder="Ex: Conakry, Dakar, Abidjan..."
+              cities={majorCities}
+              error={errors.pickupLocation}
+            />
             {errors.pickupLocation && <p className="text-red-500 text-xs mt-1">{errors.pickupLocation}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Lieu de Restitution *</label>
-            <select
-              name="dropoffLocation"
+            <CityCombobox
               value={formData.dropoffLocation}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.dropoffLocation ? 'border-red-500' : 'border-gray-300'
-              }`}
-            >
-              <option value="">Choisir un lieu</option>
-              {majorCities.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
-            </select>
+              onChange={(val) => {
+                setFormData(prev => ({ ...prev, dropoffLocation: val }));
+                if (errors.dropoffLocation) setErrors(prev => ({ ...prev, dropoffLocation: '' }));
+              }}
+              placeholder="Ex: Conakry, Kindia, Labé..."
+              cities={majorCities}
+              error={errors.dropoffLocation}
+            />
             {errors.dropoffLocation && <p className="text-red-500 text-xs mt-1">{errors.dropoffLocation}</p>}
           </div>
         </div>

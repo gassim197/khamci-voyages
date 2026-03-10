@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { countries } from "@/data/countries";
 import { trpc } from "@/lib/trpc";
+import CityCombobox from "@/components/CityCombobox";
 
 /**
  * Contact Form / Devis Form - KHAMCI VOYAGES
@@ -124,7 +125,8 @@ export default function ContactForm() {
       return;
     }
 
-    const selectedCountry = countries.find((c) => c.code === formData.destination);
+    // Support saisie libre : si c'est un code pays, on résout le nom, sinon on garde la valeur saisie
+    const selectedCountry = countries.find((c) => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase());
     const destinationLabel = selectedCountry?.name ?? formData.destination;
     const serviceLabel = SERVICE_TYPES.find((s) => s.value === formData.serviceType)?.label ?? formData.serviceType;
 
@@ -317,21 +319,16 @@ export default function ContactForm() {
                     <label className="block text-sm font-semibold text-gray-900 mb-2">
                       Destination souhaitée *
                     </label>
-                    <select
-                      name="destination"
+                    <CityCombobox
                       value={formData.destination}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                        errors.destination ? "border-red-500" : "border-gray-300"
-                      }`}
-                    >
-                      <option value="">Choisir un pays</option>
-                      {countries.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.name}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={(val) => {
+                        setFormData((prev) => ({ ...prev, destination: val }));
+                        if (errors.destination) setErrors((prev) => ({ ...prev, destination: undefined }));
+                      }}
+                      placeholder="Ex: Paris, Dubaï, New York, Conakry..."
+                      cities={countries.map((c) => c.name)}
+                      error={errors.destination}
+                    />
                     {errors.destination && (
                       <p className="text-red-500 text-xs mt-1">{errors.destination}</p>
                     )}
@@ -446,7 +443,7 @@ export default function ContactForm() {
                     <p className="font-semibold text-[#0D1B3E] mb-2">📋 Récapitulatif de votre voyage :</p>
                     <div className="grid grid-cols-2 gap-2 text-gray-700">
                       <span>Service : <strong>{SERVICE_TYPES.find(s => s.value === formData.serviceType)?.label ?? "—"}</strong></span>
-                      <span>Destination : <strong>{countries.find(c => c.code === formData.destination)?.name ?? "—"}</strong></span>
+                      <span>Destination : <strong>{(countries.find(c => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase())?.name ?? formData.destination) || "—"}</strong></span>
                       <span>Départ : <strong>{formData.departureDate || "—"}</strong></span>
                       <span>Retour : <strong>{formData.returnDate || "—"}</strong></span>
                     </div>

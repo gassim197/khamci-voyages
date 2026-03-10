@@ -4,6 +4,7 @@ import { Loader2, Hotel } from 'lucide-react';
 import { majorCities, starRatings } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
+import CityCombobox from '@/components/CityCombobox';
 
 /**
  * Hotel Quote Form - KHAMCI VOYAGES
@@ -184,19 +185,16 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
         {/* Destination */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Destination *</label>
-          <select
-            name="destination"
+          <CityCombobox
             value={formData.destination}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.destination ? 'border-red-500' : 'border-gray-300'
-            }`}
-          >
-            <option value="">Choisir une destination</option>
-            {majorCities.map(city => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-          </select>
+            onChange={(val) => {
+              setFormData(prev => ({ ...prev, destination: val }));
+              if (errors.destination) setErrors(prev => ({ ...prev, destination: '' }));
+            }}
+            placeholder="Ex: Paris, Dubaï, Conakry..."
+            cities={majorCities}
+            error={errors.destination}
+          />
           {errors.destination && <p className="text-red-500 text-xs mt-1">{errors.destination}</p>}
         </div>
 
