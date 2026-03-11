@@ -91,7 +91,7 @@ export default function FlightsPage() {
             Vols Internationaux - KHAMCI VOYAGES
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            Depuis plus de 15 ans, KHAMCI VOYAGES est votre partenaire de confiance pour tous vos voyages aériens. 
+            Depuis 2021, KHAMCI VOYAGES est votre partenaire de confiance pour tous vos voyages aériens. 
             Nous offrons des billets d'avion vers plus de 500 destinations dans le monde entier, avec les meilleures 
             compagnies aériennes et les tarifs les plus compétitifs.
           </p>

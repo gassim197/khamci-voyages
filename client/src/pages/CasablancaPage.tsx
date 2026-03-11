@@ -136,27 +136,27 @@ export default function CasablancaPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-hassan-mosque-cJLqKqL2h9eFJwULvMqwPz.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-mosquee-SktrDccbESw6gP3DzVwVoN.webp",
       alt: "Mosquée Hassan II Casablanca",
       title: "Mosquée Hassan II"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-medina-1bN5QLvvXhRgKZLKvLBrHe.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-medina-URY6ip6CJooZd8Wsrczggg.webp",
       alt: "Médina de Casablanca",
       title: "Médina"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-corniche-k6dkyQvEJAFnHu9qzj2o7Z.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-corniche-L98xXcGjgPStsKD3MtrdPy.webp",
       alt: "Corniche de Casablanca",
       title: "Corniche"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-old-town-GWe3YywutfbuKGMn3QmqqS.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-port-gCXvJb3ESxydTeJXGaCVYD.webp",
       alt: "Vieille Ville Casablanca",
       title: "Vieille Ville"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-port-c4StKNaTvpaiHbrFaTZPUn.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-ville-77CpMWNC2n9TjTfRxzfeXY.webp",
       alt: "Port de Casablanca",
       title: "Port"
     }
@@ -168,7 +168,7 @@ export default function CasablancaPage() {
       <section className="relative h-96 bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-hassan-mosque-cJLqKqL2h9eFJwULvMqwPz.png"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-mosquee-SktrDccbESw6gP3DzVwVoN.webp"
             alt="Casablanca"
             className="w-full h-full object-cover"
           />

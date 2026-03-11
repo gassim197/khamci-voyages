@@ -10,7 +10,7 @@ export default function ReassuranceBadges() {
     },
     {
       icon: "🏆",
-      text: "Experts Locaux 15+ ans",
+      text: "Experts Locaux depuis 2021",
     },
     {
       icon: "✓",

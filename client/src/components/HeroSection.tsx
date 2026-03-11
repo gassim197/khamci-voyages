@@ -96,8 +96,8 @@ export default function HeroSection() {
                   <p className="text-xs text-white/80 leading-tight">Gratuit &amp; sans engagement</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">
-                  <p className="font-bold text-base md:text-lg">15+</p>
-                  <p className="text-xs text-white/80 leading-tight">Ans d'expertise locale</p>
+                  <p className="font-bold text-base md:text-lg">2021</p>
+                  <p className="text-xs text-white/80 leading-tight">Fondée en Guinée</p>
                 </div>
               </div>
             </div>

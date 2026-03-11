@@ -216,7 +216,7 @@ export default function ContactForm() {
                   {[
                     "Réponse garantie sous 24h",
                     "100% gratuit et sans engagement",
-                    "Experts locaux depuis 15+ ans",
+                    "Experts locaux depuis 2021",
                     "Révisions illimitées jusqu'à satisfaction",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">

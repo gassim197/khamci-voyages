@@ -136,27 +136,27 @@ export default function BarcelonaPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-familia-bpo5VCLg9JCEbuE2SnsALE.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-JokxWaVQ2ByDkgbcMFRZre.webp",
       alt: "Sagrada Familia Barcelone",
       title: "Sagrada Familia"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-park-guell-gp9UZYJ2dL5zHioHFrvpRf.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-park-guell-eoSDWbxVc68iaNY5zrhadD.webp",
       alt: "Park Güell Barcelone",
       title: "Park Güell"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-gothic-quarter-GWe3YywutfbuKGMn3QmqqS.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-gothic-nxTGpV6UgRLvLURqaCvKjV.webp",
       alt: "Quartier Gothique Barcelone",
       title: "Quartier Gothique"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-beach-sunset-FiHsMUgVRDDk6Yx8vuAHXR.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-beach-HRxxwK8JQrvi6pWsZXxkf6.webp",
       alt: "Plage Barcelone",
       title: "Plage"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-las-ramblas-LTeVGWpyfAvMm7VAVWRC6M.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-ramblas-E96uTb8WHUNhqdArBWyFcW.webp",
       alt: "La Rambla Barcelone",
       title: "La Rambla"
     }
@@ -168,7 +168,7 @@ export default function BarcelonaPage() {
       <section className="relative h-96 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-familia-bpo5VCLg9JCEbuE2SnsALE.png"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-JokxWaVQ2ByDkgbcMFRZre.webp"
             alt="Barcelone"
             className="w-full h-full object-cover"
           />

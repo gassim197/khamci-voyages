@@ -136,27 +136,27 @@ export default function BangkokPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-TMXAvKJHAzZg6THDh7ubKL.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-eoSDWbxVc68iaNY5zrhadD.webp",
       alt: "Grand Palace Bangkok",
       title: "Grand Palace"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-floating-market-nADmPQsckLn2jEZdgxhyw9.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-market-nxTGpV6UgRLvLURqaCvKjV.webp",
       alt: "Marché Flottant Bangkok",
       title: "Marché Flottant"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-night-market-RDx5dMr4DGjCkssNA3wDmd.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-nightmarket-E96uTb8WHUNhqdArBWyFcW.webp",
       alt: "Marché de Nuit Bangkok",
       title: "Marché de Nuit"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-river-cruise-c4StKNaTvpaiHbrFaTZPUn.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-temple-HRxxwK8JQrvi6pWsZXxkf6.webp",
       alt: "Croisière Chao Phraya",
       title: "Croisière"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-skyline-night-FiHsMUgVRDDk6Yx8vuAHXR.png",
+      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-skyline-JokxWaVQ2ByDkgbcMFRZre.webp",
       alt: "Skyline Bangkok la Nuit",
       title: "Skyline"
     }
@@ -168,7 +168,7 @@ export default function BangkokPage() {
       <section className="relative h-96 bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-TMXAvKJHAzZg6THDh7ubKL.png"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-eoSDWbxVc68iaNY5zrhadD.webp"
             alt="Bangkok"
             className="w-full h-full object-cover"
           />

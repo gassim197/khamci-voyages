@@ -167,3 +167,17 @@
 - [x] Créer composant ChatWidget.tsx (widget flottant avec bulle de chat)
 - [x] Ajouter suggestions rapides (destinations, tarifs, visa, contact)
 - [x] Intégrer ChatWidget dans App.tsx sur toutes les pages
+
+## Corrections Critiques — Diagnostic 11/03/2026
+
+- [ ] Générer images Paris (Tour Eiffel, Louvre, Seine, Notre-Dame, Montmartre)
+- [ ] Générer images Casablanca (Mosquée Hassan II, Médina, Corniche, Vieux quartier, Port)
+- [ ] Générer images Bangkok (Grand Palace, Marché flottant, Night market, Rivière, Skyline)
+- [ ] Générer images Barcelone (Gothic Quarter, Las Ramblas, Barceloneta)
+- [ ] Mettre à jour ParisPage.tsx avec nouvelles URLs CDN
+- [ ] Mettre à jour CasablancaPage.tsx avec nouvelles URLs CDN
+- [ ] Mettre à jour BangkokPage.tsx avec nouvelles URLs CDN
+- [ ] Mettre à jour BarcelonaPage.tsx avec nouvelles URLs CDN
+- [ ] Corriger liens footer (/vols→/services/billetterie, /hotels→/services/hotel, /voitures→/services/location-vehicule)
+- [ ] Supprimer pages orphelines (AdminDashboard.tsx, AdminLogin.tsx, ComponentShowcase.tsx)
+- [ ] Corriger "15 ans" → "depuis 2021" dans Footer.tsx et WhyChooseUs.tsx

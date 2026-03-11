@@ -97,7 +97,7 @@ export default function Footer() {
               </a>
               <p className="text-gray-400 text-sm leading-relaxed mb-5">
                 Votre partenaire de confiance pour tous vos voyages en Guinée et au-delà.
-                Rapidité, fiabilité et expertise locale depuis plus de 15 ans.
+                Rapidité, fiabilité et expertise locale depuis 2021.
               </p>
               <div className="flex gap-3">
                 <a href="#" aria-label="Facebook" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
@@ -125,12 +125,12 @@ export default function Footer() {
             <div>
               <h3 className="font-bold text-white mb-5 text-sm uppercase tracking-wider">Services</h3>
               <ul className="space-y-3 text-gray-400 text-sm">
-                <li><a href="/vols" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">✈</span> Billets d'Avion</a></li>
-                <li><a href="/hotels" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🏨</span> Réservations d'Hôtels</a></li>
-                <li><a href="/voitures" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🚗</span> Location de Voitures</a></li>
-                <li><a href="/#services" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🌍</span> Voyages Organisés</a></li>
-                <li><a href="/#services" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">📋</span> Assistance Visa</a></li>
-                <li><a href="/#team-building" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🤝</span> Team Building</a></li>
+                <li><a href="/services/billetterie" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">✈</span> Billetterie</a></li>
+                <li><a href="/services/hotel" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🏨</span> Réservation d'Hôtel</a></li>
+                <li><a href="/services/location-vehicule" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🚗</span> Location de Véhicule</a></li>
+                <li><a href="/services/assurance-voyage" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🛡️</span> Assurance Voyage</a></li>
+                <li><a href="/services/visa" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">📋</span> Accompagnement Visa</a></li>
+                <li><a href="/services/hadj-oumra" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🕌</span> Hadj &amp; Oumra</a></li>
               </ul>
             </div>
 
@@ -140,10 +140,9 @@ export default function Footer() {
               <ul className="space-y-3 text-gray-400 text-sm">
                 <li><a href="/destination/paris" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🗼</span> Paris</a></li>
                 <li><a href="/destination/dubai" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🏙️</span> Dubaï</a></li>
-                <li><a href="/destination/new-york" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🗽</span> New York</a></li>
                 <li><a href="/destination/casablanca" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🕌</span> Casablanca</a></li>
-                <li><a href="/destination/bangkok" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🏯</span> Bangkok</a></li>
-                <li><a href="/destination/barcelona" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🏛️</span> Barcelone</a></li>
+                <li><a href="/services/visa" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🌍</span> Destinations Visa</a></li>
+                <li><a href="/services/hadj-oumra" className="hover:text-[#FF6B35] transition-colors flex items-center gap-2"><span className="text-[#FF6B35]">🕌</span> La Mecque</a></li>
               </ul>
             </div>
 

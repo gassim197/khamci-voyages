@@ -71,27 +71,27 @@ export default function ParisPage() {
 
   const parisImages = [
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-eiffel-tower-nADmPQsckLn2jEZdgxhyw9.webp',
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-eiffel-eoSDWbxVc68iaNY5zrhadD.webp',
       alt: 'Tour Eiffel au coucher de soleil',
       title: 'Tour Eiffel - Le symbole de Paris'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-louvre-nADmPQsckLn2jEZdgxhyw9.webp',
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-louvre-JokxWaVQ2ByDkgbcMFRZre.webp',
       alt: 'Musée du Louvre',
       title: 'Musée du Louvre - Patrimoine mondial'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-seine-river-nADmPQsckLn2jEZdgxhyw9.webp',
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-seine-nxTGpV6UgRLvLURqaCvKjV.webp',
       alt: 'Croisière sur la Seine',
       title: 'La Seine - Cœur romantique de Paris'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-notre-dame-nADmPQsckLn2jEZdgxhyw9.webp',
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-montmartre-HRxxwK8JQrvi6pWsZXxkf6.webp',
       alt: 'Cathédrale Notre-Dame',
       title: 'Notre-Dame - Chef-d\'œuvre gothique'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-montmartre-nADmPQsckLn2jEZdgxhyw9.webp',
+      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-champs-elysees-E96uTb8WHUNhqdArBWyFcW.webp',
       alt: 'Montmartre au coucher de soleil',
       title: 'Montmartre - Quartier bohème et artistique'
     }
