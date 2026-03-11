@@ -72,8 +72,8 @@ export default function LocationVehiculeService() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Service</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">Location de Véhicule</h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">Location de Véhicule</h1>
+          <p className="text-base md:text-xl text-gray-200 max-w-2xl leading-relaxed">
             Berlines, SUV, minibus ou bus — KHAMCI VOYAGES met à votre disposition une flotte de véhicules
             adaptés à tous vos déplacements, pour les particuliers et les entreprises.
           </p>
@@ -89,7 +89,7 @@ export default function LocationVehiculeService() {
       <section className="py-12 bg-gray-50">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Nos avantages pour la location</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { icon: <CheckCircle className="text-green-500" size={28} />, title: "Flotte variée", desc: "Du véhicule individuel au bus de groupe, nous disposons d'une gamme complète pour tous vos besoins." },
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Disponibilité immédiate", desc: "Nos véhicules sont disponibles rapidement. Planifiez à l'avance ou contactez-nous pour une demande urgente." },
@@ -113,7 +113,7 @@ export default function LocationVehiculeService() {
             <p className="text-gray-500">Gratuit, sans engagement — réponse sous 24h</p>
           </div>
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 space-y-5">
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Lieu de prise en charge *</label>
                 <CityCombobox value={formData.pickupCity} onChange={val => setFormData(prev => ({ ...prev, pickupCity: val }))} placeholder="Ex: Conakry, Aéroport..." cities={majorCities} />
@@ -123,7 +123,7 @@ export default function LocationVehiculeService() {
                 <CityCombobox value={formData.dropoffCity} onChange={val => setFormData(prev => ({ ...prev, dropoffCity: val }))} placeholder="Ex: Kindia, Labé..." cities={majorCities} />
               </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de début *</label>
                 <input type="date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
@@ -133,7 +133,7 @@ export default function LocationVehiculeService() {
                 <input type="date" name="returnDate" value={formData.returnDate} onChange={handleChange} min={formData.pickupDate || new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Type de véhicule</label>
                 <select name="vehicleType" value={formData.vehicleType} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
@@ -156,7 +156,7 @@ export default function LocationVehiculeService() {
               </div>
             </div>
             <hr className="border-gray-100" />
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />

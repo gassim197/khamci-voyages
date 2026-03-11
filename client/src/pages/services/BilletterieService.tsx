@@ -101,10 +101,10 @@ export default function BilletterieService() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Service</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
             Billetterie Aérienne
           </h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
+            <p className="text-base md:text-xl text-gray-200 max-w-2xl leading-relaxed">
             Réservez vos billets d'avion vers n'importe quelle destination dans le monde,
             aux meilleurs tarifs. KHAMCI VOYAGES négocie pour vous avec les meilleures compagnies aériennes.
           </p>
@@ -122,7 +122,7 @@ export default function BilletterieService() {
       <section className="py-12 bg-gray-50">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Pourquoi choisir KHAMCI VOYAGES pour votre billet ?</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { icon: <CheckCircle className="text-green-500" size={28} />, title: "Meilleurs tarifs garantis", desc: "Grâce à nos partenariats avec les compagnies aériennes, nous vous proposons des prix défiant toute concurrence." },
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Réponse en moins de 24h", desc: "Votre demande est traitée rapidement par nos experts. Vous recevez votre devis personnalisé sous 24h." },
@@ -157,7 +157,7 @@ export default function BilletterieService() {
             <div className={`flex items-center justify-center w-9 h-9 rounded-full font-bold text-sm ${step >= 2 ? "bg-[#FF6B35] text-white" : "bg-gray-200 text-gray-500"}`}>2</div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-4 md:p-8 space-y-6">
             {step === 1 && (
               <>
                 <h3 className="text-xl font-bold text-[#0D1B3E] flex items-center gap-2">
@@ -183,7 +183,7 @@ export default function BilletterieService() {
                 </div>
 
                 {/* Villes */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ville de départ *</label>
                     <CityCombobox
@@ -205,7 +205,7 @@ export default function BilletterieService() {
                 </div>
 
                 {/* Dates */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                       <Calendar size={14} className="inline mr-1" />Date de départ *
@@ -237,7 +237,7 @@ export default function BilletterieService() {
                 </div>
 
                 {/* Passagers & Compagnie */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                       <Users size={14} className="inline mr-1" />Nombre de passagers *
@@ -296,7 +296,7 @@ export default function BilletterieService() {
                   </button>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
                     <input

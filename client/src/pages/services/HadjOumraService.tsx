@@ -108,11 +108,11 @@ export default function HadjOumraService() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Service spirituel</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
             Hadj & Oumra<br />
             <span className="text-[#FF6B35]">Votre voyage vers les lieux saints</span>
           </h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
+          <p className="text-base md:text-xl text-gray-200 max-w-2xl leading-relaxed">
             KHAMCI VOYAGES organise votre pèlerinage vers La Mecque et Médine avec soin et dévotion.
             Nous prenons en charge chaque détail pour que vous puissiez vous concentrer pleinement
             sur votre voyage spirituel.
@@ -132,7 +132,7 @@ export default function HadjOumraService() {
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Nos formules</h2>
             <p className="text-gray-500">Des packages adaptés à chaque budget et chaque besoin spirituel</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {PACKAGES.map(pkg => (
               <div
                 key={pkg.name}
@@ -190,7 +190,7 @@ export default function HadjOumraService() {
           <h2 className="text-3xl font-black text-[#0D1B3E] text-center mb-10">
             Pourquoi confier votre pèlerinage à KHAMCI VOYAGES ?
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               { icon: <Heart className="text-red-500" size={28} />, title: "Accompagnement spirituel", desc: "Un guide expérimenté vous accompagne à chaque étape de votre pèlerinage." },
               { icon: <Shield className="text-green-500" size={28} />, title: "Sécurité & sérénité", desc: "Assurance voyage incluse, hébergements vérifiés, transport sécurisé." },
@@ -211,7 +211,7 @@ export default function HadjOumraService() {
       <section className="py-16 bg-gradient-to-br from-[#1a0a2e] to-[#0D1B3E] text-white">
         <div className="container max-w-4xl">
           <h2 className="text-3xl font-black text-center mb-12">Comment ça marche ?</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {STEPS.map(step => (
               <div key={step.num} className="flex items-start gap-4 bg-white/10 rounded-xl p-5 border border-white/10">
                 <div className="text-3xl font-black text-[#FF6B35] shrink-0 leading-none">{step.num}</div>
@@ -265,7 +265,7 @@ export default function HadjOumraService() {
             </div>
 
             {/* Dates */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de départ souhaitée *</label>
                 <input type="date" name="departureDate" value={formData.departureDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
@@ -277,7 +277,7 @@ export default function HadjOumraService() {
             </div>
 
             {/* Nombre de pèlerins */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Users size={14} className="inline mr-1" />Nombre de pèlerins</label>
                 <select name="travelers" value={formData.travelers} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
@@ -298,7 +298,7 @@ export default function HadjOumraService() {
             <hr className="border-gray-100" />
 
             {/* Informations de contact */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />

@@ -90,7 +90,7 @@ export default function Services() {
               <Link
                 key={index}
                 href={service.href}
-                className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100 block"
+                className="group relative overflow-hidden rounded-xl bg-white p-5 md:p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100 block"
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
               >

@@ -49,7 +49,7 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
             <MessageSquare className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-semibold text-blue-600">TÉMOIGNAGES CLIENTS</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
             Ce que disent nos clients
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">

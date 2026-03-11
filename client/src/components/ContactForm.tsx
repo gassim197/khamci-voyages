@@ -271,7 +271,7 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8">
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-4 md:p-8">
 
               {/* ===== ÉTAPE 1 ===== */}
               {step === 1 && (
@@ -335,7 +335,7 @@ export default function ContactForm() {
                   </div>
 
                   {/* Dates */}
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         <Calendar size={14} className="inline mr-1" />
@@ -376,9 +376,7 @@ export default function ContactForm() {
                     </div>
                   </div>
 
-                  {/* Passengers & Airline */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
+                  {/* Passengers & Airline *                  <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         <Users size={14} className="inline mr-1" />
                         Nombre de passagers
@@ -457,7 +455,7 @@ export default function ContactForm() {
                   </div>
 
                   {/* Name & Email */}
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         Nom Complet *

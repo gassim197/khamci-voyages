@@ -61,11 +61,11 @@ export default function Header() {
           <img
             src="/logo-khamci-officiel.png"
             alt="KHAMCI VOYAGES - Agence de Voyages Guinée"
-            className="h-14 md:h-16 w-auto"
+            className="h-10 md:h-14 w-auto"
           />
           <div className="hidden sm:block">
-            <h1 className="text-lg md:text-xl font-bold gradient-text leading-tight">KHAMCI VOYAGES</h1>
-            <p className="text-xs text-gray-500 font-medium">Agence de Voyages — Conakry, Guinée</p>
+            <h1 className="text-base md:text-xl font-bold gradient-text leading-tight">KHAMCI VOYAGES</h1>
+            <p className="text-xs text-gray-500 font-medium hidden md:block">Agence de Voyages — Conakry, Guinée</p>
           </div>
         </Link>
 

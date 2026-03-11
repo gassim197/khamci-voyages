@@ -60,7 +60,7 @@ export default function PopularDestinations() {
             <MapPin className="w-4 h-4 text-yellow-600" />
             <span className="text-sm font-semibold text-yellow-600">DESTINATIONS POPULAIRES</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
             Explorez le Monde avec KHAMCI VOYAGES
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

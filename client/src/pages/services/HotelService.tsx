@@ -70,8 +70,8 @@ export default function HotelService() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Service</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">Réservation d'Hôtel</h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">Réservation d'Hôtel</h1>
+          <p className="text-base md:text-xl text-gray-200 max-w-2xl leading-relaxed">
             Accédez à un large choix d'hébergements en Guinée et dans le monde entier.
             KHAMCI VOYAGES sélectionne pour vous les meilleures options selon votre budget et vos préférences.
           </p>
@@ -87,7 +87,7 @@ export default function HotelService() {
       <section className="py-12 bg-gray-50">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Pourquoi réserver votre hôtel avec nous ?</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { icon: <Star className="text-yellow-500" size={28} />, title: "Sélection rigoureuse", desc: "Nous sélectionnons uniquement des établissements de qualité, adaptés à vos besoins et à votre budget." },
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Confirmation rapide", desc: "Votre réservation est confirmée rapidement. Vous recevez tous les documents nécessaires par email." },
@@ -120,7 +120,7 @@ export default function HotelService() {
                 cities={majorCities}
               />
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date d'arrivée *</label>
                 <input type="date" name="checkIn" value={formData.checkIn} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
@@ -160,7 +160,7 @@ export default function HotelService() {
               </select>
             </div>
             <hr className="border-gray-100" />
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />

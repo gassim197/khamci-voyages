@@ -97,12 +97,12 @@ export default function FAQ() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-1.5 md:gap-2 mb-8 md:mb-10">
           {FAQ_ITEMS.map(cat => (
             <button
               key={cat.category}
               onClick={() => setActiveCategory(cat.category)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${
                 activeCategory === cat.category
                   ? "bg-[#FF6B35] text-white shadow-md"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"

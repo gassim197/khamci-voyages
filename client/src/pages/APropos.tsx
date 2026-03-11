@@ -47,7 +47,7 @@ export default function APropos() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Qui sommes-nous</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
             À propos de<br />
             <span className="text-[#FF6B35]">KHAMCI VOYAGES</span>
           </h1>
@@ -178,7 +178,7 @@ export default function APropos() {
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Nos propositions de services</h2>
             <p className="text-gray-500">Une gamme complète pour tous vos besoins de voyage</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {SERVICES.map(service => (
               <div key={service.title} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all">
                 <span className="text-3xl">{service.icon}</span>
@@ -200,7 +200,7 @@ export default function APropos() {
             Nous proposons des formules adaptées aux besoins de nos clients, avec des options flexibles
             pour les particuliers comme pour les entreprises.
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { icon: "🏢", title: "Entreprises", desc: "Formules spécifiques pour les entreprises et les voyageurs fréquents avec suivi dédié." },
               { icon: "🎯", title: "Tarifs promotionnels", desc: "Offres spéciales sur certaines destinations et périodes de l'année." },

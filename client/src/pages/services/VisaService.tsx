@@ -76,8 +76,8 @@ export default function VisaService() {
             </div>
             <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Service</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">Accompagnement Visa</h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">Accompagnement Visa</h1>
+          <p className="text-base md:text-xl text-gray-200 max-w-2xl leading-relaxed">
             Obtenez votre visa rapidement et sans stress. KHAMCI VOYAGES vous accompagne dans toutes les démarches
             administratives pour Dubaï, la Chine, l'Inde, le Maroc, l'Égypte, la France et le Canada.
           </p>
@@ -123,7 +123,7 @@ export default function VisaService() {
       <section className="py-12 bg-white">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Notre accompagnement visa</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               { icon: <CheckCircle className="text-green-500" size={28} />, title: "Dossier complet", desc: "Nous vous guidons dans la constitution de votre dossier et vérifions chaque document avant le dépôt." },
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Traitement rapide", desc: "Nous optimisons les délais en soumettant votre dossier dans les meilleurs créneaux disponibles." },
@@ -157,7 +157,7 @@ export default function VisaService() {
                 <option value="Autre">🌍 Autre destination</option>
               </select>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Type de visa</label>
                 <select name="visaType" value={formData.visaType} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
@@ -177,7 +177,7 @@ export default function VisaService() {
               <input type="date" name="travelDate" value={formData.travelDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
             </div>
             <hr className="border-gray-100" />
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />

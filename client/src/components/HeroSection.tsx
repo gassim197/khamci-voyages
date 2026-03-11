@@ -86,18 +86,18 @@ export default function HeroSection() {
               <p className="text-sm font-semibold text-white/90 mb-3">
                 ✓ Pourquoi 500+ voyageurs nous font confiance ?
               </p>
-              <div className="grid grid-cols-3 gap-3 text-sm">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
-                  <p className="font-bold text-lg">24h</p>
-                  <p className="text-xs text-white/80">Réponse garantie</p>
+              <div className="grid grid-cols-3 gap-2 text-sm">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">
+                  <p className="font-bold text-base md:text-lg">24h</p>
+                  <p className="text-xs text-white/80 leading-tight">Réponse garantie</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
-                  <p className="font-bold text-lg">100%</p>
-                  <p className="text-xs text-white/80">Gratuit &amp; sans engagement</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">
+                  <p className="font-bold text-base md:text-lg">100%</p>
+                  <p className="text-xs text-white/80 leading-tight">Gratuit &amp; sans engagement</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center border border-white/20">
-                  <p className="font-bold text-lg">15+</p>
-                  <p className="text-xs text-white/80">Ans d'expertise locale</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">
+                  <p className="font-bold text-base md:text-lg">15+</p>
+                  <p className="text-xs text-white/80 leading-tight">Ans d'expertise locale</p>
                 </div>
               </div>
             </div>
