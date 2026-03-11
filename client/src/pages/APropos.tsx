@@ -37,52 +37,52 @@ const WHY_PARTNER = [
 // Photos de l'inauguration du nouveau siège
 const INAUGURATION_PHOTOS = [
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/ENdLVEujxaubVyiq.jpg",
+    url: "/inauguration/cover-equipe.jpg",
     caption: "L'équipe KHAMCI VOYAGES lors de l'inauguration du nouveau siège",
     isCover: true,
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/kigJvnUGbkecXYjD.jpg",
+    url: "/inauguration/photo-01.jpg",
     caption: "Rencontre avec les invités lors de l'inauguration",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/oLIucAejsPmEDKuh.jpg",
+    url: "/inauguration/photo-02.jpg",
     caption: "Moment de convivialité avec les partenaires",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/wSvKmNvHCYWiWwMe.jpg",
+    url: "/inauguration/photo-03.jpg",
     caption: "Accueil des invités au nouveau siège",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/CLUnUTOFrHefaruF.jpg",
+    url: "/inauguration/photo-04.jpg",
     caption: "L'équipe avec les partenaires et invités",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/RrmBJpVeltNdtlar.jpg",
+    url: "/inauguration/photo-05.jpg",
     caption: "Échanges avec les clients lors de l'inauguration",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/kcLYzUeViQgGnnSP.jpg",
+    url: "/inauguration/photo-06.jpg",
     caption: "Rencontres et partages lors de l'événement",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/TXegPmbxbmhTaPcc.jpg",
+    url: "/inauguration/photo-07.jpg",
     caption: "Ambiance chaleureuse lors de l'inauguration",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/bRwQQzDQBYmZRUHZ.jpg",
+    url: "/inauguration/photo-08.jpg",
     caption: "La directrice générale lors de la cérémonie",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/sShOkInPxYFDkbbn.jpg",
+    url: "/inauguration/photo-09.jpg",
     caption: "Cérémonie d'inauguration du nouveau siège",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/SZWossopzTsAbpQU.jpg",
+    url: "/inauguration/photo-10.jpg",
     caption: "Inauguration en présence des partenaires et clients",
   },
   {
-    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/IjnTSIiwyOMVUJjS.jpg",
+    url: "/inauguration/photo-11.jpg",
     caption: "Discours lors de la cérémonie d'inauguration",
   },
 ];
@@ -149,7 +149,7 @@ export default function APropos() {
       {/* Hero avec photo couverture équipe en veste */}
       <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
         <img
-          src={INAUGURATION_PHOTOS[0].url}
+          src="/inauguration/cover-equipe.jpg"
           alt="Équipe KHAMCI VOYAGES"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
@@ -235,7 +235,7 @@ export default function APropos() {
           <div className="flex flex-col md:flex-row items-center gap-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
             <div className="shrink-0">
               <img
-                src="https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/jowNeAHZakWcXuDI.jpg"
+                src="/inauguration/fondatrice.jpg"
                 alt="Kadija Diaka Cissé - Fondatrice et Directrice Générale de KHAMCI VOYAGES"
                 className="w-52 h-64 object-cover object-top rounded-2xl shadow-2xl border-2 border-white/20"
               />
