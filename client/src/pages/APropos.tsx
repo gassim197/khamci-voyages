@@ -225,7 +225,7 @@ export default function APropos() {
         </div>
       </section>
 
-      {/* Fondatrice & Directrice Générale — PLACEHOLDER EN ATTENTE DE LA PHOTO */}
+      {/* Fondatrice & Directrice Générale */}
       <section className="py-16 bg-gradient-to-br from-[#0D1B3E] to-[#1a3a6e] text-white">
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
@@ -233,25 +233,31 @@ export default function APropos() {
             <h2 className="text-3xl font-black mt-2">La fondatrice</h2>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-            {/* Photo placeholder — sera remplacée par la vraie photo */}
             <div className="shrink-0">
-              <div className="w-48 h-48 rounded-2xl bg-white/20 border-2 border-dashed border-white/40 flex flex-col items-center justify-center text-white/60">
-                <Users size={48} className="mb-2" />
-                <span className="text-xs text-center px-4">Photo de la fondatrice à venir</span>
-              </div>
+              <img
+                src="https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/jowNeAHZakWcXuDI.jpg"
+                alt="Kadija Diaka Cissé - Fondatrice et Directrice Générale de KHAMCI VOYAGES"
+                className="w-52 h-64 object-cover object-top rounded-2xl shadow-2xl border-2 border-white/20"
+              />
             </div>
             <div>
-              <h3 className="text-2xl font-black text-white mb-1">Fondatrice &amp; Directrice Générale</h3>
-              <p className="text-orange-300 font-semibold mb-4">KHAMCI VOYAGES SARL</p>
+              <h3 className="text-2xl font-black text-white mb-1">Kadija Diaka Cissé</h3>
+              <p className="text-orange-300 font-semibold mb-1">Fondatrice &amp; Directrice Générale</p>
+              <p className="text-white/60 text-sm mb-5">KHAMCI VOYAGES SARL — Conakry, Guinée</p>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Animée par la passion du voyage et la conviction que chaque Guinéen mérite d'accéder
-                facilement aux services de mobilité internationale, elle a fondé KHAMCI VOYAGES en 2021
-                avec une vision claire : bâtir une agence de voyages de référence en Guinée et en Afrique de l'Ouest.
+                Femme d'affaires engagée et visionnaire, Kadija Diaka Cissé a fondé KHAMCI VOYAGES en 2021
+                avec une ambition claire : rendre les services de voyage accessibles à tous les Guinéens,
+                particuliers comme entreprises, à des tarifs compétitifs et avec un accompagnement de qualité.
+              </p>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                Animée par la conviction que la mobilité est un levier essentiel du développement économique
+                et personnel, elle a bâti une agence réactive et humaine, fondée sur trois valeurs fondamentales :
+                <strong className="text-white"> rapidité, efficacité et engagement</strong>.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Grâce à son leadership et à son engagement envers l'excellence du service client,
-                KHAMCI VOYAGES s'est imposée comme un acteur incontournable du secteur touristique guinéen,
-                au service des particuliers, des entreprises et des pèlerins.
+                Sous sa direction, KHAMCI VOYAGES s'est imposée comme un acteur de référence dans le secteur
+                du voyage en Guinée, au service des particuliers, des entreprises partenaires et des pèlerins
+                pour le Hadj et l'Oumra.
               </p>
             </div>
           </div>
