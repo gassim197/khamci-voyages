@@ -1538,6 +1538,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
 function BlogView() {
   const [showForm, setShowForm] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [form, setForm] = useState({
     title: "",
     excerpt: "",
@@ -1548,6 +1549,48 @@ function BlogView() {
     authorName: "KHAMCI VOYAGES",
     readTime: 5,
   });
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Seules les images sont acceptées (JPG, PNG, WEBP)");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("L'image ne doit pas dépasser 5 Mo");
+      return;
+    }
+    setIsUploadingImage(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
+        const imageData = ev.target?.result as string;
+        const response = await fetch("/api/upload/blog-image", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            imageData,
+            mimeType: file.type,
+            fileName: file.name,
+          }),
+        });
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || "Erreur lors de l'upload");
+        }
+        const { url } = await response.json();
+        setForm(f => ({ ...f, coverImage: url }));
+        toast.success("Image uploadée avec succès !");
+        setIsUploadingImage(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (err: any) {
+      toast.error(err.message || "Erreur lors de l'upload de l'image");
+      setIsUploadingImage(false);
+    }
+  };
 
   const postsQuery = trpc.blog.listAll.useQuery();
   const posts = postsQuery.data || [];
@@ -1696,9 +1739,64 @@ function BlogView() {
                        className="h-11" />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture (URL)</label>
-                <Input value={form.coverImage} onChange={e => setForm(f => ({...f, coverImage: e.target.value}))}
-                       placeholder="https://example.com/image.jpg" className="h-11" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture</label>
+                <div className="space-y-3">
+                  {/* Bouton d'upload */}
+                  <div className="flex items-center gap-3">
+                    <label
+                      htmlFor="blog-image-upload"
+                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold cursor-pointer transition-all border-2 border-dashed ${
+                        isUploadingImage
+                          ? "border-gray-200 text-gray-400 cursor-not-allowed"
+                          : "border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400"
+                      }`}
+                    >
+                      {isUploadingImage ? (
+                        <><span className="animate-spin w-4 h-4 border-2 border-orange-400 border-t-transparent rounded-full" /> Upload en cours...</>
+                      ) : (
+                        <><Camera className="w-4 h-4" /> Choisir une image depuis mon ordinateur</>
+                      )}
+                    </label>
+                    <input
+                      id="blog-image-upload"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={isUploadingImage}
+                      onChange={handleImageUpload}
+                    />
+                    <span className="text-xs text-gray-400">JPG, PNG, WEBP — max 5 Mo</span>
+                  </div>
+                  {/* Ou coller une URL */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-gray-400 shrink-0">ou coller une URL :</span>
+                    <Input
+                      value={form.coverImage}
+                      onChange={e => setForm(f => ({...f, coverImage: e.target.value}))}
+                      placeholder="https://example.com/image.jpg"
+                      className="h-9 text-sm"
+                    />
+                  </div>
+                  {/* Prévisualisation */}
+                  {form.coverImage && (
+                    <div className="relative inline-block">
+                      <img
+                        src={form.coverImage}
+                        alt="Prévisualisation"
+                        className="h-32 w-auto rounded-xl object-cover border border-gray-200 shadow-sm"
+                        onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setForm(f => ({...f, coverImage: ""}))}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600"
+                        title="Supprimer l'image"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Résumé</label>

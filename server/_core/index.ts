@@ -6,6 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { registerChatRoutes } from "./chat";
 import { registerKhamciChatRoutes } from "../chatKhamci";
+import { registerUploadRoutes } from "../uploadRoutes";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -41,6 +42,8 @@ async function startServer() {
   registerChatRoutes(app);
   // KHAMCI VOYAGES chatbot
   registerKhamciChatRoutes(app);
+  // Upload routes (images blog, etc.)
+  registerUploadRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",

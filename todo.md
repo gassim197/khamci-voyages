@@ -203,4 +203,8 @@
 - [x] Intégrer la galerie inauguration dans la page À Propos (grille + lightbox)
 - [x] Ajouter photo couverture équipe en veste (IMG_9862) en hero de la page À Propos
 - [x] Créer section profil fondatrice/directrice générale (placeholder en attente de la photo)
-- [ ] Remplacer le placeholder fondatrice par la vraie photo quand fournie
+- [x] Remplacer le placeholder fondatrice par la vraie photo (Kadija Diaka Cissé)
+
+## Bugs Blog Admin — 11/03/2026
+- [x] Articles publiés depuis le dashboard admin n'apparaissent pas sur le site
+- [x] Ajouter option upload image de couverture dans le formulaire de création d'article
