@@ -20,7 +20,6 @@ import StickyQuoteCTA from "./components/StickyQuoteCTA";
 import QuickQuoteModal from "./components/QuickQuoteModal";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
 import ChatWidget from "./components/ChatWidget";
-import AnnouncementBar from "./components/AnnouncementBar";
 import APropos from "./pages/APropos";
 import BilletterieService from "./pages/services/BilletterieService";
 import HotelService from "./pages/services/HotelService";
@@ -78,7 +77,6 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <AnnouncementBar />
           <Router />
         </TooltipProvider>
       </ThemeProvider>

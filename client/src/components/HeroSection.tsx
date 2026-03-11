@@ -53,13 +53,13 @@ export default function HeroSection() {
         </div>
 
         {/* Content */}
-        <div className="relative container z-10 text-white max-w-3xl">
+        <div className="relative container z-10 text-white max-w-4xl">
            <div className="animate-fade-in-up space-y-6">
             {/* Main Headline - Version 2: Fiabiité Mondiale */}
             <div>
-              <h1 className="heading-display mb-2 leading-tight">
-                Organisez votre voyage partout dans le monde<br />
-                <span className="gradient-text">avec KHAMCI VOYAGES</span>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 leading-tight">
+                Organisez votre voyage partout dans le monde
+                <span className="block gradient-text mt-1">avec KHAMCI VOYAGES</span>
               </h1>
               <p className="text-lg md:text-xl text-orange-300 font-semibold">
                 ⚡ Devis personnalisé en moins de 24h • Gratuit & sans engagement
