@@ -9,6 +9,7 @@ import DestinationGalleries from "@/components/DestinationGalleries";
 import HowItWorks from "@/components/HowItWorks";
 import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import PopularDestinations from "@/components/PopularDestinations";
 import Testimonials from "@/components/Testimonials";
@@ -62,6 +63,7 @@ export default function Home() {
         <Testimonials onAddTestimonial={() => setShowTestimonialForm(true)} />
         <Blog />
         <HowItWorks />
+        <FAQ />
         <ContactForm />
       </main>
       <Footer />
