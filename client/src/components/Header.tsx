@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 const SERVICES_MENU = [
@@ -8,6 +8,7 @@ const SERVICES_MENU = [
   { label: "Location de véhicule", href: "/services/location-vehicule", icon: Car, desc: "Voitures, SUV, minibus avec ou sans chauffeur" },
   { label: "Assurance voyage", href: "/services/assurance-voyage", icon: Shield, desc: "Couverture médicale et annulation" },
   { label: "Accompagnement visa", href: "/services/visa", icon: FileText, desc: "Dubaï, France, Canada, Chine et plus" },
+  { label: "Hadj & Oumra", href: "/services/hadj-oumra", icon: Star, desc: "Pèlerinage vers La Mecque et Médine" },
 ];
 
 export default function Header() {

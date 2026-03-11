@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plane, Hotel, Car, Shield, FileText, ArrowRight } from "lucide-react";
+import { Plane, Hotel, Car, Shield, FileText, ArrowRight, Star } from "lucide-react";
 import { Link } from "wouter";
 
 const services = [
@@ -52,6 +52,16 @@ const services = [
     href: "/services/visa",
     color: "from-purple-400 to-pink-400",
     badge: "7 destinations",
+  },
+  {
+    icon: Star,
+    title: "Hadj & Oumra",
+    description: "Organisation complète de votre pèlerinage vers La Mecque et Médine — vols, hébergement, guide accompagnateur.",
+    benefit: "Formules économique, confort et premium disponibles",
+    ctaText: "Organiser mon pèlerinage",
+    href: "/services/hadj-oumra",
+    color: "from-amber-400 to-yellow-500",
+    badge: "🕌 Hadj & Oumra",
   },
 ];
 
