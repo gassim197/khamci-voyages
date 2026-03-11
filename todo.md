@@ -181,3 +181,17 @@
 - [ ] Corriger liens footer (/vols→/services/billetterie, /hotels→/services/hotel, /voitures→/services/location-vehicule)
 - [ ] Supprimer pages orphelines (AdminDashboard.tsx, AdminLogin.tsx, ComponentShowcase.tsx)
 - [ ] Corriger "15 ans" → "depuis 2021" dans Footer.tsx et WhyChooseUs.tsx
+
+## Améliorations Diagnostic — 11/03/2026 (session actuelle)
+
+- [x] Activer notifications email automatiques (Gmail configuré)
+- [x] Ajouter liens réseaux sociaux réels (Facebook + Instagram) dans le footer
+- [x] Publier 3 articles de blog avec images IA
+- [x] Créer pages légales (Mentions Légales, Politique de Confidentialité, Conditions d'Utilisation)
+- [x] Connecter liens légaux dans le footer vers les vraies pages
+- [x] Créer sitemap.xml pour le SEO
+- [x] Connecter section Témoignages à la base de données (trpc.testimonials.listApproved)
+- [ ] Générer images cassées (Paris, Casablanca, Bangkok, Barcelone)
+- [ ] Corriger "15 ans" → "depuis 2021" dans WhyChooseUs.tsx
+- [ ] Ajouter WhatsApp cliquable dans le menu mobile du Header
+- [ ] Ajouter prix indicatifs sur les cartes de destination

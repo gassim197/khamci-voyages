@@ -1,44 +1,90 @@
-import { useState, useEffect } from "react";
-import { Testimonial, initialTestimonials } from "@/data/testimonials";
+import { useState } from "react";
+import { trpc } from "@/lib/trpc";
 import TestimonialCard from "./TestimonialCard";
-import { MessageSquare, Star } from "lucide-react";
+import { MessageSquare, Star, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /**
  * Testimonials - Section des témoignages clients
- * 
- * Affiche les témoignages clients avec ratings et permet de voir tous les avis
- * Inclut un CTA pour laisser un témoignage
+ *
+ * Charge les témoignages approuvés depuis la base de données via tRPC.
+ * Fallback sur des données statiques si aucun témoignage n'est disponible.
  */
 
 interface TestimonialsProps {
   onAddTestimonial?: () => void;
 }
 
+// Témoignages de secours affichés si la BDD est vide
+const fallbackTestimonials = [
+  {
+    id: "f1",
+    name: "Mamadou Diallo",
+    location: "Conakry, Guinée",
+    rating: 5,
+    content:
+      "Service exceptionnel ! Mon billet Paris-Conakry a été réservé en moins d'une heure. L'équipe KHAMCI est très professionnelle et réactive.",
+    service: "Billetterie",
+    date: "Février 2025",
+    featured: true,
+  },
+  {
+    id: "f2",
+    name: "Aïssatou Bah",
+    location: "Labé, Guinée",
+    rating: 5,
+    content:
+      "Grâce à KHAMCI VOYAGES, j'ai obtenu mon visa Schengen sans stress. Ils ont préparé tous mes documents et m'ont guidée à chaque étape.",
+    service: "Assistance Visa",
+    date: "Janvier 2025",
+    featured: true,
+  },
+  {
+    id: "f3",
+    name: "Ibrahim Kouyaté",
+    location: "Kindia, Guinée",
+    rating: 5,
+    content:
+      "Notre groupe de 12 personnes pour l'Oumra a été parfaitement pris en charge. Hôtel à 200m de la Mosquée, transferts inclus. Je recommande vivement !",
+    service: "Hadj & Oumra",
+    date: "Décembre 2024",
+    featured: true,
+  },
+];
+
 export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    // Charger les témoignages depuis localStorage
-    const stored = localStorage.getItem("khamci-testimonials");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setTestimonials([...initialTestimonials, ...parsed]);
-      } catch {
-        setTestimonials(initialTestimonials);
-      }
-    } else {
-      setTestimonials(initialTestimonials);
-    }
-  }, []);
+  const { data: dbTestimonials, isLoading } = trpc.testimonials.listApproved.useQuery();
 
-  const featured = testimonials.filter(t => t.featured).slice(0, 3);
+  // Utiliser les témoignages BDD si disponibles, sinon fallback
+  const testimonials =
+    dbTestimonials && dbTestimonials.length > 0
+      ? dbTestimonials.map((t) => ({
+          id: String(t.id),
+          name: t.clientName,
+          location: t.clientLocation ?? "Guinée",
+          rating: t.rating ?? 5,
+          content: t.content,
+          service: "Voyage",
+          date: t.createdAt
+            ? new Date(t.createdAt).toLocaleDateString("fr-FR", {
+                month: "long",
+                year: "numeric",
+              })
+            : "",
+          featured: true,
+        }))
+      : fallbackTestimonials;
+
+  const featured = testimonials.slice(0, 3);
   const displayedTestimonials = showAll ? testimonials : featured;
-  const avgRating = (
-    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
-  ).toFixed(1);
+  const avgRating =
+    testimonials.length > 0
+      ? (
+          testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+        ).toFixed(1)
+      : "5.0";
 
   return (
     <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
@@ -76,15 +122,24 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
           </div>
         </div>
 
+        {/* Loading state */}
+        {isLoading && (
+          <div className="flex justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF6B35]" />
+          </div>
+        )}
+
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {displayedTestimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-          ))}
-        </div>
+        {!isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {displayedTestimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial as any} />
+            ))}
+          </div>
+        )}
 
         {/* Show More Button */}
-        {testimonials.length > 3 && !showAll && (
+        {!isLoading && testimonials.length > 3 && !showAll && (
           <div className="text-center mb-12">
             <Button
               onClick={() => setShowAll(true)}
@@ -97,16 +152,15 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
         )}
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-12 text-center text-white">
-          <h3 className="text-3xl font-bold mb-4">
-            Partagez votre expérience !
-          </h3>
+        <div className="bg-gradient-to-r from-[#FF6B35] to-[#F7931E] rounded-lg p-12 text-center text-white">
+          <h3 className="text-3xl font-bold mb-4">Partagez votre expérience !</h3>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Vous avez voyagé avec KHAMCI VOYAGES ? Laissez un témoignage pour aider d'autres voyageurs
+            Vous avez voyagé avec KHAMCI VOYAGES ? Laissez un témoignage pour aider d'autres
+            voyageurs
           </p>
           <Button
             onClick={onAddTestimonial}
-            className="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3 text-lg"
+            className="bg-white text-[#FF6B35] hover:bg-gray-100 font-bold px-8 py-3 text-lg"
           >
             Laisser un Témoignage
           </Button>

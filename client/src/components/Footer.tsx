@@ -186,9 +186,9 @@ export default function Footer() {
               <p>&copy; {currentYear} KHAMCI VOYAGES. Tous droits réservés.</p>
             </div>
             <div className="flex flex-wrap gap-5 justify-center">
-              <a href="#" className="hover:text-[#FF6B35] transition-colors">Mentions Légales</a>
-              <a href="#" className="hover:text-[#FF6B35] transition-colors">Politique de Confidentialité</a>
-              <a href="#" className="hover:text-[#FF6B35] transition-colors">Conditions d'Utilisation</a>
+              <a href="/mentions-legales" className="hover:text-[#FF6B35] transition-colors">Mentions Légales</a>
+              <a href="/politique-confidentialite" className="hover:text-[#FF6B35] transition-colors">Politique de Confidentialité</a>
+              <a href="/conditions-utilisation" className="hover:text-[#FF6B35] transition-colors">Conditions d'Utilisation</a>
             </div>
           </div>
         </div>

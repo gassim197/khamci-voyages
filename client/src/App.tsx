@@ -25,6 +25,9 @@ import AssuranceVoyageService from "./pages/services/AssuranceVoyageService";
 import VisaService from "./pages/services/VisaService";
 import HadjOumraService from "./pages/services/HadjOumraService";
 import BlogArticlePage from "./pages/BlogArticlePage";
+import MentionsLegales from "./pages/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import ConditionsUtilisation from "./pages/ConditionsUtilisation";
 
 function Router() {
   return (
@@ -50,6 +53,9 @@ function Router() {
         <Route path="/services/visa" component={VisaService} />
         <Route path="/services/hadj-oumra" component={HadjOumraService} />
         <Route path="/blog/:slug" component={BlogArticlePage} />
+        <Route path="/mentions-legales" component={MentionsLegales} />
+        <Route path="/politique-confidentialite" component={PolitiqueConfidentialite} />
+        <Route path="/conditions-utilisation" component={ConditionsUtilisation} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
