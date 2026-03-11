@@ -21,6 +21,12 @@ import QuickQuoteModal from "./components/QuickQuoteModal";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
 import ChatWidget from "./components/ChatWidget";
 import AnnouncementBar from "./components/AnnouncementBar";
+import APropos from "./pages/APropos";
+import BilletterieService from "./pages/services/BilletterieService";
+import HotelService from "./pages/services/HotelService";
+import LocationVehiculeService from "./pages/services/LocationVehiculeService";
+import AssuranceVoyageService from "./pages/services/AssuranceVoyageService";
+import VisaService from "./pages/services/VisaService";
 
 function Router() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -40,6 +46,12 @@ function Router() {
         <Route path="/destination/bangkok" component={BangkokPage} />
         <Route path="/destination/barcelona" component={BarcelonaPage} />
         <Route path="/admin" component={AdminDashboardNew} />
+        <Route path="/a-propos" component={APropos} />
+        <Route path="/services/billetterie" component={BilletterieService} />
+        <Route path="/services/hotel" component={HotelService} />
+        <Route path="/services/location-vehicule" component={LocationVehiculeService} />
+        <Route path="/services/assurance-voyage" component={AssuranceVoyageService} />
+        <Route path="/services/visa" component={VisaService} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

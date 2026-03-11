@@ -46,7 +46,7 @@ export default function HeroSection() {
         {/* Logo Watermark - Subtle Background */}
         <div className="absolute bottom-10 right-10 opacity-10 z-0">
           <img
-            src="/logo-khamci.png"
+            src="/logo-khamci-officiel.png"
             alt=""
             className="w-40 md:w-56 h-auto"
           />
@@ -66,10 +66,11 @@ export default function HeroSection() {
               </p>
             </div>
 
-            {/* Subheading - Version 2 */}
+            {/* Subheading - Message de bienvenue */}
             <p className="text-lg md:text-xl text-gray-100 leading-relaxed max-w-2xl">
-              Billets d'avion, hôtels, voyages sur mesure et services pour entreprises.
-              Décrivez votre projet et recevez votre devis personnalisé en moins de 24h.
+              Bienvenue chez <strong className="text-white">KHAMCI VOYAGES</strong>, votre agence de voyages de confiance en Guinée depuis 2021.
+              Spécialistes de la billetterie aérienne, de la réservation d'hôtels et des voyages sur mesure,
+              nous facilitons l'accès aux services de voyage internationaux pour les particuliers et les entreprises.
             </p>
 
             {/* Primary CTA - PROMINENT */}
