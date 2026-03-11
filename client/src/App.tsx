@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -16,8 +15,6 @@ import NewYorkPage from "./pages/NewYorkPage";
 import CasablancaPage from "./pages/CasablancaPage";
 import BangkokPage from "./pages/BangkokPage";
 import BarcelonaPage from "./pages/BarcelonaPage";
-import StickyQuoteCTA from "./components/StickyQuoteCTA";
-import QuickQuoteModal from "./components/QuickQuoteModal";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
 import ChatWidget from "./components/ChatWidget";
 import APropos from "./pages/APropos";
@@ -29,8 +26,6 @@ import VisaService from "./pages/services/VisaService";
 import HadjOumraService from "./pages/services/HadjOumraService";
 
 function Router() {
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-
   return (
     <>
       <Switch>
@@ -57,12 +52,6 @@ function Router() {
         {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
-      <StickyQuoteCTA onQuoteClick={() => setIsQuoteModalOpen(true)} />
-      <QuickQuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-        source="sticky"
-      />
       <ChatWidget />
     </>
   );
