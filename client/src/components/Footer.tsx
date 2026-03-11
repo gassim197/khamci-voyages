@@ -100,10 +100,10 @@ export default function Footer() {
                 Rapidité, fiabilité et expertise locale depuis 2021.
               </p>
               <div className="flex gap-3">
-                <a href="#" aria-label="Facebook" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
+                <a href="https://www.facebook.com/share/16jVhSBqST/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
                   <Facebook size={16} />
                 </a>
-                <a href="#" aria-label="Instagram" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
+                <a href="https://www.instagram.com/khamcivoyages819?igsh=MWZlOXVnOG9jZ3hvZg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
                   <Instagram size={16} />
                 </a>
                 <a href="#" aria-label="Twitter" className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#1a3a6e] hover:bg-[#FF6B35] transition-colors">
