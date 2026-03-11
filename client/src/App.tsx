@@ -24,6 +24,7 @@ import LocationVehiculeService from "./pages/services/LocationVehiculeService";
 import AssuranceVoyageService from "./pages/services/AssuranceVoyageService";
 import VisaService from "./pages/services/VisaService";
 import HadjOumraService from "./pages/services/HadjOumraService";
+import BlogArticlePage from "./pages/BlogArticlePage";
 
 function Router() {
   return (
@@ -48,6 +49,7 @@ function Router() {
         <Route path="/services/assurance-voyage" component={AssuranceVoyageService} />
         <Route path="/services/visa" component={VisaService} />
         <Route path="/services/hadj-oumra" component={HadjOumraService} />
+        <Route path="/blog/:slug" component={BlogArticlePage} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
