@@ -26,7 +26,7 @@ export default function PopularDestinations() {
       id: "paris",
       name: "Paris",
       description: "La Ville Lumière - Découvrez la magie de l'architecture et la gastronomie française",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-eiffel-tower-TMXAvKJHAzZg6THDh7ubKL.png",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-destination-FDn7DdsSrzrHhH9WAbWZwP.webp",
       path: "/destination/paris",
       color: "from-blue-500 to-purple-600",
       icon: "🗼"
@@ -35,7 +35,7 @@ export default function PopularDestinations() {
       id: "dubai",
       name: "Dubaï",
       description: "L'Oasis du Désert - Luxe, modernité et aventures dans les Émirats",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/dubai-burj-khalifa-TMXAvKJHAzZg6THDh7ubKL.png",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/dubai-destination-KnEN8PpGNgPaqbYpuHzzhC.webp",
       path: "/destination/dubai",
       color: "from-yellow-500 to-orange-600",
       icon: "🏙️"
@@ -44,7 +44,7 @@ export default function PopularDestinations() {
       id: "casablanca",
       name: "Casablanca",
       description: "La Perle du Maroc - Tradition, culture et charme méditerranéen",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-hassan-mosque-TMXAvKJHAzZg6THDh7ubKL.png",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-destination-JgbYhoTHsJbw9mYPWoVrq6.webp",
       path: "/destination/casablanca",
       color: "from-amber-500 to-orange-600",
       icon: "🕌"
