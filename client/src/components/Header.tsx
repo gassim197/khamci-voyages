@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 const SERVICES_MENU = [
@@ -261,6 +261,15 @@ export default function Header() {
             >
               <Phone size={16} />
               <span>Appeler : +224 611 145 892</span>
+            </a>
+            <a
+              href="https://wa.me/224611145892?text=Bonjour%20KHAMCI%20VOYAGES%2C%20je%20souhaite%20un%20devis."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-green-600 text-white rounded-lg py-3 font-semibold hover:bg-green-500 transition-colors mt-1"
+            >
+              <MessageCircle size={16} />
+              <span>WhatsApp : +224 611 145 892</span>
             </a>
             <button
               onClick={() => handleNavClick("/#contact")}

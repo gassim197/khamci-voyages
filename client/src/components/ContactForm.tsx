@@ -32,9 +32,12 @@ interface FormData {
 }
 
 const SERVICE_TYPES = [
-  { value: "vol", label: "✈️ Billet d'avion", icon: "✈️" },
-  { value: "hotel", label: "🏨 Hôtel", icon: "🏨" },
-  { value: "voiture", label: "🚗 Location de voiture", icon: "🚗" },
+  { value: "vol", label: "✈️ Billetterie", icon: "✈️" },
+  { value: "hotel", label: "🏨 Réservation d'hôtel", icon: "🏨" },
+  { value: "voiture", label: "🚗 Location de véhicule", icon: "🚗" },
+  { value: "assurance", label: "🛡️ Assurance voyage", icon: "🛡️" },
+  { value: "visa", label: "📋 Accompagnement visa", icon: "📋" },
+  { value: "hadj-oumra", label: "🕌 Hadj & Oumra", icon: "🕌" },
   { value: "package", label: "🌍 Voyage complet", icon: "🌍" },
   { value: "team-building", label: "👥 Team Building", icon: "👥" },
 ];

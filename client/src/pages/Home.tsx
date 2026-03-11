@@ -3,9 +3,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Services from "@/components/Services";
-import TeamBuilding from "@/components/TeamBuilding";
 import DiscoverGuinea from "@/components/DiscoverGuinea";
-import DestinationGalleries from "@/components/DestinationGalleries";
 import HowItWorks from "@/components/HowItWorks";
 import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
@@ -18,28 +16,20 @@ import { Testimonial } from "@/data/testimonials";
 
 /**
  * Home Page - KHAMCI VOYAGES
- * 
- * Design Philosophy: "Aventure Africaine Moderne"
- * - Énergie vibrante avec couleurs dégradées du logo
- * - Asymétrie intentionnelle et layouts organiques
- * - Animations fluides et sophistiquées
- * - Typographie mixte pour hiérarchie claire
- * - Motifs africains subtils
- * 
+ *
  * Sections:
  * 1. Header - Navigation sticky
- * 2. Hero - Image plein écran avec CTA
- * 3. Why Choose Us - 4 arguments clés
- * 4. Services - 6 services présentés
- * 5. Team Building - Section dédiée
- * 6. Discover Guinea - Destinations
- * 7. Destination Galleries - Galeries interactives avec lightbox
- * 8. Popular Destinations - 6 destinations populaires
- * 9. Testimonials - Avis clients
- * 10. Blog - Articles de voyage
- * 11. How It Works - Processus en 3 étapes
- * 12. Contact Form - Formulaire de demande
- * 13. Footer - Informations et liens
+ * 2. Hero - Vidéo plein écran avec CTA
+ * 3. Why Choose Us - Arguments clés
+ * 4. Services - 6 services avec liens vers pages dédiées
+ * 5. Discover Guinea - Carrousel destinations Guinée
+ * 6. Popular Destinations - Paris, Dubaï, Casablanca
+ * 7. Testimonials - Avis clients
+ * 8. Blog - Articles de voyage
+ * 9. How It Works - Processus en 3 étapes
+ * 10. FAQ - Questions fréquentes
+ * 11. Contact Form - Formulaire de demande de devis
+ * 12. Footer
  */
 export default function Home() {
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
@@ -56,9 +46,7 @@ export default function Home() {
         <HeroSection />
         <WhyChooseUs />
         <Services />
-        <TeamBuilding />
         <DiscoverGuinea />
-        <DestinationGalleries />
         <PopularDestinations />
         <Testimonials onAddTestimonial={() => setShowTestimonialForm(true)} />
         <Blog />
