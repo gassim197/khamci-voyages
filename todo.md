@@ -195,3 +195,12 @@
 - [ ] Corriger "15 ans" → "depuis 2021" dans WhyChooseUs.tsx
 - [ ] Ajouter WhatsApp cliquable dans le menu mobile du Header
 - [ ] Ajouter prix indicatifs sur les cartes de destination
+
+## Galerie Inauguration & Profil Fondatrice — 11/03/2026
+
+- [x] Extraire et sélectionner les 12 meilleures photos de l'inauguration
+- [x] Uploader les photos sur le CDN
+- [x] Intégrer la galerie inauguration dans la page À Propos (grille + lightbox)
+- [x] Ajouter photo couverture équipe en veste (IMG_9862) en hero de la page À Propos
+- [x] Créer section profil fondatrice/directrice générale (placeholder en attente de la photo)
+- [ ] Remplacer le placeholder fondatrice par la vraie photo quand fournie

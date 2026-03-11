@@ -1,7 +1,8 @@
-import { Target, Eye, Heart, Users, Award, Handshake, CheckCircle, Phone, Mail, MapPin } from "lucide-react";
+import { Target, Eye, Heart, Users, Award, Handshake, CheckCircle, Phone, Mail, MapPin, Camera, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
+import { useState, useEffect, useCallback } from "react";
 
 const PARTNERS = [
   "SOGEFEL", "Métal Plus", "Direction Générale des Impôts", "ANAIM",
@@ -33,29 +34,142 @@ const WHY_PARTNER = [
   "Une agence dynamique et réactive, toujours disponible pour répondre à vos demandes.",
 ];
 
+// Photos de l'inauguration du nouveau siège
+const INAUGURATION_PHOTOS = [
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/ENdLVEujxaubVyiq.jpg",
+    caption: "L'équipe KHAMCI VOYAGES lors de l'inauguration du nouveau siège",
+    isCover: true,
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/kigJvnUGbkecXYjD.jpg",
+    caption: "Rencontre avec les invités lors de l'inauguration",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/oLIucAejsPmEDKuh.jpg",
+    caption: "Moment de convivialité avec les partenaires",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/wSvKmNvHCYWiWwMe.jpg",
+    caption: "Accueil des invités au nouveau siège",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/CLUnUTOFrHefaruF.jpg",
+    caption: "L'équipe avec les partenaires et invités",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/RrmBJpVeltNdtlar.jpg",
+    caption: "Échanges avec les clients lors de l'inauguration",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/kcLYzUeViQgGnnSP.jpg",
+    caption: "Rencontres et partages lors de l'événement",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/TXegPmbxbmhTaPcc.jpg",
+    caption: "Ambiance chaleureuse lors de l'inauguration",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/bRwQQzDQBYmZRUHZ.jpg",
+    caption: "La directrice générale lors de la cérémonie",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/sShOkInPxYFDkbbn.jpg",
+    caption: "Cérémonie d'inauguration du nouveau siège",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/SZWossopzTsAbpQU.jpg",
+    caption: "Inauguration en présence des partenaires et clients",
+  },
+  {
+    url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663352571509/IjnTSIiwyOMVUJjS.jpg",
+    caption: "Discours lors de la cérémonie d'inauguration",
+  },
+];
+
+function Lightbox({ photos, initialIndex, onClose }: { photos: typeof INAUGURATION_PHOTOS; initialIndex: number; onClose: () => void }) {
+  const [current, setCurrent] = useState(initialIndex);
+
+  const prev = useCallback(() => setCurrent(i => (i - 1 + photos.length) % photos.length), [photos.length]);
+  const next = useCallback(() => setCurrent(i => (i + 1) % photos.length), [photos.length]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      else if (e.key === "ArrowRight") next();
+      else if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [prev, next, onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors"
+      >
+        <X size={24} />
+      </button>
+      <button
+        onClick={(e) => { e.stopPropagation(); prev(); }}
+        className="absolute left-4 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors"
+      >
+        <ChevronLeft size={28} />
+      </button>
+      <div className="max-w-4xl max-h-[85vh] mx-16" onClick={e => e.stopPropagation()}>
+        <img
+          src={photos[current].url}
+          alt={photos[current].caption}
+          className="max-w-full max-h-[75vh] object-contain rounded-xl"
+        />
+        <p className="text-white/80 text-center mt-3 text-sm">{photos[current].caption}</p>
+        <p className="text-white/50 text-center text-xs mt-1">{current + 1} / {photos.length}</p>
+      </div>
+      <button
+        onClick={(e) => { e.stopPropagation(); next(); }}
+        className="absolute right-4 text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors"
+      >
+        <ChevronRight size={28} />
+      </button>
+    </div>
+  );
+}
+
 export default function APropos() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-[#0D1B3E] to-[#1a3a6e] text-white py-16 md:py-24">
-        <div className="container max-w-4xl">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-[#FF6B35] p-3 rounded-xl">
-              <Users size={28} className="text-white" />
+      {/* Hero avec photo couverture équipe en veste */}
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <img
+          src={INAUGURATION_PHOTOS[0].url}
+          alt="Équipe KHAMCI VOYAGES"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B3E]/90 via-[#0D1B3E]/50 to-transparent" />
+        <div className="relative h-full flex items-end pb-12">
+          <div className="container max-w-4xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-[#FF6B35] p-3 rounded-xl">
+                <Users size={28} className="text-white" />
+              </div>
+              <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Qui sommes-nous</span>
             </div>
-            <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Qui sommes-nous</span>
+            <h1 className="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">
+              À propos de<br />
+              <span className="text-[#FF6B35]">KHAMCI VOYAGES</span>
+            </h1>
+            <p className="text-gray-200 text-lg max-w-2xl">
+              Créée en 2021 en République de Guinée — votre partenaire de confiance pour tous vos voyages.
+            </p>
           </div>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
-            À propos de<br />
-            <span className="text-[#FF6B35]">KHAMCI VOYAGES</span>
-          </h1>
-          <p className="text-xl text-gray-200 max-w-2xl leading-relaxed">
-            Créée en 2021 en République de Guinée, KHAMCI VOYAGES SARL est une agence de voyages née
-            de la volonté d'offrir aux entreprises guinéennes et aux particuliers des solutions efficaces
-            pour organiser leurs déplacements nationaux et internationaux à moindre coût.
-          </p>
         </div>
       </section>
 
@@ -106,6 +220,39 @@ export default function APropos() {
                   <div className="text-xs text-gray-500 mt-1">Délai de réponse</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fondatrice & Directrice Générale — PLACEHOLDER EN ATTENTE DE LA PHOTO */}
+      <section className="py-16 bg-gradient-to-br from-[#0D1B3E] to-[#1a3a6e] text-white">
+        <div className="container max-w-5xl">
+          <div className="text-center mb-10">
+            <span className="text-orange-300 font-semibold uppercase tracking-wide text-sm">Leadership</span>
+            <h2 className="text-3xl font-black mt-2">La fondatrice</h2>
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            {/* Photo placeholder — sera remplacée par la vraie photo */}
+            <div className="shrink-0">
+              <div className="w-48 h-48 rounded-2xl bg-white/20 border-2 border-dashed border-white/40 flex flex-col items-center justify-center text-white/60">
+                <Users size={48} className="mb-2" />
+                <span className="text-xs text-center px-4">Photo de la fondatrice à venir</span>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl font-black text-white mb-1">Fondatrice &amp; Directrice Générale</h3>
+              <p className="text-orange-300 font-semibold mb-4">KHAMCI VOYAGES SARL</p>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                Animée par la passion du voyage et la conviction que chaque Guinéen mérite d'accéder
+                facilement aux services de mobilité internationale, elle a fondé KHAMCI VOYAGES en 2021
+                avec une vision claire : bâtir une agence de voyages de référence en Guinée et en Afrique de l'Ouest.
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                Grâce à son leadership et à son engagement envers l'excellence du service client,
+                KHAMCI VOYAGES s'est imposée comme un acteur incontournable du secteur touristique guinéen,
+                au service des particuliers, des entreprises et des pèlerins.
+              </p>
             </div>
           </div>
         </div>
@@ -171,8 +318,57 @@ export default function APropos() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Galerie Inauguration */}
       <section className="py-16 bg-white">
+        <div className="container max-w-6xl">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Camera className="text-[#FF6B35]" size={28} />
+              <h2 className="text-3xl font-black text-[#0D1B3E]">Inauguration du nouveau siège</h2>
+            </div>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              Retour en images sur l'inauguration de notre nouveau siège à Conakry, un moment fort
+              partagé avec nos partenaires, clients et proches.
+            </p>
+          </div>
+
+          {/* Grille de photos */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {INAUGURATION_PHOTOS.map((photo, index) => (
+              <div
+                key={index}
+                className={`relative overflow-hidden rounded-xl cursor-pointer group ${
+                  index === 0 ? "col-span-2 row-span-2" : ""
+                }`}
+                style={{ aspectRatio: index === 0 ? "auto" : "1" }}
+                onClick={() => setLightboxIndex(index)}
+              >
+                <img
+                  src={photo.url}
+                  alt={photo.caption}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  style={{ minHeight: index === 0 ? "300px" : "140px" }}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                  <Camera size={28} className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                {photo.isCover && (
+                  <div className="absolute bottom-3 left-3 bg-[#FF6B35] text-white text-xs font-bold px-3 py-1 rounded-full">
+                    Notre équipe
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-gray-400 text-sm mt-6">
+            Cliquez sur une photo pour l'agrandir
+          </p>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-16 bg-gray-50">
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Nos propositions de services</h2>
@@ -180,7 +376,7 @@ export default function APropos() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {SERVICES.map(service => (
-              <div key={service.title} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all">
+              <div key={service.title} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 bg-white hover:border-orange-200 hover:bg-orange-50 transition-all">
                 <span className="text-3xl">{service.icon}</span>
                 <div>
                   <h3 className="font-bold text-[#0D1B3E] mb-1">{service.title}</h3>
@@ -221,7 +417,7 @@ export default function APropos() {
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Handshake className="text-[#FF6B35]" size={24} />
+              <Handshake className="text-[#FF6B35]" size={28} />
               <h2 className="text-3xl font-black text-[#0D1B3E]">Nos partenaires</h2>
             </div>
             <p className="text-gray-500">Ils nous font confiance pour leurs déplacements professionnels</p>
@@ -279,6 +475,15 @@ export default function APropos() {
       </section>
 
       <Footer />
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
+        <Lightbox
+          photos={INAUGURATION_PHOTOS}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </div>
   );
 }
