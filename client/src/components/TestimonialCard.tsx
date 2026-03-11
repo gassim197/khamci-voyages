@@ -1,6 +1,31 @@
 import { Star, CheckCircle } from "lucide-react";
 import { Testimonial } from "@/data/testimonials";
 
+// Génère les initiales à partir du nom complet (ex: "Aminata Diallo" → "AD")
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(word => word[0].toUpperCase())
+    .join("");
+}
+
+// Génère une couleur de fond déterministe basée sur le nom
+const AVATAR_COLORS = [
+  "bg-[#FF6B35] text-white",
+  "bg-[#0D1B3E] text-white",
+  "bg-emerald-600 text-white",
+  "bg-purple-600 text-white",
+  "bg-rose-600 text-white",
+  "bg-amber-600 text-white",
+];
+
+function getAvatarColor(name: string): string {
+  const index = name.charCodeAt(0) % AVATAR_COLORS.length;
+  return AVATAR_COLORS[index];
+}
+
 /**
  * TestimonialCard - Composant pour afficher un témoignage client
  * 
@@ -40,7 +65,9 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
       {/* Author Info */}
       <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-        <div className="text-4xl">{testimonial.image}</div>
+        <div className={`flex items-center justify-center w-12 h-12 rounded-full font-bold text-lg shrink-0 ${getAvatarColor(testimonial.name)}`}>
+          {getInitials(testimonial.name)}
+        </div>
         <div className="flex-1">
           <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
           <p className="text-sm text-gray-600">{testimonial.title}</p>
