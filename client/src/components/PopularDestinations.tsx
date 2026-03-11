@@ -41,15 +41,6 @@ export default function PopularDestinations() {
       icon: "🏙️"
     },
     {
-      id: "newyork",
-      name: "New York",
-      description: "La Ville qui ne Dort Jamais - Énergie, culture et diversité urbaine",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/newyork-statue-liberty-TMXAvKJHAzZg6THDh7ubKL.png",
-      path: "/destination/new-york",
-      color: "from-red-500 to-pink-600",
-      icon: "🗽"
-    },
-    {
       id: "casablanca",
       name: "Casablanca",
       description: "La Perle du Maroc - Tradition, culture et charme méditerranéen",
@@ -57,24 +48,6 @@ export default function PopularDestinations() {
       path: "/destination/casablanca",
       color: "from-amber-500 to-orange-600",
       icon: "🕌"
-    },
-    {
-      id: "bangkok",
-      name: "Bangkok",
-      description: "La Cité des Anges - Temples dorés, marchés flottants et gastronomie thaïlandaise",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-TMXAvKJHAzZg6THDh7ubKL.png",
-      path: "/destination/bangkok",
-      color: "from-yellow-500 to-red-600",
-      icon: "🏯"
-    },
-    {
-      id: "barcelona",
-      name: "Barcelone",
-      description: "La Ville de Gaudí - Architecture moderniste et culture catalane vibrante",
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-familia-bpo5VCLg9JCEbuE2SnsALE.png",
-      path: "/destination/barcelona",
-      color: "from-blue-500 to-purple-600",
-      icon: "🏛️"
     }
   ];
 
