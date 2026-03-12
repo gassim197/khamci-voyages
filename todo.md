@@ -208,3 +208,9 @@
 ## Bugs Blog Admin — 11/03/2026
 - [x] Articles publiés depuis le dashboard admin n'apparaissent pas sur le site
 - [x] Ajouter option upload image de couverture dans le formulaire de création d'article
+
+## Modifications Page d'Accueil — 12/03/2026
+- [x] Remplacer "Quelle est votre destination ?" par "Demander un service"
+- [x] Corriger le lien "Voir les destinations" pour mener vers la page de découverte des villes
+- [x] Supprimer l'espace vide entre la barre de navigation et le titre de la page d'accueil
+- [x] Remplacer "Devis personnalisé en moins de 24H" par "Recevez votre demande de réservation en moins de 30 minutes" (garder Gratuit et sans engagement)

@@ -42,8 +42,8 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Content — padding-top pour compenser la navbar fixe (~80px) */}
-        <div className="relative z-10 container max-w-4xl text-white pt-28 pb-16">
+        {/* Content — le header est sticky, le hero commence directement en dessous */}
+        <div className="relative z-10 container max-w-4xl text-white pt-8 pb-16">
           <div className="animate-fade-in-up space-y-6">
 
             {/* Titre principal */}
@@ -53,7 +53,7 @@ export default function HeroSection() {
                 <span className="block gradient-text mt-1">avec KHAMCI VOYAGES</span>
               </h1>
               <p className="text-base md:text-lg text-orange-300 font-semibold">
-                ⚡ Devis personnalisé en moins de 24h &bull; Gratuit &amp; sans engagement
+                ⚡ Recevez votre demande de réservation en moins de 30 minutes &bull; Gratuit &amp; sans engagement
               </p>
             </div>
 
@@ -71,10 +71,10 @@ export default function HeroSection() {
                 onClick={() => setIsQuoteModalOpen(true)}
                 className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-base md:text-lg px-8 py-4 rounded-lg shadow-2xl transition-all transform hover:scale-105"
               >
-                🎯 QUELLE EST VOTRE DESTINATION ?
+                🎯 DEMANDER UN SERVICE
               </button>
               <button
-                onClick={() => scrollToSection("services")}
+                onClick={() => scrollToSection("destinations")}
                 className="bg-white/20 backdrop-blur-sm text-white border-2 border-white hover:bg-white/30 font-bold text-base md:text-lg px-8 py-4 rounded-lg transition-all"
               >
                 Voir les Destinations
@@ -88,7 +88,7 @@ export default function HeroSection() {
               </p>
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">
-                  <p className="font-bold text-base md:text-lg">24h</p>
+                  <p className="font-bold text-base md:text-lg">30min</p>
                   <p className="text-xs text-white/80 leading-tight">Réponse garantie</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 md:p-3 text-center border border-white/20">

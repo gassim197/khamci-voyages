@@ -57,7 +57,7 @@ export default function PopularDestinations() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+    <section id="destinations" className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
