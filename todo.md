@@ -224,3 +224,7 @@
 ## Images de couverture pages — 12/03/2026
 - [x] Ajouter images de couverture sur les pages services (Vols, Hôtels, Voitures)
 - [x] Ajouter images de couverture sur les pages destinations (Paris, Dubaï, New York, Casablanca, Bangkok, Barcelone)
+
+## Bugs Témoignages — 12/03/2026
+- [x] Texte du commentaire ne s'affiche pas dans les cartes de témoignages
+- [x] Ajouter le champ "poste/profession" dans les témoignages (BDD + formulaire + affichage)

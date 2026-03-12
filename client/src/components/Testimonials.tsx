@@ -63,17 +63,15 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
       ? dbTestimonials.map((t) => ({
           id: String(t.id),
           name: t.clientName,
+          title: t.clientTitle ?? "",
           location: t.clientLocation ?? "Guinée",
           rating: t.rating ?? 5,
+          comment: t.content,
           content: t.content,
           service: "Voyage",
-          date: t.createdAt
-            ? new Date(t.createdAt).toLocaleDateString("fr-FR", {
-                month: "long",
-                year: "numeric",
-              })
-            : "",
+          date: t.createdAt ? new Date(t.createdAt).toISOString() : new Date().toISOString(),
           featured: true,
+          verified: true,
         }))
       : fallbackTestimonials;
 
