@@ -282,16 +282,16 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
         {/* Airlines */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Compagnies Aérienne Préférées</label>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <div className="flex flex-col gap-2">
             {majorAirlines.map(airline => (
-              <label key={airline} className="flex items-center gap-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-orange-50">
+              <label key={airline} className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-orange-50 transition-colors">
                 <input
                   type="checkbox"
                   checked={formData.airlines.includes(airline)}
                   onChange={() => handleAirlineToggle(airline)}
-                  className="w-4 h-4 text-orange-500 rounded"
+                  className="w-4 h-4 text-orange-500 rounded flex-shrink-0"
                 />
-                <span className="text-sm text-gray-700">{airline}</span>
+                <span className="text-sm text-gray-700 font-medium">{airline}</span>
               </label>
             ))}
           </div>
