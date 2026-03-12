@@ -121,10 +121,9 @@ export default function ParisPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="absolute inset-0 opacity-20">
-          <div className="w-full h-full bg-blue-700"></div>
-        </div>
+      <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <img src="/covers/paris.jpg" alt="Paris, La Ville Lumière" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/45" />
         <div className="relative container z-10 text-white text-center">
           <h1 className="text-5xl font-bold mb-4">🗼 Paris, La Ville Lumière</h1>
           <p className="text-xl text-white/90 mb-6">

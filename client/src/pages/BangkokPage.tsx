@@ -165,14 +165,9 @@ export default function BangkokPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-96 bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-eoSDWbxVc68iaNY5zrhadD.webp"
-            alt="Bangkok"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <section className="relative h-96 flex items-center justify-center text-white overflow-hidden">
+        <img src="/covers/bangkok.jpg" alt="Bangkok" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/45" />
         <div className="relative z-10 text-center max-w-2xl px-4">
           <h1 className="text-5xl font-bold mb-4">Bangkok</h1>
           <p className="text-xl mb-8">La Cité des Anges - Découvrez la magie de la Thaïlande</p>

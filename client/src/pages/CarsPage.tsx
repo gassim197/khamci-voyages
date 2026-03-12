@@ -34,10 +34,9 @@ export default function CarsPage() {
     <div className="min-h-screen bg-white">
       <HeaderNav />
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#0D1B3E] to-[#FF6B35]">
-        <div className="absolute inset-0 opacity-20">
-          <div className="w-full h-full bg-purple-600"></div>
-        </div>
+      <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <img src="/covers/cars.jpg" alt="Location de voitures" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative container z-10 text-white text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Car className="w-10 h-10" />

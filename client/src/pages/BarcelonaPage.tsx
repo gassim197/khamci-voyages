@@ -165,14 +165,9 @@ export default function BarcelonaPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-96 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-JokxWaVQ2ByDkgbcMFRZre.webp"
-            alt="Barcelone"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <section className="relative h-96 flex items-center justify-center text-white overflow-hidden">
+        <img src="/covers/barcelona.jpg" alt="Barcelone" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/45" />
         <div className="relative z-10 text-center max-w-2xl px-4">
           <h1 className="text-5xl font-bold mb-4">Barcelone</h1>
           <p className="text-xl mb-8">La Ville de Gaudí - Découvrez l'architecture et la culture catalane</p>

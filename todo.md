@@ -220,3 +220,7 @@
 
 ## Remplacement textes CTA — 12/03/2026
 - [x] Remplacer toutes les occurrences de "Demander un/mon devis" par "Demander un service"
+
+## Images de couverture pages — 12/03/2026
+- [x] Ajouter images de couverture sur les pages services (Vols, Hôtels, Voitures)
+- [x] Ajouter images de couverture sur les pages destinations (Paris, Dubaï, New York, Casablanca, Bangkok, Barcelone)

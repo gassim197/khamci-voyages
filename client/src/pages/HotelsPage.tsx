@@ -32,10 +32,9 @@ export default function HotelsPage() {
     <div className="min-h-screen bg-white">
       <HeaderNav />
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#0D1B3E] to-[#1a3a6e]">
-        <div className="absolute inset-0 opacity-20">
-          <div className="w-full h-full bg-blue-600"></div>
-        </div>
+      <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <img src="/covers/hotels.jpg" alt="Hôtels" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative container z-10 text-white text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Hotel className="w-10 h-10" />
