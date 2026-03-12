@@ -153,7 +153,7 @@ export default function ContactForm() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="heading-lg gradient-text mb-4">
-            Votre Devis Gratuit en 2 Minutes
+            Votre Demande de Service en 2 Minutes
           </h2>
           <p className="text-body text-gray-600 max-w-2xl mx-auto">
             Remplissez le formulaire ci-dessous. Un expert vous contactera rapidement

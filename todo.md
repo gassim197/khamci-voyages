@@ -217,3 +217,6 @@
 
 ## Modifications Formulaire Devis — 12/03/2026
 - [x] Transformer la grille 2 colonnes des compagnies aériennes en liste verticale
+
+## Remplacement textes CTA — 12/03/2026
+- [x] Remplacer toutes les occurrences de "Demander un/mon devis" par "Demander un service"

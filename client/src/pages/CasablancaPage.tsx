@@ -181,7 +181,7 @@ export default function CasablancaPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-white text-orange-600 hover:bg-gray-100"
           >
-            Demander un Devis pour Casablanca
+            Demander un Service
           </Button>
         </div>
       </section>
@@ -290,7 +290,7 @@ export default function CasablancaPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-orange-600 hover:bg-orange-700"
           >
-            Demander Votre Devis Gratuit
+            Demander un Service
           </Button>
         </div>
       </section>

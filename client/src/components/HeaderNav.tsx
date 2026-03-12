@@ -55,7 +55,7 @@ export default function HeaderNav() {
             href="/#contact"
             className="btn-cta"
           >
-            Demander un Devis
+            Demander un Service
           </a>
         </div>
 
@@ -106,7 +106,7 @@ export default function HeaderNav() {
               onClick={() => setIsMenuOpen(false)}
               className="btn-cta w-full text-center"
             >
-              Demander un Devis
+              Demander un Service
             </a>
           </div>
         </div>

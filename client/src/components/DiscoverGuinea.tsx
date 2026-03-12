@@ -103,7 +103,7 @@ export default function DiscoverGuinea() {
                       onClick={() => handleDestinationCTA(dest.title)}
                       className="ml-10 text-orange-600 hover:text-orange-700 font-semibold text-sm transition-colors flex items-center gap-1"
                     >
-                      Inclure dans mon devis →
+                      Demander un service →
                     </button>
                   </div>
                 ))}

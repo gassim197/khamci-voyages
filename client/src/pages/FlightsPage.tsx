@@ -78,7 +78,7 @@ export default function FlightsPage() {
             onClick={() => setShowForm(true)}
             className="bg-white text-orange-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg"
           >
-            ✈️ Demander un Devis Vol
+            ✈️ Demander un Service
           </Button>
         </div>
       </section>
@@ -173,7 +173,7 @@ export default function FlightsPage() {
             onClick={() => setShowForm(true)}
             className="bg-white text-orange-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg"
           >
-            ✈️ Demander un Devis Vol Maintenant
+            ✈️ Demander un Service Maintenant
           </Button>
         </section>
       </div>

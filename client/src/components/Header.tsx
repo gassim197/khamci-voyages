@@ -143,7 +143,7 @@ export default function Header() {
                     }}
                     className="w-full text-center text-xs font-semibold text-[#FF6B35] hover:text-[#e85a2a] transition-colors"
                   >
-                    Demander un devis personnalisé →
+                    Demander un service →
                   </button>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export default function Header() {
             onClick={() => handleNavClick("/#contact")}
             className="btn-cta text-sm"
           >
-            Demander un Devis
+            Demander un Service
           </button>
         </div>
 
@@ -275,7 +275,7 @@ export default function Header() {
               onClick={() => handleNavClick("/#contact")}
               className="btn-cta w-full mt-1"
             >
-              Demander un Devis
+              Demander un Service
             </button>
           </div>
         </div>

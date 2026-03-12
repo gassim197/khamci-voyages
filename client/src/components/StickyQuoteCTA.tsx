@@ -26,7 +26,7 @@ export default function StickyQuoteCTA({ onQuoteClick }: StickyQuoteCTAProps) {
       <div className="container py-3 flex items-center justify-between gap-4">
         <div className="flex-1">
           <p className="text-white font-semibold text-sm md:text-base">
-            ✨ Vous aimez ? Demandez votre devis gratuit →
+            ✨ Vous aimez ? Demandez un service →
           </p>
           <p className="text-white/80 text-xs">
             Réponse garantie sous 24h • Sans engagement

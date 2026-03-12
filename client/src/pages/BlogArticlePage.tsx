@@ -159,7 +159,7 @@ export default function BlogArticlePage() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link href="/#contact">
                     <Button className="bg-[#FF6B35] hover:bg-[#e85a2a] text-white font-bold px-6">
-                      🎯 Demander un Devis Gratuit
+                      🎯 Demander un Service
                     </Button>
                   </Link>
                   <a

@@ -181,7 +181,7 @@ export default function BangkokPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-white text-yellow-600 hover:bg-gray-100"
           >
-            Demander un Devis pour Bangkok
+            Demander un Service
           </Button>
         </div>
       </section>
@@ -290,7 +290,7 @@ export default function BangkokPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-yellow-600 hover:bg-yellow-700"
           >
-            Demander Votre Devis Gratuit
+            Demander un Service
           </Button>
         </div>
       </section>

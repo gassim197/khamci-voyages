@@ -267,7 +267,7 @@ export default function Blog() {
               size="lg"
               className="bg-[#FF6B35] hover:bg-[#e85a2a] text-white font-bold px-8 py-4 text-base"
             >
-              🎯 Demander mon Devis Gratuit
+              🎯 Demander un Service
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

@@ -74,7 +74,7 @@ export default function HowItWorks() {
             Prêt à commencer votre aventure ?
           </p>
           <a href="#contact" className="btn-cta">
-            Demander un Devis Maintenant
+            Demander un Service
           </a>
         </div>
       </div>

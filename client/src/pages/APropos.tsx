@@ -475,7 +475,7 @@ export default function APropos() {
             <span>Conakry, République de Guinée</span>
           </div>
           <Link href="/#contact" className="inline-block bg-gradient-to-r from-[#FF6B35] to-[#e85a2a] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-opacity">
-            Demander un devis gratuit →
+            Demander un Service →
           </Link>
         </div>
       </section>

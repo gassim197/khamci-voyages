@@ -181,7 +181,7 @@ export default function BarcelonaPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-white text-blue-600 hover:bg-gray-100"
           >
-            Demander un Devis pour Barcelone
+            Demander un Service
           </Button>
         </div>
       </section>
@@ -290,7 +290,7 @@ export default function BarcelonaPage() {
             onClick={() => setShowQuoteModal(true)}
             className="bg-blue-600 hover:bg-blue-700"
           >
-            Demander Votre Devis Gratuit
+            Demander un Service
           </Button>
         </div>
       </section>
