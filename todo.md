@@ -236,3 +236,7 @@
 - [x] Adapter les cartes de services, témoignages, destinations
 - [x] Adapter les pages de destination et de services
 - [x] Adapter le dashboard admin pour le mode sombre
+
+## Bouton Bascule Thème — 12/03/2026
+- [x] Activer ThemeProvider en mode switchable
+- [x] Ajouter bouton bascule mode clair/sombre dans le Header (desktop + mobile)

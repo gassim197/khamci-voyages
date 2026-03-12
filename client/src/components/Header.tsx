@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const SERVICES_MENU = [
   { label: "Billetterie", href: "/services/billetterie", icon: Plane, desc: "Billets d'avion vers le monde entier" },
@@ -10,6 +11,21 @@ const SERVICES_MENU = [
   { label: "Accompagnement visa", href: "/services/visa", icon: FileText, desc: "Dubaï, France, Canada, Chine et plus" },
   { label: "Hadj & Oumra", href: "/services/hadj-oumra", icon: Star, desc: "Pèlerinage vers La Mecque et Médine" },
 ];
+
+function ThemeToggleButton() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
+      className="p-2 rounded-full border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-[#FF6B35] dark:hover:text-[#FF6B35] transition-all duration-200"
+    >
+      {isDark ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  );
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -177,6 +193,9 @@ export default function Header() {
             <span>+224 611 145 892</span>
           </a>
 
+          {/* Bouton bascule thème */}
+          <ThemeToggleButton />
+
           {/* CTA */}
           <button
             onClick={() => handleNavClick("/#contact")}
@@ -186,14 +205,17 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2"
-          aria-label="Menu"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: bouton thème + menu */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggleButton />
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2"
+            aria-label="Menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
