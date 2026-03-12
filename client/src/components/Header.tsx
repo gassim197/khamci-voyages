@@ -231,7 +231,7 @@ export default function Header() {
             </Link>
 
             {/* Mobile Services Accordion */}
-            <div className="border-b border-gray-100">
+            <div className="border-b border-gray-100 dark:border-gray-700">
               <button
                 onClick={() => setIsMobileServicesOpen(prev => !prev)}
                 className="w-full flex items-center justify-between text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5"

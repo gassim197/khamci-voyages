@@ -89,7 +89,7 @@ export default function HadjOumraService() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
 
       {/* Hero */}
@@ -126,11 +126,11 @@ export default function HadjOumraService() {
       </section>
 
       {/* Packages */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Nos formules</h2>
-            <p className="text-gray-500">Des packages adaptés à chaque budget et chaque besoin spirituel</p>
+            <p className="text-gray-500 dark:text-gray-400">Des packages adaptés à chaque budget et chaque besoin spirituel</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {PACKAGES.map(pkg => (
@@ -138,8 +138,8 @@ export default function HadjOumraService() {
                 key={pkg.name}
                 className={`rounded-2xl p-6 border-2 transition-all ${
                   pkg.highlight
-                    ? "border-[#FF6B35] bg-white shadow-xl scale-105"
-                    : "border-gray-200 bg-white hover:border-gray-300 shadow-sm"
+                    ? "border-[#FF6B35] bg-white dark:bg-gray-900 shadow-xl scale-105"
+                    : "border-gray-200 bg-white dark:bg-gray-900 hover:border-gray-300 shadow-sm"
                 }`}
               >
                 {pkg.highlight && (
@@ -149,13 +149,13 @@ export default function HadjOumraService() {
                 )}
                 <div className="text-4xl mb-3">{pkg.icon}</div>
                 <h3 className="text-xl font-black text-[#0D1B3E] mb-1">{pkg.name}</h3>
-                <div className="flex items-center gap-1.5 text-gray-500 text-sm mb-4">
+                <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 text-sm mb-4">
                   <Clock size={14} />
                   <span>Durée : {pkg.duration}</span>
                 </div>
                 <ul className="space-y-2">
                   {pkg.includes.map(item => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
+                    <li key={item} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
                       <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
@@ -173,7 +173,7 @@ export default function HadjOumraService() {
                   className={`mt-5 w-full py-2.5 rounded-xl font-semibold text-sm transition-all ${
                     pkg.highlight
                       ? "bg-[#FF6B35] text-white hover:bg-[#e85a2a]"
-                      : "border-2 border-[#0D1B3E] text-[#0D1B3E] hover:bg-gray-50"
+                      : "border-2 border-[#0D1B3E] text-[#0D1B3E] hover:bg-gray-50 dark:bg-gray-950"
                   }`}
                 >
                   Choisir cette formule
@@ -185,7 +185,7 @@ export default function HadjOumraService() {
       </section>
 
       {/* Pourquoi nous choisir */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-5xl">
           <h2 className="text-3xl font-black text-[#0D1B3E] text-center mb-10">
             Pourquoi confier votre pèlerinage à KHAMCI VOYAGES ?
@@ -197,10 +197,10 @@ export default function HadjOumraService() {
               { icon: <MapPin className="text-[#FF6B35]" size={28} />, title: "Hébergement stratégique", desc: "Hôtels sélectionnés à proximité de la Grande Mosquée pour faciliter vos déplacements." },
               { icon: <Users className="text-[#0D1B3E]" size={28} />, title: "Groupes & familles", desc: "Formules adaptées pour les voyages en groupe, en famille ou en couple." },
             ].map(item => (
-              <div key={item.title} className="text-center p-6 rounded-xl bg-gray-50 border border-gray-100">
+              <div key={item.title} className="text-center p-6 rounded-xl bg-gray-50 dark:bg-gray-950 border border-gray-100">
                 <div className="flex justify-center mb-3">{item.icon}</div>
                 <h3 className="font-bold text-[#0D1B3E] mb-2 text-sm">{item.title}</h3>
-                <p className="text-gray-600 text-xs leading-relaxed">{item.desc}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -226,17 +226,17 @@ export default function HadjOumraService() {
       </section>
 
       {/* Formulaire de devis */}
-      <section id="devis" className="py-16 bg-gray-50">
+      <section id="devis" className="py-16 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Demandez votre devis Hadj & Oumra</h2>
-            <p className="text-gray-500">Gratuit, sans engagement — réponse sous 24h</p>
+            <p className="text-gray-500 dark:text-gray-400">Gratuit, sans engagement — réponse sous 24h</p>
           </div>
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 space-y-5">
+          <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg p-8 space-y-5">
 
             {/* Type de voyage */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Type de pèlerinage *</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Type de pèlerinage *</label>
               <div className="grid grid-cols-2 gap-3">
                 {TRAVEL_TYPES.map(type => (
                   <button
@@ -246,7 +246,7 @@ export default function HadjOumraService() {
                     className={`py-3 rounded-xl border-2 font-semibold text-sm transition-all ${
                       formData.travelType === type
                         ? "border-[#FF6B35] bg-orange-50 text-[#FF6B35]"
-                        : "border-gray-200 text-gray-600 hover:border-gray-300"
+                        : "border-gray-200 text-gray-600 dark:text-gray-400 hover:border-gray-300"
                     }`}
                   >
                     {type === "Oumra" ? "🌙 Oumra" : "🕌 Hadj"}
@@ -257,8 +257,8 @@ export default function HadjOumraService() {
 
             {/* Formule souhaitée */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Formule souhaitée</label>
-              <select name="packageType" value={formData.packageType} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Formule souhaitée</label>
+              <select name="packageType" value={formData.packageType} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                 <option value="">Choisir une formule...</option>
                 {PACKAGE_TYPES.map(p => <option key={p} value={p}>{p}</option>)}
               </select>
@@ -267,26 +267,26 @@ export default function HadjOumraService() {
             {/* Dates */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de départ souhaitée *</label>
-                <input type="date" name="departureDate" value={formData.departureDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de départ souhaitée *</label>
+                <input type="date" name="departureDate" value={formData.departureDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de retour souhaitée</label>
-                <input type="date" name="returnDate" value={formData.returnDate} onChange={handleChange} min={formData.departureDate || new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de retour souhaitée</label>
+                <input type="date" name="returnDate" value={formData.returnDate} onChange={handleChange} min={formData.departureDate || new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
 
             {/* Nombre de pèlerins */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Users size={14} className="inline mr-1" />Nombre de pèlerins</label>
-                <select name="travelers" value={formData.travelers} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Users size={14} className="inline mr-1" />Nombre de pèlerins</label>
+                <select name="travelers" value={formData.travelers} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   {[1,2,3,4,5,6,7,8,9,10].map(n => <option key={n} value={n}>{n} pèlerin{n > 1 ? "s" : ""}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Passeport valide ?</label>
-                <select name="hasPassport" value={formData.hasPassport} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Passeport valide ?</label>
+                <select name="hasPassport" value={formData.hasPassport} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   <option value="">Sélectionner...</option>
                   <option value="Oui, valide plus de 6 mois">Oui, valide plus de 6 mois</option>
                   <option value="Oui, mais expire bientôt">Oui, mais expire bientôt</option>
@@ -295,26 +295,26 @@ export default function HadjOumraService() {
               </div>
             </div>
 
-            <hr className="border-gray-100" />
+            <hr className="border-gray-100 dark:border-gray-700" />
 
             {/* Informations de contact */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Nom et prénom *</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone *</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Téléphone *</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Précisions supplémentaires</label>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Besoins spéciaux, mobilité réduite, groupe familial, questions particulières..." className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Précisions supplémentaires</label>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Besoins spéciaux, mobilité réduite, groupe familial, questions particulières..." className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
             </div>
 
             <button type="submit" disabled={submitQuote.isPending} className="w-full bg-gradient-to-r from-[#FF6B35] to-[#e85a2a] text-white font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60 text-base">

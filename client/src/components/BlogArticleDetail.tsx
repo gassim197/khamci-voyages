@@ -16,12 +16,12 @@ export default function BlogArticleDetail({
 
   if (!article) {
     return (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
         <div className="container text-center">
-          <h2 className="heading-lg text-gray-900 mb-4">Article non trouvé</h2>
+          <h2 className="heading-lg text-gray-900 dark:text-white mb-4">Article non trouvé</h2>
           <button
             onClick={onBack}
-            className="text-orange-600 hover:text-orange-700 font-semibold"
+            className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold"
           >
             ← Retour aux articles
           </button>
@@ -36,13 +36,13 @@ export default function BlogArticleDetail({
     .slice(0, 3);
 
   return (
-    <article className="bg-white">
+    <article className="bg-white dark:bg-gray-950">
       {/* Header */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-8 md:py-12 border-b border-gray-200">
+      <div className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 py-8 md:py-12 border-b border-gray-200 dark:border-gray-700">
         <div className="container">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-semibold mb-6 transition-colors"
+            className="flex items-center gap-2 text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold mb-6 transition-colors"
           >
             <ArrowLeft size={20} />
             Retour aux articles
@@ -50,16 +50,16 @@ export default function BlogArticleDetail({
 
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 capitalize">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 capitalize">
                 {article.category}
               </span>
             </div>
 
-            <h1 className="heading-display text-gray-900 mb-6 leading-tight">
+            <h1 className="heading-display text-gray-900 dark:text-white mb-6 leading-tight">
               {article.title}
             </h1>
 
-            <div className="flex flex-wrap gap-6 text-gray-600">
+            <div className="flex flex-wrap gap-6 text-gray-600 dark:text-gray-300">
               <div className="flex items-center gap-2">
                 <Calendar size={18} />
                 <span>
@@ -84,7 +84,7 @@ export default function BlogArticleDetail({
       </div>
 
       {/* Featured Image */}
-      <div className="w-full h-96 md:h-[500px] bg-gray-200 overflow-hidden">
+      <div className="w-full h-96 md:h-[500px] bg-gray-200 dark:bg-gray-800 overflow-hidden">
         <img
           src={article.image}
           alt={article.title}
@@ -103,7 +103,7 @@ export default function BlogArticleDetail({
                   return (
                     <h2
                       key={index}
-                      className="heading-md text-gray-900 mt-8 mb-4"
+                      className="heading-md text-gray-900 dark:text-white mt-8 mb-4"
                     >
                       {paragraph.replace("## ", "")}
                     </h2>
@@ -113,10 +113,10 @@ export default function BlogArticleDetail({
                   return (
                     <ul
                       key={index}
-                      className="list-disc list-inside text-gray-700 space-y-2 mb-4"
+                      className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2 mb-4"
                     >
                       {paragraph.split("\n").map((item, i) => (
-                        <li key={i} className="text-gray-700">
+                        <li key={i} className="text-gray-700 dark:text-gray-300 dark:text-gray-300">
                           {item.replace("- ", "")}
                         </li>
                       ))}
@@ -127,7 +127,7 @@ export default function BlogArticleDetail({
                   return (
                     <p
                       key={index}
-                      className="text-gray-700 leading-relaxed mb-4"
+                      className="text-gray-700 dark:text-gray-300 dark:text-gray-300 leading-relaxed mb-4"
                     >
                       {paragraph}
                     </p>
@@ -138,11 +138,11 @@ export default function BlogArticleDetail({
             </div>
 
             {/* CTA Section */}
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-8 border border-orange-200 mb-12">
-              <h3 className="heading-md text-gray-900 mb-4">
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg p-8 border border-orange-200 dark:border-orange-800 mb-12">
+              <h3 className="heading-md text-gray-900 dark:text-white mb-4">
                 Intéressé par cette destination ou ce service ?
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6">
                 Demandez un devis personnalisé et laissez nos experts créer votre
                 voyage parfait.
               </p>
@@ -157,17 +157,17 @@ export default function BlogArticleDetail({
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
               <div>
-                <h3 className="heading-md text-gray-900 mb-8">
+                <h3 className="heading-md text-gray-900 dark:text-white mb-8">
                   Articles Similaires
                 </h3>
                 <div className="grid md:grid-cols-3 gap-6">
                   {relatedArticles.map((relatedArticle) => (
                     <div
                       key={relatedArticle.id}
-                      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden cursor-pointer group"
+                      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 dark:border-gray-700 overflow-hidden cursor-pointer group"
                       onClick={onBack}
                     >
-                      <div className="h-40 bg-gray-200 overflow-hidden">
+                      <div className="h-40 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <img
                           src={relatedArticle.image}
                           alt={relatedArticle.title}
@@ -175,10 +175,10 @@ export default function BlogArticleDetail({
                         />
                       </div>
                       <div className="p-4">
-                        <h4 className="font-semibold text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                        <h4 className="font-semibold text-gray-900 dark:text-white line-clamp-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                           {relatedArticle.title}
                         </h4>
-                        <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-2 line-clamp-2">
                           {relatedArticle.summary}
                         </p>
                       </div>

@@ -143,7 +143,7 @@ export default function APropos() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
 
       {/* Hero avec photo couverture équipe en veste */}
@@ -174,22 +174,22 @@ export default function APropos() {
       </section>
 
       {/* Introduction */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-black text-[#0D1B3E] mb-6">Notre histoire</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                 KHAMCI VOYAGES SARL a été fondée avec une vision claire : rendre les services de voyage
                 accessibles à tous les usagers, en proposant des offres adaptées et des facilités de paiement.
               </p>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                 Nous savons à quel point le déplacement est stratégique pour les entreprises et les professionnels.
                 C'est pourquoi nous nous positionnons comme un <strong>partenaire fiable et réactif</strong>,
                 prêt à simplifier l'organisation des voyages d'affaires et personnels en garantissant
                 efficacité, flexibilité et coût optimisé.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                 À travers des tarifs défiant toute concurrence, nous nous engageons à rendre chacune
                 des étapes de votre voyage mémorable.
               </p>
@@ -203,21 +203,21 @@ export default function APropos() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm">
                   <div className="text-3xl font-black text-[#FF6B35]">2021</div>
-                  <div className="text-xs text-gray-500 mt-1">Année de création</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Année de création</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm">
                   <div className="text-3xl font-black text-[#FF6B35]">+10</div>
-                  <div className="text-xs text-gray-500 mt-1">Partenaires institutionnels</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Partenaires institutionnels</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm">
                   <div className="text-3xl font-black text-[#FF6B35]">6</div>
-                  <div className="text-xs text-gray-500 mt-1">Services proposés</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Services proposés</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm">
                   <div className="text-3xl font-black text-[#FF6B35]">24h</div>
-                  <div className="text-xs text-gray-500 mt-1">Délai de réponse</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Délai de réponse</div>
                 </div>
               </div>
             </div>
@@ -265,31 +265,31 @@ export default function APropos() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-5xl">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="bg-orange-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                 <Target className="text-[#FF6B35]" size={24} />
               </div>
               <h3 className="text-xl font-black text-[#0D1B3E] mb-4">Notre Vision</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
                 Devenir la <strong>référence en matière de voyages en Guinée et en Afrique</strong>,
                 en facilitant l'accès aux services de voyage et en accompagnant les particuliers
                 et les professionnels dans tous leurs déplacements.
               </p>
-              <p className="text-gray-600 leading-relaxed text-sm mt-3">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm mt-3">
                 Être reconnue pour notre professionnalisme, la qualité de notre service client
                 et notre engagement à offrir les meilleures solutions de voyage adaptées aux besoins de chacun.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="bg-blue-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                 <Heart className="text-[#0D1B3E]" size={24} />
               </div>
               <h3 className="text-xl font-black text-[#0D1B3E] mb-4">Notre Mission</h3>
-              <p className="text-gray-600 leading-relaxed text-sm mb-3">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm mb-3">
                 Simplifier l'organisation des voyages en offrant des services accessibles, flexibles et de qualité.
               </p>
               <ul className="space-y-2">
@@ -298,7 +298,7 @@ export default function APropos() {
                   "Accompagner nos clients à chaque étape de leur voyage",
                   "Favoriser le développement du tourisme guinéen",
                 ].map(item => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-gray-600">
+                  <li key={item} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
                     <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
                     {item}
                   </li>
@@ -306,14 +306,14 @@ export default function APropos() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                 <Eye className="text-green-600" size={24} />
               </div>
               <h3 className="text-xl font-black text-[#0D1B3E] mb-4">Nos Objectifs</h3>
               <ul className="space-y-2">
                 {OBJECTIVES.slice(0, 4).map(obj => (
-                  <li key={obj} className="flex items-start gap-2 text-sm text-gray-600">
+                  <li key={obj} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
                     <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
                     {obj.split(".")[0]}.
                   </li>
@@ -325,14 +325,14 @@ export default function APropos() {
       </section>
 
       {/* Galerie Inauguration */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-6xl">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Camera className="text-[#FF6B35]" size={28} />
               <h2 className="text-3xl font-black text-[#0D1B3E]">Inauguration du nouveau siège</h2>
             </div>
-            <p className="text-gray-500 max-w-xl mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
               Retour en images sur l'inauguration de notre nouveau siège à Conakry, un moment fort
               partagé avec nos partenaires, clients et proches.
             </p>
@@ -374,19 +374,19 @@ export default function APropos() {
       </section>
 
       {/* Services */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Nos propositions de services</h2>
-            <p className="text-gray-500">Une gamme complète pour tous vos besoins de voyage</p>
+            <p className="text-gray-500 dark:text-gray-400">Une gamme complète pour tous vos besoins de voyage</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {SERVICES.map(service => (
-              <div key={service.title} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 bg-white hover:border-orange-200 hover:bg-orange-50 transition-all">
+              <div key={service.title} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 bg-white dark:bg-gray-900 hover:border-orange-200 hover:bg-orange-50 transition-all">
                 <span className="text-3xl">{service.icon}</span>
                 <div>
                   <h3 className="font-bold text-[#0D1B3E] mb-1">{service.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{service.desc}</p>
                 </div>
               </div>
             ))}
@@ -419,18 +419,18 @@ export default function APropos() {
       </section>
 
       {/* Partenaires */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-5xl">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Handshake className="text-[#FF6B35]" size={28} />
               <h2 className="text-3xl font-black text-[#0D1B3E]">Nos partenaires</h2>
             </div>
-            <p className="text-gray-500">Ils nous font confiance pour leurs déplacements professionnels</p>
+            <p className="text-gray-500 dark:text-gray-400">Ils nous font confiance pour leurs déplacements professionnels</p>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
             {PARTNERS.map(partner => (
-              <span key={partner} className="bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:border-orange-300 hover:bg-orange-50 transition-colors">
+              <span key={partner} className="bg-gray-50 dark:bg-gray-950 border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-orange-300 hover:bg-orange-50 transition-colors">
                 {partner}
               </span>
             ))}
@@ -444,13 +444,13 @@ export default function APropos() {
           <div className="text-center mb-10">
             <Award className="text-[#FF6B35] mx-auto mb-3" size={32} />
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Pourquoi choisir KHAMCI VOYAGES ?</h2>
-            <p className="text-gray-500">En collaborant avec nous, vous optez pour un service haut de gamme</p>
+            <p className="text-gray-500 dark:text-gray-400">En collaborant avec nous, vous optez pour un service haut de gamme</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {WHY_PARTNER.map(reason => (
-              <div key={reason} className="flex items-start gap-3 bg-white rounded-xl p-5 shadow-sm border border-orange-100">
+              <div key={reason} className="flex items-start gap-3 bg-white dark:bg-gray-900 rounded-xl p-5 shadow-sm border border-orange-100">
                 <CheckCircle className="text-[#FF6B35] shrink-0 mt-0.5" size={20} />
-                <p className="text-gray-700 text-sm leading-relaxed">{reason}</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{reason}</p>
               </div>
             ))}
           </div>
@@ -458,19 +458,19 @@ export default function APropos() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-3xl text-center">
           <h2 className="text-3xl font-black text-[#0D1B3E] mb-4">Contactez-nous</h2>
-          <p className="text-gray-500 mb-8">Notre équipe est disponible pour répondre à toutes vos questions</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">Notre équipe est disponible pour répondre à toutes vos questions</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a href="tel:+224611145892" className="flex items-center justify-center gap-2 bg-[#0D1B3E] text-white rounded-xl px-6 py-3.5 font-semibold hover:bg-[#1a3a6e] transition-colors">
               <Phone size={18} /> +224 611 145 892
             </a>
-            <a href="mailto:khamcivoyages@gmail.com" className="flex items-center justify-center gap-2 border-2 border-[#0D1B3E] text-[#0D1B3E] rounded-xl px-6 py-3.5 font-semibold hover:bg-gray-50 transition-colors">
+            <a href="mailto:khamcivoyages@gmail.com" className="flex items-center justify-center gap-2 border-2 border-[#0D1B3E] text-[#0D1B3E] rounded-xl px-6 py-3.5 font-semibold hover:bg-gray-50 dark:bg-gray-950 transition-colors">
               <Mail size={18} /> khamcivoyages@gmail.com
             </a>
           </div>
-          <div className="flex items-center justify-center gap-2 text-gray-500 text-sm mb-8">
+          <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-8">
             <MapPin size={16} className="text-[#FF6B35]" />
             <span>Conakry, République de Guinée</span>
           </div>

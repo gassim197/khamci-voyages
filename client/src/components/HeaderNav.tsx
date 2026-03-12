@@ -28,19 +28,19 @@ export default function HeaderNav() {
         <div className="hidden md:flex items-center gap-6">
           <a
             href="/#services"
-            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+            className="text-gray-700 dark:text-gray-300 hover:text-orange-500 transition-colors font-medium"
           >
             Services
           </a>
           <a
             href="/#team-building"
-            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+            className="text-gray-700 dark:text-gray-300 hover:text-orange-500 transition-colors font-medium"
           >
             Team Building
           </a>
           <a
             href="/#guinea"
-            className="text-gray-700 hover:text-orange-500 transition-colors font-medium"
+            className="text-gray-700 dark:text-gray-300 hover:text-orange-500 transition-colors font-medium"
           >
             Découvrir
           </a>

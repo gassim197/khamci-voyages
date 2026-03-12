@@ -100,7 +100,7 @@ export default function ChatWidget() {
       {/* Chat Window */}
       {isOpen && (
         <div
-          className="fixed bottom-24 right-4 z-50 w-[350px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200"
+          className="fixed bottom-24 right-4 z-50 w-[350px] max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700"
           style={{ height: "500px", maxHeight: "calc(100vh - 120px)" }}
         >
           {/* Header */}
@@ -126,15 +126,15 @@ export default function ChatWidget() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-800">
             {/* Welcome message */}
             <div className="flex gap-2 items-start">
               <div className="w-7 h-7 rounded-full bg-[#FF6B35] flex items-center justify-center shrink-0 mt-0.5">
                 <Bot size={14} className="text-white" />
               </div>
-              <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm max-w-[85%]">
+              <div className="bg-white dark:bg-gray-700 rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm max-w-[85%]">
                 <p
-                  className="text-sm text-gray-800 leading-relaxed"
+                  className="text-sm text-gray-800 dark:text-gray-100 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: formatMessage(WELCOME_MESSAGE) }}
                 />
               </div>
@@ -147,7 +147,7 @@ export default function ChatWidget() {
                   <button
                     key={s}
                     onClick={() => handleSuggestion(s)}
-                    className="block w-full text-left text-xs text-[#0D1B3E] bg-white border border-[#0D1B3E]/20 hover:border-[#FF6B35] hover:bg-orange-50 rounded-xl px-3 py-2 transition-all"
+                    className="block w-full text-left text-xs text-[#0D1B3E] dark:text-gray-200 bg-white dark:bg-gray-700 border border-[#0D1B3E]/20 dark:border-gray-600 hover:border-[#FF6B35] hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-xl px-3 py-2 transition-all"
                   >
                     {s}
                   </button>
@@ -179,7 +179,7 @@ export default function ChatWidget() {
                     className={`rounded-2xl px-3 py-2 shadow-sm max-w-[85%] ${
                       m.role === "user"
                         ? "bg-[#0D1B3E] text-white rounded-tr-sm"
-                        : "bg-white text-gray-800 rounded-tl-sm"
+                        : "bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-sm"
                     }`}
                   >
                     <p
@@ -197,7 +197,7 @@ export default function ChatWidget() {
                 <div className="w-7 h-7 rounded-full bg-[#FF6B35] flex items-center justify-center shrink-0">
                   <Bot size={14} className="text-white" />
                 </div>
-                <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+                <div className="bg-white dark:bg-gray-700 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
                   <div className="flex gap-1 items-center">
                     <div
                       className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
@@ -220,7 +220,7 @@ export default function ChatWidget() {
           </div>
 
           {/* Quick actions bar */}
-          <div className="px-3 py-2 bg-white border-t border-gray-100 flex gap-2 shrink-0">
+          <div className="px-3 py-2 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 flex gap-2 shrink-0">
             <a
               href="tel:+224611145892"
               className="flex-1 flex items-center justify-center gap-1.5 text-xs text-[#0D1B3E] border border-[#0D1B3E]/30 rounded-lg py-1.5 hover:bg-[#0D1B3E] hover:text-white transition-all"
@@ -250,14 +250,14 @@ export default function ChatWidget() {
           {/* Input */}
           <form
             onSubmit={handleFormSubmit}
-            className="px-3 py-3 bg-white border-t border-gray-200 flex gap-2 items-center shrink-0"
+            className="px-3 py-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex gap-2 items-center shrink-0"
           >
             <input
               ref={inputRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Posez votre question..."
-              className="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0D1B3E] bg-gray-50"
+              className="flex-1 text-sm border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0D1B3E] bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               disabled={isLoading}
             />
             <button

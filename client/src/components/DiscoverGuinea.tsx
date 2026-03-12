@@ -67,7 +67,7 @@ export default function DiscoverGuinea() {
                 <h2 className="heading-lg gradient-text mb-4">
                   Explorez les Joyaux de la Guinée
                 </h2>
-                <p className="text-body text-gray-600">
+                <p className="text-body text-gray-600 dark:text-gray-300">
                   Chaque destination peut être incluse dans votre devis personnalisé.
                   Cliquez sur votre préférée pour commencer votre voyage.
                 </p>
@@ -94,7 +94,7 @@ export default function DiscoverGuinea() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 text-sm mb-3 ml-10">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 ml-10">
                       {dest.description}
                     </p>
 
@@ -121,7 +121,7 @@ export default function DiscoverGuinea() {
               </button>
 
               {/* Reassurance */}
-              <div className="text-center text-sm text-gray-600">
+              <div className="text-center text-sm text-gray-600 dark:text-gray-400">
                 <p>✓ Réponse sous 24h • ✓ Gratuit et sans engagement</p>
               </div>
             </div>

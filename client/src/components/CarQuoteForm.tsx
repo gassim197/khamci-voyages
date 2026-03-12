@@ -106,17 +106,17 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Service Type Badge */}
-      <div className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg">
+      <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
         <Car className="w-5 h-5 text-purple-500" />
-        <span className="font-semibold text-purple-900">Demande de Devis - Location de Voiture</span>
+        <span className="font-semibold text-purple-900 dark:text-purple-300">Demande de Devis - Location de Voiture</span>
       </div>
 
       {/* Personal Info Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Vos Informations</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Vos Informations</h3>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Prénom *</label>
             <input
               type="text"
               name="firstName"
@@ -124,13 +124,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
               onChange={handleChange}
               placeholder="Jean"
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.firstName ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom *</label>
             <input
               type="text"
               name="lastName"
@@ -138,13 +137,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
               onChange={handleChange}
               placeholder="Dupont"
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.lastName ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
             <input
               type="email"
               name="email"
@@ -152,13 +150,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
               onChange={handleChange}
               placeholder="jean@example.com"
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Téléphone *</label>
             <input
               type="tel"
               name="phone"
@@ -166,8 +163,7 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
               onChange={handleChange}
               placeholder="+224 XXX XXX XXX"
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.phone ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
           </div>
@@ -176,12 +172,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
 
       {/* Car Rental Details Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Détails de la Location</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Détails de la Location</h3>
         
         {/* Locations */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Lieu de Prise en Charge *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lieu de Prise en Charge *</label>
             <CityCombobox
               value={formData.pickupLocation}
               onChange={(val) => {
@@ -195,7 +191,7 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
             {errors.pickupLocation && <p className="text-red-500 text-xs mt-1">{errors.pickupLocation}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Lieu de Restitution *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lieu de Restitution *</label>
             <CityCombobox
               value={formData.dropoffLocation}
               onChange={(val) => {
@@ -213,28 +209,26 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
         {/* Dates */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date de Prise en Charge *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date de Prise en Charge *</label>
             <input
               type="date"
               name="pickupDate"
               value={formData.pickupDate}
               onChange={handleChange}
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.pickupDate ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.pickupDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.pickupDate && <p className="text-red-500 text-xs mt-1">{errors.pickupDate}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date de Restitution *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date de Restitution *</label>
             <input
               type="date"
               name="dropoffDate"
               value={formData.dropoffDate}
               onChange={handleChange}
               className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                errors.dropoffDate ? 'border-red-500' : 'border-gray-300'
-              }`}
+                errors.dropoffDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.dropoffDate && <p className="text-red-500 text-xs mt-1">{errors.dropoffDate}</p>}
           </div>
@@ -243,12 +237,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
         {/* Car Type & Drivers */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Type de Véhicule *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Type de Véhicule *</label>
             <select
               name="carType"
               value={formData.carType}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {carTypes.map(type => (
                 <option key={type.value} value={type.value}>{type.label}</option>
@@ -256,12 +250,12 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de Conducteurs *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Conducteurs *</label>
             <select
               name="drivers"
               value={formData.drivers}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {[1, 2, 3, 4].map(n => (
                 <option key={n} value={n}>{n} conducteur{n > 1 ? 's' : ''}</option>
@@ -272,21 +266,21 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Budget Estimé par Jour (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Jour (USD) *</label>
           <input
             type="number"
             name="estimatedBudget"
             value={formData.estimatedBudget}
             onChange={handleChange}
             placeholder="50"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
         </div>
       </div>
 
       {/* Message */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Message Spécial (optionnel)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message Spécial (optionnel)</label>
         <textarea
           name="message"
           value={formData.message}
@@ -298,7 +292,7 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
       </div>
 
       {/* Reassurance */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-700">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 text-sm text-green-700 dark:text-green-400">
         ✓ Gratuit et sans engagement • Réponse garantie sous 24h
       </div>
 

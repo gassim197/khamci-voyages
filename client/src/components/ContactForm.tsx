@@ -148,14 +148,14 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="heading-lg gradient-text mb-4">
             Votre Demande de Service en 2 Minutes
           </h2>
-          <p className="text-body text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Remplissez le formulaire ci-dessous. Un expert vous contactera rapidement
             pour personnaliser votre voyage et vous envoyer un devis détaillé.
           </p>
@@ -176,7 +176,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-gray-100">Téléphone</h3>
-                      <a href="tel:+224611145892" className="text-gray-600 hover:text-[#FF6B35] transition-colors">
+                      <a href="tel:+224611145892" className="text-gray-600 dark:text-gray-300 hover:text-[#FF6B35] transition-colors">
                         +224 611 145 892
                       </a>
                     </div>
@@ -189,7 +189,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-gray-100">Email</h3>
-                      <a href="mailto:khamcivoyages@gmail.com" className="text-gray-600 hover:text-[#FF6B35] transition-colors">
+                      <a href="mailto:khamcivoyages@gmail.com" className="text-gray-600 dark:text-gray-300 hover:text-[#FF6B35] transition-colors">
                         khamcivoyages@gmail.com
                       </a>
                     </div>
@@ -202,20 +202,20 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-gray-100">Adresse</h3>
-                      <p className="text-gray-600">Almamya, commune de Kaloum</p>
-                      <p className="text-gray-600 text-sm">Conakry, Guinée</p>
+                      <p className="text-gray-600 dark:text-gray-300">Almamya, commune de Kaloum</p>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">Conakry, Guinée</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Reassurance */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                <h4 className="font-bold text-green-900 mb-4 flex items-center gap-2">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+                <h4 className="font-bold text-green-900 dark:text-green-300 mb-4 flex items-center gap-2">
                   <CheckCircle size={20} />
                   Pourquoi Nous Choisir ?
                 </h4>
-                <ul className="space-y-3 text-sm text-green-800">
+                <ul className="space-y-3 text-sm text-green-800 dark:text-green-300">
                   {[
                     "Réponse garantie sous 24h",
                     "100% gratuit et sans engagement",
@@ -239,19 +239,19 @@ export default function ContactForm() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className={`flex items-center justify-center w-9 h-9 rounded-full font-bold text-sm transition-all ${
-                    step >= 1 ? "bg-[#FF6B35] text-white shadow-md" : "bg-gray-200 text-gray-500"
+                    step >= 1 ? "bg-[#FF6B35] text-white shadow-md" : "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
                   }`}>
                     {step > 1 ? <CheckCircle size={18} /> : "1"}
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${step >= 1 ? "text-[#0D1B3E]" : "text-gray-400"}`}>
+                    <p className={`text-sm font-semibold ${step >= 1 ? "text-[#0D1B3E] dark:text-white" : "text-gray-400"}`}>
                       Votre voyage
                     </p>
-                    <p className="text-xs text-gray-500">Service, destination & dates</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Service, destination & dates</p>
                   </div>
                 </div>
 
-                <div className="flex-1 mx-4 h-1 rounded-full bg-gray-200 overflow-hidden">
+                <div className="flex-1 mx-4 h-1 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-[#FF6B35] to-[#0D1B3E] transition-all duration-500"
                     style={{ width: step === 1 ? "0%" : "100%" }}
@@ -260,15 +260,15 @@ export default function ContactForm() {
 
                 <div className="flex items-center gap-3">
                   <div className={`flex items-center justify-center w-9 h-9 rounded-full font-bold text-sm transition-all ${
-                    step >= 2 ? "bg-[#FF6B35] text-white shadow-md" : "bg-gray-200 text-gray-500"
+                    step >= 2 ? "bg-[#FF6B35] text-white shadow-md" : "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
                   }`}>
                     2
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${step >= 2 ? "text-[#0D1B3E]" : "text-gray-400"}`}>
+                    <p className={`text-sm font-semibold ${step >= 2 ? "text-[#0D1B3E] dark:text-white" : "text-gray-400"}`}>
                       Vos coordonnées
                     </p>
-                    <p className="text-xs text-gray-500">Nom, email & téléphone</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Nom, email & téléphone</p>
                   </div>
                 </div>
               </div>
@@ -280,11 +280,11 @@ export default function ContactForm() {
               {step === 1 && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-xl font-bold text-[#0D1B3E] mb-1 flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-[#0D1B3E] dark:text-white mb-1 flex items-center gap-2">
                       <Plane size={20} className="text-[#FF6B35]" />
                       Parlez-nous de votre voyage
                     </h3>
-                    <p className="text-sm text-gray-500">Étape 1 sur 2 — Quelques infos sur votre projet</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Étape 1 sur 2 — Quelques infos sur votre projet</p>
                   </div>
 
                   {/* Service Type */}
@@ -303,8 +303,8 @@ export default function ContactForm() {
                           }}
                           className={`flex flex-col items-center gap-2 p-3 rounded-lg border-2 text-sm font-medium transition-all ${
                             formData.serviceType === service.value
-                              ? "border-[#FF6B35] bg-orange-50 text-[#FF6B35]"
-                              : "border-gray-200 text-gray-600 hover:border-orange-300 hover:bg-orange-50"
+                              ? "border-[#FF6B35] bg-orange-50 dark:bg-orange-900/20 text-[#FF6B35]"
+                              : "border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/20"
                           }`}
                         >
                           <span className="text-2xl">{service.icon}</span>
@@ -350,8 +350,8 @@ export default function ContactForm() {
                         value={formData.departureDate}
                         onChange={handleChange}
                         min={new Date().toISOString().split("T")[0]}
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                          errors.departureDate ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all ${
+                          errors.departureDate ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                         }`}
                       />
                       {errors.departureDate && (
@@ -369,8 +369,8 @@ export default function ContactForm() {
                         value={formData.returnDate}
                         onChange={handleChange}
                         min={formData.departureDate || new Date().toISOString().split("T")[0]}
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                          errors.returnDate ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all ${
+                          errors.returnDate ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                         }`}
                       />
                       {errors.returnDate && (
@@ -432,16 +432,16 @@ export default function ContactForm() {
               {step === 2 && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-xl font-bold text-[#0D1B3E] mb-1 flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-[#0D1B3E] dark:text-white mb-1 flex items-center gap-2">
                       <Users size={20} className="text-[#FF6B35]" />
                       Vos coordonnées
                     </h3>
-                    <p className="text-sm text-gray-500">Étape 2 sur 2 — Comment vous contacter ?</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Étape 2 sur 2 — Comment vous contacter ?</p>
                   </div>
 
                   {/* Récap voyage */}
-                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-sm">
-                    <p className="font-semibold text-[#0D1B3E] mb-2">📋 Récapitulatif de votre voyage :</p>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4 text-sm">
+                    <p className="font-semibold text-[#0D1B3E] dark:text-white mb-2">📋 Récapitulatif de votre voyage :</p>
                     <div className="grid grid-cols-2 gap-2 text-gray-700 dark:text-gray-300">
                       <span>Service : <strong>{SERVICE_TYPES.find(s => s.value === formData.serviceType)?.label ?? "—"}</strong></span>
                       <span>Destination : <strong>{formData.destination ? (countries.find(c => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase())?.name || formData.destination) : "—"}</strong></span>
@@ -469,8 +469,8 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Jean Dupont"
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                          errors.name ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all ${
+                          errors.name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                         }`}
                       />
                       {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
@@ -485,8 +485,8 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="jean@exemple.com"
-                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                          errors.email ? "border-red-500" : "border-gray-300"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all ${
+                          errors.email ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                         }`}
                       />
                       {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -504,8 +504,8 @@ export default function ContactForm() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+224 XXX XXX XXX"
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all ${
-                        errors.phone ? "border-red-500" : "border-gray-300"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all ${
+                        errors.phone ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                       }`}
                     />
                     {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -522,7 +522,7 @@ export default function ContactForm() {
                       onChange={handleChange}
                       placeholder="Allergies alimentaires, demandes spéciales, budget approximatif..."
                       rows={3}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] transition-all resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all resize-none"
                     />
                   </div>
 
@@ -554,7 +554,7 @@ export default function ContactForm() {
                     </button>
                   </div>
 
-                  <div className="text-center text-sm text-gray-500 space-y-1">
+                  <div className="text-center text-sm text-gray-500 dark:text-gray-400 space-y-1">
                     <p>✓ 100% Gratuit et sans engagement &nbsp;·&nbsp; ✓ Réponse sous 24h &nbsp;·&nbsp; ✓ Données sécurisées</p>
                   </div>
                 </div>

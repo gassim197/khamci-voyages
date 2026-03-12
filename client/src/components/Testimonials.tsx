@@ -85,18 +85,18 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
       : "5.0";
 
   return (
-    <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-blue-100 rounded-full">
-            <MessageSquare className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-600">TÉMOIGNAGES CLIENTS</span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+            <MessageSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">TÉMOIGNAGES CLIENTS</span>
           </div>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
             Ce que disent nos clients
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6">
             Découvrez les expériences de nos clients satisfaits à travers le monde
           </p>
 
@@ -114,7 +114,7 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
                 />
               ))}
             </div>
-            <span className="text-lg font-semibold text-gray-900">
+            <span className="text-lg font-semibold text-gray-900 dark:text-white">
               {avgRating} / 5 ({testimonials.length} avis)
             </span>
           </div>

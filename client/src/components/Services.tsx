@@ -76,7 +76,7 @@ export default function Services() {
           <h2 className="heading-lg gradient-text mb-4">
             Nos Services
           </h2>
-          <p className="text-body text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             KHAMCI VOYAGES vous propose une gamme complète de services pour faciliter
             l'accès aux voyages internationaux, pour les particuliers comme pour les entreprises.
           </p>
@@ -90,7 +90,7 @@ export default function Services() {
               <Link
                 key={index}
                 href={service.href}
-                className="group relative overflow-hidden rounded-xl bg-white p-5 md:p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100 block"
+                className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-5 md:p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100 dark:border-gray-700 block"
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
               >
@@ -100,7 +100,7 @@ export default function Services() {
                 <div className="relative z-10 space-y-4">
                   {/* Badge */}
                   {service.badge && (
-                    <span className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-2.5 py-1 rounded-full mb-1">
+                    <span className="inline-block bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-bold px-2.5 py-1 rounded-full mb-1">
                       {service.badge}
                     </span>
                   )}
@@ -116,7 +116,7 @@ export default function Services() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     {service.description}
                   </p>
 
@@ -127,7 +127,7 @@ export default function Services() {
 
                   {/* CTA */}
                   <div className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
-                    hovered === index ? "text-[#FF6B35]" : "text-[#0D1B3E]"
+                    hovered === index ? "text-[#FF6B35]" : "text-[#0D1B3E] dark:text-white"
                   }`}>
                     {service.ctaText}
                     <ArrowRight size={16} className={`transition-transform ${hovered === index ? "translate-x-1" : ""}`} />
@@ -140,7 +140,7 @@ export default function Services() {
 
         {/* Bottom CTA */}
         <div className="text-center mt-12">
-          <p className="text-gray-500 mb-4">Vous avez un besoin spécifique ?</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">Vous avez un besoin spécifique ?</p>
           <a
             href="#contact"
             onClick={(e) => {

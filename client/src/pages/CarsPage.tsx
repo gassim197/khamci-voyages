@@ -31,7 +31,7 @@ export default function CarsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <HeaderNav />
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
@@ -58,15 +58,15 @@ export default function CarsPage() {
       <div className="container py-16">
         {/* Introduction */}
         <section className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Location de Voitures - KHAMCI VOYAGES
           </h2>
-          <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
             KHAMCI VOYAGES vous propose une large gamme de véhicules de location pour tous vos besoins : 
             voitures économiques, SUV, minibus ou véhicules de luxe. Bénéficiez d'assurance complète, 
             de tarifs compétitifs et d'une assistance 24/7.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             Que vous voyagiez en famille, en groupe ou en solo, nous avons le véhicule parfait pour votre voyage. 
             Livraison flexible à l'aéroport ou en centre-ville, avec chauffeur optionnel.
           </p>
@@ -74,7 +74,7 @@ export default function CarsPage() {
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Avantages de Louer avec KHAMCI VOYAGES
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -83,7 +83,7 @@ export default function CarsPage() {
               return (
                 <div key={idx} className="p-6 bg-purple-50 rounded-lg hover:shadow-lg transition-shadow">
                   <Icon className="w-8 h-8 text-purple-500 mb-3" />
-                  <h3 className="font-bold text-gray-900 mb-2">{feature.title}</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
                   <p className="text-gray-600 text-sm">{feature.description}</p>
                 </div>
               );
@@ -93,13 +93,13 @@ export default function CarsPage() {
 
         {/* Car Types */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Types de Véhicules Disponibles
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {carTypes.map((car, idx) => (
               <div key={idx} className="p-6 border border-gray-200 rounded-lg hover:border-purple-500 transition-colors">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{car.type}</h3>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{car.type}</h3>
                 <p className="text-gray-600 mb-3 text-sm">{car.examples}</p>
                 <p className="text-sm text-purple-600 font-semibold">{car.price}</p>
               </div>
@@ -109,13 +109,13 @@ export default function CarsPage() {
 
         {/* Services */}
         <section className="bg-purple-50 rounded-lg p-8 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Nos Services de Location
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Location Standard</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Location Standard</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Assurance tous risques incluse</li>
                 <li>✓ Carburant illimité</li>
                 <li>✓ Kilométrage illimité</li>
@@ -123,8 +123,8 @@ export default function CarsPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Options Additionnelles</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Options Additionnelles</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Chauffeur professionnel</li>
                 <li>✓ Siège bébé et rehausseur</li>
                 <li>✓ Wifi embarqué</li>
@@ -152,8 +152,8 @@ export default function CarsPage() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full my-8">
+            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold gradient-text">Demander un Devis Voiture</h2>
               <button
                 onClick={() => setShowForm(false)}

@@ -20,18 +20,18 @@ export default function QuickQuoteModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8 animate-fade-in-up"
+        className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full my-8 animate-fade-in-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold gradient-text">Demander un Devis</h2>
-            <p className="text-sm text-gray-600">Choisissez le service qui vous intéresse</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Choisissez le service qui vous intéresse</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-700 dark:text-gray-300"
           >
             <X size={24} />
           </button>

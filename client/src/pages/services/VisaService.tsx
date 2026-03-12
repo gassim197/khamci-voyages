@@ -64,7 +64,7 @@ export default function VisaService() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
 
       {/* Hero */}
@@ -90,10 +90,10 @@ export default function VisaService() {
       </section>
 
       {/* Destinations Visa */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-2">Destinations disponibles</h2>
-          <p className="text-gray-500 text-center mb-8">Délais indicatifs à partir de la date de dépôt du dossier complet</p>
+          <p className="text-gray-500 dark:text-gray-400 text-center mb-8">Délais indicatifs à partir de la date de dépôt du dossier complet</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {VISA_DESTINATIONS.map(dest => (
               <button
@@ -103,24 +103,24 @@ export default function VisaService() {
                 className={`p-4 rounded-xl border-2 text-center transition-all hover:shadow-md ${
                   formData.destination === dest.country
                     ? "border-[#FF6B35] bg-orange-50"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                    : "border-gray-200 bg-white dark:bg-gray-900 hover:border-gray-300"
                 }`}
               >
                 <div className="text-3xl mb-2">{dest.flag}</div>
                 <div className="font-semibold text-[#0D1B3E] text-sm">{dest.country}</div>
-                <div className="text-xs text-gray-500 mt-1">⏱ {dest.delay}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">⏱ {dest.delay}</div>
               </button>
             ))}
-            <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-white text-center flex flex-col items-center justify-center">
+            <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-white dark:bg-gray-900 text-center flex flex-col items-center justify-center">
               <div className="text-2xl mb-1">🌍</div>
-              <div className="text-xs text-gray-500">Autre destination ? Contactez-nous</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">Autre destination ? Contactez-nous</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Value Proposition */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-gray-900">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Notre accompagnement visa</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -129,10 +129,10 @@ export default function VisaService() {
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Traitement rapide", desc: "Nous optimisons les délais en soumettant votre dossier dans les meilleurs créneaux disponibles." },
               { icon: <Shield className="text-[#0D1B3E]" size={28} />, title: "Suivi personnalisé", desc: "Vous êtes informé à chaque étape de l'avancement de votre demande de visa." },
             ].map(item => (
-              <div key={item.title} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+              <div key={item.title} className="bg-gray-50 dark:bg-gray-950 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
                 <div className="mb-3">{item.icon}</div>
                 <h3 className="font-bold text-[#0D1B3E] mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -140,16 +140,16 @@ export default function VisaService() {
       </section>
 
       {/* Form */}
-      <section id="devis" className="py-16 bg-gray-50">
+      <section id="devis" className="py-16 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Demandez votre accompagnement visa</h2>
-            <p className="text-gray-500">Gratuit, sans engagement — réponse sous 24h</p>
+            <p className="text-gray-500 dark:text-gray-400">Gratuit, sans engagement — réponse sous 24h</p>
           </div>
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 space-y-5">
+          <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg p-8 space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Pays de destination *</label>
-              <select name="destination" value={formData.destination} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Pays de destination *</label>
+              <select name="destination" value={formData.destination} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                 <option value="">Sélectionner un pays...</option>
                 {VISA_DESTINATIONS.map(d => (
                   <option key={d.country} value={d.country}>{d.flag} {d.country}</option>
@@ -159,41 +159,41 @@ export default function VisaService() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Type de visa</label>
-                <select name="visaType" value={formData.visaType} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Type de visa</label>
+                <select name="visaType" value={formData.visaType} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   <option value="">Choisir...</option>
                   {VISA_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Users size={14} className="inline mr-1" />Nombre de personnes</label>
-                <select name="travelers" value={formData.travelers} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Users size={14} className="inline mr-1" />Nombre de personnes</label>
+                <select name="travelers" value={formData.travelers} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} personne{n > 1 ? "s" : ""}</option>)}
                 </select>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Date de voyage prévue</label>
-              <input type="date" name="travelDate" value={formData.travelDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Date de voyage prévue</label>
+              <input type="date" name="travelDate" value={formData.travelDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
             </div>
-            <hr className="border-gray-100" />
+            <hr className="border-gray-100 dark:border-gray-700" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Nom et prénom *</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone *</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Téléphone *</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Précisions supplémentaires</label>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Situation particulière, refus antérieur, questions spécifiques..." className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Précisions supplémentaires</label>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Situation particulière, refus antérieur, questions spécifiques..." className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
             </div>
             <button type="submit" disabled={submitQuote.isPending} className="w-full bg-gradient-to-r from-[#FF6B35] to-[#e85a2a] text-white font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60">
               {submitQuote.isPending ? "Envoi en cours..." : "📋 Envoyer ma demande d'accompagnement visa"}

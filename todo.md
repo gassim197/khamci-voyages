@@ -240,3 +240,41 @@
 ## Bouton Bascule Thème — 12/03/2026
 - [x] Activer ThemeProvider en mode switchable
 - [x] Ajouter bouton bascule mode clair/sombre dans le Header (desktop + mobile)
+
+## Corrections Mode Sombre — 12/03/2026
+- [ ] Corriger les textes invisibles en mode sombre
+- [ ] Corriger les fonds de cartes et sections en mode sombre
+- [ ] Corriger les formulaires et champs de saisie en mode sombre
+- [ ] Corriger les pages de destination et services en mode sombre
+- [ ] Corriger les pages légales en mode sombre
+
+## Corrections Mode Sombre (Mars 2026)
+
+- [x] Corriger Blog.tsx - fond, textes et badges de catégorie
+- [x] Corriger BlogCard.tsx - fond, textes, badges et boutons
+- [x] Corriger BlogArticleDetail.tsx - fond et textes
+- [x] Corriger FlightQuoteForm.tsx - inputs, labels, fond
+- [x] Corriger HotelQuoteForm.tsx - inputs, labels, fond
+- [x] Corriger CarQuoteForm.tsx - inputs, labels, fond
+- [x] Corriger ServiceQuoteForm.tsx - inputs, labels, fond
+- [x] Corriger ContactForm.tsx - fond, textes, inputs
+- [x] Corriger WhyChooseUs.tsx - fond et textes
+- [x] Corriger Services.tsx - cartes et textes
+- [x] Corriger PopularDestinations.tsx - cartes et textes
+- [x] Corriger TestimonialCard.tsx - fond et textes
+- [x] Corriger Testimonials.tsx - fond et textes
+- [x] Corriger HowItWorks.tsx - fond et textes
+- [x] Corriger TeamBuilding.tsx - fond et textes
+- [x] Corriger QuickQuoteModal.tsx - fond et textes
+- [x] Corriger DiscoverGuinea.tsx - fond et textes
+- [x] Corriger CityCombobox.tsx - dropdown et inputs
+- [x] Corriger DestinationGalleries.tsx - fond et dégradés
+- [x] Corriger ReassuranceBadges.tsx - cartes et textes
+- [x] Corriger FAQ.tsx - fond, accordion et textes
+- [x] Corriger ChatWidget.tsx - fenêtre chat et messages
+- [x] Corriger Header.tsx - menu mobile
+- [x] Corriger AdminLogin.tsx - formulaire de connexion
+- [x] Corriger pages de destination (Paris, Dubai, New York, Casablanca, Bangkok, Barcelona)
+- [x] Corriger pages de service (Billetterie, Hotel, Location, Assurance, Visa, Hadj)
+- [x] Corriger pages légales (A Propos, Mentions Légales, Politique, CGU)
+- [x] Corriger BlogArticlePage.tsx

@@ -85,7 +85,7 @@ export default function TestimonialForm({ onClose, onSubmit }: TestimonialFormPr
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Laisser un Témoignage</h2>
@@ -184,7 +184,7 @@ export default function TestimonialForm({ onClose, onSubmit }: TestimonialFormPr
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none"
               required
             />
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
               {formData.comment.length} / 500 caractères
             </p>
           </div>

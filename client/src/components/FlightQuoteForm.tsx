@@ -115,67 +115,67 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Service Type Badge */}
-      <div className="flex items-center gap-2 p-3 bg-orange-50 rounded-lg">
+      <div className="flex items-center gap-2 p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
         <Plane className="w-5 h-5 text-orange-500" />
-        <span className="font-semibold text-orange-900">Demande de Devis - Vols</span>
+        <span className="font-semibold text-orange-900 dark:text-orange-300">Demande de Devis - Vols</span>
       </div>
 
       {/* Personal Info Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Vos Informations</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Vos Informations</h3>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Prénom *</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
               placeholder="Jean"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.firstName ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom *</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
               placeholder="Dupont"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.lastName ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="jean@example.com"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Téléphone *</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="+224 XXX XXX XXX"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.phone ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -185,12 +185,12 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
 
       {/* Flight Details Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Détails du Vol</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Détails du Vol</h3>
         
         {/* Cities */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Ville de Départ *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ville de Départ *</label>
             <CityCombobox
               value={formData.departureCity}
               onChange={(val) => {
@@ -204,7 +204,7 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
             {errors.departureCity && <p className="text-red-500 text-xs mt-1">{errors.departureCity}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Ville d'Arrivée *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ville d'Arrivée *</label>
             <CityCombobox
               value={formData.arrivalCity}
               onChange={(val) => {
@@ -222,27 +222,27 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
         {/* Dates */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date de Départ *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date de Départ *</label>
             <input
               type="date"
               name="departureDate"
               value={formData.departureDate}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.departureDate ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.departureDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.departureDate && <p className="text-red-500 text-xs mt-1">{errors.departureDate}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date de Retour (optionnel)</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date de Retour (optionnel)</label>
             <input
               type="date"
               name="returnDate"
               value={formData.returnDate}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
-                errors.returnDate ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.returnDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
             {errors.returnDate && <p className="text-red-500 text-xs mt-1">{errors.returnDate}</p>}
@@ -252,12 +252,12 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
         {/* Passengers & Class */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de Passagers *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Passagers *</label>
             <select
               name="passengers"
               value={formData.passengers}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {[1, 2, 3, 4, 5, 6].map(n => (
                 <option key={n} value={n}>{n} passager{n > 1 ? 's' : ''}</option>
@@ -265,12 +265,12 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Classe *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Classe *</label>
             <select
               name="cabinClass"
               value={formData.cabinClass}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {cabinClasses.map(cls => (
                 <option key={cls.value} value={cls.value}>{cls.label}</option>
@@ -281,17 +281,17 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
 
         {/* Airlines */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Compagnies Aérienne Préférées</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Compagnies Aérienne Préférées</label>
           <div className="flex flex-col gap-2">
             {majorAirlines.map(airline => (
-              <label key={airline} className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-orange-50 transition-colors">
+              <label key={airline} className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors">
                 <input
                   type="checkbox"
                   checked={formData.airlines.includes(airline)}
                   onChange={() => handleAirlineToggle(airline)}
                   className="w-4 h-4 text-orange-500 rounded flex-shrink-0"
                 />
-                <span className="text-sm text-gray-700 font-medium">{airline}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">{airline}</span>
               </label>
             ))}
           </div>
@@ -299,33 +299,33 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Budget Estimé (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé (USD) *</label>
           <input
             type="number"
             name="estimatedBudget"
             value={formData.estimatedBudget}
             onChange={handleChange}
             placeholder="2000"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
         </div>
       </div>
 
       {/* Message */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Message Spécial (optionnel)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message Spécial (optionnel)</label>
         <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
           placeholder="Demandes spéciales, allergies, préférences..."
           rows={4}
-          className="w-full px-4 py-2 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-orange-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
         />
       </div>
 
       {/* Reassurance */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-700">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 text-sm text-green-700 dark:text-green-400">
         ✓ Gratuit et sans engagement • Réponse garantie sous 24h
       </div>
 

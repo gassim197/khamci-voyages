@@ -90,7 +90,7 @@ export default function DubaiPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
         <img src="/covers/dubai.jpg" alt="Dubaï" className="absolute inset-0 w-full h-full object-cover" />
@@ -113,12 +113,12 @@ export default function DubaiPage() {
       <div className="container py-16">
         {/* Overview */}
         <section className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">À propos de Dubaï</h2>
-          <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">À propos de Dubaï</h2>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
             Dubaï est une destination ultra-moderne combinant gratte-ciels futuristes, plages de luxe et 
             expériences uniques. C'est un paradis pour les amateurs de shopping, d'aventure et de luxe.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             Du désert doré aux gratte-ciels brillants, Dubaï offre un contraste fascinant entre tradition 
             et modernité, avec une hospitalité légendaire et des attractions de classe mondiale.
           </p>
@@ -126,37 +126,37 @@ export default function DubaiPage() {
 
         {/* Quick Facts */}
         <section className="grid md:grid-cols-4 gap-6 mb-16">
-          <div className="p-6 bg-orange-50 rounded-lg">
+          <div className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
             <Clock className="w-8 h-8 text-orange-600 mb-3" />
-            <h3 className="font-bold text-gray-900 mb-2">Durée idéale</h3>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Durée idéale</h3>
             <p className="text-gray-700">4-6 jours</p>
           </div>
-          <div className="p-6 bg-orange-50 rounded-lg">
+          <div className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
             <DollarSign className="w-8 h-8 text-orange-600 mb-3" />
-            <h3 className="font-bold text-gray-900 mb-2">Budget/jour</h3>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Budget/jour</h3>
             <p className="text-gray-700">AED 300-600</p>
           </div>
-          <div className="p-6 bg-orange-50 rounded-lg">
+          <div className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
             <MapPin className="w-8 h-8 text-orange-600 mb-3" />
-            <h3 className="font-bold text-gray-900 mb-2">Fuseau horaire</h3>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Fuseau horaire</h3>
             <p className="text-gray-700">UTC+4</p>
           </div>
-          <div className="p-6 bg-orange-50 rounded-lg">
+          <div className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
             <Zap className="w-8 h-8 text-orange-600 mb-3" />
-            <h3 className="font-bold text-gray-900 mb-2">Meilleure période</h3>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Meilleure période</h3>
             <p className="text-gray-700">Octobre-Avril</p>
           </div>
         </section>
 
         {/* Top Attractions */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Top Attractions</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Top Attractions</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {attractions.map((attr, idx) => (
-              <div key={idx} className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{attr.name}</h3>
-                <p className="text-gray-700 mb-3">{attr.description}</p>
-                <div className="flex justify-between text-sm text-gray-600">
+              <div key={idx} className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-lg transition-shadow bg-white dark:bg-gray-800">
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{attr.name}</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">{attr.description}</p>
+                <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
                   <span>⏱️ {attr.time}</span>
                   <span>💰 {attr.price}</span>
                 </div>
@@ -167,13 +167,13 @@ export default function DubaiPage() {
 
         {/* Restaurants */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Restaurants Recommandés</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Restaurants Recommandés</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {restaurants.map((rest, idx) => (
-              <div key={idx} className="p-6 bg-orange-50 rounded-lg">
+              <div key={idx} className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                 <Utensils className="w-6 h-6 text-orange-500 mb-2" />
-                <h3 className="font-bold text-gray-900 mb-2">{rest.name}</h3>
-                <p className="text-sm text-gray-700 mb-2">{rest.cuisine}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">{rest.name}</h3>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{rest.cuisine}</p>
                 <div className="flex justify-between text-sm">
                   <span className="text-orange-600 font-semibold">{rest.price}</span>
                   <span>{rest.rating}</span>
@@ -185,13 +185,13 @@ export default function DubaiPage() {
 
         {/* Travel Tips */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Conseils Pratiques</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Conseils Pratiques</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {tips.map((tip, idx) => (
-              <div key={idx} className="p-6 bg-gray-50 rounded-lg">
+              <div key={idx} className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <div className="text-3xl mb-3">{tip.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2">{tip.title}</h3>
-                <p className="text-gray-700 text-sm">{tip.description}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">{tip.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">{tip.description}</p>
               </div>
             ))}
           </div>
@@ -199,16 +199,16 @@ export default function DubaiPage() {
 
         {/* Special Offers */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Offres Spéciales KHAMCI VOYAGES</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Offres Spéciales KHAMCI VOYAGES</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {offers.map((offer, idx) => (
               <div key={idx} className="p-6 border-2 border-orange-500 rounded-lg bg-orange-50">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{offer.title}</h3>
-                <p className="text-gray-700 mb-4">{offer.description}</p>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{offer.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">{offer.description}</p>
                 <p className="text-2xl font-bold text-orange-600 mb-4">{offer.price}</p>
                 <ul className="space-y-2 mb-4">
                   {offer.includes.map((item, i) => (
-                    <li key={i} className="text-sm text-gray-700">✓ {item}</li>
+                    <li key={i} className="text-sm text-gray-700 dark:text-gray-300">✓ {item}</li>
                   ))}
                 </ul>
                 <Button
@@ -240,12 +240,12 @@ export default function DubaiPage() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">Réserver Votre Voyage à Dubaï</h2>
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full my-8">
+            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Réserver Votre Voyage à Dubaï</h2>
               <button
                 onClick={() => setShowForm(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
+                className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 text-2xl"
               >
                 ✕
               </button>

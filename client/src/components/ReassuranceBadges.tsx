@@ -23,10 +23,10 @@ export default function ReassuranceBadges() {
       {badges.map((badge, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+          className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700"
         >
           <div className="text-2xl mb-2">{badge.icon}</div>
-          <p className="text-sm font-semibold text-gray-900">{badge.text}</p>
+          <p className="text-sm font-semibold text-gray-900 dark:text-white">{badge.text}</p>
         </div>
       ))}
     </div>

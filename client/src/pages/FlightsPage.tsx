@@ -55,7 +55,7 @@ export default function FlightsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <HeaderNav />
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#FF6B35] to-[#0D1B3E]">
@@ -87,15 +87,15 @@ export default function FlightsPage() {
       <div className="container py-16">
         {/* Introduction */}
         <section className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Vols Internationaux - KHAMCI VOYAGES
           </h2>
-          <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
             Depuis 2021, KHAMCI VOYAGES est votre partenaire de confiance pour tous vos voyages aériens. 
             Nous offrons des billets d'avion vers plus de 500 destinations dans le monde entier, avec les meilleures 
             compagnies aériennes et les tarifs les plus compétitifs.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             Que vous voyagiez pour affaires, loisirs ou famille, notre équipe d'experts est à votre service pour 
             trouver le vol parfait adapté à vos besoins et votre budget.
           </p>
@@ -103,17 +103,17 @@ export default function FlightsPage() {
 
         {/* Features Grid */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Pourquoi Choisir KHAMCI VOYAGES pour vos Vols ?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <div key={idx} className="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                <div key={idx} className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition-shadow">
                   <Icon className="w-8 h-8 text-orange-500 mb-3" />
-                  <h3 className="font-bold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
                 </div>
               );
             })}
@@ -122,14 +122,14 @@ export default function FlightsPage() {
 
         {/* Popular Destinations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Destinations Populaires
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {destinations.map((dest, idx) => (
-              <div key={idx} className="p-6 border border-gray-200 rounded-lg hover:border-orange-500 transition-colors">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">{dest.city}</h3>
-                <p className="text-gray-600 mb-3">{dest.country}</p>
+              <div key={idx} className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-orange-500 transition-colors bg-white dark:bg-gray-800">
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{dest.city}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-3">{dest.country}</p>
                 <p className="text-sm text-orange-600 font-semibold">{dest.flights} vols disponibles</p>
               </div>
             ))}
@@ -137,14 +137,14 @@ export default function FlightsPage() {
         </section>
 
         {/* Services Details */}
-        <section className="bg-gray-50 rounded-lg p-8 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <section className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Nos Services pour vos Vols
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Réservation de Vols</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Réservation de Vols</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Vols directs et connectés</li>
                 <li>✓ Toutes les compagnies aériennes</li>
                 <li>✓ Classes économique et affaires</li>
@@ -152,8 +152,8 @@ export default function FlightsPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Services Additionnels</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Services Additionnels</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Assurance voyage complète</li>
                 <li>✓ Transferts aéroport inclus</li>
                 <li>✓ Assistance visa si nécessaire</li>
@@ -181,8 +181,8 @@ export default function FlightsPage() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full my-8">
+            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold gradient-text">Demander un Devis Vol</h2>
               <button
                 onClick={() => setShowForm(false)}

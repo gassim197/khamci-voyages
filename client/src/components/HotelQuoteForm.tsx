@@ -110,68 +110,64 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Service Type Badge */}
-      <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg">
+      <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
         <Hotel className="w-5 h-5 text-blue-500" />
-        <span className="font-semibold text-blue-900">Demande de Devis - Hôtel</span>
+        <span className="font-semibold text-blue-900 dark:text-blue-300">Demande de Devis - Hôtel</span>
       </div>
 
       {/* Personal Info Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Vos Informations</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Vos Informations</h3>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Prénom *</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
               placeholder="Jean"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.firstName ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom *</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
               placeholder="Dupont"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.lastName ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="jean@example.com"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Téléphone *</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="+224 XXX XXX XXX"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.phone ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
           </div>
@@ -180,11 +176,11 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
 
       {/* Hotel Details Section */}
       <div className="space-y-4">
-        <h3 className="font-semibold text-gray-900">Détails de l'Hôtel</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white">Détails de l'Hôtel</h3>
         
         {/* Destination */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Destination *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Destination *</label>
           <CityCombobox
             value={formData.destination}
             onChange={(val) => {
@@ -201,28 +197,26 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
         {/* Dates */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date d'Arrivée *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date d'Arrivée *</label>
             <input
               type="date"
               name="checkInDate"
               value={formData.checkInDate}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.checkInDate ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.checkInDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.checkInDate && <p className="text-red-500 text-xs mt-1">{errors.checkInDate}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Date de Départ *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date de Départ *</label>
             <input
               type="date"
               name="checkOutDate"
               value={formData.checkOutDate}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.checkOutDate ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                errors.checkOutDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600' }`}
             />
             {errors.checkOutDate && <p className="text-red-500 text-xs mt-1">{errors.checkOutDate}</p>}
           </div>
@@ -231,12 +225,12 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
         {/* Rooms & Guests */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de Chambres *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Chambres *</label>
             <select
               name="rooms"
               value={formData.rooms}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {[1, 2, 3, 4, 5].map(n => (
                 <option key={n} value={n}>{n} chambre{n > 1 ? 's' : ''}</option>
@@ -244,12 +238,12 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de Voyageurs *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Voyageurs *</label>
             <select
               name="guests"
               value={formData.guests}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
                 <option key={n} value={n}>{n} voyageur{n > 1 ? 's' : ''}</option>
@@ -260,7 +254,7 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
 
         {/* Star Rating */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Catégorie d'Hôtel (optionnel)</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Catégorie d'Hôtel (optionnel)</label>
           <div className="grid grid-cols-3 gap-2">
             {starRatings.map(rating => (
               <label key={rating.value} className="flex items-center gap-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
@@ -280,21 +274,21 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Budget Estimé par Nuit (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Nuit (USD) *</label>
           <input
             type="number"
             name="estimatedBudget"
             value={formData.estimatedBudget}
             onChange={handleChange}
             placeholder="150"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           />
         </div>
       </div>
 
       {/* Message */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Message Spécial (optionnel)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message Spécial (optionnel)</label>
         <textarea
           name="message"
           value={formData.message}
@@ -306,7 +300,7 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
       </div>
 
       {/* Reassurance */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-700">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 text-sm text-green-700 dark:text-green-400">
         ✓ Gratuit et sans engagement • Réponse garantie sous 24h
       </div>
 

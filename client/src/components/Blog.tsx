@@ -23,10 +23,10 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
-  destinations: "bg-blue-100 text-blue-700",
-  conseils: "bg-green-100 text-green-700",
-  offres: "bg-orange-100 text-orange-700",
-  actualites: "bg-purple-100 text-purple-700",
+  destinations: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+  conseils: "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300",
+  offres: "bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300",
+  actualites: "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300",
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -74,18 +74,18 @@ export default function Blog() {
   const regularPosts = filteredPosts.slice(3);
 
   return (
-    <section id="blog" className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="blog" className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-orange-100 rounded-full">
-            <BookOpen className="w-4 h-4 text-orange-600" />
-            <span className="text-sm font-semibold text-orange-600">BLOG & ACTUALITÉS</span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-orange-100 dark:bg-orange-900/30 rounded-full">
+            <BookOpen className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+            <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">BLOG & ACTUALITÉS</span>
           </div>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
             Conseils, Destinations & Offres
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Découvrez nos articles sur les destinations, les conseils de voyage,
             les offres spéciales et l'actualité de KHAMCI VOYAGES.
           </p>
@@ -100,7 +100,7 @@ export default function Blog() {
               className={`px-4 py-2 rounded-full font-semibold transition-all text-sm ${
                 selectedCategory === cat.value
                   ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg"
-                  : "bg-white text-gray-700 border border-gray-300 hover:border-orange-500 hover:text-orange-600"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:border-orange-500 hover:text-orange-600 dark:hover:border-orange-400 dark:hover:text-orange-400"
               }`}
             >
               {cat.icon} {cat.label}
@@ -118,7 +118,7 @@ export default function Blog() {
         {/* Error State */}
         {error && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">Impossible de charger les articles pour le moment.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-lg">Impossible de charger les articles pour le moment.</p>
           </div>
         )}
 
@@ -126,12 +126,12 @@ export default function Blog() {
         {!isLoading && !error && filteredPosts.length === 0 && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📝</div>
-            <h3 className="text-xl font-bold text-gray-700 mb-2">
+            <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200 mb-2">
               {selectedCategory === "tous"
                 ? "Aucun article publié pour le moment"
                 : `Aucun article dans la catégorie "${CATEGORY_LABELS[selectedCategory] ?? selectedCategory}"`}
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-6">
               {selectedCategory === "tous"
                 ? "Les articles publiés depuis le dashboard admin apparaîtront ici."
                 : "Essayez une autre catégorie."}
@@ -139,7 +139,7 @@ export default function Blog() {
             {selectedCategory !== "tous" && (
               <button
                 onClick={() => setSelectedCategory("tous")}
-                className="text-orange-600 hover:text-orange-700 font-semibold"
+                className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold"
               >
                 Voir tous les articles →
               </button>
@@ -154,9 +154,9 @@ export default function Blog() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {featuredPosts.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`} className="block h-full">
-                  <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group flex flex-col">
+                  <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group flex flex-col bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     {/* Cover Image */}
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-orange-100 to-red-100 flex-shrink-0">
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 flex-shrink-0">
                       {post.coverImage ? (
                         <img
                           src={post.coverImage}
@@ -169,7 +169,7 @@ export default function Blog() {
                         </div>
                       )}
                       {/* Category badge */}
-                      <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-bold ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700"}`}>
+                      <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-bold ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`}>
                         <Tag size={10} className="inline mr-1" />
                         {CATEGORY_LABELS[post.category] ?? post.category}
                       </div>
@@ -177,17 +177,17 @@ export default function Blog() {
 
                     {/* Content */}
                     <div className="p-5 flex flex-col flex-grow">
-                      <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                      <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2 line-clamp-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                         {post.title}
                       </h3>
                       {post.excerpt && (
-                        <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow">
+                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4 flex-grow">
                           {post.excerpt}
                         </p>
                       )}
 
                       {/* Meta */}
-                      <div className="flex items-center gap-4 text-xs text-gray-400 mb-4">
+                      <div className="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500 mb-4">
                         <span className="flex items-center gap-1">
                           <Calendar size={11} />
                           {post.publishedAt
@@ -216,13 +216,13 @@ export default function Blog() {
             {/* More articles */}
             {regularPosts.length > 0 && (
               <>
-                <div className="my-8 border-t border-gray-200" />
-                <h3 className="text-xl font-bold text-gray-900 mb-8">Autres Articles</h3>
+                <div className="my-8 border-t border-gray-200 dark:border-gray-700" />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-8">Autres Articles</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                   {regularPosts.map((post) => (
                     <Link key={post.id} href={`/blog/${post.slug}`} className="block h-full">
-                      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group flex flex-col">
-                        <div className="relative h-40 overflow-hidden bg-gradient-to-br from-orange-50 to-red-50 flex-shrink-0">
+                      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group flex flex-col bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                        <div className="relative h-40 overflow-hidden bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 flex-shrink-0">
                           {post.coverImage ? (
                             <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                           ) : (
@@ -230,18 +230,18 @@ export default function Blog() {
                               {CATEGORY_ICONS[post.category] ?? "📰"}
                             </div>
                           )}
-                          <div className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700"}`}>
+                          <div className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`}>
                             {CATEGORY_LABELS[post.category] ?? post.category}
                           </div>
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
-                          <h3 className="font-bold text-gray-900 mb-1 line-clamp-2 group-hover:text-orange-600 transition-colors text-base">
+                          <h3 className="font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors text-base">
                             {post.title}
                           </h3>
-                          <div className="flex items-center gap-3 text-xs text-gray-400 mt-auto pt-3">
+                          <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500 mt-auto pt-3">
                             <span className="flex items-center gap-1"><Calendar size={10} />{new Date(post.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}</span>
                             <span className="flex items-center gap-1"><Clock size={10} />{post.readTime ?? 5} min</span>
-                            <span className="ml-auto text-orange-600 font-semibold text-xs flex items-center gap-1">Lire <ArrowRight size={10} /></span>
+                            <span className="ml-auto text-orange-600 dark:text-orange-400 font-semibold text-xs flex items-center gap-1">Lire <ArrowRight size={10} /></span>
                           </div>
                         </div>
                       </Card>

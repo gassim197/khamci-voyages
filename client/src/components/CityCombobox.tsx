@@ -107,8 +107,8 @@ export default function CityCombobox({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoComplete="off"
-          className={`w-full px-4 py-2 pr-16 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 ${
-            error ? 'border-red-500' : 'border-gray-300'
+          className={`w-full px-4 py-2 pr-16 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 ${
+            error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
           }`}
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
@@ -116,7 +116,7 @@ export default function CityCombobox({
             <button
               type="button"
               onClick={handleClear}
-              className="p-1 text-gray-400 hover:text-gray-600 rounded"
+              className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded"
               tabIndex={-1}
             >
               <X size={14} />
@@ -128,7 +128,7 @@ export default function CityCombobox({
               setIsOpen(prev => !prev);
               inputRef.current?.focus();
             }}
-            className="p-1 text-gray-400 hover:text-gray-600 rounded"
+            className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded"
             tabIndex={-1}
           >
             <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -138,7 +138,7 @@ export default function CityCombobox({
 
       {/* Dropdown suggestions */}
       {isOpen && filtered.length > 0 && (
-        <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-52 overflow-y-auto">
+        <ul className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg max-h-52 overflow-y-auto">
           {filtered.map(city => (
             <li
               key={city}
@@ -146,8 +146,8 @@ export default function CityCombobox({
                 e.preventDefault(); // prevent blur before click
                 handleSelect(city);
               }}
-              className={`px-4 py-2 cursor-pointer text-sm hover:bg-orange-50 hover:text-orange-700 transition-colors ${
-                city === inputValue ? 'bg-orange-50 text-orange-700 font-medium' : 'text-gray-700'
+              className={`px-4 py-2 cursor-pointer text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-700 dark:hover:text-orange-300 transition-colors ${
+                city === inputValue ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 font-medium' : 'text-gray-700 dark:text-gray-300'
               }`}
             >
               {city}
@@ -160,7 +160,7 @@ export default function CityCombobox({
                 e.preventDefault();
                 handleSelect(inputValue.trim());
               }}
-              className="px-4 py-2 cursor-pointer text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100 italic"
+              className="px-4 py-2 cursor-pointer text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 border-t border-gray-100 dark:border-gray-700 italic"
             >
               Utiliser "{inputValue.trim()}"
             </li>

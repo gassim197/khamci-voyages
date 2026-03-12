@@ -80,7 +80,7 @@ export default function FAQ() {
   const activeItems = FAQ_ITEMS.find(c => c.category === activeCategory)?.questions || [];
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-white">
+    <section id="faq" className="py-16 md:py-24 bg-white dark:bg-gray-950">
       <div className="container max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -90,7 +90,7 @@ export default function FAQ() {
           <h2 className="heading-lg gradient-text mb-4">
             Tout ce que vous devez savoir
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
             Vous avez une question ? Retrouvez les réponses aux questions les plus fréquentes
             de nos clients. Vous ne trouvez pas votre réponse ? Notre équipe est disponible.
           </p>
@@ -105,7 +105,7 @@ export default function FAQ() {
               className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${
                 activeCategory === cat.category
                   ? "bg-[#FF6B35] text-white shadow-md"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
               {cat.category}
@@ -122,15 +122,15 @@ export default function FAQ() {
               <div
                 key={key}
                 className={`border rounded-xl overflow-hidden transition-all duration-200 ${
-                  isOpen ? "border-[#FF6B35] shadow-md" : "border-gray-200 hover:border-gray-300"
+                  isOpen ? "border-[#FF6B35] shadow-md" : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
               >
                 <button
                   onClick={() => toggleItem(key)}
-                  className="w-full flex items-center justify-between gap-4 p-5 text-left bg-white hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between gap-4 p-5 text-left bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
                   <span className={`font-semibold text-sm md:text-base leading-snug ${
-                    isOpen ? "text-[#FF6B35]" : "text-[#0D1B3E]"
+                    isOpen ? "text-[#FF6B35]" : "text-[#0D1B3E] dark:text-white"
                   }`}>
                     {item.q}
                   </span>
@@ -142,8 +142,8 @@ export default function FAQ() {
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 bg-orange-50/30 border-t border-orange-100">
-                    <p className="text-gray-600 text-sm leading-relaxed pt-4">
+                  <div className="px-5 pb-5 bg-orange-50/30 dark:bg-orange-900/10 border-t border-orange-100 dark:border-orange-900/30">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed pt-4">
                       {item.a}
                     </p>
                   </div>

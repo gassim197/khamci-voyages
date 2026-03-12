@@ -130,13 +130,13 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-white dark:bg-gray-900 shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-1">Gestion des témoignages clients</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-300 mt-1">Gestion des témoignages clients</p>
           </div>
           <Button
             onClick={() => {
@@ -185,9 +185,9 @@ export default function AdminDashboard() {
         {/* Testimonials List */}
         <div className="space-y-4">
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-lg p-8 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
               <EyeOff className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">Aucun témoignage à afficher</p>
+              <p className="text-gray-600 dark:text-gray-300">Aucun témoignage à afficher</p>
             </div>
           ) : (
             filtered.map(testimonial => (
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-semibold text-gray-900">{testimonial.name}</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.name}</h3>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         testimonial.status === "pending"
                           ? "bg-yellow-100 text-yellow-800"
@@ -216,15 +216,15 @@ export default function AdminDashboard() {
                         {testimonial.status === "pending" ? "En attente" : testimonial.status === "approved" ? "Approuvé" : "Rejeté"}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600">{testimonial.title} • {testimonial.location}</p>
-                    <p className="text-sm text-gray-500 mt-1">⭐ {testimonial.rating}/5</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{testimonial.title} • {testimonial.location}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">⭐ {testimonial.rating}/5</p>
                   </div>
                   <Eye className="w-5 h-5 text-gray-400" />
                 </div>
 
                 {selectedId === testimonial.id && (
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <p className="text-gray-700 mb-6">"{testimonial.comment}"</p>
+                  <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <p className="text-gray-700 dark:text-gray-300 mb-6">"{testimonial.comment}"</p>
 
                     {testimonial.status === "pending" && (
                       <div className="flex gap-3">

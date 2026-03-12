@@ -191,13 +191,13 @@ export default function DestinationGalleries() {
   const displayImages = [...allImages, ...allImages];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 overflow-hidden">
       <div className="container mb-12">
         <div className="text-center">
           <h2 className="heading-lg gradient-text mb-4">
             Galeries des Destinations
           </h2>
-          <p className="text-body text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Explorez la beauté de la Guinée et du monde. Faites défiler ou cliquez sur une image pour l'agrandir.
           </p>
         </div>
@@ -224,8 +224,8 @@ export default function DestinationGalleries() {
         </button>
 
         {/* Dégradés sur les bords */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 to-transparent z-[5] pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 to-transparent z-[5] pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 dark:from-gray-950 to-transparent z-[5] pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 dark:from-gray-950 to-transparent z-[5] pointer-events-none" />
 
         {/* Piste de défilement */}
         <div

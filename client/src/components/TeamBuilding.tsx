@@ -15,7 +15,7 @@ export default function TeamBuilding() {
 
   return (
     <>
-      <section id="team-building" className="py-16 md:py-24 bg-gradient-to-br from-white to-gray-50">
+      <section id="team-building" className="py-16 md:py-24 bg-gradient-to-br from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Image */}
@@ -40,7 +40,7 @@ export default function TeamBuilding() {
               </div>
 
               {/* Description */}
-              <p className="text-body text-gray-600">
+              <p className="text-body text-gray-600 dark:text-gray-300">
                 KHAMCI VOYAGES organise des expériences de team building inoubliables
                 qui renforcent la cohésion de votre équipe. Activités ludiques, découverte
                 culturelle et moments de détente dans les plus beaux cadres de Guinée.
@@ -56,7 +56,7 @@ export default function TeamBuilding() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Équipe Motivée</h3>
-                    <p className="text-gray-600 text-sm">Souvenirs inoubliables qui renforcent les liens</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Souvenirs inoubliables qui renforcent les liens</p>
                   </div>
                 </div>
 
@@ -68,7 +68,7 @@ export default function TeamBuilding() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Budget Maîtrisé</h3>
-                    <p className="text-gray-600 text-sm">Packages adaptés à tous les budgets d'entreprise</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Packages adaptés à tous les budgets d'entreprise</p>
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@ export default function TeamBuilding() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Cadre Exceptionnel</h3>
-                    <p className="text-gray-600 text-sm">Découvrez la beauté naturelle de la Guinée</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Découvrez la beauté naturelle de la Guinée</p>
                   </div>
                 </div>
 
@@ -92,14 +92,14 @@ export default function TeamBuilding() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">Logistique Complète</h3>
-                    <p className="text-gray-600 text-sm">Animateurs expérimentés, assurance groupe incluse</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Animateurs expérimentés, assurance groupe incluse</p>
                   </div>
                 </div>
               </div>
 
               {/* Reassurance */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <p className="text-sm text-green-700">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                <p className="text-sm text-green-700 dark:text-green-300">
                   <span className="font-bold">✓ Assurance groupe incluse</span> • Révisions illimitées • Satisfaction garantie
                 </p>
               </div>
@@ -113,7 +113,7 @@ export default function TeamBuilding() {
               </button>
 
               {/* Secondary Text */}
-              <p className="text-center text-sm text-gray-600">
+              <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                 Réponse sous 24h • Sans engagement • Révisions illimitées
               </p>
             </div>

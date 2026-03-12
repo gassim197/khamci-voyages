@@ -163,7 +163,7 @@ export default function BangkokPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center text-white overflow-hidden">
         <img src="/covers/bangkok.jpg" alt="Bangkok" className="absolute inset-0 w-full h-full object-cover" />

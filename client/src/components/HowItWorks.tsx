@@ -29,7 +29,7 @@ export default function HowItWorks() {
           <h2 className="heading-lg gradient-text mb-4">
             Comment ça Marche
           </h2>
-          <p className="text-body text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Un processus simple et transparent pour organiser votre voyage
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function HowItWorks() {
                   </div>
 
                   <h3 className="heading-md mb-3 text-gray-900 dark:text-gray-100">{step.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -70,7 +70,7 @@ export default function HowItWorks() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <p className="text-body text-gray-600 mb-6">
+          <p className="text-body text-gray-600 dark:text-gray-300 mb-6">
             Prêt à commencer votre aventure ?
           </p>
           <a href="#contact" className="btn-cta">

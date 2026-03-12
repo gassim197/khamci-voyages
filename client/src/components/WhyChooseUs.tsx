@@ -25,13 +25,13 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="heading-lg gradient-text mb-4">
             Pourquoi Choisir KHAMCI VOYAGES
           </h2>
-          <p className="text-body text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Nous mettons à votre service notre expertise, notre passion pour les voyages
             et notre engagement envers votre satisfaction.
           </p>
@@ -48,14 +48,14 @@ export default function WhyChooseUs() {
                   animationDelay: `${index * 100}ms`,
                 }}
               >
-                <div className="mb-4 inline-block p-3 bg-gradient-to-br from-orange-100 to-red-100 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-4 inline-block p-3 bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 rounded-lg group-hover:scale-110 transition-transform duration-300">
                   <Icon
                     size={28}
-                    className="text-orange-500"
+                    className="text-orange-500 dark:text-orange-400"
                   />
                 </div>
-                <h3 className="heading-md mb-2 text-gray-900">{reason.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <h3 className="heading-md mb-2 text-gray-900 dark:text-white">{reason.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                   {reason.description}
                 </p>
               </div>

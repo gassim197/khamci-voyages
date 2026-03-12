@@ -60,7 +60,7 @@ export default function LocationVehiculeService() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
 
       {/* Hero */}
@@ -86,7 +86,7 @@ export default function LocationVehiculeService() {
       </section>
 
       {/* Value Proposition */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-gray-950">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-[#0D1B3E] text-center mb-8">Nos avantages pour la location</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -95,10 +95,10 @@ export default function LocationVehiculeService() {
               { icon: <Clock className="text-[#FF6B35]" size={28} />, title: "Disponibilité immédiate", desc: "Nos véhicules sont disponibles rapidement. Planifiez à l'avance ou contactez-nous pour une demande urgente." },
               { icon: <Shield className="text-[#0D1B3E]" size={28} />, title: "Chauffeurs professionnels", desc: "Nos chauffeurs sont expérimentés, ponctuels et connaissent parfaitement les routes guinéennes et internationales." },
             ].map(item => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div key={item.title} className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="mb-3">{item.icon}</div>
                 <h3 className="font-bold text-[#0D1B3E] mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -106,73 +106,73 @@ export default function LocationVehiculeService() {
       </section>
 
       {/* Form */}
-      <section id="devis" className="py-16 bg-white">
+      <section id="devis" className="py-16 bg-white dark:bg-gray-900">
         <div className="container max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-[#0D1B3E] mb-2">Demandez votre devis location</h2>
-            <p className="text-gray-500">Gratuit, sans engagement — réponse sous 24h</p>
+            <p className="text-gray-500 dark:text-gray-400">Gratuit, sans engagement — réponse sous 24h</p>
           </div>
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 space-y-5">
+          <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg p-8 space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Lieu de prise en charge *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Lieu de prise en charge *</label>
                 <CityCombobox value={formData.pickupCity} onChange={val => setFormData(prev => ({ ...prev, pickupCity: val }))} placeholder="Ex: Conakry, Aéroport..." cities={majorCities} />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Lieu de restitution</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Lieu de restitution</label>
                 <CityCombobox value={formData.dropoffCity} onChange={val => setFormData(prev => ({ ...prev, dropoffCity: val }))} placeholder="Ex: Kindia, Labé..." cities={majorCities} />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de début *</label>
-                <input type="date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de début *</label>
+                <input type="date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} min={new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de fin</label>
-                <input type="date" name="returnDate" value={formData.returnDate} onChange={handleChange} min={formData.pickupDate || new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Calendar size={14} className="inline mr-1" />Date de fin</label>
+                <input type="date" name="returnDate" value={formData.returnDate} onChange={handleChange} min={formData.pickupDate || new Date().toISOString().split("T")[0]} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Type de véhicule</label>
-                <select name="vehicleType" value={formData.vehicleType} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Type de véhicule</label>
+                <select name="vehicleType" value={formData.vehicleType} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   <option value="">Sans préférence</option>
                   {VEHICLE_TYPES.map(v => <option key={v} value={v}>{v}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5"><Users size={14} className="inline mr-1" />Passagers</label>
-                <select name="passengers" value={formData.passengers} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5"><Users size={14} className="inline mr-1" />Passagers</label>
+                <select name="passengers" value={formData.passengers} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   {[1,2,3,4,5,6,7,8,10,15,20,30,50].map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Avec chauffeur ?</label>
-                <select name="withDriver" value={formData.withDriver} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Avec chauffeur ?</label>
+                <select name="withDriver" value={formData.withDriver} onChange={handleChange} className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]">
                   <option value="oui">Oui</option>
                   <option value="non">Non</option>
                 </select>
               </div>
             </div>
-            <hr className="border-gray-100" />
+            <hr className="border-gray-100 dark:border-gray-700" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nom et prénom *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Nom et prénom *</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone *</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Téléphone *</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+224 6XX XXX XXX" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.com" className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35]" />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Précisions supplémentaires</label>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Itinéraire prévu, besoins spéciaux, entreprise..." className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Précisions supplémentaires</label>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Itinéraire prévu, besoins spéciaux, entreprise..." className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF6B35] resize-none" />
             </div>
             <button type="submit" disabled={submitQuote.isPending} className="w-full bg-gradient-to-r from-[#FF6B35] to-[#e85a2a] text-white font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60">
               {submitQuote.isPending ? "Envoi en cours..." : "🚗 Envoyer ma demande de devis"}

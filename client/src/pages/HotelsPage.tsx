@@ -29,7 +29,7 @@ export default function HotelsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <HeaderNav />
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
@@ -56,15 +56,15 @@ export default function HotelsPage() {
       <div className="container py-16">
         {/* Introduction */}
         <section className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Réservations d'Hôtels - KHAMCI VOYAGES
           </h2>
-          <p className="text-lg text-gray-700 leading-relaxed mb-4">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
             KHAMCI VOYAGES vous propose une sélection exclusive d'hôtels 3, 4 et 5 étoiles dans les plus belles 
             destinations du monde. Bénéficiez de tarifs négociés, de services premium et d'une assistance personnalisée 
             pour chaque réservation.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             De la chambre simple au suite luxueuse, nous trouvons l'hébergement parfait adapté à votre budget et vos 
             préférences. Notre équipe s'occupe de tous les détails pour que vous profitiez pleinement de votre séjour.
           </p>
@@ -72,7 +72,7 @@ export default function HotelsPage() {
 
         {/* Amenities */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Avantages de Réserver avec KHAMCI VOYAGES
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
@@ -81,7 +81,7 @@ export default function HotelsPage() {
               return (
                 <div key={idx} className="p-6 bg-blue-50 rounded-lg hover:shadow-lg transition-shadow">
                   <Icon className="w-8 h-8 text-blue-500 mb-3" />
-                  <h3 className="font-bold text-gray-900 mb-2">{amenity.title}</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{amenity.title}</h3>
                   <p className="text-gray-600 text-sm">{amenity.description}</p>
                 </div>
               );
@@ -91,7 +91,7 @@ export default function HotelsPage() {
 
         {/* Destinations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             Destinations Populaires
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -110,13 +110,13 @@ export default function HotelsPage() {
 
         {/* Services */}
         <section className="bg-blue-50 rounded-lg p-8 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Nos Services Hôteliers
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Réservation d'Hôtels</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Réservation d'Hôtels</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Hôtels 3, 4 et 5 étoiles</li>
                 <li>✓ Tarifs négociés et exclusifs</li>
                 <li>✓ Annulation gratuite jusqu'à 48h</li>
@@ -124,8 +124,8 @@ export default function HotelsPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Services Additionnels</h3>
-              <ul className="space-y-2 text-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Services Additionnels</h3>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>✓ Transferts aéroport</li>
                 <li>✓ Excursions et activités</li>
                 <li>✓ Assistance 24/7</li>
@@ -153,8 +153,8 @@ export default function HotelsPage() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl max-w-2xl w-full my-8">
+            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold gradient-text">Demander un Devis Hôtel</h2>
               <button
                 onClick={() => setShowForm(false)}

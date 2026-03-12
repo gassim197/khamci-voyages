@@ -38,7 +38,7 @@ export default function BlogArticlePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       <Header />
 
       <main className="flex-grow pt-20">
@@ -58,8 +58,8 @@ export default function BlogArticlePage() {
         {(error || (!isLoading && !post)) && (
           <div className="max-w-3xl mx-auto px-4 py-20 text-center">
             <div className="text-6xl mb-4">😕</div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Article introuvable</h1>
-            <p className="text-gray-500 mb-8">Cet article n'existe pas ou n'est plus disponible.</p>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Article introuvable</h1>
+            <p className="text-gray-500 dark:text-gray-400 mb-8">Cet article n'existe pas ou n'est plus disponible.</p>
             <Link href="/#blog">
               <Button className="bg-[#FF6B35] hover:bg-[#e85a2a] text-white">
                 <ArrowLeft size={16} className="mr-2" />
@@ -97,18 +97,18 @@ export default function BlogArticlePage() {
               </Link>
 
               {/* Category badge */}
-              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold mb-4 ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700"}`}>
+              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold mb-4 ${CATEGORY_COLORS[post.category] ?? "bg-gray-100 text-gray-700 dark:text-gray-300"}`}>
                 <Tag size={10} />
                 {CATEGORY_LABELS[post.category] ?? post.category}
               </div>
 
               {/* Title */}
-              <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              <h1 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
                 {post.title}
               </h1>
 
               {/* Meta */}
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6 pb-6 border-b border-gray-200">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
                 <span className="flex items-center gap-1">
                   <Calendar size={14} />
                   {post.publishedAt
@@ -119,7 +119,7 @@ export default function BlogArticlePage() {
                   <Clock size={14} />
                   {post.readTime ?? 5} min de lecture
                 </span>
-                <span className="font-medium text-gray-700">Par {post.authorName ?? "KHAMCI VOYAGES"}</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300">Par {post.authorName ?? "KHAMCI VOYAGES"}</span>
                 <button
                   onClick={handleShare}
                   className="ml-auto flex items-center gap-1 text-orange-600 hover:text-orange-700 font-semibold"
@@ -131,15 +131,15 @@ export default function BlogArticlePage() {
 
               {/* Excerpt */}
               {post.excerpt && (
-                <p className="text-lg text-gray-600 italic mb-8 border-l-4 border-orange-400 pl-4">
+                <p className="text-lg text-gray-600 dark:text-gray-400 italic mb-8 border-l-4 border-orange-400 pl-4">
                   {post.excerpt}
                 </p>
               )}
 
               {/* Content */}
               <div
-                className="prose prose-lg max-w-none text-gray-700 leading-relaxed
-                  prose-headings:text-gray-900 prose-headings:font-bold
+                className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed
+                  prose-headings:text-gray-900 dark:text-white prose-headings:font-bold
                   prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline
                   prose-strong:text-gray-900
                   prose-img:rounded-xl prose-img:shadow-md"
