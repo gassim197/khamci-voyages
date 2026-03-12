@@ -13,7 +13,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-start overflow-hidden">
         {/* Background Video with Overlay */}
         <div className="absolute inset-0">
           <video
