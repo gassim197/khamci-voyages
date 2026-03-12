@@ -111,7 +111,7 @@ export default function Services() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#FF6B35] transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-[#FF6B35] transition-colors">
                     {service.title}
                   </h3>
 
@@ -121,7 +121,7 @@ export default function Services() {
                   </p>
 
                   {/* Benefit */}
-                  <div className="bg-gray-50 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700">
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300">
                     ✓ {service.benefit}
                   </div>
 

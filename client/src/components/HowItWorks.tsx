@@ -23,7 +23,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white dark:bg-gray-900">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="heading-lg gradient-text mb-4">
@@ -43,7 +43,7 @@ export default function HowItWorks() {
             return (
               <div key={index} className="relative">
                 {/* Step Card */}
-                <div className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow relative z-10">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow relative z-10">
                   <div className="mb-6 flex items-center justify-between">
                     <div className="inline-block p-3 bg-gradient-to-br from-orange-400 to-red-400 rounded-lg">
                       <Icon size={28} className="text-white" />
@@ -51,7 +51,7 @@ export default function HowItWorks() {
                     <div className="text-4xl font-bold gradient-text">{step.number}</div>
                   </div>
 
-                  <h3 className="heading-md mb-3 text-gray-900">{step.title}</h3>
+                  <h3 className="heading-md mb-3 text-gray-900 dark:text-gray-100">{step.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
                     {step.description}
                   </p>

@@ -228,3 +228,11 @@
 ## Bugs Témoignages — 12/03/2026
 - [x] Texte du commentaire ne s'affiche pas dans les cartes de témoignages
 - [x] Ajouter le champ "poste/profession" dans les témoignages (BDD + formulaire + affichage)
+
+## Mode Sombre Automatique — 12/03/2026
+- [x] Configurer ThemeProvider en mode système (prefers-color-scheme)
+- [x] Définir les variables CSS du mode sombre dans index.css
+- [x] Adapter Header, Hero, Footer pour le mode sombre
+- [x] Adapter les cartes de services, témoignages, destinations
+- [x] Adapter les pages de destination et de services
+- [x] Adapter le dashboard admin pour le mode sombre

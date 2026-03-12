@@ -78,13 +78,13 @@ export default function DiscoverGuinea() {
                 {destinations.map((dest, index) => (
                   <div
                     key={index}
-                    className="group p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100 hover:border-orange-300"
+                    className="group p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 hover:border-orange-300"
                   >
                     {/* Icon & Title */}
                     <div className="flex items-start gap-3 mb-2">
                       <span className="text-2xl">{dest.icon}</span>
                       <div>
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                           {dest.title}
                         </h3>
                         <p className="text-xs text-orange-600 font-semibold">

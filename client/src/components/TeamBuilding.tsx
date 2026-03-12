@@ -55,7 +55,7 @@ export default function TeamBuilding() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Équipe Motivée</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Équipe Motivée</h3>
                     <p className="text-gray-600 text-sm">Souvenirs inoubliables qui renforcent les liens</p>
                   </div>
                 </div>
@@ -67,7 +67,7 @@ export default function TeamBuilding() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Budget Maîtrisé</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Budget Maîtrisé</h3>
                     <p className="text-gray-600 text-sm">Packages adaptés à tous les budgets d'entreprise</p>
                   </div>
                 </div>
@@ -79,7 +79,7 @@ export default function TeamBuilding() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Cadre Exceptionnel</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Cadre Exceptionnel</h3>
                     <p className="text-gray-600 text-sm">Découvrez la beauté naturelle de la Guinée</p>
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export default function TeamBuilding() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Logistique Complète</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Logistique Complète</h3>
                     <p className="text-gray-600 text-sm">Animateurs expérimentés, assurance groupe incluse</p>
                   </div>
                 </div>

@@ -166,7 +166,7 @@ export default function ContactForm() {
           <div className="md:col-span-1">
             <div className="space-y-8 sticky top-8">
               <div>
-                <h3 className="heading-md text-gray-900 mb-6">Nous Contacter</h3>
+                <h3 className="heading-md text-gray-900 dark:text-gray-100 mb-6">Nous Contacter</h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="flex-shrink-0">
@@ -175,7 +175,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Téléphone</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-gray-100">Téléphone</h3>
                       <a href="tel:+224611145892" className="text-gray-600 hover:text-[#FF6B35] transition-colors">
                         +224 611 145 892
                       </a>
@@ -188,7 +188,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Email</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-gray-100">Email</h3>
                       <a href="mailto:khamcivoyages@gmail.com" className="text-gray-600 hover:text-[#FF6B35] transition-colors">
                         khamcivoyages@gmail.com
                       </a>
@@ -201,7 +201,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Adresse</h3>
+                      <h3 className="font-semibold text-gray-900 dark:text-gray-100">Adresse</h3>
                       <p className="text-gray-600">Almamya, commune de Kaloum</p>
                       <p className="text-gray-600 text-sm">Conakry, Guinée</p>
                     </div>
@@ -274,7 +274,7 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-4 md:p-8">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-8">
 
               {/* ===== ÉTAPE 1 ===== */}
               {step === 1 && (
@@ -289,7 +289,7 @@ export default function ContactForm() {
 
                   {/* Service Type */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
                       Type de service souhaité *
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -319,7 +319,7 @@ export default function ContactForm() {
 
                   {/* Destination */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                       Destination souhaitée *
                     </label>
                     <CityCombobox
@@ -340,7 +340,7 @@ export default function ContactForm() {
                   {/* Dates */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         <Calendar size={14} className="inline mr-1" />
                         Date de départ *
                       </label>
@@ -359,7 +359,7 @@ export default function ContactForm() {
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         <Calendar size={14} className="inline mr-1" />
                         Date de retour *
                       </label>
@@ -380,7 +380,7 @@ export default function ContactForm() {
                   </div>
 
                   {/* Passengers & Airline *                  <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         <Users size={14} className="inline mr-1" />
                         Nombre de passagers
                       </label>
@@ -398,7 +398,7 @@ export default function ContactForm() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         Compagnie aérienne préférée
                       </label>
                       <select
@@ -442,7 +442,7 @@ export default function ContactForm() {
                   {/* Récap voyage */}
                   <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-sm">
                     <p className="font-semibold text-[#0D1B3E] mb-2">📋 Récapitulatif de votre voyage :</p>
-                    <div className="grid grid-cols-2 gap-2 text-gray-700">
+                    <div className="grid grid-cols-2 gap-2 text-gray-700 dark:text-gray-300">
                       <span>Service : <strong>{SERVICE_TYPES.find(s => s.value === formData.serviceType)?.label ?? "—"}</strong></span>
                       <span>Destination : <strong>{formData.destination ? (countries.find(c => c.code === formData.destination || c.name.toLowerCase() === formData.destination.toLowerCase())?.name || formData.destination) : "—"}</strong></span>
                       <span>Départ : <strong>{formData.departureDate || "—"}</strong></span>
@@ -460,7 +460,7 @@ export default function ContactForm() {
                   {/* Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         Nom Complet *
                       </label>
                       <input
@@ -476,7 +476,7 @@ export default function ContactForm() {
                       {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         Email *
                       </label>
                       <input
@@ -495,7 +495,7 @@ export default function ContactForm() {
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                       Téléphone *
                     </label>
                     <input
@@ -513,7 +513,7 @@ export default function ContactForm() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                       Message ou demandes spéciales (optionnel)
                     </label>
                     <textarea
@@ -531,7 +531,7 @@ export default function ContactForm() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-[#FF6B35] hover:text-[#FF6B35] transition-all"
+                      className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:border-[#FF6B35] hover:text-[#FF6B35] transition-all"
                     >
                       <ArrowLeft size={18} />
                       Retour

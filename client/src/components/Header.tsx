@@ -54,7 +54,7 @@ export default function Header() {
   const isServiceActive = SERVICES_MENU.some(s => s.href === location);
 
   return (
-    <header className="sticky top-0 z-40 bg-white shadow-md">
+    <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800/50 border-b border-transparent dark:border-gray-700/50">
       <nav className="container flex items-center justify-between py-3">
         {/* Logo officiel */}
         <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-transform">
@@ -75,7 +75,7 @@ export default function Header() {
           <Link
             href="/"
             className={`text-sm font-medium transition-colors ${
-              location === "/" ? "text-[#FF6B35] font-semibold" : "text-gray-700 hover:text-[#FF6B35]"
+              location === "/" ? "text-[#FF6B35] font-semibold" : "text-gray-700 dark:text-gray-200 hover:text-[#FF6B35]"
             }`}
           >
             Accueil
@@ -91,7 +91,7 @@ export default function Header() {
             <button
               onClick={() => setIsServicesOpen(prev => !prev)}
               className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                isServiceActive ? "text-[#FF6B35] font-semibold" : "text-gray-700 hover:text-[#FF6B35]"
+                isServiceActive ? "text-[#FF6B35] font-semibold" : "text-gray-700 dark:text-gray-200 hover:text-[#FF6B35]"
               }`}
             >
               Services
@@ -103,7 +103,7 @@ export default function Header() {
 
             {/* Dropdown */}
             {isServicesOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="p-2">
                   {SERVICES_MENU.map(service => {
                     const Icon = service.icon;
@@ -119,7 +119,7 @@ export default function Header() {
                         <div className={`p-2 rounded-lg shrink-0 transition-colors ${
                           location === service.href
                             ? "bg-[#FF6B35] text-white"
-                            : "bg-gray-100 text-gray-600 group-hover:bg-[#FF6B35] group-hover:text-white"
+                            : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 group-hover:bg-[#FF6B35] group-hover:text-white"
                         }`}>
                           <Icon size={16} />
                         </div>
@@ -129,13 +129,13 @@ export default function Header() {
                           }`}>
                             {service.label}
                           </div>
-                          <div className="text-xs text-gray-500 mt-0.5">{service.desc}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{service.desc}</div>
                         </div>
                       </Link>
                     );
                   })}
                 </div>
-                <div className="border-t border-gray-100 p-3 bg-gray-50">
+                <div className="border-t border-gray-100 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900">
                   <button
                     onClick={() => {
                       setIsServicesOpen(false);
@@ -154,7 +154,7 @@ export default function Header() {
           <Link
             href="/a-propos"
             className={`text-sm font-medium transition-colors ${
-              location === "/a-propos" ? "text-[#FF6B35] font-semibold" : "text-gray-700 hover:text-[#FF6B35]"
+              location === "/a-propos" ? "text-[#FF6B35] font-semibold" : "text-gray-700 dark:text-gray-200 hover:text-[#FF6B35]"
             }`}
           >
             À propos
@@ -163,7 +163,7 @@ export default function Header() {
           {/* Contact */}
           <button
             onClick={() => handleNavClick("/#contact")}
-            className="text-sm font-medium text-gray-700 hover:text-[#FF6B35] transition-colors"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors"
           >
             Contact
           </button>
@@ -171,7 +171,7 @@ export default function Header() {
           {/* Téléphone */}
           <a
             href="tel:+224611145892"
-            className="flex items-center gap-1.5 text-[#0D1B3E] hover:text-[#FF6B35] transition-colors font-semibold text-sm border border-[#0D1B3E] hover:border-[#FF6B35] rounded-full px-3 py-1.5"
+            className="flex items-center gap-1.5 text-[#0D1B3E] dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-semibold text-sm border border-[#0D1B3E] dark:border-gray-500 hover:border-[#FF6B35] rounded-full px-3 py-1.5"
           >
             <Phone size={14} className="shrink-0" />
             <span>+224 611 145 892</span>
@@ -198,12 +198,12 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
+        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
           <div className="container py-4 flex flex-col gap-1">
             <Link
               href="/"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-gray-700 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 block"
+              className="text-left text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 dark:border-gray-700 block"
             >
               Accueil
             </Link>
@@ -212,7 +212,7 @@ export default function Header() {
             <div className="border-b border-gray-100">
               <button
                 onClick={() => setIsMobileServicesOpen(prev => !prev)}
-                className="w-full flex items-center justify-between text-gray-700 hover:text-[#FF6B35] transition-colors font-medium py-2.5"
+                className="w-full flex items-center justify-between text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5"
               >
                 <span>Services</span>
                 <ChevronDown
@@ -229,7 +229,7 @@ export default function Header() {
                         key={service.href}
                         href={service.href}
                         onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                        className="flex items-center gap-3 py-2 text-sm text-gray-600 hover:text-[#FF6B35] transition-colors"
+                        className="flex items-center gap-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-[#FF6B35] transition-colors"
                       >
                         <Icon size={15} className="text-[#FF6B35] shrink-0" />
                         {service.label}
@@ -243,14 +243,14 @@ export default function Header() {
             <Link
               href="/a-propos"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-gray-700 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 block"
+              className="text-left text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 dark:border-gray-700 block"
             >
               À propos
             </Link>
 
             <button
               onClick={() => handleNavClick("/#contact")}
-              className="text-left text-gray-700 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100"
+              className="text-left text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 dark:border-gray-700"
             >
               Contact
             </button>
