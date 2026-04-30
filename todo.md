@@ -278,3 +278,15 @@
 - [x] Corriger pages de service (Billetterie, Hotel, Location, Assurance, Visa, Hadj)
 - [x] Corriger pages légales (A Propos, Mentions Légales, Politique, CGU)
 - [x] Corriger BlogArticlePage.tsx
+
+
+## Optimisation SEO Complète (Mars 2026)
+
+- [x] Ajouter/optimiser les métadonnées (index.html) (title, description) pour toutes les pages
+- [x] Implémenter le balisage structuré (TravelAgency) Schema.org (LocalBusiness, Organization, BreadcrumbList)
+- [x] Ajouter les balises Open Graph (index.html) et Twitter Card optimisées
+- [x] Créer sitemap.xml et robots.txt
+- [ ] Optimiser les images (alt text, compression)
+- [ ] Améliorer la performance (Core Web Vitals)
+- [ ] Ajouter des balises hreflang pour les variantes linguistiques
+- [ ] Configurer Google Search Console et Bing Webmaster Tools

@@ -1,0 +1,25 @@
+# Robots.txt pour KHAMCI VOYAGES
+# Permet aux moteurs de recherche d'indexer le site
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /*.json$
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://khamcivoyages.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

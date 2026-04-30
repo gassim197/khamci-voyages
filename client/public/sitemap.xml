@@ -1,118 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Page d'accueil -->
+  <!-- Pages principales -->
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- À propos -->
-  <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/a-propos</loc>
-    <lastmod>2025-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
+  
   <!-- Pages de service -->
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/billetterie</loc>
-    <lastmod>2025-03-11</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://khamcivoyages.com/vols</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/hotel</loc>
-    <lastmod>2025-03-11</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://khamcivoyages.com/hotels</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/location-vehicule</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/voitures</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Pages de destinations -->
+  <url>
+    <loc>https://khamcivoyages.com/destination/paris</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/assurance-voyage</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/destination/dubai</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/visa</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/destination/new-york</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/services/hadj-oumra</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/destination/casablanca</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
-
-  <!-- Destinations -->
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/destination/paris</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/destination/bangkok</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://khamcivoyages.com/destination/barcelona</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Pages de services détaillées -->
+  <url>
+    <loc>https://khamcivoyages.com/services/billetterie</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/destination/dubai</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/services/hotel</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/destination/casablanca</loc>
-    <lastmod>2025-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Blog -->
-  <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/blog/top-5-destinations-depuis-conakry-2025</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/services/location-vehicule</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/blog/guide-obtenir-visa-depuis-guinee-2025</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/services/assurance-voyage</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/blog/hadj-oumra-2025-guide-preparation-pelerinage</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/services/visa</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
+  <url>
+    <loc>https://khamcivoyages.com/services/hadj-omra</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Pages légales -->
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/mentions-legales</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/a-propos</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://khamcivoyages.com/mentions-legales</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/politique-confidentialite</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/politique-confidentialite</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://khamcivoyage-tggjc7uo.manus.space/conditions-utilisation</loc>
-    <lastmod>2025-03-11</lastmod>
+    <loc>https://khamcivoyages.com/conditions-utilisation</loc>
+    <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
 </urlset>
