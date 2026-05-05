@@ -5,6 +5,7 @@ import { majorCities, carTypes } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import CityCombobox from '@/components/CityCombobox';
+import { trackDevisSubmission } from '@/lib/analytics';
 
 /**
  * Car Rental Quote Form - KHAMCI VOYAGES
@@ -63,6 +64,11 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
 
   const submitQuote = trpc.quotes.submit.useMutation({
     onSuccess: () => {
+      trackDevisSubmission({
+        service_type: "voiture",
+        destination: formData.pickupLocation,
+        source: "page_voitures",
+      });
       toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
       if (onSubmit) { onSubmit(formData); } else { window.location.href = '/thank-you'; }
     },

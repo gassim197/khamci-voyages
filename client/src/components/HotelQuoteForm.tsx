@@ -5,6 +5,7 @@ import { majorCities, starRatings } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import CityCombobox from '@/components/CityCombobox';
+import { trackDevisSubmission } from '@/lib/analytics';
 
 /**
  * Hotel Quote Form - KHAMCI VOYAGES
@@ -62,6 +63,11 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
 
   const submitQuote = trpc.quotes.submit.useMutation({
     onSuccess: () => {
+      trackDevisSubmission({
+        service_type: "hotel",
+        destination: formData.destination,
+        source: "page_hotels",
+      });
       toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
       if (onSubmit) {
         onSubmit(formData);

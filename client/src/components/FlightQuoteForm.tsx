@@ -5,6 +5,7 @@ import { majorAirlines, majorCities, cabinClasses } from '@/data/serviceTypes';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import CityCombobox from '@/components/CityCombobox';
+import { trackDevisSubmission } from '@/lib/analytics';
 
 /**
  * Flight Quote Form - KHAMCI VOYAGES
@@ -72,6 +73,11 @@ export default function FlightQuoteForm({ onSubmit, onClose }: FlightQuoteFormPr
 
   const submitQuote = trpc.quotes.submit.useMutation({
     onSuccess: () => {
+      trackDevisSubmission({
+        service_type: "vol",
+        destination: formData.arrivalCity || formData.departureCity,
+        source: "page_vols",
+      });
       toast.success('Votre demande de devis a été envoyée ! Nous vous répondrons sous 24h.');
       sessionStorage.setItem('quoteData', JSON.stringify({
         name: `${formData.firstName} ${formData.lastName}`.trim(),

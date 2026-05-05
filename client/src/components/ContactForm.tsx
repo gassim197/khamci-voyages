@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { countries } from "@/data/countries";
 import { trpc } from "@/lib/trpc";
 import CityCombobox from "@/components/CityCombobox";
+import { trackDevisSubmission } from "@/lib/analytics";
 
 /**
  * Contact Form / Devis Form - KHAMCI VOYAGES
@@ -72,6 +73,11 @@ export default function ContactForm() {
   const submitQuote = trpc.quotes.submit.useMutation({
     onSuccess: () => {
       sessionStorage.setItem("quoteData", JSON.stringify(formData));
+      trackDevisSubmission({
+        service_type: (formData.serviceType as "vol" | "hotel" | "voiture" | "visa" | "autre") || "autre",
+        destination: formData.destination,
+        source: "contact_form",
+      });
       toast.success("✅ Votre demande de devis a été envoyée ! Nous vous répondons sous 24h.");
       setTimeout(() => setLocation("/thank-you"), 1500);
     },

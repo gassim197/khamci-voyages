@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
+import { trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
 
 const SERVICES_MENU = [
   { label: "Billetterie", href: "/services/billetterie", icon: Plane, desc: "Billets d'avion vers le monde entier" },
@@ -187,6 +188,7 @@ export default function Header() {
           {/* Téléphone */}
           <a
             href="tel:+224611145892"
+            onClick={() => trackPhoneClick(window.location.pathname)}
             className="flex items-center gap-1.5 text-[#0D1B3E] dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-semibold text-sm border border-[#0D1B3E] dark:border-gray-500 hover:border-[#FF6B35] rounded-full px-3 py-1.5"
           >
             <Phone size={14} className="shrink-0" />
@@ -279,6 +281,7 @@ export default function Header() {
 
             <a
               href="tel:+224611145892"
+              onClick={() => trackPhoneClick('mobile_menu')}
               className="flex items-center justify-center gap-2 bg-[#0D1B3E] text-white rounded-lg py-3 font-semibold hover:bg-[#1a3a6e] transition-colors mt-2"
             >
               <Phone size={16} />
@@ -288,6 +291,7 @@ export default function Header() {
               href="https://wa.me/224611145892?text=Bonjour%20KHAMCI%20VOYAGES%2C%20je%20souhaite%20un%20devis."
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick('mobile_menu')}
               className="flex items-center justify-center gap-2 bg-green-600 text-white rounded-lg py-3 font-semibold hover:bg-green-500 transition-colors mt-1"
             >
               <MessageCircle size={16} />

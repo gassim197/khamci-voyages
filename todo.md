@@ -293,3 +293,14 @@
 
 ## Google Analytics — Mai 2026
 - [x] Intégration balise Google Analytics (G-9E2RM59EN1) dans index.html
+
+## Événements de Conversion Google Analytics — Mai 2026
+- [x] Créer un helper gtag pour les événements de conversion (client/src/lib/analytics.ts)
+- [x] Ajouter événement gtag dans ContactForm (soumission devis)
+- [x] Ajouter événement gtag dans QuickQuoteModal (via ServiceQuoteForm)
+- [x] Ajouter événement gtag dans FlightQuoteForm (devis vol)
+- [x] Ajouter événement gtag dans HotelQuoteForm (devis hôtel)
+- [x] Ajouter événement gtag dans CarQuoteForm (devis voiture)
+- [x] Ajouter événement gtag dans ServiceQuoteForm (via sous-formulaires)
+- [x] Ajouter événement gtag pour clic WhatsApp
+- [x] Ajouter événement gtag pour clic téléphone

@@ -1,5 +1,6 @@
 import { MessageCircle, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { trackWhatsAppClick } from '@/lib/analytics';
 
 /**
  * WhatsApp Floating Button - KHAMCI VOYAGES
@@ -65,6 +66,7 @@ export default function WhatsAppButton() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick(window.location.pathname)}
               className="block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-center transition-colors"
             >
               💬 Démarrer la conversation
