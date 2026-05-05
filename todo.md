@@ -290,3 +290,6 @@
 - [ ] Améliorer la performance (Core Web Vitals)
 - [ ] Ajouter des balises hreflang pour les variantes linguistiques
 - [ ] Configurer Google Search Console et Bing Webmaster Tools
+
+## Google Analytics — Mai 2026
+- [x] Intégration balise Google Analytics (G-9E2RM59EN1) dans index.html
