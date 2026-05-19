@@ -314,3 +314,9 @@
 - [x] Ajouter la gestion des articles dans le dashboard admin
 - [x] Endpoint SSR pour les métadonnées Open Graph (titre, description, image par article)
 - [x] Tester le partage sur les réseaux sociaux (tests vitest OK)
+
+## Boutons de Partage Social — Mai 2026
+- [x] Ajouter des boutons de partage social sur la page d'article de blog (Facebook, WhatsApp, Twitter, LinkedIn, Copier le lien)
+- [x] Créer composant SocialShareButtons.tsx avec tracking GA4
+- [x] Intégrer SocialShareButtons dans BlogArticlePage.tsx
+- [x] Ajouter fonction trackEvent générique dans analytics.ts

@@ -1,10 +1,11 @@
 import { trpc } from "@/lib/trpc";
 import { useParams, Link } from "wouter";
-import { ArrowLeft, Calendar, Clock, Tag, Share2, MessageCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Tag, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SocialShareButtons from "@/components/SocialShareButtons";
 
 const CATEGORY_LABELS: Record<string, string> = {
   destinations: "Destinations",
@@ -28,14 +29,6 @@ export default function BlogArticlePage() {
     { slug },
     { enabled: !!slug }
   );
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({ title: post?.title, url: window.location.href });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
@@ -120,13 +113,6 @@ export default function BlogArticlePage() {
                   {post.readTime ?? 5} min de lecture
                 </span>
                 <span className="font-medium text-gray-700 dark:text-gray-300">Par {post.authorName ?? "KHAMCI VOYAGES"}</span>
-                <button
-                  onClick={handleShare}
-                  className="ml-auto flex items-center gap-1 text-orange-600 hover:text-orange-700 font-semibold"
-                >
-                  <Share2 size={14} />
-                  Partager
-                </button>
               </div>
 
               {/* Excerpt */}
@@ -146,6 +132,15 @@ export default function BlogArticlePage() {
                 style={{ whiteSpace: "pre-wrap" }}
               >
                 {post.content}
+              </div>
+
+              {/* Social Share Buttons */}
+              <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <SocialShareButtons
+                  url={window.location.href}
+                  title={post.title}
+                  description={post.excerpt ?? undefined}
+                />
               </div>
 
               {/* CTA */}

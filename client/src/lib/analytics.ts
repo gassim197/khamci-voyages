@@ -26,6 +26,14 @@ function sendEvent(eventName: string, params?: Record<string, string | number | 
 }
 
 /**
+ * Événement générique : permet d'envoyer un événement GA4 avec un nom et des paramètres personnalisés
+ * Utilisé notamment pour le tracking des partages d'articles sur les réseaux sociaux
+ */
+export function trackEvent(eventName: string, params?: Record<string, string | number | boolean>) {
+  sendEvent(eventName, params);
+}
+
+/**
  * Événement : Soumission d'un devis
  * Déclenché quand un formulaire de devis est soumis avec succès
  */
