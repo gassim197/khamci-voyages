@@ -25,6 +25,7 @@ import AssuranceVoyageService from "./pages/services/AssuranceVoyageService";
 import VisaService from "./pages/services/VisaService";
 import HadjOumraService from "./pages/services/HadjOumraService";
 import BlogArticlePage from "./pages/BlogArticlePage";
+import BlogPage from "./pages/BlogPage";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsUtilisation from "./pages/ConditionsUtilisation";
@@ -52,6 +53,7 @@ function Router() {
         <Route path="/services/assurance-voyage" component={AssuranceVoyageService} />
         <Route path="/services/visa" component={VisaService} />
         <Route path="/services/hadj-oumra" component={HadjOumraService} />
+        <Route path="/blog" component={BlogPage} />
         <Route path="/blog/:slug" component={BlogArticlePage} />
         <Route path="/mentions-legales" component={MentionsLegales} />
         <Route path="/politique-confidentialite" component={PolitiqueConfidentialite} />

@@ -304,3 +304,13 @@
 - [x] Ajouter événement gtag dans ServiceQuoteForm (via sous-formulaires)
 - [x] Ajouter événement gtag pour clic WhatsApp
 - [x] Ajouter événement gtag pour clic téléphone
+
+## Système de Blog avec Open Graph — Mai 2026
+- [x] Créer le schéma de base de données pour les articles de blog
+- [x] Créer les procédures tRPC (CRUD articles)
+- [x] Créer la page individuelle d'article avec métadonnées OG dynamiques
+- [x] Créer la page de listing du blog
+- [x] Intégrer les routes dans App.tsx
+- [x] Ajouter la gestion des articles dans le dashboard admin
+- [x] Endpoint SSR pour les métadonnées Open Graph (titre, description, image par article)
+- [x] Tester le partage sur les réseaux sociaux (tests vitest OK)
