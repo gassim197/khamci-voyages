@@ -44,7 +44,12 @@ function generateOgHtml(post: {
   const articleUrl = `${siteUrl}/blog/${post.slug}`;
   const title = `${post.title} | KHAMCI VOYAGES`;
   const description = post.excerpt || `Lisez "${post.title}" sur le blog de KHAMCI VOYAGES, votre agence de voyages en Guinée.`;
-  const image = post.coverImage || `${siteUrl}/og-image.jpg`;
+  const defaultOgImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/og-image-khamci-h7N4HYmxhJoJvsUHM7gK9Q.png";
+  // S'assurer que l'image est une URL absolue
+  let image = post.coverImage || defaultOgImage;
+  if (image && !image.startsWith("http")) {
+    image = `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+  }
   const publishedDate = post.publishedAt ? new Date(post.publishedAt).toISOString() : new Date().toISOString();
 
   return `<!DOCTYPE html>
