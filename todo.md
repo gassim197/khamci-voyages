@@ -320,3 +320,8 @@
 - [x] Créer composant SocialShareButtons.tsx avec tracking GA4
 - [x] Intégrer SocialShareButtons dans BlogArticlePage.tsx
 - [x] Ajouter fonction trackEvent générique dans analytics.ts
+
+## Barre de Progression de Lecture — Mai 2026
+- [x] Créer composant ReadingProgressBar.tsx avec hook useReadingProgress
+- [x] Intégrer la barre dans BlogArticlePage.tsx
+- [x] Tester la barre sur différentes longueurs d'articles

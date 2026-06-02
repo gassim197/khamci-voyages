@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SocialShareButtons from "@/components/SocialShareButtons";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
 
 const CATEGORY_LABELS: Record<string, string> = {
   destinations: "Destinations",
@@ -32,6 +33,7 @@ export default function BlogArticlePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+      <ReadingProgressBar />
       <Header />
 
       <main className="flex-grow pt-20">
