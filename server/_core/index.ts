@@ -3,8 +3,6 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";
-import { registerChatRoutes } from "./chat";
 import { registerKhamciChatRoutes } from "../chatKhamci";
 import { registerUploadRoutes } from "../uploadRoutes";
 import { appRouter } from "../routers";
@@ -39,10 +37,6 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // Open Graph middleware for social media crawlers (must be before Vite/static)
   app.use(ogMiddleware);
-  // OAuth callback under /api/oauth/callback
-  registerOAuthRoutes(app);
-  // Chat API with streaming and tool calling
-  registerChatRoutes(app);
   // KHAMCI VOYAGES chatbot
   registerKhamciChatRoutes(app);
   // Upload routes (images blog, etc.)
