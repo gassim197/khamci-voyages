@@ -1,24 +1,31 @@
-import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
+
+// Enums Postgres (déclarés en amont des tables, requis par pg-core)
+export const roleEnum = pgEnum("role", ["user", "admin"]);
+export const quoteStatusEnum = pgEnum("quote_status", ["pending", "in_progress", "completed", "rejected"]);
+export const testimonialStatusEnum = pgEnum("testimonial_status", ["pending", "approved", "rejected"]);
+export const blogCategoryEnum = pgEnum("blog_category", ["destinations", "conseils", "offres", "actualites"]);
+export const blogPostStatusEnum = pgEnum("blog_post_status", ["draft", "published"]);
 
 /**
  * Core user table backing auth flow.
  * Extend this file with additional tables as your product grows.
  * Columns use camelCase to match both database fields and generated types.
  */
-export const users = mysqlTable("users", {
+export const users = pgTable("users", {
   /**
    * Surrogate primary key. Auto-incremented numeric value managed by the database.
    * Use this for relations between tables.
    */
-  id: int("id").autoincrement().primaryKey(),
+  id: serial("id").primaryKey(),
   /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  role: roleEnum("role").default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
@@ -26,8 +33,8 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 // Table des devis
-export const quotes = mysqlTable("quotes", {
-  id: int("id").autoincrement().primaryKey(),
+export const quotes = pgTable("quotes", {
+  id: serial("id").primaryKey(),
   // Informations client
   clientName: varchar("clientName", { length: 255 }).notNull(),
   clientEmail: varchar("clientEmail", { length: 320 }).notNull(),
@@ -36,48 +43,48 @@ export const quotes = mysqlTable("quotes", {
   destination: varchar("destination", { length: 255 }),
   departureDate: varchar("departureDate", { length: 50 }),
   returnDate: varchar("returnDate", { length: 50 }),
-  passengers: int("passengers").default(1),
+  passengers: integer("passengers").default(1),
   serviceType: varchar("serviceType", { length: 100 }),
   // Message et notes
   message: text("message"),
   adminNotes: text("adminNotes"),
   // Statut
-  status: mysqlEnum("status", ["pending", "in_progress", "completed", "rejected"]).default("pending").notNull(),
+  status: quoteStatusEnum("status").default("pending").notNull(),
   // Métadonnées
   source: varchar("source", { length: 100 }).default("website"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
 });
 
 export type Quote = typeof quotes.$inferSelect;
 export type InsertQuote = typeof quotes.$inferInsert;
 
 // Table des témoignages
-export const testimonials = mysqlTable("testimonials", {
-  id: int("id").autoincrement().primaryKey(),
+export const testimonials = pgTable("testimonials", {
+  id: serial("id").primaryKey(),
   // Informations client
   clientName: varchar("clientName", { length: 255 }).notNull(),
   clientTitle: varchar("clientTitle", { length: 255 }),
   clientLocation: varchar("clientLocation", { length: 255 }),
   // Contenu
   content: text("content").notNull(),
-  rating: int("rating").default(5),
+  rating: integer("rating").default(5),
   // Statut
-  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  status: testimonialStatusEnum("status").default("pending").notNull(),
   // Métadonnées
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
 });
 
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = typeof testimonials.$inferInsert;
 
 // Table des paramètres admin (mot de passe, etc.)
-export const adminSettings = mysqlTable("admin_settings", {
-  id: int("id").autoincrement().primaryKey(),
+export const adminSettings = pgTable("admin_settings", {
+  id: serial("id").primaryKey(),
   key: varchar("key", { length: 100 }).notNull().unique(),
   value: text("value").notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
 });
 
 export type AdminSetting = typeof adminSettings.$inferSelect;
@@ -94,8 +101,8 @@ export type AdminProfile = {
 };
 
 // Table des abonnés à la newsletter
-export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
-  id: int("id").autoincrement().primaryKey(),
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
   isActive: boolean("isActive").default(true).notNull(),
@@ -106,19 +113,19 @@ export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
 export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
 
 // Table des articles de blog
-export const blogPosts = mysqlTable("blog_posts", {
-  id: int("id").autoincrement().primaryKey(),
+export const blogPosts = pgTable("blog_posts", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 500 }).notNull(),
   slug: varchar("slug", { length: 500 }).notNull().unique(),
   excerpt: text("excerpt"),
   content: text("content").notNull(),
   coverImage: varchar("coverImage", { length: 1000 }),
-  category: mysqlEnum("category", ["destinations", "conseils", "offres", "actualites"]).default("destinations").notNull(),
-  status: mysqlEnum("status", ["draft", "published"]).default("draft").notNull(),
+  category: blogCategoryEnum("category").default("destinations").notNull(),
+  status: blogPostStatusEnum("status").default("draft").notNull(),
   authorName: varchar("authorName", { length: 255 }).default("KHAMCI VOYAGES"),
-  readTime: int("readTime").default(5),
+  readTime: integer("readTime").default(5),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().$onUpdate(() => new Date()).notNull(),
   publishedAt: timestamp("publishedAt"),
 });
 

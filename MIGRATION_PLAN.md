@@ -10,12 +10,12 @@
 
 Ces choix conditionnent la suite. À trancher dès maintenant :
 
-| Décision | Option A (rapide) | Option B (alignée AssoHub) | Recommandation |
+| Décision | Option A (rapide) | Option B (alignée AssoHub) | Décision actée |
 |---|---|---|---|
-| **Base de données** | Garder MySQL → **PlanetScale** ou **Aiven** | Migrer vers **Neon Postgres** | A si tu veux livrer vite. B si tu veux un seul écosystème. |
+| **Base de données** | Garder MySQL → **PlanetScale** ou **Aiven** | Migrer vers **Neon Postgres** | ✅ **Postgres (Neon)** |
 | **Hébergement** | **Render** (Web Service) — tier gratuit + 7 $/mois sans veille | **Railway** ou **Fly.io** | Render pour la simplicité, Railway si tu veux du CI/CD plus poussé. |
 | **Stockage fichiers** | **Cloudflare R2** (S3-compat, egress gratuit) | AWS S3 | R2 — plus économique pour ton volume. |
-| **Provider IA chatbot** | **Anthropic Claude** (cohérent avec ton stack) | OpenAI direct | Anthropic — utilise `@ai-sdk/anthropic`. |
+| **Provider IA chatbot** | **Anthropic Claude** (cohérent avec ton stack) | OpenAI direct | ✅ **Standby V1.5** (chatbot retiré) |
 | **Nom de domaine** | À acheter (Namecheap, OVH, Porkbun) | — | Choisir maintenant pour configurer les emails. |
 
 > **Choix par défaut retenus dans ce plan** : MySQL conservé (PlanetScale), Render pour l'hébergement, Cloudflare R2 pour le stockage, Anthropic pour le chatbot. Adapte si tu choisis différemment.
@@ -120,30 +120,17 @@ Le site doit builder. Le chatbot, les uploads et la Map peuvent encore être cas
 
 ### 2.2 — Chatbot Khamci Bot → Anthropic
 
-- [ ] Créer une clé API Anthropic sur `console.anthropic.com`.
-- [ ] `pnpm add @ai-sdk/anthropic`
-- [ ] **Réécrire `server/chatKhamci.ts`** :
-  - Remplacer `import { createOpenAI } from "@ai-sdk/openai"` par `import { createAnthropic } from "@ai-sdk/anthropic"`.
-  - Retirer `createPatchedFetch` et son import.
-  - Configurer le client avec `apiKey: process.env.ANTHROPIC_API_KEY`.
-  - Utiliser `model: anthropic("claude-sonnet-4-5")` (ou la version en cours).
-- [ ] **Mettre à jour le system prompt** dans `chatKhamci.ts` (ligne 17) : remplacer `Site web : khamcivoyage-tggjc7uo.manus.space` par le nouveau domaine.
+✅ **Mis en standby — suppression effective le 3 juin 2026.** Réactivation possible via `git revert` du commit Phase 2.
+
+Fichiers retirés : `server/chatKhamci.ts`, `client/src/components/AIChatBox.tsx`, `client/src/components/ChatWidget.tsx` (widget flottant), `client/src/hooks/useFileUpload.ts`, `server/_core/patchedFetch.ts`. Dépendances retirées : `@ai-sdk/openai`, `@ai-sdk/react`, `ai`. Décision réévaluée en V1.5 si les données de trafic confirment l'intérêt.
 
 ### 2.3 — Google Maps → API directe
 
-Le composant `Map.tsx` charge déjà l'API Google Maps JS côté client.
-
-- [ ] Créer une clé API Google Maps (Cloud Console → Maps JavaScript API + Places API).
-- [ ] **Vérifier** dans `Map.tsx` comment la clé est récupérée. Si elle passe par un endpoint serveur via `server/_core/map.ts`, simplifier : exposer directement `VITE_GOOGLE_MAPS_API_KEY` côté client.
-- [ ] **Supprimer `server/_core/map.ts`** une fois la simplification faite.
+✅ **Code mort supprimé (`Map.tsx` n'était jamais importé).** Pas d'API Google externe nécessaire pour le projet. Dépendance `@types/google.maps` retirée.
 
 ### 2.4 — Vidéo Hero (Manus CDN expirant)
 
-**Critique** : l'URL signée actuelle (`https://private-us-east-1.manuscdn.com/...?Expires=1804697242`) expire en juin 2027.
-
-- [ ] Télécharger la vidéo depuis l'URL actuelle tant qu'elle est encore valide.
-- [ ] L'uploader sur R2 (ou la mettre dans `client/public/videos/hero.mp4` si elle fait moins de 10 Mo).
-- [ ] **Modifier `client/src/components/HeroSection.tsx` ligne 28** : remplacer l'URL Manus par l'URL R2 ou `/videos/hero.mp4`.
+✅ **Effectué.** `client/src/components/HeroSection.tsx` pointe désormais vers le fichier local `/videos/hero.mp4` (dans `client/public/videos/`) au lieu de l'URL signée Manus CDN.
 
 ### 2.5 — Emails (URL admin en dur)
 
@@ -156,23 +143,15 @@ Le composant `Map.tsx` charge déjà l'API Google Maps JS côté client.
 
 ### 2.7 — Base de données
 
-**Si tu restes en MySQL** :
-- [ ] Créer un compte PlanetScale → nouvelle base `khamci-voyages-prod`.
-- [ ] Récupérer la chaîne `DATABASE_URL`.
-- [ ] Exporter les données existantes de Manus DB (si encore accessibles) via `mysqldump`.
-- [ ] Importer dans PlanetScale via leur CLI ou `mysql < dump.sql`.
-- [ ] `pnpm db:push` pour valider les migrations Drizzle.
-
-**Si tu migres vers Postgres (Neon)** :
-- [ ] Adapter `drizzle.config.ts` (`dialect: "postgresql"`).
-- [ ] Réécrire `drizzle/schema.ts` : `mysqlTable` → `pgTable`, `mysqlEnum` → `pgEnum`, `int` → `integer`, etc.
-- [ ] Adapter `server/db.ts` : `drizzle/mysql2` → `drizzle/neon-http`.
-- [ ] Remplacer `mysql2` par `@neondatabase/serverless` dans `package.json`.
-- [ ] Adapter les fonctions `onDuplicateKeyUpdate` → `onConflictDoUpdate`.
-- [ ] Exporter/importer les données.
-- [ ] Régénérer les migrations Drizzle.
-
-> **Note** : la voie Postgres ajoute environ 1 jour, mais te donne un alignement total avec AssoHub.
+✅ **Migration vers Postgres/Neon effectuée** (3 juin 2026) :
+- [x] `drizzle.config.ts` → `dialect: "postgresql"`.
+- [x] `drizzle/schema.ts` réécrit : `mysqlTable` → `pgTable`, `mysqlEnum` → `pgEnum` (déclarés en amont), `int().autoincrement()` → `serial`, `int` → `integer`, `.onUpdateNow()` → `.$onUpdate(() => new Date())`.
+- [x] `server/db.ts` : driver `drizzle-orm/mysql2` → `drizzle-orm/neon-http` + `neon()` de `@neondatabase/serverless`.
+- [x] `mysql2` remplacé par `@neondatabase/serverless` dans `package.json`.
+- [x] 4 `onDuplicateKeyUpdate` → `onConflictDoUpdate` (targets : `users.openId`, `adminSettings.key` ×2, `newsletterSubscribers.email`).
+- [x] Migrations Drizzle MySQL supprimées et régénérées pour Postgres.
+- [ ] Provisionner la base Neon, renseigner `DATABASE_URL` dans `.env.local`, puis `pnpm db:push` (reste à faire, hors de cette session).
+- [ ] Import des données existantes (si encore accessibles).
 
 ### Vérification de fin de Phase 2
 
@@ -379,11 +358,11 @@ Et mettre à jour `todo.md` pour retirer la mention du mot de passe `khamci2024`
 | Poste | Tier | Coût mensuel |
 |---|---|---|
 | Render Starter | Sans spin-down | 7 $ |
-| PlanetScale Hobby | Si encore dispo, sinon Scaler | 0 $ ou 39 $ |
+| Neon Postgres | Free tier (autoscale au besoin) | ~0 $ |
 | Cloudflare R2 | Volume faible | ~0 $ |
-| Anthropic API | ~1000 conversations/mois | ~5–15 $ |
+| Anthropic API | Chatbot en standby (V1.5) | 0 $ |
 | Domaine `.com` | — | ~1 $/mois amorti |
-| **Total** | | **~13–30 $/mois** |
+| **Total** | | **~13–20 $/mois** |
 
 À comparer avec ton abonnement Manus actuel.
 

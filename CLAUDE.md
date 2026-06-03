@@ -32,11 +32,11 @@ Le projet a été initialement généré avec **Manus**. Une migration est en co
 | Service Manus | Remplaçant |
 |---|---|
 | Forge storage proxy | **Cloudflare R2** (S3-compatible) |
-| Forge AI proxy (OpenAI) | **Anthropic Claude** via `@ai-sdk/anthropic` |
-| Forge Google Maps proxy | **Google Maps API directe** (clé côté client) |
+| Forge AI proxy (OpenAI) | ❌ **Chatbot retiré (standby V1.5)** |
+| Forge Google Maps proxy | ❌ **Code Maps mort supprimé** |
 | OAuth Manus | **Supprimé** (les visiteurs n'ont pas de compte ; admin reste sur password) |
 | Hébergement Manus | **Render** (Web Service Node) |
-| Base Manus | **PlanetScale** (MySQL) — décision à confirmer |
+| Base Manus | **Neon** (Postgres) |
 
 ---
 
@@ -53,7 +53,7 @@ Le projet a été initialement généré avec **Manus**. Une migration est en co
 
 ### Backend
 - **Express** + **tRPC** (serveur unique qui sert l'API et le SPA buildé)
-- **Drizzle ORM** sur **MySQL** (`mysql2`)
+- **Drizzle ORM** sur **Postgres** (Neon serverless)
 - **Nodemailer** (SMTP Gmail) pour les emails transactionnels
 - **bcryptjs** pour le hash du mot de passe admin
 - **AI SDK** (`ai`) pour le streaming du chatbot
@@ -191,9 +191,7 @@ Voir `.env.example` pour la liste complète. Variables critiques :
 | `ADMIN_PASSWORD` | Mot de passe du dashboard admin | Oui (prod) |
 | `JWT_SECRET` | Signature des sessions admin | Oui |
 | `GMAIL_USER` + `GMAIL_APP_PASSWORD` | SMTP transactionnel | Oui |
-| `ANTHROPIC_API_KEY` | Chatbot Khamci Bot | Oui (après Phase 2.2) |
 | `R2_*` | Stockage uploads | Oui (après Phase 2.1) |
-| `VITE_GOOGLE_MAPS_API_KEY` | Carte côté client | Oui |
 | `PUBLIC_SITE_URL` | URL canonique (liens emails, OG) | Oui |
 
 **Variables supprimées (anciennes Manus)** : `VITE_APP_ID`, `OAUTH_SERVER_URL`, `OWNER_OPEN_ID`, `BUILT_IN_FORGE_API_URL`, `BUILT_IN_FORGE_API_KEY`.
@@ -253,5 +251,6 @@ Voir `.env.example` pour la liste complète. Variables critiques :
 - Internationalisation EN/AR.
 - Optimisation images (WebP/AVIF avec sharp).
 - Refactor `users` table (devenue obsolète).
+- Réactivation du chatbot Khamci Bot (V1.5 si data trafic confirme l'intérêt).
 
 À garder dans `todo.md`, pas dans le scope de la migration courante.

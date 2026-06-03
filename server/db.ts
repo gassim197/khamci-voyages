@@ -1,5 +1,6 @@
 import { eq, desc, gte } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
 import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import bcrypt from "bcryptjs";
@@ -10,7 +11,8 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const sql = neon(process.env.DATABASE_URL);
+      _db = drizzle(sql);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -69,7 +71,8 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
+    await db.insert(users).values(values).onConflictDoUpdate({
+      target: users.openId,
       set: updateSet,
     });
   } catch (error) {
@@ -211,7 +214,7 @@ export async function setAdminPassword(newPassword: string): Promise<void> {
   const hash = await bcrypt.hash(newPassword, 12);
   await db.insert(adminSettings)
     .values({ key: ADMIN_PASSWORD_KEY, value: hash })
-    .onDuplicateKeyUpdate({ set: { value: hash } });
+    .onConflictDoUpdate({ target: adminSettings.key, set: { value: hash } });
 }
 
 // =====================
@@ -248,7 +251,7 @@ export async function updateAdminProfile(profile: Partial<AdminProfile>): Promis
   const updated = { ...current, ...profile };
   await db.insert(adminSettings)
     .values({ key: ADMIN_PROFILE_KEY, value: JSON.stringify(updated) })
-    .onDuplicateKeyUpdate({ set: { value: JSON.stringify(updated) } });
+    .onConflictDoUpdate({ target: adminSettings.key, set: { value: JSON.stringify(updated) } });
   return updated;
 }
 
@@ -262,7 +265,7 @@ export async function subscribeToNewsletter(email: string, name?: string) {
   // Upsert : si l'email existe déjà, on réactive l'abonnement
   await db.insert(newsletterSubscribers)
     .values({ email, name: name ?? null, isActive: true })
-    .onDuplicateKeyUpdate({ set: { isActive: true, name: name ?? null } });
+    .onConflictDoUpdate({ target: newsletterSubscribers.email, set: { isActive: true, name: name ?? null } });
 }
 
 export async function getAllNewsletterSubscribers() {

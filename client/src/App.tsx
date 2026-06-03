@@ -16,7 +16,6 @@ import CasablancaPage from "./pages/CasablancaPage";
 import BangkokPage from "./pages/BangkokPage";
 import BarcelonaPage from "./pages/BarcelonaPage";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
-import ChatWidget from "./components/ChatWidget";
 import APropos from "./pages/APropos";
 import BilletterieService from "./pages/services/BilletterieService";
 import HotelService from "./pages/services/HotelService";
@@ -62,7 +61,6 @@ function Router() {
         {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
-      <ChatWidget />
     </>
   );
 }
