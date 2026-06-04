@@ -167,6 +167,16 @@ export default function Header() {
             )}
           </div>
 
+          {/* Team Building */}
+          <Link
+            href="/team-building"
+            className={`text-sm font-medium transition-colors ${
+              location === "/team-building" ? "text-[#FF6B35] font-semibold" : "text-gray-700 dark:text-gray-200 hover:text-[#FF6B35]"
+            }`}
+          >
+            Team Building
+          </Link>
+
           {/* À propos */}
           <Link
             href="/a-propos"
@@ -263,6 +273,14 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+            <Link
+              href="/team-building"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-left text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 dark:border-gray-700 block"
+            >
+              Team Building
+            </Link>
 
             <Link
               href="/a-propos"
