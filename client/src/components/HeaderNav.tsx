@@ -33,7 +33,7 @@ export default function HeaderNav() {
             Services
           </a>
           <a
-            href="/#team-building"
+            href="/team-building"
             className="text-gray-700 dark:text-gray-300 hover:text-orange-500 transition-colors font-medium"
           >
             Team Building
@@ -81,7 +81,7 @@ export default function HeaderNav() {
               Services
             </a>
             <a
-              href="/#team-building"
+              href="/team-building"
               onClick={() => setIsMenuOpen(false)}
               className="text-left text-gray-700 hover:text-orange-500 transition-colors font-medium py-2 border-b border-gray-100"
             >
