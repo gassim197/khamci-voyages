@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Clock, DollarSign, Utensils, Camera, AlertCircle } from 'lucide-react';
+import { MapPin, Clock, Banknote, Utensils, Camera, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceQuoteForm from '@/components/ServiceQuoteForm';
 import DestinationImageGallery from '@/components/DestinationImageGallery';
@@ -162,7 +162,7 @@ export default function ParisPage() {
             <p className="text-gray-700 dark:text-gray-300">4-7 jours</p>
           </div>
           <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <DollarSign className="w-8 h-8 text-blue-600 mb-3" />
+            <Banknote className="w-8 h-8 text-blue-600 mb-3" />
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Budget/jour</h3>
             <p className="text-gray-700 dark:text-gray-300">€80-150</p>
           </div>

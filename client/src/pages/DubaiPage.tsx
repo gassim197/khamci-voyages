@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Clock, DollarSign, Utensils, Camera, Zap } from 'lucide-react';
+import { MapPin, Clock, Banknote, Utensils, Camera, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceQuoteForm from '@/components/ServiceQuoteForm';
 
@@ -132,7 +132,7 @@ export default function DubaiPage() {
             <p className="text-gray-700">4-6 jours</p>
           </div>
           <div className="p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-            <DollarSign className="w-8 h-8 text-orange-600 mb-3" />
+            <Banknote className="w-8 h-8 text-orange-600 mb-3" />
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Budget/jour</h3>
             <p className="text-gray-700">AED 300-600</p>
           </div>

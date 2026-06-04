@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Clock, DollarSign, Utensils, Camera, Zap } from 'lucide-react';
+import { MapPin, Clock, Banknote, Utensils, Camera, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceQuoteForm from '@/components/ServiceQuoteForm';
 
@@ -132,7 +132,7 @@ export default function NewYorkPage() {
             <p className="text-gray-700">5-7 jours</p>
           </div>
           <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <DollarSign className="w-8 h-8 text-blue-600 mb-3" />
+            <Banknote className="w-8 h-8 text-blue-600 mb-3" />
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Budget/jour</h3>
             <p className="text-gray-700">$100-200</p>
           </div>

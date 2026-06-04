@@ -272,7 +272,7 @@ export default function CarQuoteForm({ onSubmit, onClose }: CarQuoteFormProps) {
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Jour (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Jour (GNF) *</label>
           <input
             type="number"
             name="estimatedBudget"

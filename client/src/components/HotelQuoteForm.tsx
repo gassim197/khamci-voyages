@@ -280,7 +280,7 @@ export default function HotelQuoteForm({ onSubmit, onClose }: HotelQuoteFormProp
 
         {/* Budget */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Nuit (USD) *</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Budget Estimé par Nuit (GNF) *</label>
           <input
             type="number"
             name="estimatedBudget"

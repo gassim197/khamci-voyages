@@ -92,14 +92,54 @@ export const majorAirlines = [
 ];
 
 export const majorCities = [
-  'Paris (CDG)',
-  'Bangkok (BKK)',
-  'New York (JFK)',
+  // Guinée (départ principal)
+  'Conakry (CKY)',
+
+  // Afrique de l'Ouest
   'Dakar (DSS)',
   'Abidjan (ABJ)',
+  'Bamako (BKO)',
+  'Banjul (BJL)',
+  'Bissau (OXB)',
+  'Freetown (FNA)',
+  'Monrovia (ROB)',
+  'Nouakchott (NKC)',
   'Accra (ACC)',
   'Lagos (LOS)',
+
+  // Afrique du Nord
   'Casablanca (CMN)',
   'Marrakech (RAK)',
   'Tunis (TUN)',
+  'Le Caire (CAI)',
+  'Alger (ALG)',
+
+  // Europe
+  'Paris (CDG)',
+  'Paris Orly (ORY)',
+  'Bruxelles (BRU)',
+  'Londres (LHR)',
+  'Francfort (FRA)',
+  'Genève (GVA)',
+  'Madrid (MAD)',
+  'Amsterdam (AMS)',
+
+  // Moyen-Orient
+  'Dubaï (DXB)',
+  'Istanbul (IST)',
+  'Doha (DOH)',
+  'Jeddah (JED)',
+  'Riyad (RUH)',
+
+  // Amérique du Nord
+  'New York (JFK)',
+  'Montréal (YUL)',
+  'Toronto (YYZ)',
+  'Washington (IAD)',
+
+  // Asie
+  'Bangkok (BKK)',
+  'Hong Kong (HKG)',
+  'Tokyo (NRT)',
+  'Pékin (PEK)',
 ];

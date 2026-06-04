@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plane, MapPin, Clock, Shield, Users, DollarSign } from 'lucide-react';
+import { Plane, MapPin, Clock, Shield, Users, Banknote } from 'lucide-react';
 import HeaderNav from '@/components/HeaderNav';
 import { Button } from '@/components/ui/button';
 import FlightQuoteForm from '@/components/FlightQuoteForm';
@@ -19,7 +19,7 @@ export default function FlightsPage() {
       description: 'Plus de 500 destinations dans le monde entier',
     },
     {
-      icon: DollarSign,
+      icon: Banknote,
       title: 'Meilleurs Prix',
       description: 'Tarifs compétitifs et offres exclusives',
     },
