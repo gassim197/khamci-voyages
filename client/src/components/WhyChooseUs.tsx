@@ -25,9 +25,9 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
+    <section className="py-12 md:py-16 bg-white dark:bg-gray-950">
       <div className="container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="heading-lg gradient-text mb-4">
             Pourquoi Choisir KHAMCI VOYAGES
           </h2>
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Divider */}
-        <div className="divider-gradient mt-16"></div>
+        <div className="divider-gradient mt-10"></div>
       </div>
     </section>
   );
