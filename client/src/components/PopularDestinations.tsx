@@ -53,6 +53,42 @@ export default function PopularDestinations() {
       priceFrom: "À partir de 1 200 000 GNF",
       duration: "Vol aller-retour",
       highlight: "Sans visa pour ressortissants guinéens"
+    },
+    {
+      id: "new-york",
+      name: "New York",
+      description: "La Big Apple — Énergie urbaine, culture et rêve américain au cœur de Manhattan",
+      image: "/covers/new-york.jpg",
+      path: "/destination/new-york",
+      color: "from-red-500 to-blue-600",
+      icon: "🗽",
+      priceFrom: "À partir de 4 500 000 GNF",
+      duration: "Vol aller-retour",
+      highlight: "Visa USA / ESTA accompagnement"
+    },
+    {
+      id: "bangkok",
+      name: "Bangkok",
+      description: "Le Royaume du Sourire — Temples dorés, marchés flottants et hospitalité légendaire",
+      image: "/images/bangkok-skyline.webp",
+      path: "/destination/bangkok",
+      color: "from-orange-500 to-pink-600",
+      icon: "🛕",
+      priceFrom: "À partir de 3 500 000 GNF",
+      duration: "Vol aller-retour",
+      highlight: "Visa Thaïlande disponible"
+    },
+    {
+      id: "barcelona",
+      name: "Barcelone",
+      description: "La Joya Catalane — Architecture de Gaudí, plages méditerranéennes et ambiance unique",
+      image: "/images/barcelona-sagrada.jpg",
+      path: "/destination/barcelona",
+      color: "from-rose-500 to-amber-600",
+      icon: "🏛️",
+      priceFrom: "À partir de 2 800 000 GNF",
+      duration: "Vol aller-retour",
+      highlight: "Visa Schengen disponible"
     }
   ];
 
