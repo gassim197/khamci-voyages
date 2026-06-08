@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle, Sun, Moon } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, Plane, Hotel, Car, Shield, FileText, Star, MessageCircle, Sun, Moon, BookOpen } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
@@ -167,6 +167,16 @@ export default function Header() {
             )}
           </div>
 
+          {/* Blog */}
+          <Link
+            href="/blog"
+            className={`text-sm font-medium transition-colors ${
+              location.startsWith("/blog") ? "text-[#FF6B35] font-semibold" : "text-gray-700 dark:text-gray-200 hover:text-[#FF6B35]"
+            }`}
+          >
+            Blog
+          </Link>
+
           {/* À propos */}
           <Link
             href="/a-propos"
@@ -263,6 +273,17 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+            <Link
+              href="/blog"
+              onClick={() => setIsMenuOpen(false)}
+              className={`flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-[#FF6B35] transition-colors font-medium py-2.5 border-b border-gray-100 dark:border-gray-700 ${
+                location.startsWith("/blog") ? "text-[#FF6B35] font-semibold" : ""
+              }`}
+            >
+              <BookOpen size={16} className="text-[#FF6B35] shrink-0" />
+              Blog
+            </Link>
 
             <Link
               href="/a-propos"
