@@ -54,7 +54,7 @@ export default function DiscoverGuinea() {
             {/* Image */}
             <div>
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/guinea-destination-collage-Lp3sdFMybCqtsZRyuDPh2S.webp"
+                src="/images/guinea-destination-collage.webp"
                 alt="Destinations en Guinée"
                 className="rounded-lg shadow-xl hover-lift"
               />

@@ -35,7 +35,11 @@ export default function MentionsLegales() {
             <section>
               <h2 className="text-xl font-bold text-[#0D1B3E] mb-3 pb-2 border-b border-gray-100 dark:border-gray-700">2. Hébergement</h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                Ce site est hébergé par <strong>Manus</strong>, plateforme de déploiement d'applications web.
+                Ce site est hébergé par <strong>Render Cloud Platform</strong> (
+                <a href="https://render.com" target="_blank" rel="noopener noreferrer" className="text-[#0D1B3E] underline dark:text-blue-400">render.com</a>
+                ), plateforme de déploiement web. Le contenu est édité par <strong>Khamci Voyages</strong>,
+                agence de voyages située à Almamya, derrière la bluezone de Kaloum — Conakry, Guinée.
+                Contact : khamcivoyages@gmail.com, +224 611 14 58 92.
               </p>
             </section>
 

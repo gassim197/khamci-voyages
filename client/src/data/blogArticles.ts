@@ -47,7 +47,7 @@ Laissez KHAMCI VOYAGES organiser votre aventure à Fouta Djallon. Nous connaisso
     `,
     category: "destination",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/fouta-djallon-1-HV8GNusJeY7gpwrRiJ3ey2.webp",
+      "/images/fouta-djallon-1.webp",
     author: "Mamadou Diallo",
     date: "2026-02-28",
     readTime: 8,
@@ -88,7 +88,7 @@ KHAMCI VOYAGES peut organiser votre séjour à Conakry avec des hôtels sélecti
     `,
     category: "destination",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/conakry-1-nzgispaK4KkekcAE6qEAu2.webp",
+      "/images/conakry-1.webp",
     author: "Aïssatou Bah",
     date: "2026-02-25",
     readTime: 6,
@@ -132,7 +132,7 @@ KHAMCI VOYAGES gère tous les détails : transport, hébergement, activités, as
     `,
     category: "conseil",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/team-building-corporate-ZouKXetLzNz2fYDPBg9YLD.webp",
+      "/images/team-building-corporate.webp",
     author: "Ibrahim Sow",
     date: "2026-02-20",
     readTime: 7,
@@ -184,7 +184,7 @@ Ne laissez pas le visa vous stresser. Nous gérons tout.
     `,
     category: "conseil",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airplane-sunset-64duN9FBfa4CZjHNXpHzzz.webp",
+      "/images/hero-airplane-sunset.webp",
     author: "Fatou Diallo",
     date: "2026-02-18",
     readTime: 9,
@@ -226,7 +226,7 @@ Les places sont limitées. Contactez-nous dès aujourd'hui pour sécuriser votre
     `,
     category: "offre",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/iles-loos-1-2fztnGfEJ2sqUphFxcfmTd.webp",
+      "/images/iles-loos-1.webp",
     author: "Khadija Camara",
     date: "2026-02-15",
     readTime: 5,
@@ -282,7 +282,7 @@ Voyagez en 2026 de manière responsable et authentique avec KHAMCI VOYAGES.
     `,
     category: "actualité",
     image:
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/kindia-1-VSHwFpKEaWVcw3taNQmsGf.webp",
+      "/images/kindia-1.webp",
     author: "Moussa Keïta",
     date: "2026-02-10",
     readTime: 7,

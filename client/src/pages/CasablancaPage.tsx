@@ -136,29 +136,29 @@ export default function CasablancaPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-mosquee-SktrDccbESw6gP3DzVwVoN.webp",
+      src: "/images/casablanca-mosquee.jpg",
       alt: "Mosquée Hassan II Casablanca",
       title: "Mosquée Hassan II"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-medina-URY6ip6CJooZd8Wsrczggg.webp",
+      src: "/images/casablanca-medina.jpg",
       alt: "Médina de Casablanca",
       title: "Médina"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-corniche-L98xXcGjgPStsKD3MtrdPy.webp",
+      src: "/images/casablanca-corniche.jpg",
       alt: "Corniche de Casablanca",
       title: "Corniche"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-port-gCXvJb3ESxydTeJXGaCVYD.webp",
-      alt: "Vieille Ville Casablanca",
-      title: "Vieille Ville"
-    },
-    {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/casablanca-ville-77CpMWNC2n9TjTfRxzfeXY.webp",
+      src: "/images/casablanca-port.jpg",
       alt: "Port de Casablanca",
       title: "Port"
+    },
+    {
+      src: "/images/casablanca-vieille-ville.jpg",
+      alt: "Vieille ville de Casablanca",
+      title: "Vieille ville (centre-ville historique)"
     }
   ];
 

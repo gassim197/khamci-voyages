@@ -61,7 +61,7 @@ export default function FlightsPage() {
       <section className="relative h-96 flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#FF6B35] to-[#0D1B3E]">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-airplane-sunset-64duN9FBfa4CZjHNXpHzzz.webp"
+            src="/images/hero-airplane-sunset.webp"
             alt="Vols"
             className="w-full h-full object-cover"
           />

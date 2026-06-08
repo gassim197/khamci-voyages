@@ -136,27 +136,27 @@ export default function BangkokPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-grand-palace-eoSDWbxVc68iaNY5zrhadD.webp",
+      src: "/images/bangkok-grand-palace.webp",
       alt: "Grand Palace Bangkok",
       title: "Grand Palace"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-market-nxTGpV6UgRLvLURqaCvKjV.webp",
+      src: "/images/bangkok-market.webp",
       alt: "Marché Flottant Bangkok",
       title: "Marché Flottant"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-nightmarket-E96uTb8WHUNhqdArBWyFcW.webp",
+      src: "/images/bangkok-nightmarket.webp",
       alt: "Marché de Nuit Bangkok",
       title: "Marché de Nuit"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-temple-HRxxwK8JQrvi6pWsZXxkf6.webp",
+      src: "/images/bangkok-temple.webp",
       alt: "Croisière Chao Phraya",
       title: "Croisière"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/bangkok-skyline-JokxWaVQ2ByDkgbcMFRZre.webp",
+      src: "/images/bangkok-skyline.webp",
       alt: "Skyline Bangkok la Nuit",
       title: "Skyline"
     }

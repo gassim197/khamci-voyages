@@ -71,29 +71,29 @@ export default function ParisPage() {
 
   const parisImages = [
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-eiffel-eoSDWbxVc68iaNY5zrhadD.webp',
+      src: '/images/paris-eiffel.jpg',
       alt: 'Tour Eiffel au coucher de soleil',
       title: 'Tour Eiffel - Le symbole de Paris'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-louvre-JokxWaVQ2ByDkgbcMFRZre.webp',
+      src: '/images/paris-louvre.jpg',
       alt: 'Musée du Louvre',
       title: 'Musée du Louvre - Patrimoine mondial'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-seine-nxTGpV6UgRLvLURqaCvKjV.webp',
+      src: '/images/paris-seine.jpg',
       alt: 'Croisière sur la Seine',
       title: 'La Seine - Cœur romantique de Paris'
     },
     {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-montmartre-HRxxwK8JQrvi6pWsZXxkf6.webp',
-      alt: 'Cathédrale Notre-Dame',
-      title: 'Notre-Dame - Chef-d\'œuvre gothique'
-    },
-    {
-      src: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/paris-champs-elysees-E96uTb8WHUNhqdArBWyFcW.webp',
+      src: '/images/paris-montmartre.jpg',
       alt: 'Montmartre au coucher de soleil',
       title: 'Montmartre - Quartier bohème et artistique'
+    },
+    {
+      src: '/images/paris-notre-dame.jpg',
+      alt: 'Cathédrale Notre-Dame de Paris',
+      title: 'Notre-Dame - Chef-d\'œuvre gothique'
     }
   ];
 

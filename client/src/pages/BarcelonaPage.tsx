@@ -136,27 +136,27 @@ export default function BarcelonaPage() {
 
   const galleryImages = [
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-sagrada-JokxWaVQ2ByDkgbcMFRZre.webp",
+      src: "/images/barcelona-sagrada.jpg",
       alt: "Sagrada Familia Barcelone",
       title: "Sagrada Familia"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-park-guell-eoSDWbxVc68iaNY5zrhadD.webp",
+      src: "/images/barcelona-park-guell.jpg",
       alt: "Park Güell Barcelone",
       title: "Park Güell"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-gothic-nxTGpV6UgRLvLURqaCvKjV.webp",
+      src: "/images/barcelona-gothic.jpg",
       alt: "Quartier Gothique Barcelone",
       title: "Quartier Gothique"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-beach-HRxxwK8JQrvi6pWsZXxkf6.webp",
+      src: "/images/barcelona-beach.jpg",
       alt: "Plage Barcelone",
       title: "Plage"
     },
     {
-      src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/barcelona-ramblas-E96uTb8WHUNhqdArBWyFcW.webp",
+      src: "/images/barcelona-ramblas.jpg",
       alt: "La Rambla Barcelone",
       title: "La Rambla"
     }

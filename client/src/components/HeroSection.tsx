@@ -22,7 +22,7 @@ export default function HeroSection() {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            poster="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-bg-world-travel-dAdxY5xHpjMoxUVLkFppar.webp"
+            poster="/images/hero-bg-world-travel.webp"
           >
             <source src="/videos/hero.mp4" type="video/mp4" />
           </video>
