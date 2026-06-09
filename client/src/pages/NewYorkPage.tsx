@@ -93,7 +93,7 @@ export default function NewYorkPage() {
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
-        <img src="/covers/new-york.jpg" alt="New York" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-newyork-destination-5hAd5orSRCbyotLu2KFYhF.webp" alt="New York" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/45" />
         <div className="relative container z-10 text-white text-center">
           <h1 className="text-5xl font-bold mb-4">🗽 New York, La Ville qui ne Dort Jamais</h1>
