@@ -93,7 +93,7 @@ export default function DubaiPage() {
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
-        <img src="/covers/dubai.jpg" alt="Dubaï" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-dubai-destination-RZd2Uh2ZWkFuKoMjoAZcJt.webp" alt="Dubaï" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/45" />
         <div className="relative container z-10 text-white text-center">
           <h1 className="text-5xl font-bold mb-4">🏙️ Dubaï, La Ville du Luxe</h1>

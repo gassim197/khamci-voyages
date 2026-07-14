@@ -325,3 +325,18 @@
 - [x] Créer composant ReadingProgressBar.tsx avec hook useReadingProgress
 - [x] Intégrer la barre dans BlogArticlePage.tsx
 - [x] Tester la barre sur différentes longueurs d'articles
+
+## Phase 1 — Tâches Critiques (Juin 2026)
+- [x] Tâche 1.1 : Ajouter lien "Blog" dans la navigation Header (desktop + mobile avec icône)
+- [x] Tâche 1.2 : Corriger les liens du footer (vols, hotels, voitures) — déjà corrects
+- [x] Tâche 1.3 : Vérifier les métadonnées Open Graph des articles de blog — middleware OG validé
+- [x] Tâche 1.4 : Créer images de couverture 1200x630px pour les 3 articles principaux (Top 5, Visa, Hadj)
+
+## Phase 2 — Images des Pages de Destination (Juin 2026)
+- [x] Générer image hero Paris 2560x1440px (CDN)
+- [x] Générer image hero Dubaï 2560x1440px (CDN)
+- [x] Générer image hero New York 2560x1440px (CDN)
+- [x] Générer image hero Casablanca 2560x1440px (CDN)
+- [x] Générer image hero Bangkok 2560x1440px (CDN)
+- [x] Générer image hero Barcelone 2560x1440px (CDN)
+- [x] Intégrer toutes les nouvelles images CDN dans les 6 pages de destination

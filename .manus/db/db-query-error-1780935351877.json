@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, title, slug, category, cover_image FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2V3ESqqqga2REMv.root --database Tggjc7uo8jLmjyKySijZqx --execute SELECT id, title, slug, category, cover_image FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'published_at' in 'order clause'"
+  ]
+}
