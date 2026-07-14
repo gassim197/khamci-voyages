@@ -1,8 +1,9 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ContactWidget from "./components/ContactWidget";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ThankYou from "./pages/ThankYou";
@@ -67,6 +68,13 @@ function Router() {
   );
 }
 
+// Widget de contact flottant, masqué sur les routes admin
+function FloatingContact() {
+  const [location] = useLocation();
+  if (location.startsWith("/admin")) return null;
+  return <ContactWidget />;
+}
+
 function App() {
   return (
     <ErrorBoundary>
@@ -77,6 +85,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <FloatingContact />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
