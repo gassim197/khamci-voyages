@@ -166,7 +166,7 @@ export default function CasablancaPage() {
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center text-white overflow-hidden">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/hero-casablanca-destination-ZXWuvvSHjqCcdW2SZSgTTh.webp" alt="Casablanca" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/covers/hero-casablanca.webp" alt="Casablanca" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/45" />
         <div className="relative z-10 text-center max-w-2xl px-4">
           <h1 className="text-5xl font-bold mb-4">Casablanca</h1>
