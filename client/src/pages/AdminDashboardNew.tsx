@@ -176,12 +176,6 @@ function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
               </Button>
             </div>
 
-            <div className="mt-6 p-3 rounded-xl bg-amber-50 border border-amber-100">
-              <p className="text-xs text-amber-700">
-                <strong>Mot de passe par défaut :</strong> khamci2024
-              </p>
-            </div>
-
             <a href="/" className="block text-center text-sm text-gray-400 hover:text-orange-500 transition-colors mt-5">
               ← Retour au site
             </a>
