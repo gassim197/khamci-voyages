@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getBlogPostBySlug } from "./db";
+import { ENV } from "./_core/env";
 
 /**
  * Liste des user-agents des crawlers de réseaux sociaux.
@@ -40,11 +41,11 @@ function generateOgHtml(post: {
   publishedAt: Date | null;
   category: string;
 }): string {
-  const siteUrl = "https://khamcivoyages.com";
+  const siteUrl = ENV.publicSiteUrl;
   const articleUrl = `${siteUrl}/blog/${post.slug}`;
   const title = `${post.title} | KHAMCI VOYAGES`;
   const description = post.excerpt || `Lisez "${post.title}" sur le blog de KHAMCI VOYAGES, votre agence de voyages en Guinée.`;
-  const defaultOgImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663352571509/Tggjc7uo8jLmjyKySijZqx/og-image-khamci-h7N4HYmxhJoJvsUHM7gK9Q.png";
+  const defaultOgImage = "/og-image.webp";
   // S'assurer que l'image est une URL absolue
   let image = post.coverImage || defaultOgImage;
   if (image && !image.startsWith("http")) {

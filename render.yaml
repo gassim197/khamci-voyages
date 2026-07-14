@@ -1,0 +1,43 @@
+# Render Blueprint — Khamci Voyages
+# Un seul Web Service Node qui sert l'API tRPC + le SPA React buildé.
+# Docs : https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: khamci-voyages
+    runtime: node
+    plan: starter            # 7 $/mois, pas de mise en veille. "free" pour tester.
+    region: frankfurt        # le plus proche de l'Afrique de l'Ouest / Europe
+    branch: main
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /
+    autoDeploy: true         # redéploie à chaque push sur main
+    envVars:
+      # Version Node (Vite 7 exige >= 22.12). NE PAS définir NODE_ENV ici :
+      # le script "start" force déjà NODE_ENV=production, et le laisser vide
+      # évite que pnpm élimine les devDependencies nécessaires au build.
+      - key: NODE_VERSION
+        value: "22.12.0"
+
+      # URL canonique du site (liens des emails admin, Open Graph).
+      # À renseigner avec le nouveau domaine une fois acheté.
+      - key: PUBLIC_SITE_URL
+        sync: false
+
+      # Base Neon Postgres — depuis console.neon.tech > Connection Details.
+      - key: DATABASE_URL
+        sync: false
+
+      # Mot de passe du dashboard admin (obligatoire, pas de fallback).
+      - key: ADMIN_PASSWORD
+        sync: false
+
+      # Secret de signature des sessions admin — généré par Render.
+      - key: JWT_SECRET
+        generateValue: true
+
+      # SMTP Gmail transactionnel.
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false

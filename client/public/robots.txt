@@ -9,7 +9,7 @@ Disallow: /*.json$
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://khamcivoyages.com/sitemap.xml
+Sitemap: https://khamci-voyages.com/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Pages principales -->
   <url>
-    <loc>https://khamcivoyages.com/</loc>
+    <loc>https://khamci-voyages.com/</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,19 +10,19 @@
   
   <!-- Pages de service -->
   <url>
-    <loc>https://khamcivoyages.com/vols</loc>
+    <loc>https://khamci-voyages.com/vols</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/hotels</loc>
+    <loc>https://khamci-voyages.com/hotels</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/voitures</loc>
+    <loc>https://khamci-voyages.com/voitures</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -30,37 +30,37 @@
   
   <!-- Pages de destinations -->
   <url>
-    <loc>https://khamcivoyages.com/destination/paris</loc>
+    <loc>https://khamci-voyages.com/destination/paris</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/destination/dubai</loc>
+    <loc>https://khamci-voyages.com/destination/dubai</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/destination/new-york</loc>
+    <loc>https://khamci-voyages.com/destination/new-york</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/destination/casablanca</loc>
+    <loc>https://khamci-voyages.com/destination/casablanca</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/destination/bangkok</loc>
+    <loc>https://khamci-voyages.com/destination/bangkok</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/destination/barcelona</loc>
+    <loc>https://khamci-voyages.com/destination/barcelona</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -68,37 +68,37 @@
   
   <!-- Pages de services détaillées -->
   <url>
-    <loc>https://khamcivoyages.com/services/billetterie</loc>
+    <loc>https://khamci-voyages.com/services/billetterie</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/services/hotel</loc>
+    <loc>https://khamci-voyages.com/services/hotel</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/services/location-vehicule</loc>
+    <loc>https://khamci-voyages.com/services/location-vehicule</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/services/assurance-voyage</loc>
+    <loc>https://khamci-voyages.com/services/assurance-voyage</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/services/visa</loc>
+    <loc>https://khamci-voyages.com/services/visa</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/services/hadj-omra</loc>
+    <loc>https://khamci-voyages.com/services/hadj-oumra</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -106,25 +106,25 @@
   
   <!-- Pages légales -->
   <url>
-    <loc>https://khamcivoyages.com/a-propos</loc>
+    <loc>https://khamci-voyages.com/a-propos</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/mentions-legales</loc>
+    <loc>https://khamci-voyages.com/mentions-legales</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/politique-confidentialite</loc>
+    <loc>https://khamci-voyages.com/politique-confidentialite</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://khamcivoyages.com/conditions-utilisation</loc>
+    <loc>https://khamci-voyages.com/conditions-utilisation</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
