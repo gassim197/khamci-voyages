@@ -43,6 +43,12 @@ vi.mock("./db", () => ({
   getApprovedTestimonials: vi.fn().mockResolvedValue([]),
   updateTestimonialStatus: vi.fn().mockResolvedValue({}),
   deleteTestimonial: vi.fn().mockResolvedValue({}),
+  // Auth par utilisateur : renvoie l'owner si le mot de passe est correct, sinon null.
+  verifyAdminUser: vi.fn(async (email: string, password: string) =>
+    password === "khamci2024"
+      ? { id: 1, email, name: "Admin Test", role: "owner" as const }
+      : null
+  ),
 }));
 
 // Mock the email module
@@ -65,7 +71,10 @@ function createAdminContext(): TrpcContext {
     user: null,
     req: {
       protocol: "https",
-      headers: { "x-admin-token": "khamci2024" },
+      headers: {
+        "x-admin-email": "khamcivoyages@gmail.com",
+        "x-admin-token": "khamci2024",
+      },
     } as unknown as TrpcContext["req"],
     res: { clearCookie: vi.fn() } as unknown as TrpcContext["res"],
   };
@@ -75,9 +84,12 @@ function createAdminContext(): TrpcContext {
 // AUTH - ADMIN LOGIN
 // =====================
 describe("auth.adminLogin", () => {
-  it("should return success with correct password", async () => {
+  it("should return success with correct email + password", async () => {
     const caller = appRouter.createCaller(createPublicContext());
-    const result = await caller.auth.adminLogin({ password: "khamci2024" });
+    const result = await caller.auth.adminLogin({
+      email: "khamcivoyages@gmail.com",
+      password: "khamci2024",
+    });
     expect(result.success).toBe(true);
     expect(result.token).toBe("khamci2024");
   });
@@ -85,8 +97,11 @@ describe("auth.adminLogin", () => {
   it("should throw UNAUTHORIZED with wrong password", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     await expect(
-      caller.auth.adminLogin({ password: "wrongpassword" })
-    ).rejects.toThrow("Mot de passe incorrect");
+      caller.auth.adminLogin({
+        email: "khamcivoyages@gmail.com",
+        password: "wrongpassword",
+      })
+    ).rejects.toThrow("Email ou mot de passe incorrect");
   });
 });
 

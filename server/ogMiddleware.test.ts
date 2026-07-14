@@ -133,7 +133,7 @@ describe("ogMiddleware", () => {
     const html = (res.end as any).mock.calls[0][0] as string;
     expect(html).toContain("Test Article");
     // Should use default og-image when coverImage is null
-    expect(html).toContain("og-image.jpg");
+    expect(html).toContain("og-image.webp");
   });
 
   it("should call next() for unpublished posts", async () => {
