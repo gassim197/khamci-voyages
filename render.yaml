@@ -36,8 +36,12 @@ services:
       - key: JWT_SECRET
         generateValue: true
 
-      # SMTP Gmail transactionnel.
-      - key: GMAIL_USER
+      # Email transactionnel via Resend (SMTP).
+      # RESEND_API_KEY : depuis resend.com > API Keys.
+      - key: RESEND_API_KEY
         sync: false
-      - key: GMAIL_APP_PASSWORD
+      # Adresse d'expéditeur. Tant que le domaine n'est pas vérifié chez Resend :
+      # "onboarding@resend.dev". Une fois khamci-voyages.com vérifié, passer à
+      # "contact@khamci-voyages.com".
+      - key: EMAIL_FROM
         sync: false

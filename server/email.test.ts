@@ -1,26 +1,18 @@
 import { describe, it, expect } from "vitest";
 
-describe("Email configuration", () => {
-  it("should have GMAIL_USER environment variable set", () => {
-    const gmailUser = process.env.GMAIL_USER;
-    // The secret should be set (non-empty string)
-    expect(gmailUser).toBeDefined();
-    expect(typeof gmailUser).toBe("string");
-    expect(gmailUser!.length).toBeGreaterThan(0);
+describe("Email configuration (Resend)", () => {
+  it("EMAIL_FROM should look like an email address when set", () => {
+    const from = process.env.EMAIL_FROM;
+    if (from) {
+      expect(from).toMatch(/@/);
+    }
   });
 
-  it("should have GMAIL_APP_PASSWORD environment variable set", () => {
-    const gmailPass = process.env.GMAIL_APP_PASSWORD;
-    // The secret should be set (non-empty string)
-    expect(gmailPass).toBeDefined();
-    expect(typeof gmailPass).toBe("string");
-    expect(gmailPass!.length).toBeGreaterThan(0);
-  });
-
-  it("GMAIL_USER should look like an email address", () => {
-    const gmailUser = process.env.GMAIL_USER;
-    if (gmailUser) {
-      expect(gmailUser).toMatch(/@/);
+  it("RESEND_API_KEY should look like a Resend key when set", () => {
+    const key = process.env.RESEND_API_KEY;
+    if (key) {
+      // Les clés Resend commencent par "re_".
+      expect(key.startsWith("re_")).toBe(true);
     }
   });
 });

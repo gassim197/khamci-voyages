@@ -10,7 +10,10 @@ export const ENV = {
   cookieSecret: process.env.JWT_SECRET ?? "",
   adminPassword: process.env.ADMIN_PASSWORD ?? "",
 
-  // Email (Gmail SMTP)
-  gmailUser: process.env.GMAIL_USER ?? "",
-  gmailAppPassword: process.env.GMAIL_APP_PASSWORD ?? "",
+  // Email (Resend — envoi transactionnel via SMTP)
+  resendApiKey: process.env.RESEND_API_KEY ?? "",
+  // Adresse d'expéditeur. Avant vérification du domaine : "onboarding@resend.dev"
+  // (Resend n'autorise alors l'envoi que vers l'email du compte). Une fois
+  // khamci-voyages.com vérifié : "contact@khamci-voyages.com".
+  emailFrom: process.env.EMAIL_FROM ?? "onboarding@resend.dev",
 };

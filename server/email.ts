@@ -4,21 +4,22 @@ import { ENV } from "./_core/env";
 const ADMIN_EMAIL = "khamcivoyages@gmail.com";
 const FROM_NAME = "KHAMCI VOYAGES";
 
-// Crée un transporteur Nodemailer selon la configuration disponible
+// Crée un transporteur Nodemailer branché sur Resend (SMTP)
 function createTransporter() {
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+  const apiKey = ENV.resendApiKey;
 
-  if (!gmailUser || !gmailPass) {
-    console.warn("[Email] GMAIL_USER ou GMAIL_APP_PASSWORD non configurés. Les emails ne seront pas envoyés.");
+  if (!apiKey) {
+    console.warn("[Email] RESEND_API_KEY non configurée. Les emails ne seront pas envoyés.");
     return null;
   }
 
   return nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.resend.com",
+    port: 465,
+    secure: true,
     auth: {
-      user: gmailUser,
-      pass: gmailPass, // Mot de passe d'application Gmail (pas le mot de passe normal)
+      user: "resend", // Toujours "resend" ; le mot de passe est la clé API.
+      pass: apiKey,
     },
   });
 }
@@ -146,7 +147,7 @@ export async function sendNewQuoteNotification(quote: {
   try {
     await transporter.sendMail({
       to: ADMIN_EMAIL,
-      from: `"${FROM_NAME}" <${process.env.GMAIL_USER}>`,
+      from: `"${FROM_NAME}" <${ENV.emailFrom}>`,
       subject: `🆕 Nouveau devis - ${quote.clientName} - ${serviceLabel}`,
       html,
     });
@@ -218,7 +219,7 @@ export async function sendQuoteConfirmationToClient(quote: {
   try {
     await transporter.sendMail({
       to: quote.clientEmail,
-      from: `"${FROM_NAME}" <${process.env.GMAIL_USER}>`,
+      from: `"${FROM_NAME}" <${ENV.emailFrom}>`,
       subject: `✅ Votre demande de devis KHAMCI VOYAGES a été reçue`,
       html,
     });
@@ -286,7 +287,7 @@ export async function sendNewTestimonialNotification(testimonial: {
   try {
     await transporter.sendMail({
       to: ADMIN_EMAIL,
-      from: `"${FROM_NAME}" <${process.env.GMAIL_USER}>`,
+      from: `"${FROM_NAME}" <${ENV.emailFrom}>`,
       subject: `💬 Nouveau témoignage - ${testimonial.clientName} - ${stars}`,
       html,
     });
