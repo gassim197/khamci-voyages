@@ -6,6 +6,7 @@ export const quoteStatusEnum = pgEnum("quote_status", ["pending", "in_progress",
 export const testimonialStatusEnum = pgEnum("testimonial_status", ["pending", "approved", "rejected"]);
 export const blogCategoryEnum = pgEnum("blog_category", ["destinations", "conseils", "offres", "actualites"]);
 export const blogPostStatusEnum = pgEnum("blog_post_status", ["draft", "published"]);
+export const adminRoleEnum = pgEnum("admin_role", ["owner", "editor"]);
 
 /**
  * Core user table backing auth flow.
@@ -131,3 +132,16 @@ export const blogPosts = pgTable("blog_posts", {
 
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertBlogPost = typeof blogPosts.$inferInsert;
+
+// Table des comptes administrateurs (multi-admin : owner / editor)
+export const adminUsers = pgTable("admin_users", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  name: varchar("name", { length: 120 }).notNull(),
+  passwordHash: text("passwordHash").notNull(),
+  role: adminRoleEnum("role").default("editor").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AdminUser = typeof adminUsers.$inferSelect;
+export type InsertAdminUser = typeof adminUsers.$inferInsert;

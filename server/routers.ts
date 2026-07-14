@@ -7,21 +7,33 @@ import { TRPCError } from "@trpc/server";
 import {
   createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
-  verifyAdminPassword, setAdminPassword, getAdminProfile, updateAdminProfile,
+  getAdminProfile, updateAdminProfile,
+  verifyAdminUser, listAdminUsers, createAdminUser, deleteAdminUser, updateAdminUserPassword,
   subscribeToNewsletter, getAllNewsletterSubscribers, deleteNewsletterSubscriber,
   createBlogPost, updateBlogPost, deleteBlogPost, getAllBlogPosts, getPublishedBlogPosts, getBlogPostBySlug,
 } from "./db";
 import { sendNewQuoteNotification, sendQuoteConfirmationToClient, sendNewTestimonialNotification } from "./email";
 
-// adminProcedure vérifie le token dans les headers (token = mot de passe en clair pour la session)
+// adminProcedure vérifie les identifiants par utilisateur : headers x-admin-email
+// + x-admin-token (token = mot de passe en clair, revérifié serveur à chaque requête).
+// L'utilisateur authentifié est ajouté au contexte (ctx.adminUser).
 const adminProcedure = publicProcedure.use(async ({ ctx, next }) => {
+  const email = (ctx.req as any).headers["x-admin-email"] as string | undefined;
   const token = (ctx.req as any).headers["x-admin-token"] as string | undefined;
-  if (!token) {
+  if (!email || !token) {
     throw new TRPCError({ code: "UNAUTHORIZED", message: "Accès non autorisé" });
   }
-  const isValid = await verifyAdminPassword(token);
-  if (!isValid) {
+  const adminUser = await verifyAdminUser(email, token);
+  if (!adminUser) {
     throw new TRPCError({ code: "UNAUTHORIZED", message: "Accès non autorisé" });
+  }
+  return next({ ctx: { ...ctx, adminUser } });
+});
+
+// ownerProcedure : réservé au propriétaire (gestion des utilisateurs).
+const ownerProcedure = adminProcedure.use(async ({ ctx, next }) => {
+  if (ctx.adminUser.role !== "owner") {
+    throw new TRPCError({ code: "FORBIDDEN", message: "Réservé au propriétaire du compte" });
   }
   return next({ ctx });
 });
@@ -36,15 +48,22 @@ export const appRouter = router({
       return { success: true } as const;
     }),
     adminLogin: publicProcedure
-      .input(z.object({ password: z.string() }))
+      .input(z.object({ email: z.string().email(), password: z.string() }))
       .mutation(async ({ input }) => {
-        const isValid = await verifyAdminPassword(input.password);
-        if (!isValid) {
-          throw new TRPCError({ code: "UNAUTHORIZED", message: "Mot de passe incorrect" });
+        const user = await verifyAdminUser(input.email, input.password);
+        if (!user) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Email ou mot de passe incorrect" });
         }
         // Le token de session = le mot de passe en clair (vérifié côté serveur à chaque requête)
-        return { success: true, token: input.password };
+        return {
+          success: true,
+          token: input.password,
+          user: { id: user.id, email: user.email, name: user.name, role: user.role },
+        };
       }),
+
+    // Renvoie l'utilisateur admin courant (le client connaît ainsi son rôle).
+    adminMe: adminProcedure.query(({ ctx }) => ctx.adminUser),
 
     getAdminProfile: adminProcedure.query(async () => getAdminProfile()),
 
@@ -68,17 +87,60 @@ export const appRouter = router({
         newPassword: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
         confirmPassword: z.string().min(1),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
         if (input.newPassword !== input.confirmPassword) {
           throw new TRPCError({ code: "BAD_REQUEST", message: "Les mots de passe ne correspondent pas" });
         }
-        // Vérifier l'ancien mot de passe
-        const isValid = await verifyAdminPassword(input.currentPassword);
-        if (!isValid) {
+        // Vérifier l'ancien mot de passe de l'utilisateur courant
+        const valid = await verifyAdminUser(ctx.adminUser.email, input.currentPassword);
+        if (!valid) {
           throw new TRPCError({ code: "UNAUTHORIZED", message: "Mot de passe actuel incorrect" });
         }
-        await setAdminPassword(input.newPassword);
+        await updateAdminUserPassword(ctx.adminUser.id, input.newPassword);
         return { success: true };
+      }),
+  }),
+
+  // Gestion des comptes administrateurs (owner uniquement pour créer/supprimer).
+  adminUsers: router({
+    // Tous les admins peuvent voir la liste.
+    list: adminProcedure.query(async () => listAdminUsers()),
+
+    // Seul l'owner crée des comptes (toujours des editors).
+    create: ownerProcedure
+      .input(z.object({
+        email: z.string().email(),
+        name: z.string().min(2),
+        password: z.string().min(8, "8 caractères minimum"),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const user = await createAdminUser(input);
+          return { success: true, user };
+        } catch (err) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: err instanceof Error ? err.message : "Impossible de créer l'utilisateur",
+          });
+        }
+      }),
+
+    // Seul l'owner supprime. Pas d'auto-suppression, dernier owner protégé (côté db).
+    delete: ownerProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (input.id === ctx.adminUser.id) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Vous ne pouvez pas supprimer votre propre compte" });
+        }
+        try {
+          await deleteAdminUser(input.id);
+          return { success: true };
+        } catch (err) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: err instanceof Error ? err.message : "Impossible de supprimer l'utilisateur",
+          });
+        }
       }),
   }),
 

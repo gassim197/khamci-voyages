@@ -37,7 +37,7 @@ const ORANGE_LIGHT = "#FF8C5A";
 // ─── TYPES ──────────────────────────────────────────────────────────────────
 type QuoteStatus = "pending" | "in_progress" | "completed" | "rejected";
 type TestimonialStatus = "pending" | "approved" | "rejected";
-type ActiveView = "dashboard" | "quotes" | "testimonials" | "blog" | "newsletter" | "profile" | "settings";
+type ActiveView = "dashboard" | "quotes" | "testimonials" | "blog" | "newsletter" | "profile" | "settings" | "users";
 
 const QUOTE_STATUS_LABELS: Record<QuoteStatus, string> = {
   pending: "En attente",
@@ -76,16 +76,22 @@ const SERVICE_LABELS: Record<string, string> = {
 
 // ─── PAGE DE CONNEXION ───────────────────────────────────────────────────────
 function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loginMutation = trpc.auth.adminLogin.useMutation({
     onSuccess: (data) => {
       localStorage.setItem("khamci-admin-token", data.token);
+      localStorage.setItem("khamci-admin-email", data.user.email);
       localStorage.setItem("khamci-admin-expiry", String(Date.now() + 24 * 60 * 60 * 1000));
       onLogin(data.token);
       toast.success("Connexion réussie !");
     },
-    onError: () => toast.error("Mot de passe incorrect"),
+    onError: () => toast.error("Email ou mot de passe incorrect"),
   });
+
+  const submit = () => {
+    if (email && password) loginMutation.mutate({ email, password });
+  };
 
   return (
     <div className="min-h-screen flex" style={{ background: NAVY }}>
@@ -147,16 +153,35 @@ function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    placeholder="vous@exemple.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && submit()}
+                    className="pl-10 h-12 border-gray-200 rounded-xl focus:border-orange-400 focus:ring-orange-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Mot de passe
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <Input
                     type="password"
+                    autoComplete="current-password"
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && loginMutation.mutate({ password })}
+                    onKeyDown={(e) => e.key === "Enter" && submit()}
                     className="pl-10 h-12 border-gray-200 rounded-xl focus:border-orange-400 focus:ring-orange-400"
                   />
                 </div>
@@ -165,8 +190,8 @@ function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
               <Button
                 className="w-full h-12 text-white font-semibold rounded-xl transition-all shadow-md hover:shadow-lg"
                 style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}
-                onClick={() => loginMutation.mutate({ password })}
-                disabled={loginMutation.isPending || !password}
+                onClick={submit}
+                disabled={loginMutation.isPending || !email || !password}
               >
                 {loginMutation.isPending ? (
                   <span className="flex items-center gap-2"><RefreshCw className="w-4 h-4 animate-spin" /> Connexion...</span>
@@ -196,6 +221,7 @@ function Sidebar({
   adminAvatar,
   pendingQuotes,
   pendingTestimonials,
+  isOwner,
   isOpen,
   onClose,
 }: {
@@ -207,6 +233,7 @@ function Sidebar({
   adminAvatar: string | null;
   pendingQuotes: number;
   pendingTestimonials: number;
+  isOwner: boolean;
   isOpen: boolean;
   onClose: () => void;
 }) {
@@ -217,6 +244,8 @@ function Sidebar({
     { id: "blog", icon: BookOpen, label: "Blog", section: "contenu" },
     { id: "newsletter", icon: Users, label: "Newsletter", section: "contenu" },
     { id: "profile", icon: User, label: "Profil", section: "compte" },
+    // Onglet réservé au propriétaire (gestion des comptes admin)
+    ...(isOwner ? [{ id: "users" as ActiveView, icon: ShieldCheck, label: "Utilisateurs", section: "compte" }] : []),
     { id: "settings", icon: Settings, label: "Paramètres", section: "compte" },
   ];
 
@@ -852,6 +881,7 @@ function SettingsSection({ adminToken }: { adminToken: string }) {
       setCurrentPassword(""); setNewPassword(""); setConfirmPassword("");
       setTimeout(() => {
         localStorage.removeItem("khamci-admin-token");
+        localStorage.removeItem("khamci-admin-email");
         localStorage.removeItem("khamci-admin-expiry");
         window.location.reload();
       }, 2000);
@@ -1195,6 +1225,21 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   const adminPosition = profileQuery.data?.position || "Admin";
   const adminAvatar = profileQuery.data?.avatarUrl || null;
 
+  // Utilisateur admin connecté (rôle revérifié serveur, jamais depuis localStorage)
+  const meQuery = trpc.auth.adminMe.useQuery(undefined, { retry: false });
+  const currentUser = meQuery.data ?? null;
+  const isOwner = currentUser?.role === "owner";
+
+  // Session invalide (token révoqué / compte supprimé) → déconnexion
+  useEffect(() => {
+    if (meQuery.isError) onLogout();
+  }, [meQuery.isError, onLogout]);
+
+  // Si l'onglet Utilisateurs est ouvert mais qu'on n'est pas owner, on rebascule
+  useEffect(() => {
+    if (activeView === "users" && currentUser && !isOwner) setActiveView("dashboard");
+  }, [activeView, currentUser, isOwner]);
+
   const quotesQuery = trpc.quotes.list.useQuery(undefined, { refetchInterval: 30000 });
   const testimonialsQuery = trpc.testimonials.listAll.useQuery(undefined, { refetchInterval: 30000 });
 
@@ -1295,6 +1340,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
     newsletter: "Abonnés newsletter",
     profile: "Mon profil",
     settings: "Paramètres",
+    users: "Gestion des utilisateurs",
   };
 
   return (
@@ -1309,6 +1355,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
         adminAvatar={adminAvatar}
         pendingQuotes={pendingQuotes}
         pendingTestimonials={pendingTestimonials}
+        isOwner={isOwner}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
@@ -1368,6 +1415,23 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
             >
               <RefreshCw className={`w-5 h-5 ${quotesQuery.isFetching || testimonialsQuery.isFetching ? "animate-spin" : ""}`} />
             </button>
+
+            {/* Utilisateur connecté */}
+            {currentUser && (
+              <div className="hidden sm:flex items-center gap-2 pl-3 ml-1 border-l border-gray-200">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                     style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}>
+                  {currentUser.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="leading-tight">
+                  <p className="text-xs font-semibold text-gray-900">{currentUser.name}</p>
+                  <span className="text-[10px] font-semibold"
+                        style={{ color: currentUser.role === "owner" ? ORANGE : "#64748B" }}>
+                    {currentUser.role === "owner" ? "Propriétaire" : "Éditeur"}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </header>
 
@@ -1522,6 +1586,8 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
 
           {/* ─── VUE PARAMÈTRES ─── */}
           {activeView === "settings" && <SettingsSection adminToken={adminToken} />}
+
+          {activeView === "users" && isOwner && currentUser && <UsersView currentUserId={currentUser.id} />}
         </main>
       </div>
     </div>
@@ -1959,6 +2025,200 @@ function NewsletterView() {
   );
 }
 
+// ─── GESTION DES UTILISATEURS (owner uniquement) ───────────────────────────────
+function UsersView({ currentUserId }: { currentUserId: number }) {
+  const usersQuery = trpc.adminUsers.list.useQuery();
+  const users = usersQuery.data || [];
+
+  const [showForm, setShowForm] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
+
+  const createMutation = trpc.adminUsers.create.useMutation({
+    onSuccess: (data) => {
+      toast.success(
+        `Compte créé pour ${data.user.name}. Communiquez le mot de passe de manière sécurisée (WhatsApp direct, pas par email).`
+      );
+      usersQuery.refetch();
+      setShowForm(false);
+      setName(""); setEmail(""); setPassword("");
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const deleteMutation = trpc.adminUsers.delete.useMutation({
+    onSuccess: () => {
+      toast.success("Compte supprimé.");
+      usersQuery.refetch();
+      setDeleteTarget(null);
+    },
+    onError: (e) => { toast.error(e.message); setDeleteTarget(null); },
+  });
+
+  const handleCreate = () => {
+    if (name.trim().length < 2) { toast.error("Le nom doit contenir au moins 2 caractères"); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { toast.error("Email invalide"); return; }
+    if (password.length < 8) { toast.error("Le mot de passe doit contenir au moins 8 caractères"); return; }
+    createMutation.mutate({ name: name.trim(), email: email.trim(), password });
+  };
+
+  const ROLE_LABELS: Record<string, string> = { owner: "Propriétaire", editor: "Éditeur" };
+
+  return (
+    <div>
+      {/* En-tête */}
+      <div className="flex items-center justify-between mb-6">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {users.length} compte{users.length > 1 ? "s" : ""} administrateur{users.length > 1 ? "s" : ""}
+        </p>
+        <button
+          onClick={() => setShowForm(v => !v)}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm hover:shadow-md transition-all"
+          style={{ background: NAVY }}
+        >
+          <Plus className="w-4 h-4" />
+          Ajouter un utilisateur
+        </button>
+      </div>
+
+      {/* Formulaire de création */}
+      {showForm && (
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 mb-6">
+          <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-4">➕ Nouvel utilisateur (éditeur)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom *</label>
+              <Input value={name} onChange={e => setName(e.target.value)} placeholder="Nom complet" className="h-11" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
+              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="editeur@exemple.com" className="h-11" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mot de passe * (8 car. min)</label>
+              <Input type="text" value={password} onChange={e => setPassword(e.target.value)} placeholder="Mot de passe" className="h-11" />
+            </div>
+          </div>
+          <div className="mt-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800">
+            <p className="text-xs text-amber-700 dark:text-amber-300">
+              🔒 Communiquez ce mot de passe à l'utilisateur de manière sécurisée (WhatsApp direct, <strong>pas par email</strong>).
+            </p>
+          </div>
+          <div className="flex gap-3 justify-end pt-4">
+            <button
+              onClick={() => { setShowForm(false); setName(""); setEmail(""); setPassword(""); }}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={handleCreate}
+              disabled={createMutation.isPending}
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+              style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}
+            >
+              {createMutation.isPending ? "Création..." : "Créer le compte"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Tableau des utilisateurs */}
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-100 dark:border-gray-800 text-left text-gray-500 dark:text-gray-400">
+                <th className="px-5 py-3 font-semibold">Nom</th>
+                <th className="px-5 py-3 font-semibold">Email</th>
+                <th className="px-5 py-3 font-semibold">Rôle</th>
+                <th className="px-5 py-3 font-semibold">Créé le</th>
+                <th className="px-5 py-3 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map(u => {
+                const isSelf = u.id === currentUserId;
+                const isOwnerRow = u.role === "owner";
+                return (
+                  <tr key={u.id} className="border-b border-gray-50 dark:border-gray-800 last:border-0">
+                    <td className="px-5 py-3 font-medium text-gray-900 dark:text-white">
+                      {u.name}{isSelf && <span className="text-xs text-gray-400 ml-1">(vous)</span>}
+                    </td>
+                    <td className="px-5 py-3 text-gray-600 dark:text-gray-300">{u.email}</td>
+                    <td className="px-5 py-3">
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
+                            style={isOwnerRow
+                              ? { background: `${ORANGE}22`, color: ORANGE }
+                              : { background: "#E2E8F0", color: "#475569" }}>
+                        {isOwnerRow && <ShieldCheck className="w-3 h-3" />}
+                        {ROLE_LABELS[u.role] || u.role}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3 text-gray-500 dark:text-gray-400">
+                      {new Date(u.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}
+                    </td>
+                    <td className="px-5 py-3 text-right">
+                      {!isOwnerRow && !isSelf ? (
+                        <button
+                          onClick={() => setDeleteTarget({ id: u.id, name: u.name })}
+                          className="p-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                          title="Supprimer ce compte"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <span className="text-xs text-gray-300 dark:text-gray-600">—</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+              {users.length === 0 && (
+                <tr><td colSpan={5} className="px-5 py-8 text-center text-gray-400">Aucun utilisateur.</td></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Aide récupération de mot de passe */}
+      <p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
+        Mot de passe oublié ? Supprimez le compte et recréez-le avec un nouveau mot de passe.
+      </p>
+
+      {/* Dialog de confirmation suppression */}
+      <Dialog open={!!deleteTarget} onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Supprimer ce compte ?</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Le compte de <strong>{deleteTarget?.name}</strong> sera définitivement supprimé. Cette action est irréversible.
+          </p>
+          <div className="flex gap-3 justify-end pt-4">
+            <button
+              onClick={() => setDeleteTarget(null)}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={() => deleteTarget && deleteMutation.mutate({ id: deleteTarget.id })}
+              disabled={deleteMutation.isPending}
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500 hover:bg-red-600 disabled:opacity-60"
+            >
+              {deleteMutation.isPending ? "Suppression..." : "Supprimer"}
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
 // ─── WRAPPER ───────────────────────────────────────────────────────────────────────────────
 function AdminDashboardWithProvider({ adminToken, onLogout }: { adminToken: string; onLogout: () => void }) {
   return <Dashboard onLogout={onLogout} adminToken={adminToken} />;
@@ -1970,14 +2230,16 @@ export default function AdminDashboardNew() {
 
   useEffect(() => {
     const token = localStorage.getItem("khamci-admin-token");
+    const email = localStorage.getItem("khamci-admin-email");
     const expiry = localStorage.getItem("khamci-admin-expiry");
-    if (token && expiry && Date.now() < parseInt(expiry)) {
+    if (token && email && expiry && Date.now() < parseInt(expiry)) {
       setAdminToken(token);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("khamci-admin-token");
+    localStorage.removeItem("khamci-admin-email");
     localStorage.removeItem("khamci-admin-expiry");
     setAdminToken(null);
   };

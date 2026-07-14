@@ -1,7 +1,7 @@
 import { eq, desc, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
-import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost } from "../drizzle/schema";
+import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost, adminUsers, AdminUser } from "../drizzle/schema";
 import bcrypt from "bcryptjs";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -353,4 +353,110 @@ export async function getBlogPostBySlug(slug: string) {
   if (!db) throw new Error("Database not available");
   const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
   return result[0] ?? null;
+}
+
+// =====================
+// ADMIN USERS (MULTI-ADMIN : owner / editor)
+// =====================
+
+// Utilisateur admin sans le hash du mot de passe (jamais exposé au client).
+export type SafeAdminUser = Omit<AdminUser, "passwordHash">;
+
+function toSafeAdminUser(user: AdminUser): SafeAdminUser {
+  const { passwordHash: _passwordHash, ...safe } = user;
+  return safe;
+}
+
+const normalizeEmail = (email: string) => email.trim().toLowerCase();
+
+// Au premier démarrage, crée le compte owner à partir de ADMIN_PASSWORD si
+// la table admin_users est vide.
+export async function bootstrapOwnerIfEmpty(): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Admin] Bootstrap ignoré : base de données indisponible");
+    return;
+  }
+
+  const existing = await db.select({ id: adminUsers.id }).from(adminUsers).limit(1);
+  if (existing.length > 0) return;
+
+  const ownerPassword = process.env.ADMIN_PASSWORD;
+  if (!ownerPassword) {
+    throw new Error(
+      "ADMIN_PASSWORD environment variable is required to bootstrap the owner account. " +
+      "Set it in .env or in your deployment environment."
+    );
+  }
+
+  const passwordHash = await bcrypt.hash(ownerPassword, 12);
+  await db.insert(adminUsers).values({
+    email: normalizeEmail("khamcivoyages@gmail.com"),
+    name: "Khamci Voyages",
+    passwordHash,
+    role: "owner",
+  });
+  console.log("[Admin] Compte owner créé (khamcivoyages@gmail.com)");
+}
+
+// Vérifie email + mot de passe. Retourne l'utilisateur (sans hash) ou null.
+export async function verifyAdminUser(email: string, password: string): Promise<SafeAdminUser | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(adminUsers).where(eq(adminUsers.email, normalizeEmail(email))).limit(1);
+  const user = result[0];
+  if (!user) return null;
+  const ok = await bcrypt.compare(password, user.passwordHash);
+  if (!ok) return null;
+  return toSafeAdminUser(user);
+}
+
+export async function listAdminUsers(): Promise<SafeAdminUser[]> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const rows = await db.select().from(adminUsers).orderBy(adminUsers.createdAt);
+  return rows.map(toSafeAdminUser);
+}
+
+// Crée un editor (on ne crée jamais de second owner en V1).
+export async function createAdminUser(data: { email: string; name: string; password: string }): Promise<SafeAdminUser> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const email = normalizeEmail(data.email);
+
+  const existing = await db.select({ id: adminUsers.id }).from(adminUsers).where(eq(adminUsers.email, email)).limit(1);
+  if (existing.length > 0) {
+    throw new Error("Email déjà utilisé");
+  }
+
+  const passwordHash = await bcrypt.hash(data.password, 12);
+  const inserted = await db.insert(adminUsers).values({
+    email,
+    name: data.name.trim(),
+    passwordHash,
+    role: "editor",
+  }).returning();
+  return toSafeAdminUser(inserted[0]);
+}
+
+// Supprime un utilisateur. Interdit la suppression d'un owner (garde-fou : le
+// dernier owner ne peut pas être supprimé, et aucun second owner n'existe en V1).
+export async function deleteAdminUser(id: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const target = await db.select().from(adminUsers).where(eq(adminUsers.id, id)).limit(1);
+  const user = target[0];
+  if (!user) throw new Error("Utilisateur introuvable");
+  if (user.role === "owner") {
+    throw new Error("Impossible de supprimer un compte propriétaire");
+  }
+  await db.delete(adminUsers).where(eq(adminUsers.id, id));
+}
+
+// Met à jour le hash de mot de passe d'un utilisateur (changement par lui-même).
+export async function updateAdminUserPassword(id: number, newPassword: string): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const passwordHash = await bcrypt.hash(newPassword, 12);
+  await db.update(adminUsers).set({ passwordHash }).where(eq(adminUsers.id, id));
 }

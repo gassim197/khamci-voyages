@@ -14,10 +14,10 @@ const trpcClient = trpc.createClient({
       url: "/api/trpc",
       transformer: superjson,
       headers() {
-        const token = typeof window !== "undefined"
-          ? localStorage.getItem("khamci-admin-token")
-          : null;
-        return token ? { "x-admin-token": token } : {};
+        if (typeof window === "undefined") return {};
+        const token = localStorage.getItem("khamci-admin-token");
+        const email = localStorage.getItem("khamci-admin-email");
+        return token && email ? { "x-admin-token": token, "x-admin-email": email } : {};
       },
       fetch(input, init) {
         return globalThis.fetch(input, {

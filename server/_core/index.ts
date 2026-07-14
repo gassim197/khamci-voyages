@@ -7,6 +7,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { ogMiddleware } from "../ogMiddleware";
+import { bootstrapOwnerIfEmpty } from "../db";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -48,6 +49,14 @@ async function startServer() {
     await setupVite(app, server);
   } else {
     serveStatic(app);
+  }
+
+  // Crée le compte owner au premier démarrage si aucun admin n'existe.
+  // On log l'erreur sans empêcher le boot (ex: DB indisponible en dev).
+  try {
+    await bootstrapOwnerIfEmpty();
+  } catch (err) {
+    console.error("[Admin] Bootstrap owner échoué:", err);
   }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
