@@ -31,7 +31,7 @@ Le projet a été initialement généré avec **Manus**. Une migration est en co
 
 | Service Manus | Remplaçant |
 |---|---|
-| Forge storage proxy | **Cloudflare R2** (S3-compatible) |
+| Forge storage proxy | ❌ **Non retenu pour la V1 — uploads manuels via commit git** (R2 reporté V1.5) |
 | Forge AI proxy (OpenAI) | ❌ **Chatbot retiré (standby V1.5)** |
 | Forge Google Maps proxy | ❌ **Code Maps mort supprimé** |
 | OAuth Manus | **Supprimé** (les visiteurs n'ont pas de compte ; admin reste sur password) |
@@ -187,12 +187,13 @@ Voir `.env.example` pour la liste complète. Variables critiques :
 
 | Variable | Usage | Obligatoire |
 |---|---|---|
-| `DATABASE_URL` | Chaîne MySQL (PlanetScale) | Oui |
+| `NODE_ENV` | `development` / `production` | Non (défaut dev) |
+| `PUBLIC_SITE_URL` | URL canonique (liens emails, OG) | Oui |
+| `DATABASE_URL` | Chaîne Postgres (Neon) | Oui |
 | `ADMIN_PASSWORD` | Mot de passe du dashboard admin | Oui (prod) |
 | `JWT_SECRET` | Signature des sessions admin | Oui |
-| `GMAIL_USER` + `GMAIL_APP_PASSWORD` | SMTP transactionnel | Oui |
-| `R2_*` | Stockage uploads | Oui (après Phase 2.1) |
-| `PUBLIC_SITE_URL` | URL canonique (liens emails, OG) | Oui |
+| `GMAIL_USER` | Compte SMTP transactionnel | Oui |
+| `GMAIL_APP_PASSWORD` | Mot de passe d'application Gmail | Oui |
 
 **Variables supprimées (anciennes Manus)** : `VITE_APP_ID`, `OAUTH_SERVER_URL`, `OWNER_OPEN_ID`, `BUILT_IN_FORGE_API_URL`, `BUILT_IN_FORGE_API_KEY`.
 
@@ -252,5 +253,6 @@ Voir `.env.example` pour la liste complète. Variables critiques :
 - Optimisation images (WebP/AVIF avec sharp).
 - Refactor `users` table (devenue obsolète).
 - Réactivation du chatbot Khamci Bot (V1.5 si data trafic confirme l'intérêt).
+- Feature upload admin pour blog (V1.5 si volume justifie l'infra R2 ou disque persistant).
 
 À garder dans `todo.md`, pas dans le scope de la migration courante.

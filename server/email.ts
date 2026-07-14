@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { ENV } from "./_core/env";
 
 const ADMIN_EMAIL = "khamcivoyages@gmail.com";
 const FROM_NAME = "KHAMCI VOYAGES";
@@ -128,7 +129,7 @@ export async function sendNewQuoteNotification(quote: {
       </div>` : ''}
 
       <div class="cta">
-        <a href="https://khamcivoyage-tggjc7uo.manus.space/admin/dashboard">
+        <a href="${ENV.publicSiteUrl}/admin/dashboard">
           📊 Voir dans le Dashboard Admin
         </a>
       </div>
@@ -269,7 +270,7 @@ export async function sendNewTestimonialNotification(testimonial: {
         "${testimonial.content}"
       </div>
       <div class="cta">
-        <a href="https://khamcivoyage-tggjc7uo.manus.space/admin/dashboard">
+        <a href="${ENV.publicSiteUrl}/admin/dashboard">
           ✅ Approuver dans le Dashboard
         </a>
       </div>

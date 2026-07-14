@@ -1538,7 +1538,6 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
 function BlogView() {
   const [showForm, setShowForm] = useState(false);
   const [editingPost, setEditingPost] = useState<any>(null);
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [form, setForm] = useState({
     title: "",
     excerpt: "",
@@ -1549,48 +1548,6 @@ function BlogView() {
     authorName: "KHAMCI VOYAGES",
     readTime: 5,
   });
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      toast.error("Seules les images sont acceptées (JPG, PNG, WEBP)");
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("L'image ne doit pas dépasser 5 Mo");
-      return;
-    }
-    setIsUploadingImage(true);
-    try {
-      const reader = new FileReader();
-      reader.onload = async (ev) => {
-        const imageData = ev.target?.result as string;
-        const response = await fetch("/api/upload/blog-image", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({
-            imageData,
-            mimeType: file.type,
-            fileName: file.name,
-          }),
-        });
-        if (!response.ok) {
-          const err = await response.json();
-          throw new Error(err.error || "Erreur lors de l'upload");
-        }
-        const { url } = await response.json();
-        setForm(f => ({ ...f, coverImage: url }));
-        toast.success("Image uploadée avec succès !");
-        setIsUploadingImage(false);
-      };
-      reader.readAsDataURL(file);
-    } catch (err: any) {
-      toast.error(err.message || "Erreur lors de l'upload de l'image");
-      setIsUploadingImage(false);
-    }
-  };
 
   const postsQuery = trpc.blog.listAll.useQuery();
   const posts = postsQuery.data || [];
@@ -1741,41 +1698,18 @@ function BlogView() {
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Image de couverture</label>
                 <div className="space-y-3">
-                  {/* Bouton d'upload */}
-                  <div className="flex items-center gap-3">
-                    <label
-                      htmlFor="blog-image-upload"
-                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold cursor-pointer transition-all border-2 border-dashed ${
-                        isUploadingImage
-                          ? "border-gray-200 text-gray-400 cursor-not-allowed"
-                          : "border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400"
-                      }`}
-                    >
-                      {isUploadingImage ? (
-                        <><span className="animate-spin w-4 h-4 border-2 border-orange-400 border-t-transparent rounded-full" /> Upload en cours...</>
-                      ) : (
-                        <><Camera className="w-4 h-4" /> Choisir une image depuis mon ordinateur</>
-                      )}
-                    </label>
-                    <input
-                      id="blog-image-upload"
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      disabled={isUploadingImage}
-                      onChange={handleImageUpload}
-                    />
-                    <span className="text-xs text-gray-400">JPG, PNG, WEBP — max 5 Mo</span>
-                  </div>
-                  {/* Ou coller une URL */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-400 shrink-0">ou coller une URL :</span>
+                  {/* Chemin de l'image */}
+                  <div>
                     <Input
                       value={form.coverImage}
                       onChange={e => setForm(f => ({...f, coverImage: e.target.value}))}
-                      placeholder="https://example.com/image.jpg"
-                      className="h-9 text-sm"
+                      placeholder="/images/blog/mon-article.webp"
+                      className="h-11 text-sm"
                     />
+                    <p className="mt-1.5 text-xs text-gray-400">
+                      Ajoute d'abord ton image dans <code className="text-gray-500">client/public/images/blog/</code>,
+                      puis colle son chemin ici (ex : <code className="text-gray-500">/images/blog/mon-article.webp</code>).
+                    </p>
                   </div>
                   {/* Prévisualisation */}
                   {form.coverImage && (

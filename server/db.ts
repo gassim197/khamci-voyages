@@ -2,7 +2,6 @@ import { eq, desc, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost } from "../drizzle/schema";
-import { ENV } from './_core/env';
 import bcrypt from "bcryptjs";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -58,9 +57,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
     if (user.role !== undefined) {
       values.role = user.role;
       updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
     }
 
     if (!values.lastSignedIn) {
@@ -202,7 +198,13 @@ export async function verifyAdminPassword(password: string): Promise<boolean> {
   const hash = await getAdminPasswordHash();
   // Si aucun hash en DB, utiliser le mot de passe par défaut de l'env
   if (!hash) {
-    const defaultPassword = process.env.ADMIN_PASSWORD || "khamci2024";
+    const defaultPassword = process.env.ADMIN_PASSWORD;
+    if (!defaultPassword) {
+      throw new Error(
+        "ADMIN_PASSWORD environment variable is required. " +
+        "Set it in .env or in your deployment environment."
+      );
+    }
     return password === defaultPassword;
   }
   return bcrypt.compare(password, hash);

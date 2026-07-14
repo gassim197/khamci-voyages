@@ -110,13 +110,13 @@ Le site doit builder. Le chatbot, les uploads et la Map peuvent encore être cas
 
 ### 2.1 — Storage (uploads d'images blog) → Cloudflare R2
 
-**Pourquoi** : `@aws-sdk/client-s3` est déjà installé. R2 est compatible S3.
+❌ **Reportée V1.5 — Option A choisie (upload manuel via commit) pour économiser du setup et éviter les blocages Cloudflare.**
 
-- [ ] Créer un compte Cloudflare → R2 → créer un bucket `khamci-uploads`.
-- [ ] Générer un token API R2 (Access Key ID + Secret Access Key).
-- [ ] Configurer un domaine public ou un Worker pour servir les fichiers.
-- [ ] **Réécrire `server/storage.ts`** : remplacer les appels au proxy forge par le client S3 v3 pointé sur R2 (`endpoint: https://<account-id>.r2.cloudflarestorage.com`).
-- [ ] **Réécrire `server/uploadRoutes.ts`** : la route `POST /api/upload/blog-image` doit faire un `PutObjectCommand` et renvoyer l'URL publique.
+Pour la V1, les images de blog sont ajoutées manuellement dans `client/public/images/blog/` et l'admin saisit le chemin (ex : `/images/blog/mon-article.webp`) dans le champ URL du formulaire d'article. Aucune infra de stockage externe n'est nécessaire.
+
+- [x] Supprimé `server/storage.ts` et `server/uploadRoutes.ts` (derniers consommateurs du proxy forge).
+- [x] Retiré le bouton d'upload de l'éditeur blog (`AdminDashboardNew.tsx`), conservé le champ chemin/URL avec un texte d'aide.
+- Réactivation R2 possible en V1.5 si le volume justifie l'infra (ou disque persistant Render).
 
 ### 2.2 — Chatbot Khamci Bot → Anthropic
 
@@ -134,8 +134,8 @@ Fichiers retirés : `server/chatKhamci.ts`, `client/src/components/AIChatBox.tsx
 
 ### 2.5 — Emails (URL admin en dur)
 
-- [ ] **Modifier `server/email.ts` lignes 131 et 272** : remplacer `https://khamcivoyage-tggjc7uo.manus.space/admin/dashboard` par une variable `process.env.PUBLIC_SITE_URL + "/admin/dashboard"`.
-- [ ] Ajouter `PUBLIC_SITE_URL` à `server/_core/env.ts`.
+- [x] **Modifier `server/email.ts` lignes 131 et 272** : remplacer `https://khamcivoyage-tggjc7uo.manus.space/admin/dashboard` par `${ENV.publicSiteUrl}/admin/dashboard`.
+- [x] Ajouter `PUBLIC_SITE_URL` à `server/_core/env.ts` (exposé via `ENV.publicSiteUrl`).
 
 ### 2.6 — Mentions Légales
 
@@ -359,10 +359,10 @@ Et mettre à jour `todo.md` pour retirer la mention du mot de passe `khamci2024`
 |---|---|---|
 | Render Starter | Sans spin-down | 7 $ |
 | Neon Postgres | Free tier (autoscale au besoin) | ~0 $ |
-| Cloudflare R2 | Volume faible | ~0 $ |
+| Stockage images | Upload manuel via commit git (R2 reporté V1.5) | 0 $ |
 | Anthropic API | Chatbot en standby (V1.5) | 0 $ |
 | Domaine `.com` | — | ~1 $/mois amorti |
-| **Total** | | **~13–20 $/mois** |
+| **Total** | | **~13 $/mois** |
 
 À comparer avec ton abonnement Manus actuel.
 
