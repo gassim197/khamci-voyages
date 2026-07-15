@@ -270,7 +270,7 @@ function Sidebar({
           </div>
           <div>
             <span className="block text-white font-bold text-sm leading-tight">KHAMCI VOYAGES</span>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Tableau de bord</p>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Espace admin</p>
           </div>
           <button
             onClick={onClose}

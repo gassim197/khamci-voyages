@@ -9,6 +9,10 @@ export const ENV = {
   // Admin auth
   cookieSecret: process.env.JWT_SECRET ?? "",
   adminPassword: process.env.ADMIN_PASSWORD ?? "",
+  // Nom affiché du compte owner créé au premier démarrage. Volontairement pas
+  // le nom de la marque : la sidebar distingue le branding de la personne
+  // connectée. Aucun endpoint de renommage n'existe, d'où le réglage ici.
+  adminName: process.env.ADMIN_NAME?.trim() || "Administrateur",
 
   // Email (Resend — envoi transactionnel via SMTP)
   resendApiKey: process.env.RESEND_API_KEY ?? "",

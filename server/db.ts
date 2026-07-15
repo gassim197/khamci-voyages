@@ -3,6 +3,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import { InsertUser, users, quotes, testimonials, adminSettings, newsletterSubscribers, blogPosts, InsertQuote, InsertTestimonial, AdminProfile, InsertBlogPost, adminUsers, AdminUser } from "../drizzle/schema";
 import bcrypt from "bcryptjs";
+import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -392,7 +393,7 @@ export async function bootstrapOwnerIfEmpty(): Promise<void> {
   const passwordHash = await bcrypt.hash(ownerPassword, 12);
   await db.insert(adminUsers).values({
     email: normalizeEmail("khamcivoyages@gmail.com"),
-    name: "Khamci Voyages",
+    name: ENV.adminName,
     passwordHash,
     role: "owner",
   });
