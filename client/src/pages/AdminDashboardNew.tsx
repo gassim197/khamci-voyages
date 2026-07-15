@@ -112,7 +112,7 @@ function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
                style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}>
             <Plane className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">KHAMCI VOYAGES</h1>
+          <span className="block text-4xl font-bold text-white mb-3 tracking-tight">KHAMCI VOYAGES</span>
           <p className="text-blue-300 text-lg mb-8">Votre partenaire de voyage en Guinée</p>
 
           <div className="grid grid-cols-3 gap-4 mt-8">
@@ -141,12 +141,12 @@ function AdminLogin({ onLogin }: { onLogin: (token: string) => void }) {
                  style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}>
               <Plane className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold" style={{ color: NAVY }}>KHAMCI VOYAGES</h1>
+            <span className="block text-2xl font-bold" style={{ color: NAVY }}>KHAMCI VOYAGES</span>
           </div>
 
           <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-1" style={{ color: NAVY }}>Bon retour !</h2>
+              <h1 className="text-2xl font-bold mb-1" style={{ color: NAVY }}>Bon retour !</h1>
               <p className="text-gray-500">Connectez-vous à votre espace administrateur</p>
             </div>
 
@@ -272,7 +272,7 @@ function Sidebar({
             <Plane className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-white font-bold text-sm leading-tight">KHAMCI VOYAGES</h1>
+            <span className="block text-white font-bold text-sm leading-tight">KHAMCI VOYAGES</span>
             <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Administration</p>
           </div>
           <button
@@ -1375,7 +1375,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
 
             {/* Titre de la page */}
             <div className="flex-1">
-              <h2 className="font-bold text-gray-900 text-base">{PAGE_TITLES[activeView]}</h2>
+              <h1 className="font-bold text-gray-900 text-base">{PAGE_TITLES[activeView]}</h1>
               <p className="text-xs text-gray-400 hidden sm:block">
                 {new Date().toLocaleDateString("fr-FR", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
               </p>
