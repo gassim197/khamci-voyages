@@ -2019,6 +2019,7 @@ function NewsletterView() {
 
 // ─── GESTION DES UTILISATEURS (owner uniquement) ───────────────────────────────
 function UsersView({ currentUserId }: { currentUserId: number }) {
+  const utils = trpc.useUtils();
   const usersQuery = trpc.adminUsers.list.useQuery();
   const users = usersQuery.data || [];
 
@@ -2027,6 +2028,8 @@ function UsersView({ currentUserId }: { currentUserId: number }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
+  const [renameTarget, setRenameTarget] = useState<{ id: number; name: string } | null>(null);
+  const [renameValue, setRenameValue] = useState("");
 
   const createMutation = trpc.adminUsers.create.useMutation({
     onSuccess: (data) => {
@@ -2048,6 +2051,30 @@ function UsersView({ currentUserId }: { currentUserId: number }) {
     },
     onError: (e) => { toast.error(e.message); setDeleteTarget(null); },
   });
+
+  const renameMutation = trpc.adminUsers.updateName.useMutation({
+    onSuccess: (data) => {
+      toast.success(`Compte renommé en « ${data.user.name} ».`);
+      usersQuery.refetch();
+      // Si l'owner s'est renommé lui-même, la sidebar et le header doivent suivre.
+      utils.auth.adminMe.invalidate();
+      setRenameTarget(null);
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const openRename = (u: { id: number; name: string }) => {
+    setRenameTarget(u);
+    setRenameValue(u.name);
+  };
+
+  const handleRename = () => {
+    if (!renameTarget) return;
+    const trimmed = renameValue.trim();
+    if (trimmed.length < 2) { toast.error("Le nom doit contenir au moins 2 caractères"); return; }
+    if (trimmed === renameTarget.name) { setRenameTarget(null); return; }
+    renameMutation.mutate({ id: renameTarget.id, name: trimmed });
+  };
 
   const handleCreate = () => {
     if (name.trim().length < 2) { toast.error("Le nom doit contenir au moins 2 caractères"); return; }
@@ -2152,18 +2179,28 @@ function UsersView({ currentUserId }: { currentUserId: number }) {
                     <td className="px-5 py-3 text-gray-500 dark:text-gray-400">
                       {new Date(u.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}
                     </td>
-                    <td className="px-5 py-3 text-right">
-                      {!isOwnerRow && !isSelf ? (
+                    <td className="px-5 py-3">
+                      <div className="flex items-center justify-end gap-1">
+                        {/* Renommer : autorisé sur tous les comptes, y compris le sien */}
                         <button
-                          onClick={() => setDeleteTarget({ id: u.id, name: u.name })}
-                          className="p-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                          title="Supprimer ce compte"
+                          onClick={() => openRename({ id: u.id, name: u.name })}
+                          className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                          title="Renommer ce compte"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Edit3 className="w-4 h-4" />
                         </button>
-                      ) : (
-                        <span className="text-xs text-gray-300 dark:text-gray-600">—</span>
-                      )}
+                        {!isOwnerRow && !isSelf ? (
+                          <button
+                            onClick={() => setDeleteTarget({ id: u.id, name: u.name })}
+                            className="p-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                            title="Supprimer ce compte"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        ) : (
+                          <span className="w-8 text-center text-xs text-gray-300 dark:text-gray-600">—</span>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 );
@@ -2203,6 +2240,45 @@ function UsersView({ currentUserId }: { currentUserId: number }) {
               className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500 hover:bg-red-600 disabled:opacity-60"
             >
               {deleteMutation.isPending ? "Suppression..." : "Supprimer"}
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog de renommage */}
+      <Dialog open={!!renameTarget} onOpenChange={(open) => { if (!open) setRenameTarget(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Renommer le compte</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Modifie uniquement le nom affiché. L'email de connexion et le rôle restent inchangés.
+          </p>
+          <div className="pt-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom affiché *</label>
+            <Input
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") handleRename(); }}
+              placeholder="Nom complet"
+              className="h-11"
+              autoFocus
+            />
+          </div>
+          <div className="flex gap-3 justify-end pt-4">
+            <button
+              onClick={() => setRenameTarget(null)}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={handleRename}
+              disabled={renameMutation.isPending}
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+              style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}
+            >
+              {renameMutation.isPending ? "Enregistrement..." : "Enregistrer"}
             </button>
           </div>
         </DialogContent>

@@ -454,6 +454,22 @@ export async function deleteAdminUser(id: number): Promise<void> {
   await db.delete(adminUsers).where(eq(adminUsers.id, id));
 }
 
+// Renomme un utilisateur : nom affiché uniquement. L'email (identifiant de
+// connexion), le rôle et le hash du mot de passe ne sont jamais touchés.
+export async function updateAdminUserName(id: number, name: string): Promise<SafeAdminUser> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const trimmed = name.trim();
+  if (trimmed.length < 2) throw new Error("Le nom doit contenir au moins 2 caractères");
+
+  const updated = await db.update(adminUsers)
+    .set({ name: trimmed })
+    .where(eq(adminUsers.id, id))
+    .returning();
+  if (updated.length === 0) throw new Error("Utilisateur introuvable");
+  return toSafeAdminUser(updated[0]);
+}
+
 // Met à jour le hash de mot de passe d'un utilisateur (changement par lui-même).
 export async function updateAdminUserPassword(id: number, newPassword: string): Promise<void> {
   const db = await getDb();

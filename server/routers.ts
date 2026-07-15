@@ -8,7 +8,7 @@ import {
   createQuote, getAllQuotes, updateQuoteStatus, deleteQuote, getQuoteStats,
   createTestimonial, getAllTestimonials, getApprovedTestimonials, updateTestimonialStatus, deleteTestimonial,
   getAdminProfile, updateAdminProfile,
-  verifyAdminUser, listAdminUsers, createAdminUser, deleteAdminUser, updateAdminUserPassword,
+  verifyAdminUser, listAdminUsers, createAdminUser, deleteAdminUser, updateAdminUserName, updateAdminUserPassword,
   subscribeToNewsletter, getAllNewsletterSubscribers, deleteNewsletterSubscriber,
   createBlogPost, updateBlogPost, deleteBlogPost, getAllBlogPosts, getPublishedBlogPosts, getBlogPostBySlug,
 } from "./db";
@@ -121,6 +121,25 @@ export const appRouter = router({
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: err instanceof Error ? err.message : "Impossible de créer l'utilisateur",
+          });
+        }
+      }),
+
+    // Seul l'owner renomme un compte — le sien ou celui d'un editor. Le nom
+    // affiché est la seule colonne modifiable ici (pas d'email ni de rôle).
+    updateName: ownerProcedure
+      .input(z.object({
+        id: z.number(),
+        name: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères").max(120),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const user = await updateAdminUserName(input.id, input.name);
+          return { success: true, user };
+        } catch (err) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: err instanceof Error ? err.message : "Impossible de renommer l'utilisateur",
           });
         }
       }),
