@@ -19,7 +19,8 @@ export default function HeaderNav() {
             className="h-12 md:h-16 w-auto"
           />
           <div className="hidden sm:block">
-            <h1 className="text-lg md:text-xl font-bold gradient-text">KHAMCI VOYAGES</h1>
+            {/* Pas de h1 : le h1 appartient au contenu de chaque page (le nom de marque reste porté par l'alt du logo) */}
+            <span className="block text-lg md:text-xl font-bold gradient-text">KHAMCI VOYAGES</span>
             <p className="text-xs text-gray-600">Agence de Voyages</p>
           </div>
         </a>

@@ -81,7 +81,8 @@ export default function Header() {
             className="h-10 md:h-14 w-auto"
           />
           <div className="hidden sm:block">
-            <h1 className="text-base md:text-xl font-bold gradient-text leading-tight">KHAMCI VOYAGES</h1>
+            {/* Pas de h1 : le h1 appartient au contenu de chaque page (le nom de marque reste porté par l'alt du logo) */}
+            <span className="block text-base md:text-xl font-bold gradient-text leading-tight">KHAMCI VOYAGES</span>
             <p className="text-xs text-gray-500 font-medium hidden md:block">Agence de Voyages — Conakry, Guinée</p>
           </div>
         </Link>
