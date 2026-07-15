@@ -216,9 +216,7 @@ function Sidebar({
   activeView,
   onNavigate,
   onLogout,
-  adminName,
-  adminPosition,
-  adminAvatar,
+  currentUser,
   pendingQuotes,
   pendingTestimonials,
   isOwner,
@@ -228,9 +226,8 @@ function Sidebar({
   activeView: ActiveView;
   onNavigate: (view: ActiveView) => void;
   onLogout: () => void;
-  adminName: string;
-  adminPosition: string;
-  adminAvatar: string | null;
+  // Compte admin_users connecté (et non le profil éditorial admin_settings)
+  currentUser: { name: string; email: string; role: string } | null;
   pendingQuotes: number;
   pendingTestimonials: number;
   isOwner: boolean;
@@ -273,7 +270,7 @@ function Sidebar({
           </div>
           <div>
             <span className="block text-white font-bold text-sm leading-tight">KHAMCI VOYAGES</span>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Administration</p>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Tableau de bord</p>
           </div>
           <button
             onClick={onClose}
@@ -281,37 +278,6 @@ function Sidebar({
           >
             <X className="w-5 h-5" />
           </button>
-        </div>
-
-        {/* Profil admin */}
-        <div className="p-4 mx-3 my-3 rounded-2xl" style={{ background: "rgba(255,255,255,0.05)" }}>
-          <div className="flex items-center gap-3">
-            {adminAvatar ? (
-              <img
-                src={adminAvatar}
-                alt={adminName}
-                className="w-11 h-11 rounded-full object-cover border-2"
-                style={{ borderColor: ORANGE }}
-              />
-            ) : (
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0"
-                style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}
-              >
-                {adminName.charAt(0).toUpperCase()}
-              </div>
-            )}
-            <div className="min-w-0">
-              <p className="text-white font-semibold text-sm truncate">{adminName}</p>
-              <p className="text-xs truncate" style={{ color: "rgba(255,255,255,0.5)" }}>{adminPosition}</p>
-            </div>
-            <div className="ml-auto flex-shrink-0">
-              <span className="text-xs px-2 py-0.5 rounded-full font-medium"
-                    style={{ background: `${ORANGE}22`, color: ORANGE_LIGHT }}>
-                Admin
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* Navigation */}
@@ -365,6 +331,39 @@ function Sidebar({
 
         {/* Bas de la sidebar */}
         <div className="p-3 border-t space-y-1" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+          {/* Identité connectée : avatar rond (une personne), par opposition au logo carré du haut */}
+          {currentUser && (
+            <div className="px-3 pt-2 pb-3">
+              <p className="text-[10px] uppercase tracking-wide mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Connecté en tant que
+              </p>
+              <div className="flex items-center gap-2.5">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                  style={{ background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_LIGHT})` }}
+                >
+                  {currentUser.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-white font-semibold text-sm truncate" title={currentUser.name}>
+                    {currentUser.name}
+                  </p>
+                  <p className="text-xs truncate" style={{ color: "rgba(255,255,255,0.45)" }} title={currentUser.email}>
+                    {currentUser.email}
+                  </p>
+                  <span
+                    className="inline-block mt-1.5 text-[10px] px-2 py-0.5 rounded-full font-semibold"
+                    style={currentUser.role === "owner"
+                      ? { background: `${ORANGE}22`, color: ORANGE_LIGHT }
+                      : { background: "rgba(148,163,184,0.18)", color: "#CBD5E1" }
+                    }
+                  >
+                    {currentUser.role === "owner" ? "Propriétaire" : "Éditeur"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
           <a
             href="/"
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -1220,11 +1219,6 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const profileQuery = trpc.auth.getAdminProfile.useQuery();
-  const adminName = profileQuery.data?.name || "Administrateur";
-  const adminPosition = profileQuery.data?.position || "Admin";
-  const adminAvatar = profileQuery.data?.avatarUrl || null;
-
   // Utilisateur admin connecté (rôle revérifié serveur, jamais depuis localStorage)
   const meQuery = trpc.auth.adminMe.useQuery(undefined, { retry: false });
   const currentUser = meQuery.data ?? null;
@@ -1350,9 +1344,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
         activeView={activeView}
         onNavigate={setActiveView}
         onLogout={onLogout}
-        adminName={adminName}
-        adminPosition={adminPosition}
-        adminAvatar={adminAvatar}
+        currentUser={currentUser}
         pendingQuotes={pendingQuotes}
         pendingTestimonials={pendingTestimonials}
         isOwner={isOwner}
