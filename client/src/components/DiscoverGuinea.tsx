@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import QuickQuoteModal from "./QuickQuoteModal";
 
 /**
@@ -11,29 +12,34 @@ import QuickQuoteModal from "./QuickQuoteModal";
  */
 
 export default function DiscoverGuinea() {
+  const [, setLocation] = useLocation();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState<string | null>(null);
 
   const destinations = [
     {
+      slug: "fouta-djallon",
       title: "Fouta Djallon",
       description: "Montagnes spectaculaires avec cascades et paysages verdoyants",
       benefit: "Aventure & Nature",
       icon: "⛰️",
     },
     {
+      slug: "conakry",
       title: "Conakry",
       description: "Capitale dynamique avec plages, marchés colorés et vie nocturne vibrante",
       benefit: "Culture & Détente",
       icon: "🏖️",
     },
     {
+      slug: "kindia",
       title: "Kindia",
       description: "Cascades cristallines et forêts tropicales pour les amateurs de nature",
       benefit: "Découverte & Immersion",
       icon: "🌳",
     },
     {
+      slug: "iles-de-loos",
       title: "Îles de Loos",
       description: "Archipel paradisiaque avec plages de sable blanc et eaux turquoise",
       benefit: "Paradis Tropical",
@@ -78,7 +84,8 @@ export default function DiscoverGuinea() {
                 {destinations.map((dest, index) => (
                   <div
                     key={index}
-                    className="group p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 hover:border-orange-300"
+                    onClick={() => setLocation(`/guinee/${dest.slug}`)}
+                    className="group p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 hover:border-orange-300 cursor-pointer"
                   >
                     {/* Icon & Title */}
                     <div className="flex items-start gap-3 mb-2">
@@ -94,13 +101,25 @@ export default function DiscoverGuinea() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 ml-10">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-2 ml-10">
                       {dest.description}
                     </p>
 
-                    {/* Micro-CTA */}
+                    {/* Lien explicite vers la page destination */}
+                    <Link
+                      href={`/guinee/${dest.slug}`}
+                      className="ml-10 mb-3 inline-block text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 text-sm transition-colors"
+                    >
+                      Découvrir {dest.title} →
+                    </Link>
+
+                    {/* Micro-CTA : ne doit pas déclencher la navigation de la carte */}
                     <button
-                      onClick={() => handleDestinationCTA(dest.title)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDestinationCTA(dest.title);
+                      }}
                       className="ml-10 text-orange-600 hover:text-orange-700 font-semibold text-sm transition-colors flex items-center gap-1"
                     >
                       Demander un service →

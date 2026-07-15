@@ -25,6 +25,7 @@ import LocationVehiculeService from "./pages/services/LocationVehiculeService";
 import AssuranceVoyageService from "./pages/services/AssuranceVoyageService";
 import VisaService from "./pages/services/VisaService";
 import HadjOumraService from "./pages/services/HadjOumraService";
+import GuineaDestinationPage from "./pages/GuineaDestinationPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import BlogPage from "./pages/BlogPage";
 import MentionsLegales from "./pages/MentionsLegales";
@@ -47,6 +48,7 @@ function Router() {
         <Route path="/destination/casablanca" component={CasablancaPage} />
         <Route path="/destination/bangkok" component={BangkokPage} />
         <Route path="/destination/barcelona" component={BarcelonaPage} />
+        <Route path="/guinee/:slug" component={GuineaDestinationPage} />
         <Route path="/admin" component={AdminDashboardNew} />
         <Route path="/a-propos" component={APropos} />
         <Route path="/services/billetterie" component={BilletterieService} />
