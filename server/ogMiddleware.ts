@@ -41,7 +41,7 @@ function generateOgHtml(post: {
   publishedAt: Date | null;
   category: string;
 }): string {
-  const siteUrl = ENV.publicSiteUrl;
+  const siteUrl = ENV.publicSiteUrl.replace(/\/$/, "");
   const articleUrl = `${siteUrl}/blog/${post.slug}`;
   const title = `${post.title} | KHAMCI VOYAGES`;
   const description = post.excerpt || `Lisez "${post.title}" sur le blog de KHAMCI VOYAGES, votre agence de voyages en Guinée.`;
