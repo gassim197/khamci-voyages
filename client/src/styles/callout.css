@@ -1,0 +1,157 @@
+/*
+ * Styles des callouts (encadrés éditoriaux) du blog Khamci Voyages.
+ *
+ * CSS pur volontaire (pas de @apply / d'utilitaires Tailwind) : les classes
+ * `callout-*` sont générées dynamiquement par CalloutExtension.ts, donc elles
+ * ne sont jamais présentes dans le JSX. Écrire le style en CSS authored garantit
+ * qu'il n'est jamais purgé par Tailwind, en dev comme en production.
+ *
+ * Ces règles s'appliquent à la fois :
+ *   1. dans l'éditeur admin (WYSIWYG, via CalloutView) ;
+ *   2. dans le rendu public (BlogArticlePage, dangerouslySetInnerHTML + .prose).
+ * Tailwind Typography utilise des sélecteurs `:where()` (spécificité 0), donc
+ * ces classes réelles priment sans effort à l'intérieur de .prose.
+ *
+ * Le mode sombre du projet est piloté par la classe `.dark` sur un ancêtre
+ * (cf. @custom-variant dark dans index.css) : on cible donc `.dark .callout-*`.
+ */
+
+.callout {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--callout-accent);
+  background: var(--callout-bg);
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  color: var(--callout-title);
+}
+
+.callout-title::before {
+  content: var(--callout-icon);
+  font-size: 1rem;
+  line-height: 1;
+  /* Rend l'emoji en couleur d'origine même si un filtre de teinte s'applique */
+  filter: none;
+}
+
+.callout-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #334155;
+}
+
+/* Le corps peut contenir des paragraphes/listes : on neutralise les marges
+   de bord pour un padding homogène, tout en gardant l'espacement interne. */
+.callout-body > :first-child {
+  margin-top: 0;
+}
+.callout-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* Champ d'édition du titre (uniquement dans l'éditeur admin) : transparent,
+   hérite de la typo du titre pour un vrai WYSIWYG. */
+.callout-title-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: inherit;
+}
+.callout-title-input::placeholder {
+  color: currentColor;
+  opacity: 0.5;
+}
+
+/* ── Variantes (mode clair) ──────────────────────────────────────────────── */
+
+.callout-retenir {
+  --callout-accent: #ff6b35;
+  --callout-bg: #fff4ee;
+  --callout-title: #c2410c;
+  --callout-icon: "📌";
+}
+
+.callout-conseil {
+  --callout-accent: #0d1b3e;
+  --callout-bg: #f0f3fa;
+  --callout-title: #0d1b3e;
+  --callout-icon: "💡";
+}
+
+.callout-exemple {
+  --callout-accent: #059669;
+  --callout-bg: #ecfdf5;
+  --callout-title: #047857;
+  --callout-icon: "📖";
+}
+
+.callout-erreur {
+  --callout-accent: #dc2626;
+  --callout-bg: #fef2f2;
+  --callout-title: #b91c1c;
+  --callout-icon: "⚠️";
+}
+
+.callout-resultat {
+  --callout-accent: #7c3aed;
+  --callout-bg: #f5f3ff;
+  --callout-title: #6d28d9;
+  --callout-icon: "✅";
+}
+
+/* ── Variantes (mode sombre) ─────────────────────────────────────────────── */
+
+.dark .callout-body {
+  color: #cbd5e1;
+}
+
+.dark .callout-retenir {
+  --callout-accent: #ff8c5a;
+  --callout-bg: rgba(255, 107, 53, 0.12);
+  --callout-title: #fdba74;
+}
+
+/* Le marine (#0D1B3E) est illisible sur fond sombre : on bascule sur un bleu
+   plus clair pour l'accent et le titre, tout en gardant l'esprit "signature". */
+.dark .callout-conseil {
+  --callout-accent: #3b82f6;
+  --callout-bg: rgba(59, 130, 246, 0.14);
+  --callout-title: #93c5fd;
+}
+
+.dark .callout-exemple {
+  --callout-accent: #10b981;
+  --callout-bg: rgba(16, 185, 129, 0.13);
+  --callout-title: #6ee7b7;
+}
+
+.dark .callout-erreur {
+  --callout-accent: #ef4444;
+  --callout-bg: rgba(220, 38, 38, 0.15);
+  --callout-title: #fca5a5;
+}
+
+.dark .callout-resultat {
+  --callout-accent: #8b5cf6;
+  --callout-bg: rgba(139, 92, 246, 0.16);
+  --callout-title: #c4b5fd;
+}

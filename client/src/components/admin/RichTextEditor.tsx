@@ -22,9 +22,22 @@ import {
   Link as LinkIcon,
   Image as ImageIcon,
   Minus,
+  MessageSquareQuote,
   Undo,
   Redo,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Callout,
+  CALLOUT_VARIANTS,
+  CALLOUT_DEFAULT_TITLES,
+  CALLOUT_ICONS,
+} from "./CalloutExtension";
 
 type RichTextEditorProps = {
   /** HTML actuel du contenu */
@@ -208,7 +221,46 @@ function Toolbar({ editor }: { editor: Editor }) {
 
       <Divider />
 
-      {/* Groupe 6 — Historique */}
+      {/* Groupe 6 — Encadré éditorial (callout) */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            title="Insérer un encadré éditorial"
+            aria-label="Insérer un encadré éditorial"
+            aria-pressed={editor.isActive("callout")}
+            className={[
+              "inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors",
+              "text-gray-600 dark:text-gray-300",
+              "hover:bg-gray-100 dark:hover:bg-gray-800",
+              editor.isActive("callout")
+                ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300"
+                : "",
+            ].join(" ")}
+          >
+            <MessageSquareQuote size={16} />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start" className="w-64">
+          {CALLOUT_VARIANTS.map((variant) => (
+            <DropdownMenuItem
+              key={variant}
+              onSelect={() => editor.chain().focus().setCallout({ variant }).run()}
+              className="gap-2"
+            >
+              <span aria-hidden className="text-base leading-none">
+                {CALLOUT_ICONS[variant]}
+              </span>
+              <span>{CALLOUT_DEFAULT_TITLES[variant]}</span>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Divider />
+
+      {/* Groupe 7 — Historique */}
       <ToolbarButton
         title="Annuler (Ctrl+Z)"
         onClick={() => editor.chain().focus().undo().run()}
@@ -254,6 +306,7 @@ export function RichTextEditor({ value, onChange, placeholder, minHeight = 400 }
       Placeholder.configure({
         placeholder: placeholder ?? "Rédige ton article ici…",
       }),
+      Callout,
     ],
     content: value,
     editorProps: {

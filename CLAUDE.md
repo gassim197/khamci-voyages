@@ -212,6 +212,37 @@ Voir `.env.example` pour la liste complète. Variables critiques :
 
 ---
 
+## Éditeur blog
+
+Le contenu des articles (`blog_posts.content`) est stocké en **HTML**, édité
+via l'éditeur riche Tiptap (`client/src/components/admin/RichTextEditor.tsx`)
+et rendu côté public dans `BlogArticlePage.tsx` (via `dangerouslySetInnerHTML`
+dans un wrapper `prose`).
+
+### Callouts dans l'éditeur blog
+
+L'éditeur admin blog supporte 5 types de callouts (encadrés éditoriaux
+colorés) via l'extension `CalloutExtension.ts` :
+
+- `retenir` (À retenir) — key takeaway orange 📌
+- `conseil` (Le conseil KHAMCI) — signature marine/bleu 💡
+- `exemple` (Exemple concret) — illustration verte 📖
+- `erreur` (Erreur fréquente) — alerte rouge ⚠️
+- `resultat` (Résultat observé) — preuve violette ✅
+
+Structure HTML stockée en DB :
+`<div class="callout callout-{variant}" data-variant data-title>` avec un
+`.callout-title` (titre, icône via CSS `::before`) et un `.callout-body`
+(contenu formatable). Le même CSS s'applique dans l'éditeur admin et le rendu
+public → WYSIWYG fidèle.
+
+- Extension : `client/src/components/admin/CalloutExtension.ts`
+- Vue d'édition (titre inline) : `client/src/components/admin/CalloutView.tsx`
+- Styles (CSS pur, jamais purgé, importé dans `main.tsx`) :
+  `client/src/styles/callout.css`
+
+---
+
 ## Points d'attention métier
 
 - **Numéro WhatsApp** : `+224 611 14 58 92` — bouton flottant, lien dans le footer, system prompt chatbot.
