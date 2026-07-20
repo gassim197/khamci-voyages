@@ -27,6 +27,7 @@ import {
   BookOpen, Users, PenLine, Globe, Tag, Plus, Edit3,
 } from "lucide-react";
 import AdminStatsSection from "@/components/AdminStatsSection";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
 
 // ─── COULEURS KHAMCI VOYAGES ────────────────────────────────────────────────
 const NAVY = "#0D1B3E";
@@ -1791,8 +1792,12 @@ function BlogView() {
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Contenu *</label>
-                <Textarea value={form.content} onChange={e => setForm(f => ({...f, content: e.target.value}))}
-                          placeholder="Contenu complet de l'article..." rows={8} required />
+                <RichTextEditor
+                  value={form.content}
+                  onChange={(html) => setForm(f => ({...f, content: html}))}
+                  placeholder="Rédige ton article ici…"
+                  minHeight={500}
+                />
               </div>
             </div>
             <div className="flex gap-3 justify-end pt-2">

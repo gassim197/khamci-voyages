@@ -124,17 +124,13 @@ export default function BlogArticlePage() {
                 </p>
               )}
 
-              {/* Content */}
+              {/* Content — HTML généré par l'éditeur riche (admins authentifiés) */}
               <div
-                className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed
-                  prose-headings:text-gray-900 dark:text-white prose-headings:font-bold
+                className="prose prose-lg dark:prose-invert prose-headings:font-bold
                   prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline
-                  prose-strong:text-gray-900
-                  prose-img:rounded-xl prose-img:shadow-md"
-                style={{ whiteSpace: "pre-wrap" }}
-              >
-                {post.content}
-              </div>
+                  prose-img:rounded-lg max-w-none"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
 
               {/* Social Share Buttons */}
               <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
