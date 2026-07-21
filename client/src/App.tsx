@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ContactWidget from "./components/ContactWidget";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ThankYou from "./pages/ThankYou";
@@ -77,6 +78,13 @@ function FloatingContact() {
   return <ContactWidget />;
 }
 
+// Bannière promotionnelle globale, masquée sur les routes admin
+function GlobalAnnouncement() {
+  const [location] = useLocation();
+  if (location.startsWith("/admin")) return null;
+  return <AnnouncementBar />;
+}
+
 function App() {
   return (
     <ErrorBoundary>
@@ -86,6 +94,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <GlobalAnnouncement />
           <Router />
           <FloatingContact />
         </TooltipProvider>
