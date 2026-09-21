@@ -4,6 +4,20 @@ import { ENV } from "./_core/env";
 const ADMIN_EMAIL = "khamcivoyages@gmail.com";
 const FROM_NAME = "KHAMCI VOYAGES";
 
+export async function sendStudyApplicationNotification(application: { name: string; email: string; phone: string; message: string }) {
+  const transporter = createTransporter();
+  if (!transporter) return false;
+  // Plain text avoids interpreting candidate-provided content as HTML.
+  await transporter.sendMail({
+    from: `"${FROM_NAME}" <${ENV.emailFrom}>`,
+    to: ADMIN_EMAIL,
+    replyTo: application.email,
+    subject: "Nouvelle préinscription — Études en France",
+    text: `Une demande est enregistrée dans l’administration, rubrique Devis, filtre Études France.\n\nNom : ${application.name}\nEmail : ${application.email}\nTéléphone : ${application.phone}\n\n${application.message}\n\nCette préinscription ne vaut pas confirmation d’accompagnement.`,
+  });
+  return true;
+}
+
 // Crée un transporteur Nodemailer branché sur Resend (SMTP)
 function createTransporter() {
   const apiKey = ENV.resendApiKey;

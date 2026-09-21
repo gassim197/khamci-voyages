@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import ContactWidget from "./components/ContactWidget";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import StudiesFrance from "./pages/StudiesFrance";
 import Home from "./pages/Home";
 import ThankYou from "./pages/ThankYou";
 import FlightsPage from "./pages/FlightsPage";
@@ -40,6 +41,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/thank-you" component={ThankYou} />
+        <Route path="/etudes-france" component={StudiesFrance} />
         <Route path="/vols" component={FlightsPage} />
         <Route path="/hotels" component={HotelsPage} />
         <Route path="/voitures" component={CarsPage} />
@@ -76,14 +78,14 @@ function Router() {
 // Widget de contact flottant, masqué sur les routes admin
 function FloatingContact() {
   const [location] = useLocation();
-  if (location.startsWith("/admin")) return null;
+  if (location.startsWith("/admin") || location === "/etudes-france") return null;
   return <ContactWidget />;
 }
 
 // Bannière promotionnelle globale, masquée sur les routes admin
 function GlobalAnnouncement() {
   const [location] = useLocation();
-  if (location.startsWith("/admin")) return null;
+  if (location.startsWith("/admin") || location === "/etudes-france") return null;
   return <AnnouncementBar />;
 }
 
