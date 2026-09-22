@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import DiscoverGuinea from "@/components/DiscoverGuinea";
 import HowItWorks from "@/components/HowItWorks";
 import StatsBar from "@/components/StatsBar";
+import StudiesFrancePromotion from "@/components/StudiesFrancePromotion";
 import TravelProfiles from "@/components/TravelProfiles";
 import Blog from "@/components/Blog";
 import ContactForm from "@/components/ContactForm";
@@ -23,6 +24,7 @@ import { Testimonial } from "@/data/testimonials";
  * 1. Header - Navigation sticky
  * 2. Hero - Carte de recherche de vol (devis déguisé)
  * 3. Stats Bar - Chiffres clés (5+ ans, 100+ voyageurs, 10+ destinations)
+ * Bloc campagne Études France après les chiffres clés.
  * 4. Why Choose Us - Arguments clés
  * 5. How It Works - Processus en 3 étapes
  * 6. Services - 6 services avec liens vers pages dédiées
@@ -49,6 +51,7 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection />
         <StatsBar />
+        <StudiesFrancePromotion />
         <WhyChooseUs />
         <HowItWorks />
         <Services />

@@ -158,7 +158,7 @@ export default function Testimonials({ onAddTestimonial }: TestimonialsProps) {
           </p>
           <Button
             onClick={onAddTestimonial}
-            className="bg-white text-[#FF6B35] hover:bg-gray-100 font-bold px-8 py-3 text-lg"
+            className="bg-white text-[#FF6B35] hover:bg-gray-100 font-bold max-w-full h-auto min-h-11 whitespace-normal px-4 sm:px-8 py-3 text-lg"
           >
             Laisser un Témoignage
           </Button>
