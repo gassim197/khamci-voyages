@@ -5,6 +5,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
 
 const SERVICES_MENU = [
+  { label: "Études en France", href: "/etudes-france", icon: BookOpen, desc: "Préparez votre projet d’études avec nous" },
   { label: "Billetterie", href: "/services/billetterie", icon: Plane, desc: "Billets d'avion vers le monde entier" },
   { label: "Réservation d'hôtel", href: "/services/hotel", icon: Hotel, desc: "Hébergements en Guinée et à l'étranger" },
   { label: "Location de véhicule", href: "/services/location-vehicule", icon: Car, desc: "Voitures, SUV, minibus avec ou sans chauffeur" },

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { studyFranceRouter } from "./studyFrance";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
@@ -39,6 +40,7 @@ const ownerProcedure = adminProcedure.use(async ({ ctx, next }) => {
 });
 
 export const appRouter = router({
+  studyFrance: studyFranceRouter,
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),

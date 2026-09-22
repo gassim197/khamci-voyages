@@ -121,6 +121,24 @@ function escapeHtml(str: string): string {
 export function ogMiddleware(req: Request, res: Response, next: NextFunction) {
   const userAgent = req.headers["user-agent"];
 
+  if (req.path === "/etudes-france" && isSocialCrawler(userAgent)) {
+    const url = escapeHtml(`${ENV.publicSiteUrl.replace(/\/$/, "")}/etudes-france`);
+    const image = escapeHtml(`${ENV.publicSiteUrl.replace(/\/$/, "")}/covers/hero-paris.webp`);
+    const title = "Études en France | Khamci Voyages";
+    const description = "Préparez votre projet d’études en France depuis la Guinée : orientation, dossier, entretien et accompagnement visa après admission.";
+    return res.status(200).type("html").send(`<!doctype html><html lang="fr"><head>
+      <meta charset="utf-8"><title>${title}</title>
+      <meta name="description" content="${description}"><link rel="canonical" href="${url}">
+      <meta property="og:type" content="website"><meta property="og:site_name" content="Khamci Voyages">
+      <meta property="og:title" content="${title}"><meta property="og:description" content="${description}">
+      <meta property="og:url" content="${url}"><meta property="og:image" content="${image}">
+      <meta name="twitter:card" content="summary_large_image">
+      </head><body><h1>Votre projet d’études en France</h1><p>${description}</p>
+      <p>Honoraires : 1 000 000 GNF avant admission, puis 500 000 GNF après admission. Frais externes non inclus.</p>
+      <p>Accompagnement privé indépendant de Campus France, sans garantie d’admission ni de visa.</p>
+      <a href="${url}#preinscription">Présentez votre projet</a></body></html>`);
+  }
+
   // Ne traiter que les requêtes /blog/:slug provenant de crawlers
   const blogMatch = req.path.match(/^\/blog\/([^/]+)$/);
   if (!blogMatch || !isSocialCrawler(userAgent)) {

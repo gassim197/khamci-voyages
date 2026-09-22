@@ -1,3 +1,4 @@
+import { csvCell } from "@shared/csv";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -73,6 +74,7 @@ const SERVICE_LABELS: Record<string, string> = {
   circuit: "Circuit",
   custom: "Personnalisé",
   team_building: "Team Building",
+  etudes_france: "Études France",
 };
 
 // ─── PAGE DE CONNEXION ───────────────────────────────────────────────────────
@@ -543,8 +545,8 @@ function QuoteCard({ quote, onRefresh }: { quote: any; onRefresh: () => void }) 
 
             {quote.message && (
               <div className="bg-blue-50 rounded-xl p-3 text-sm">
-                <p className="text-xs text-blue-500 font-medium mb-1">Message du client</p>
-                <p className="text-gray-700 leading-relaxed">{quote.message}</p>
+                <p className="text-xs text-blue-500 font-medium mb-1">{quote.serviceType === "etudes_france" ? "Projet d’études" : "Message du client"}</p>
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap break-words">{quote.message}</p>
               </div>
             )}
 
@@ -1215,6 +1217,7 @@ function DashboardOverview({
 // ─── DASHBOARD PRINCIPAL ──────────────────────────────────────────────────────
 function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken: string }) {
   const [activeView, setActiveView] = useState<ActiveView>("dashboard");
+  const [serviceFilter, setServiceFilter] = useState("all");
   const [quoteFilter, setQuoteFilter] = useState<string>("all");
   const [testimonialFilter, setTestimonialFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -1241,14 +1244,16 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
   const quotes = quotesQuery.data || [];
   const testimonials = testimonialsQuery.data || [];
 
+  const serviceQuotes = useMemo(() => quotes.filter(q => serviceFilter === "all" || q.serviceType === serviceFilter), [quotes, serviceFilter]);
+
   const filteredQuotes = useMemo(() => quotes.filter(q => {
     const matchesFilter = quoteFilter === "all" || q.status === quoteFilter;
     const matchesSearch = !searchQuery ||
       q.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       q.clientEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (q.destination || "").toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesFilter && matchesSearch;
-  }), [quotes, quoteFilter, searchQuery]);
+    return matchesFilter && matchesSearch && (serviceFilter === "all" || q.serviceType === serviceFilter);
+  }), [quotes, quoteFilter, searchQuery, serviceFilter]);
 
   const filteredTestimonials = useMemo(() => testimonials.filter(t => {
     const matchesFilter = testimonialFilter === "all" || t.status === testimonialFilter;
@@ -1265,7 +1270,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
 
   // ─── EXPORT CSV ─────────────────────────────────────────────────────────────
   const exportQuotesToCSV = () => {
-    const dataToExport = filteredQuotes.length > 0 ? filteredQuotes : quotes;
+    const dataToExport = filteredQuotes;
     if (dataToExport.length === 0) {
       toast.error("Aucun devis à exporter");
       return;
@@ -1274,7 +1279,7 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
     const SERVICE_LABELS_FR: Record<string, string> = {
       flights: "Vols", vol: "Vols", hotel: "Hôtel", car: "Voiture",
       visa: "Visa", tour: "Circuit", custom: "Personnalisé",
-      team_building: "Team Building",
+      team_building: "Team Building", etudes_france: "Études France",
     };
     const STATUS_LABELS_FR: Record<string, string> = {
       pending: "En attente", in_progress: "En cours",
@@ -1298,14 +1303,14 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
       q.departureDate ? new Date(q.departureDate).toLocaleDateString("fr-FR") : "",
       q.returnDate ? new Date(q.returnDate).toLocaleDateString("fr-FR") : "",
       (q as any).budget || "",
-      (q.message || "").replace(/"/g, "'").replace(/\n/g, " "),
+      q.message || "",
       q.source || "",
       new Date(q.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }),
     ]);
 
     const csvContent = [
       headers.join(";"),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(";")),
+      ...rows.map(row => row.map(cell => csvCell(String(cell))).join(";")),
     ].join("\n");
 
     // BOM UTF-8 pour Excel
@@ -1459,11 +1464,11 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
               <div className="flex gap-2 mb-5 flex-wrap items-center justify-between">
                 <div className="flex gap-2 flex-wrap">
                   {[
-                    { value: "all", label: "Tous", count: quotes.length },
-                    { value: "pending", label: "En attente", count: quotes.filter(q => q.status === "pending").length },
-                    { value: "in_progress", label: "En cours", count: quotes.filter(q => q.status === "in_progress").length },
-                    { value: "completed", label: "Complétés", count: quotes.filter(q => q.status === "completed").length },
-                    { value: "rejected", label: "Rejetés", count: quotes.filter(q => q.status === "rejected").length },
+                    { value: "all", label: "Tous", count: serviceQuotes.length },
+                    { value: "pending", label: "En attente", count: serviceQuotes.filter(q => q.status === "pending").length },
+                    { value: "in_progress", label: "En cours", count: serviceQuotes.filter(q => q.status === "in_progress").length },
+                    { value: "completed", label: "Complétés", count: serviceQuotes.filter(q => q.status === "completed").length },
+                    { value: "rejected", label: "Rejetés", count: serviceQuotes.filter(q => q.status === "rejected").length },
                   ].map(f => (
                     <button key={f.value} onClick={() => setQuoteFilter(f.value)}
                       className="px-4 py-2 rounded-xl text-sm font-medium transition-all border"
@@ -1477,18 +1482,22 @@ function Dashboard({ onLogout, adminToken }: { onLogout: () => void; adminToken:
                   ))}
                 </div>
 
+                <select aria-label="Filtrer par service" value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm">
+                  <option value="all">Tous les services</option>
+                  <option value="etudes_france">Études France</option>
+                </select>
                 {/* Bouton Export CSV */}
                 <button
                   onClick={exportQuotesToCSV}
-                  disabled={quotes.length === 0}
+                  disabled={filteredQuotes.length === 0}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all border shadow-sm hover:shadow-md disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ background: "#10B981", color: "white", borderColor: "#059669" }}
-                  title={`Exporter ${filteredQuotes.length > 0 ? filteredQuotes.length : quotes.length} devis en CSV`}
+                  title={`Exporter ${filteredQuotes.length} devis en CSV`}
                 >
                   <Download className="w-4 h-4" />
                   <span className="hidden sm:inline">Exporter CSV</span>
                   <span className="sm:hidden">CSV</span>
-                  <span className="text-xs opacity-80 ml-0.5">({filteredQuotes.length > 0 ? filteredQuotes.length : quotes.length})</span>
+                  <span className="text-xs opacity-80 ml-0.5">({filteredQuotes.length})</span>
                 </button>
               </div>
 

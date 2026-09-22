@@ -23,6 +23,8 @@ function createMockRes(): Partial<Response> {
   res.status = vi.fn().mockReturnValue(res);
   res.set = vi.fn().mockReturnValue(res);
   res.end = vi.fn().mockReturnValue(res);
+  res.type = vi.fn().mockReturnValue(res);
+  res.send = vi.fn().mockReturnValue(res);
   return res;
 }
 
@@ -32,6 +34,27 @@ describe("ogMiddleware", () => {
   beforeEach(() => {
     next = vi.fn();
     vi.clearAllMocks();
+  });
+
+  it("serves the France campaign preview to WhatsApp without querying the database", () => {
+    const req = createMockReq("/etudes-france", "WhatsApp/2.0");
+    const res = createMockRes();
+    ogMiddleware(req as Request, res as Response, next);
+    expect(res.status).toHaveBeenCalledWith(200);
+    const html = vi.mocked(res.send!).mock.calls[0][0];
+    expect(html).toContain("Études en France");
+    expect(html).toContain('og:image');
+    expect(html).toContain("sans garantie");
+    expect(mockedGetBlogPostBySlug).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it("lets ordinary browsers reach the actual France form", () => {
+    const req = createMockReq("/etudes-france");
+    const res = createMockRes();
+    ogMiddleware(req as Request, res as Response, next);
+    expect(next).toHaveBeenCalled();
+    expect(res.send).not.toHaveBeenCalled();
   });
 
   it("should call next() for non-blog paths", () => {
