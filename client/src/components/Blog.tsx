@@ -262,10 +262,10 @@ export default function Blog() {
             Après avoir lu nos articles, demandez un devis personnalisé.
             Nos experts sont prêts à créer votre aventure parfaite.
           </p>
-          <Link href="/#contact">
+          <Link href="/#contact" className="inline-flex max-w-full">
             <Button
               size="lg"
-              className="bg-[#FF6B35] hover:bg-[#e85a2a] text-white font-bold px-8 py-4 text-base"
+              className="bg-[#FF6B35] hover:bg-[#e85a2a] text-white font-bold max-w-full h-auto min-h-11 whitespace-normal px-4 sm:px-8 py-4 text-base"
             >
               🎯 Demander un Service
               <ArrowRight className="w-4 h-4 ml-2" />

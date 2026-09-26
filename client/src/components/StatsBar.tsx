@@ -53,15 +53,15 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[number]; visible: bo
   const count = useCountUp(stat.value, visible);
 
   return (
-    <div className="text-center px-4">
-      <p className="text-4xl md:text-5xl font-black text-orange-400 tabular-nums">
+    <div className="text-center min-w-0 px-1 sm:px-4">
+      <p className="text-3xl sm:text-4xl md:text-5xl font-black text-orange-400 tabular-nums">
         {count}
         {stat.suffix}
       </p>
-      <p className="mt-2 text-sm md:text-base font-bold tracking-wide text-white">
+      <p className="mt-2 text-[10px] sm:text-sm md:text-base font-bold tracking-wide text-white">
         {stat.label}
       </p>
-      <p className="text-xs md:text-sm text-white/70">{stat.sublabel}</p>
+      <p className="text-[10px] sm:text-xs md:text-sm text-white/70">{stat.sublabel}</p>
     </div>
   );
 }

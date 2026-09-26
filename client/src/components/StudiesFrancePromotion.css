@@ -1,0 +1,47 @@
+.sf-promo-flag { display: inline-block; flex-shrink: 0; width: 22px; height: 15px; border-radius: 2px; background: linear-gradient(90deg, #245bb9 33.33%, #fff 33.33%, #fff 66.66%, #ec4c52 66.66%); }
+.sf-announcement { background: #062752; color: #fff; }
+.sf-announcement-inner { position: relative; max-width: 1280px; margin: auto; padding: 8px 64px 8px 24px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 22px; }
+.sf-announcement p { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 13px; line-height: 1.5; }
+.sf-announcement-detail { color: #d5e8f7; }
+.sf-announcement-link { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; font-size: 13px; font-weight: 700; color: #ffc03b; text-underline-offset: 4px; }
+.sf-announcement-link:hover { text-decoration: underline; }
+.sf-announcement-close { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; color: #fff; cursor: pointer; }
+.sf-announcement-close:hover { background: #ffffff18; }
+.sf-announcement a:focus-visible, .sf-announcement button:focus-visible, .sf-promo-cta:focus-visible { outline: 3px solid #ffc03b; outline-offset: 4px; }
+.sf-promo-section { padding-block: 56px; background: #f2f7fb; }
+.dark .sf-promo-section { background: #101b2c; }
+.sf-promo-card { display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; border-radius: 24px; background: linear-gradient(120deg, #062552, #074c80 72%, #008fc4); color: #fff; box-shadow: 0 18px 42px #06275214; }
+.sf-promo-copy { padding: 48px; align-self: center; }
+.sf-promo-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; color: #b1e7ff; margin: 0 0 22px; }
+.sf-promo-copy h2 { font-size: clamp(30px, 3vw, 43px); font-weight: 800; line-height: 1.14; letter-spacing: -1px; margin: 0 0 22px; color: #fff; }
+.sf-promo-copy h2 span { color: #ffc03b; }
+.sf-promo-description { max-width: 465px; font-size: 16px; line-height: 1.75; color: #dcf0ff; margin: 0 0 26px; }
+.sf-promo-cta { display: inline-flex; align-items: center; justify-content: center; gap: 20px; padding: 17px 24px; border-radius: 9px; background: #ffb21b; color: #062752; font-size: 14px; font-weight: 800; transition: background .2s; }
+.sf-promo-cta:hover { background: #ffc548; }
+.sf-promo-note { font-size: 11px; line-height: 1.6; color: #c2e5f8; margin: 17px 0 0; }
+.sf-promo-visual { position: relative; min-height: 380px; }
+.sf-promo-visual img { width: 100%; height: 100%; position: absolute; object-fit: cover; object-position: center; }
+.sf-promo-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #031c3bed, transparent 65%); }
+.sf-promo-caption { position: absolute; bottom: 35px; left: 32px; right: 24px; z-index: 1; display: flex; align-items: center; gap: 16px; color: #fff; }
+.sf-promo-caption svg { color: #ffc03b; flex-shrink: 0; }
+.sf-promo-caption strong, .sf-promo-caption span { display: block; font-size: 23px; line-height: 1.3; font-weight: 700; }
+@media (max-width: 1000px) { .sf-announcement-detail { display: none; } .sf-promo-copy { padding: 32px; } }
+@media (max-width: 700px) {
+  .sf-announcement-inner { justify-content: flex-start; padding-left: 18px; gap: 0 18px; }
+  .sf-announcement p { font-size: 12px; }
+  .sf-announcement-link { min-height: 36px; }
+  .sf-promo-section { padding-block: 32px; }
+  .sf-promo-card { grid-template-columns: 1fr; border-radius: 18px; }
+  .sf-promo-copy { padding: 30px 24px; }
+  .sf-promo-eyebrow { font-size: 9px; letter-spacing: 1px; gap: 8px; }
+  .sf-promo-description { font-size: 15px; }
+  .sf-promo-visual { min-height: 230px; }
+  .sf-promo-visual img { object-position: center 45%; }
+  .sf-promo-caption { bottom: 24px; left: 24px; }
+  .sf-promo-caption strong, .sf-promo-caption span { font-size: 21px; }
+}
+@media (max-width: 380px) {
+  .sf-promo-caption { gap: 10px; }
+  .sf-promo-caption strong, .sf-promo-caption span { font-size: 17px; }
+  .sf-promo-cta { padding-inline: 16px; gap: 12px; font-size: 13px; }
+}
