@@ -406,11 +406,11 @@ export default function StudiesFrance() {
             </div>
             <div className="sf-hero-visual">
               <img
-                src="/covers/hero-paris.webp"
-                alt="La tour Eiffel et les toits de Paris"
+                src="/covers/etudes-france-campus.webp"
+                alt="Illustration d’une étudiante avec ses livres sur un campus universitaire"
                 fetchPriority="high"
-                width="800"
-                height="1000"
+                width="1536"
+                height="1024"
               />
               <div className="sf-photo-shade" />
               <div className="sf-destination">
