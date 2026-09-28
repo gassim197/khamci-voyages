@@ -123,7 +123,7 @@ export function ogMiddleware(req: Request, res: Response, next: NextFunction) {
 
   if (req.path === "/etudes-france" && isSocialCrawler(userAgent)) {
     const url = escapeHtml(`${ENV.publicSiteUrl.replace(/\/$/, "")}/etudes-france`);
-    const image = escapeHtml(`${ENV.publicSiteUrl.replace(/\/$/, "")}/covers/hero-paris.webp`);
+    const image = escapeHtml(`${ENV.publicSiteUrl.replace(/\/$/, "")}/covers/etudes-france-campus.webp`);
     const title = "Études en France | Khamci Voyages";
     const description = "Préparez votre projet d’études en France depuis la Guinée : orientation, dossier, entretien et accompagnement visa après admission.";
     return res.status(200).type("html").send(`<!doctype html><html lang="fr"><head>
